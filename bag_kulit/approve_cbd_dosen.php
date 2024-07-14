@@ -1,0 +1,258 @@
+<HTML>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../menu.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="../mytable.css" type="text/css" media="screen" />
+<!--</head>-->
+</head>
+<BODY>
+
+<?php
+
+	include "../config.php";
+	include "../fungsi.php";
+
+	error_reporting("E_ALL ^ E_NOTICE");
+
+	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
+		echo "
+		<script>
+			window.location.href=\"../accessdenied.php\";
+		</script>
+		";
+	}
+	else{
+	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND $_COOKIE['level']==4)
+	{
+		if ($_COOKIE['level']==4) {include "menu4.php";}
+
+		echo "<div class=\"text_header\">PENILAIAN KEPANITERAAN (STASE) ILMU KESEHATAN KULIT DAN KELAMIN</div>";
+
+		echo "<br><br><br><fieldset class=\"fieldset_art\">
+	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
+		echo "<center><h4 id=\"top\"><font style=\"color:#006400;text-shadow:1px 1px black;\">APPROVAL NILAI UJIAN KASUS</font></h4>";
+
+		$id = $_GET[id];
+		$data_cbd = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `kulit_nilai_cbd` WHERE `id`='$id'"));
+		$id_stase = "M114";
+		$data_stase = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
+		$data_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_cbd[nim]'"));
+		$stase_id = "stase_".$id_stase;
+		$data_stase_mhsw = mysqli_query($con,"SELECT * FROM `$stase_id` WHERE `nim`='$data_cbd[nim]'");
+		$datastase_mhsw = mysqli_fetch_array($data_stase_mhsw);
+
+
+		echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+		echo "<input type=\"hidden\" name=\"id_stase\" value=\"$id_stase\">";
+		echo "<input type=\"hidden\" name=\"id\" value=\"$id\">";
+		echo "<table border=1 style=\"width:75%;background:rgb(244, 241, 217);\">";
+		$tgl_mulai = $_GET[mulai];
+		$tgl_selesai = $_GET[selesai];
+		$approval = $_GET[approval];
+		$mhsw = $_GET[mhsw];
+		echo "<input type=\"hidden\" name=\"tgl_mulai\" value=\"$tgl_mulai\" />";
+		echo "<input type=\"hidden\" name=\"tgl_selesai\" value=\"$tgl_selesai\" />";
+		echo "<input type=\"hidden\" name=\"approval\" value=\"$approval\" />";
+		echo "<input type=\"hidden\" name=\"mhsw\" value=\"$mhsw\" />";
+
+		//Judul Kasus
+		echo "<tr>";
+			echo "<td style=\"width:40%\">Judul Kasus</td>";
+			echo "<td style=\"width:60%\">$data_cbd[kasus]</td>";
+		echo "</tr>";
+		//Nama dokter muda/koas
+		echo "<tr>";
+			echo "<td>Nama dokter muda</td>";
+			echo "<td>$data_mhsw[nama]</td>";
+		echo "</tr>";
+		//NIM
+		echo "<tr>";
+			echo "<td>NIM</td>";
+			echo "<td>$data_mhsw[nim]</td>";
+		echo "</tr>";
+		//Pengajuan
+		echo "<tr>";
+			echo "<td colspan=2>Diajukan pada:</td>";
+		echo "</tr>";
+		//Tgl isi kegiatan
+		echo "<tr>";
+			echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;Tanggal isi kegiatan</td>";
+			$tgl_isi_indo = tanggal_indo($data_cbd[tgl_isi]);
+			echo "<td>$tgl_isi_indo</td>";
+		echo "</tr>";
+		//Jam kegiatan
+		echo "<tr>";
+			echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;Jam isi kegiatan</td>";
+			echo "<td>";
+			echo "$data_cbd[jam_isi]";
+			echo "</td>";
+		echo "</tr>";
+		//Dosen Pembimbing Lapangan
+		echo "<tr>";
+			echo "<td>Dosen Pembimbing Lapangan</td>";
+			echo "<td>";
+			$data_dosen = mysqli_fetch_array(mysqli_query($con,"SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_cbd[dosen]'"));
+			echo "$data_dosen[nama], $data_dosen[gelar] ($data_dosen[nip])";
+			echo "</td>";
+		echo "</tr>";
+		echo "</table><br><br>";
+
+		//Form nilai
+		echo "<table border=1 style=\"width:75%;background:rgb(244, 241, 217);\">";
+		echo "<tr><td><b>Form Penilaian:</b></td></tr>";
+		echo "</table>";
+		echo "<table border=1 style=\"width:75%;background:rgb(244, 241, 217);\">";
+		echo "<thead>";
+			echo "<th style=\"width:5%\">No</th>";
+			echo "<th style=\"width:65%\">Aspek Yang Dinilai</th>";
+			echo "<th style=\"width:15%\">Bobot</th>";
+			echo "<th style=\"width:15%\">Nilai (0-100)</th>";
+		echo "</thead>";
+		//No 1
+		echo "<tr>";
+			echo "<td align=center>1</td>";
+			echo "<td>Kemampuan Anamnesis dan Pemeriksaan Fisik</td>";
+			echo "<td align=center>25%</td>";
+			echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"aspek_1\" style=\"width:100%;font-size:0.85em;text-align:center\" value=\"$data_cbd[aspek_1]\" id=\"aspek_1\" onkeyup=\"sum();\" onchange=\"sum();\" required/></td>";
+		echo "</tr>";
+		//No 2
+		echo "<tr>";
+			echo "<td align=center>2</td>";
+			echo "<td>Kemampuan Keputusan klinis (usulan pemeriksaan penunjang level FKTP dan penegakan diagnosis)</td>";
+			echo "<td align=center>25%</td>";
+			echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"aspek_2\" style=\"width:100%;font-size:0.85em;text-align:center\" value=\"$data_cbd[aspek_2]\" id=\"aspek_2\" onkeyup=\"sum();\" onchange=\"sum();\" required/></td>";
+		echo "</tr>";
+		//No 3
+		echo "<tr>";
+			echo "<td align=center>3</td>";
+			echo "<td>Kemampuan Penatalaksanaan Pasien (resep)</td>";
+			echo "<td align=center>25%</td>";
+			echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"aspek_3\" style=\"width:100%;font-size:0.85em;text-align:center\" value=\"$data_cbd[aspek_3]\" id=\"aspek_3\" onkeyup=\"sum();\" onchange=\"sum();\" required/></td>";
+		echo "</tr>";
+		//No 4
+		echo "<tr>";
+			echo "<td align=center>4</td>";
+			echo "<td>Kemampuan edukasi, komunikasi dan profesionalisme</td>";
+			echo "<td align=center>25%</td>";
+			echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"aspek_4\" style=\"width:100%;font-size:0.85em;text-align:center\" value=\"$data_cbd[aspek_4]\" id=\"aspek_4\" onkeyup=\"sum();\" onchange=\"sum();\" required/></td>";
+		echo "</tr>";
+		//Rata-Rata Nilai
+		echo "<tr>";
+			echo "<td colspan=3 align=right>Rata-Rata Nilai (Jumlah Bobot x Nilai)</td>";
+			echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:100%;font-size:0.85em;text-align:center\" id=\"nilai_rata\" value=\"$data_cbd[nilai_rata]\" id=\"nilai_rata\" required/></td>";
+		echo "</tr>";
+		echo "</table><br>";
+
+		//Umpan Balik
+		echo "<table border=1 style=\"width:75%;background:rgb(244, 241, 217);\">";
+		echo "<tr>";
+			echo "<td>Umpan Balik:<br><textarea name=\"umpan_balik\" rows=5 style=\"width:100%;font-family:Tahoma;font-size:1em\">$data_cbd[umpan_balik]</textarea></td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>Saran:<br><textarea name=\"saran\" rows=5 style=\"width:100%;font-family:Tahoma;font-size:1em\">$data_cbd[saran]</textarea></td>";
+		echo "</tr>";
+		echo "</table><br>";
+
+		echo "<br><center><input type=\"submit\" class=\"submit1\" name=\"cancel\" value=\"CANCEL\" formnovalidate>";
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		echo "<input type=\"submit\" class=\"submit1\" name=\"approve\" value=\"APPROVE\"></center>";
+		echo "</form><br><br></fieldset>";
+
+		if ($_POST[cancel]=="CANCEL")
+		{
+			$tgl_mulai=$_POST[tgl_mulai];
+			$tgl_selesai=$_POST[tgl_selesai];
+			$approval=$_POST[approval];
+			$mhsw=$_POST[mhsw];
+			echo "
+			<script>
+				window.location.href=\"penilaian_kulit_dosen.php?mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\";
+			</script>
+			";
+		}
+
+		if ($_POST[approve]=="APPROVE")
+		{
+			$tgl_mulai=$_POST[tgl_mulai];
+			$tgl_selesai=$_POST[tgl_selesai];
+			$approval=$_POST[approval];
+			$mhsw=$_POST[mhsw];
+
+			$aspek_1 = number_format($_POST[aspek_1],2);
+			$aspek_2 = number_format($_POST[aspek_2],2);
+			$aspek_3 = number_format($_POST[aspek_3],2);
+			$aspek_4 = number_format($_POST[aspek_4],2);
+
+			$umpan_balik = addslashes($_POST[umpan_balik]);
+			$saran = addslashes($_POST[saran]);
+
+			$nilai_rata = 0.25*$_POST[aspek_1] + 0.25*$_POST[aspek_2] + 0.25*$_POST[aspek_3] + 0.25*$_POST[aspek_4];
+			$nilai_rata = number_format($nilai_rata,2);
+
+			$update_cbd = mysqli_query($con,"UPDATE `kulit_nilai_cbd` SET
+					`aspek_1`='$aspek_1',`aspek_2`='$aspek_2',
+					`aspek_3`='$aspek_3',`aspek_4`='$aspek_4',`nilai_rata`='$nilai_rata',
+					`umpan_balik`='$umpan_balik',`saran`='$saran',
+					`tgl_approval`='$tgl',`status_approval`='1'
+					WHERE `id`='$_POST[id]'");
+
+			echo "
+				<script>
+				window.location.href = \"penilaian_kulit_dosen.php?mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\";
+		      </script>
+				";
+		}
+	}
+		else
+		echo "
+		<script>
+			window.location.href=\"../accessdenied.php\";
+		</script>
+		";
+	}
+?>
+<script src="../jquery.min.js"></script>
+
+<script>
+function sum() {
+			var aspek1 = document.getElementById('aspek_1').value;
+			var aspek2 = document.getElementById('aspek_2').value;
+			var aspek3 = document.getElementById('aspek_3').value;
+			var aspek4 = document.getElementById('aspek_4').value;
+			var result = 0.25*parseFloat(aspek1) + 0.25*parseFloat(aspek2) + 0.25*parseFloat(aspek3) + 0.25*parseFloat(aspek4);
+			if (!isNaN(result)) {
+				 document.getElementById('nilai_rata').value = number_format(result,2);
+			}
+
+	function number_format (number, decimals, decPoint, thousandsSep) {
+		number = (number + '').replace(/[^0-9+\-Ee.]/g, '')
+		var n = !isFinite(+number) ? 0 : +number
+		var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
+		var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep
+		var dec = (typeof decPoint === 'undefined') ? '.' : decPoint
+		var s = ''
+
+		var toFixedFix = function (n, prec) {
+		var k = Math.pow(10, prec)
+		return '' + (Math.round(n * k) / k)
+			.toFixed(prec)
+		}
+
+		// @todo: for IE parseFloat(0.55).toFixed(0) = 0;
+		s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.')
+		if (s[0].length > 3) {
+		s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)
+		}
+		if ((s[1] || '').length < prec) {
+		s[1] = s[1] || ''
+		s[1] += new Array(prec - s[1].length + 1).join('0')
+		}
+
+		return s.join(dec)
+	}
+}
+</script>
+
+<!--</body></html>-->
+</BODY>
+</HTML>

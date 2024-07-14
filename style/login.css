@@ -1,0 +1,122 @@
+body {
+  background: url("../images/login-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-position: center 15%;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-card {
+  background-color: rgba(255, 255, 255, 0.38);
+  padding: 2em;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-card h4 {
+  text-shadow: 1px 1px black;
+  font-size: 1.5em;
+  margin: 0;
+  line-height: 1.5;
+  color: #34495e;
+  margin-bottom: 1em;
+}
+
+.login-card h1 {
+  font-size: 1.8em;
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  color: #1e7e34;
+
+  margin-bottom: 1.5em;
+}
+
+.login-card img {
+  width: 100px;
+  margin-bottom: 1em;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  background-color: #f0f8ff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.75em;
+  margin-bottom: 1em;
+  font-size: 1em;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.login-card input[type="text"]:hover,
+.login-card input[type="password"]:hover {
+  background-color: #e6f7ff;
+  border-color: #28a745;
+}
+
+.login-card .checkbox-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1em;
+  color: #34495e;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+.login-card .checkbox-container input[type="checkbox"] {
+  display: none;
+}
+
+.login-card .checkbox-container label {
+  display: flex;
+  align-items: center;
+}
+
+.login-card .checkbox-container label::before {
+  content: "\f096";
+  font-family: "FontAwesome";
+  margin-right: 0.5em;
+  font-size: 1em;
+}
+
+.login-card .checkbox-container input[type="checkbox"]:checked + label::before {
+  content: "\f14a";
+  color: #007bff;
+}
+
+.login-card input[type="submit"] {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-card input[type="submit"]:hover {
+  background-color: #218838;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .login-card {
+    padding: 2em 3em;
+  }
+}

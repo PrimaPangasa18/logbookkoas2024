@@ -1,0 +1,123 @@
+/* begin Page */
+/* Created by Aris Triwiyatno */
+
+table {
+  border: 1px solid grey;
+	font-family: Tahoma;
+  font-size: 1em;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tabel_normal {
+  border: 0;
+	font-family: Tahoma;
+  font-size: 1em;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0);
+}
+.td_normal {
+  padding = 0;
+}
+
+thead {
+  font-family: Tahoma;
+  padding: 0;
+}
+
+th {
+	background-color: #006400;
+   	color: #FFFFFF;
+    font: 100%/1 Tahoma;
+	padding : 5px 5px 5px 5px;
+	text-shadow: 1px 1px black;
+	text-align:center;
+
+	/*border:0;*/
+}
+tr {
+	font: 100%/1 Tahoma;
+  padding : 5px 5px 5px 5px;
+	/*border: 2px solid white;*/
+}
+.genap {
+    /*background-color:FFFFCC;*/
+  background-color:rgba(245, 226, 50, 0.2);
+}
+.ganjil {
+	/*background-color:99FFCC;*/
+	background-color:rgba(123, 205, 91, 0.2);
+}
+
+td {
+	padding : 5px 5px 5px 5px;
+  line-height: 20px;
+  vertical-align: top;
+	/*border: 2px solid white;*/
+	/*border: 0;*/
+}
+
+h1 {
+  text-transform: uppercase;
+  -webkit-text-transform: uppercase;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+    font-size: 32px;
+	text-align: center;
+	color: 006699;
+	text-shadow: 1px 1px black;
+}
+h2 {
+  text-transform: uppercase;
+  -webkit-text-transform: uppercase;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+    font-size: 28px;
+	color: 006699;
+	text-align: center;
+	text-shadow: 1px 1px black;
+}
+
+h3 {
+  text-transform: uppercase;
+  -webkit-text-transform: uppercase;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+    font-size: 24px;
+	text-align: center;
+}
+
+h4 {
+  text-transform: uppercase;
+  -webkit-text-transform: uppercase;
+  font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+    font-size: 20px;
+	text-align: center;
+}
+
+h5 {
+	font-family: Georgia;
+    font-size: 16px;
+	text-align: center;
+}
+
+.submit1{
+  border:0;
+  text-decoration: none;
+  background-image: url('images/btn.png');
+  background-position: left;
+  repeat: repeat-x;
+  color: black;
+  line-height: 23px;
+  width:120px;
+  height:30px;
+ }
+
+.submit1:hover {
+  border:0;
+  text-decoration: none;
+  background-image: url('images/btn_hvr.png');
+  background-position: left;
+  repeat: repeat-x;
+  color:black;
+  text-shadow: 1px 2px grey;
+  transition: ease-in 0.3s;
+  line-height: 23px;
+  width:120px;
+  height:30px;
+}

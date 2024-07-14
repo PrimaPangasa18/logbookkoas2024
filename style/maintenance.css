@@ -1,0 +1,74 @@
+body {
+  background: url("../images/login-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-position: center 15%;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-card {
+  background-color: rgba(255, 255, 255, 0.38);
+  padding: 2em;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 800px;
+  /* Adjusted for wider layout */
+  text-align: center;
+}
+
+.login-card h4 {
+  text-shadow: 1px 1px black;
+  font-size: 1.5em;
+  margin: 0;
+  line-height: 1.5;
+  color: #34495e;
+  margin-bottom: 1em;
+}
+
+.login-card h1 {
+  font-size: 2.2em;
+  /* Increased size */
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  /* Bold text */
+  color: red;
+  /* Red color */
+  margin-bottom: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card h1 .fa-exclamation-triangle {
+  margin-right: 10px;
+}
+
+.login-card img {
+  width: 100px;
+  margin-bottom: 1em;
+}
+
+.login-card .maintenance-dates {
+  color: red;
+  /* Red color for dates */
+}
+
+.login-card .thanks {
+  font-size: 1.8em;
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  color: #1e7e34;
+  margin-top: 1.5em;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .login-card {
+    padding: 2em 3em;
+  }
+}
