@@ -82,13 +82,13 @@
             </a>
             <ul id="multi-four" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_individu_search.php" class="sidebar-link">Rotasi Normal</a>
+                <a href="rotasi_kelompok.php" class="sidebar-link">Rotasi Normal</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_search.php" class="sidebar-link">Rotasi Tambahan</a>
+                <a href="rotasi_kelpmanual.php" class="sidebar-link">Rotasi Tambahan</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_stase_search.php" class="sidebar-link">Hapus Rotasi</a>
+                <a href="rotasi_kelpdelete.php" class="sidebar-link">Hapus Rotasi</a>
               </li>
             </ul>
         </ul>
@@ -99,13 +99,13 @@
             </a>
             <ul id="multi-five" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_individu_search.php" class="sidebar-link">Rotasi Normal</a>
+                <a href="rotasi_individu.php" class="sidebar-link">Rotasi Normal</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_search.php" class="sidebar-link">Rotasi Tambahan</a>
+                <a href="rotasi_indmanual_search.php" class="sidebar-link">Rotasi Tambahan</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_stase_search.php" class="sidebar-link">Hapus Rotasi</a>
+                <a href="rotasi_inddelete_search.php" class="sidebar-link">Hapus Rotasi</a>
               </li>
             </ul>
         </ul>
@@ -180,10 +180,10 @@
             </a>
             <ul id="multi-ten" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_individu_search.php" class="sidebar-link">User Mahasiswa</a>
+                <a href="tambah_user_mhsw.php" class="sidebar-link">User Mahasiswa</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_search.php" class="sidebar-link">User Dosen/Residen</a>
+                <a href="tambah_user_dosen.php" class="sidebar-link">User Dosen/Residen</a>
               </li>
             </ul>
         </ul>
@@ -194,10 +194,10 @@
             </a>
             <ul id="multi-eleven" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_individu_search.php" class="sidebar-link">User Mahasiswa</a>
+                <a href="edit_user_mhsw.php" class="sidebar-link">User Mahasiswa</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_search.php" class="sidebar-link">User Dosen/Residen</a>
+                <a href="edit_user_dosen.php" class="sidebar-link">User Dosen/Residen</a>
               </li>
             </ul>
         </ul>
@@ -208,14 +208,14 @@
             </a>
             <ul id="multi-twelve" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_individu_search.php" class="sidebar-link">User Mahasiswa</a>
+                <a href="import_user_mhsw.php" class="sidebar-link">User Mahasiswa</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_search.php" class="sidebar-link">User Dosen/Residen</a>
+                <a href="import_user_dosen.php" class="sidebar-link">User Dosen/Residen</a>
               </li>
             </ul>
           <li class="sidebar-item">
-            <a href="rotasi_internal_stase_search.php" class="sidebar-link">
+            <a href="update_nim_koas.php" class="sidebar-link">
               <span>Update NIM Koas</span>
             </a>
           </li>
@@ -228,7 +228,7 @@
         </a>
         <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
+            <a href="update_admin.php" class="sidebar-link">Update Profil</a>
           </li>
         </ul>
       </li>
