@@ -108,155 +108,34 @@
 				<div class="container-fluid">
 					<div class="mb-3">
 						<h3 class="fw-bold fs-4 mb-3">BERANDA</h3>
-						<div class="row">
-							<div class="col-12 col-md-4">
-								<div class="card border-0">
-									<div class="card-body py-4 rounded-2">
-										<h5 class="mb-2 fw-bold">Memebers Progress</h5>
-										<p class="mb-2 fw-bold">$72,540</p>
-										<div class="mb-0">
-											<span class="badge text-success me-2"> +9.0% </span>
-											<span class="fw-bold"> Since Last Month </span>
-										</div>
-									</div>
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">SELAMAT DATANG DI WEB KOAS FAKULTAS KEDOKTERAN UNDIP</h2>
+						<br>
+						<!-- ISI DISINI -->
+						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+							</div>
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img src="images/fkundip.png" class="d-block w-100 carousel-image" alt="Image 1">
+								</div>
+								<div class="carousel-item">
+									<img src="images/fkundip_edit.jpg" class="d-block w-100 carousel-image" alt="Image 2">
 								</div>
 							</div>
-							<div class="col-12 col-md-4">
-								<div class="card border-0">
-									<div class="card-body py-4 rounded-2">
-										<h5 class="mb-2 fw-bold">Memebers Progress</h5>
-										<p class="mb-2 fw-bold">$72,540</p>
-										<div class="mb-0">
-											<span class="badge text-success me-2"> +9.0% </span>
-											<span class="fw-bold"> Since Last Month </span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-4">
-								<div class="card border-0">
-									<div class="card-body py-4 rounded-2">
-										<h5 class="mb-2 fw-bold">Memebers Progress</h5>
-										<p class="mb-2 fw-bold">$72,540</p>
-										<div class="mb-0">
-											<span class="badge text-success me-2"> +9.0% </span>
-											<span class="fw-bold"> Since Last Month </span>
-										</div>
-									</div>
-								</div>
-							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
 						</div>
-						<h3 class="fw-bold fs-4 my-3">Avg. Agent Earnings</h3>
-						<div class="row">
-							<div class="col-12">
-								<table class="table table-striped">
-									<thead>
-										<tr class="highlight">
-											<th scope="col">#</th>
-											<th scope="col">First</th>
-											<th scope="col">Last</th>
-											<th scope="col">Handle</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td colspan="2">Larry the Bird</td>
-											<td>@twitter</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="container-fluid">
-					<div class="mb-3">
-						<h3 class="fw-bold fs-4 mb-3">BERANDA</h3>
-						<div class="row">
-							<div class="col-12 col-md-4">
-								<div class="card border-0">
-									<div class="card-body py-4 rounded-2">
-										<h5 class="mb-2 fw-bold">Memebers Progress</h5>
-										<p class="mb-2 fw-bold">$72,540</p>
-										<div class="mb-0">
-											<span class="badge text-success me-2"> +9.0% </span>
-											<span class="fw-bold"> Since Last Month </span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-4">
-								<div class="card border-0">
-									<div class="card-body py-4 rounded-2">
-										<h5 class="mb-2 fw-bold">Memebers Progress</h5>
-										<p class="mb-2 fw-bold">$72,540</p>
-										<div class="mb-0">
-											<span class="badge text-success me-2"> +9.0% </span>
-											<span class="fw-bold"> Since Last Month </span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-4">
-								<div class="card border-0">
-									<div class="card-body py-4 rounded-2">
-										<h5 class="mb-2 fw-bold">Memebers Progress</h5>
-										<p class="mb-2 fw-bold">$72,540</p>
-										<div class="mb-0">
-											<span class="badge text-success me-2"> +9.0% </span>
-											<span class="fw-bold"> Since Last Month </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<h3 class="fw-bold fs-4 my-3">Avg. Agent Earnings</h3>
-						<div class="row">
-							<div class="col-12">
-								<table class="table table-striped">
-									<thead>
-										<tr class="highlight">
-											<th scope="col">#</th>
-											<th scope="col">First</th>
-											<th scope="col">Last</th>
-											<th scope="col">Handle</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td colspan="2">Larry the Bird</td>
-											<td>@twitter</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
+						<!-- BERAKHIR -->
+
 					</div>
 				</div>
 			</main>

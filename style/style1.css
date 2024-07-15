@@ -224,6 +224,10 @@ tr.highlight th {
   flex: 1 1 auto;
   padding: 1rem;
 }
+.carousel-image {
+  max-height: 560px; /* Ubah ukuran tinggi maksimum sesuai kebutuhan Anda */
+  object-fit: contain; /* Mempertahankan rasio aspek gambar */
+}
 
 /* End Main */
 

@@ -99,7 +99,7 @@
 					<div class="mb-3">
 						<h3 class="fw-bold fs-4 mb-3">INFORMASI E-LOGBOOK KOAS</h3>
 						<br>
-						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">File Download Untuk Informasi Penting</h2>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">FILE INFORMASI PENTING</h2>
 						<br>
 						<table class="table table-bordered table-striped info-table">
 							<thead class="thead-dark">
