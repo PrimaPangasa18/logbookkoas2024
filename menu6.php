@@ -72,9 +72,9 @@
           <li class="sidebar-item">
             <a href="filter_kegiatan_dosen.php" class="sidebar-link">Daftar Kegiatan</a>
           </li>
-          <li class="sidebar-item">
+          <!-- <li class="sidebar-item">
             <a href="#" class="sidebar-link">Rekap Kegiatan</a>
-          </li>
+          </li> -->
         </ul>
       </li>
     </ul>

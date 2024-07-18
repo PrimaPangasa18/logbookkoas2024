@@ -51,7 +51,7 @@ if(isset($input["username"]) && isset($input["password"])){
 		
 		$stmt->close();
 	}
-}
+}	
 else{
 	$response["status"] = 2;
 	$response["message"] = "Missing mandatory parameters";

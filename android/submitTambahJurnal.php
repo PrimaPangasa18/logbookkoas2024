@@ -8,9 +8,9 @@ $input = json_decode($inputJSON, TRUE); //convert JSON into array
 //Check for Mandatory parameters
 $jenis = $input['jenis'];
 $username = $input['username'];
-$angkatana = $input['angkatan'];
 $hari = $input['hari'];
 $stase    = $input['stase'];
+//yudhi menghapus angkatan
 $tanggal  = $input['tanggal'];
 $jam_awal= $input['jam_awal'];
 $jam_akhir = $input['jam_akhir'];

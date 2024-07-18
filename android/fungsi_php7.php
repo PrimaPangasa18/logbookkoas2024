@@ -129,7 +129,7 @@ function ketuntasan_penyakit($con,$include_id,$target_id,$mhsw_nim,$user)
 	$ketuntasan = 0;
 	while ($data=mysqli_fetch_array($daftar_penyakit))
 	{
-	  if ($data['skdi_level']=="MKM" OR $data['k_level']=="MKM" OR $data['ipsg_level']=="MKM" OR $data['kml_level']=="MKM")
+	  if ($data[skdi_level]=="MKM" OR $data[k_level]=="MKM" OR $data[ipsg_level]=="MKM" OR $data[kml_level]=="MKM")
 	  {
 	    $jml_MKM = mysqli_num_rows(mysqli_query($con,"SELECT `id` FROM `jurnal_penyakit_dummy` WHERE `nim`='$mhsw_nim'
 	      AND (`penyakit1`='$data[id]' OR `penyakit2`='$data[id]' OR `penyakit3`='$data[id]'  OR `penyakit4`='$data[id]')
@@ -183,7 +183,7 @@ function ketuntasan_penyakit($con,$include_id,$target_id,$mhsw_nim,$user)
 	  {
 	    $blocked = 0;
 	    //Start - Pewarnaan Capaian Level 4A
-	    if (($data['skdi_level']=="4A" OR $data['k_level']=="4A" OR $data['ipsg_level']=="4A" OR $data['kml_level']=="4A") AND $blocked == 0)
+	    if (($data[skdi_level]=="4A" OR $data[k_level]=="4A" OR $data[ipsg_level]=="4A" OR $data[kml_level]=="4A") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -235,9 +235,9 @@ function ketuntasan_penyakit($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 4A
 
 	    //Start - Pewarnaan Capaian Level 3A dan 3B
-	    if (($data['skdi_level']=="3" OR $data['k_level']=="3" OR $data['ipsg_level']=="3" OR $data['kml_level']=="3"
-	        OR $data['skdi_level']=="3A" OR $data['k_level']=="3A" OR $data['ipsg_level']=="3A" OR $data['kml_level']=="3A"
-	        OR $data['skdi_level']=="3B" OR $data['k_level']=="3B" OR $data['ipsg_level']=="3B" OR $data['kml_level']=="3B")
+	    if (($data[skdi_level]=="3" OR $data[k_level]=="3" OR $data[ipsg_level]=="3" OR $data[kml_level]=="3"
+	        OR $data[skdi_level]=="3A" OR $data[k_level]=="3A" OR $data[ipsg_level]=="3A" OR $data[kml_level]=="3A"
+	        OR $data[skdi_level]=="3B" OR $data[k_level]=="3B" OR $data[ipsg_level]=="3B" OR $data[kml_level]=="3B")
 	        AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
@@ -280,7 +280,7 @@ function ketuntasan_penyakit($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 3A dan 3B
 
 	    //Start - Pewarnaan Capaian Level 2
-	    if (($data['skdi_level']=="2" OR $data['k_level']=="2" OR $data['ipsg_level']=="2" OR $data['kml_level']=="2") AND $blocked == 0)
+	    if (($data[skdi_level]=="2" OR $data[k_level]=="2" OR $data[ipsg_level]=="2" OR $data[kml_level]=="2") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -322,7 +322,7 @@ function ketuntasan_penyakit($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 2
 
 	    //Start - Pewarnaan Capaian Level 1
-	    if (($data['skdi_level']=="1" OR $data['k_level']=="1" OR $data['ipsg_level']=="1" OR $data['kml_level']=="1") AND $blocked == 0)
+	    if (($data[skdi_level]=="1" OR $data[k_level]=="1" OR $data[ipsg_level]=="1" OR $data[kml_level]=="1") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -354,7 +354,7 @@ function ketuntasan_penyakit($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 1
 
 	    //Start - Pewarnaan Capaian MKM
-	    if (($data['skdi_level']=="MKM" OR $data['k_level']=="MKM" OR $data['ipsg_level']=="MKM" OR $data['kml_level']=="MKM") AND $blocked == 0)
+	    if (($data[skdi_level]=="MKM" OR $data[k_level]=="MKM" OR $data[ipsg_level]=="MKM" OR $data[kml_level]=="MKM") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -410,7 +410,7 @@ function ketuntasan_ketrampilan ($con,$include_id,$target_id,$mhsw_nim,$user)
 	$ketuntasan = 0;
 	while ($data=mysqli_fetch_array($daftar_ketrampilan))
 	{
-	  if ($data['skdi_level']=="MKM" OR $data['k_level']=="MKM" OR $data['ipsg_level']=="MKM" OR $data['kml_level']=="MKM")
+	  if ($data[skdi_level]=="MKM" OR $data[k_level]=="MKM" OR $data[ipsg_level]=="MKM" OR $data[kml_level]=="MKM")
 	  {
 	    $jml_MKM = mysqli_num_rows(mysqli_query($con,"SELECT `id` FROM `jurnal_ketrampilan_dummy` WHERE `nim`='$mhsw_nim'
 	      AND (`ketrampilan1`='$data[id]' OR `ketrampilan2`='$data[id]' OR `ketrampilan3`='$data[id]'  OR `ketrampilan4`='$data[id]')
@@ -464,7 +464,7 @@ function ketuntasan_ketrampilan ($con,$include_id,$target_id,$mhsw_nim,$user)
 	  {
 	    $blocked = 0;
 	    //Start - Pewarnaan Capaian Level 4A
-	    if (($data['skdi_level']=="4A" OR $data['k_level']=="4A" OR $data['ipsg_level']=="4A" OR $data['kml_level']=="4A") AND $blocked == 0)
+	    if (($data[skdi_level]=="4A" OR $data[k_level]=="4A" OR $data[ipsg_level]=="4A" OR $data[kml_level]=="4A") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -516,9 +516,9 @@ function ketuntasan_ketrampilan ($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 4A
 
 	    //Start - Pewarnaan Capaian Level 3A dan 3B
-	    if (($data['skdi_level']=="3" OR $data['k_level']=="3" OR $data['ipsg_level']=="3" OR $data['kml_level']=="3"
-	        OR $data['skdi_level']=="3A" OR $data['k_level']=="3A" OR $data['ipsg_level']=="3A" OR $data['kml_level']=="3A"
-	        OR $data['skdi_level']=="3B" OR $data['k_level']=="3B" OR $data['ipsg_level']=="3B" OR $data['kml_level']=="3B")
+	    if (($data[skdi_level]=="3" OR $data[k_level]=="3" OR $data[ipsg_level]=="3" OR $data[kml_level]=="3"
+	        OR $data[skdi_level]=="3A" OR $data[k_level]=="3A" OR $data[ipsg_level]=="3A" OR $data[kml_level]=="3A"
+	        OR $data[skdi_level]=="3B" OR $data[k_level]=="3B" OR $data[ipsg_level]=="3B" OR $data[kml_level]=="3B")
 	        AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
@@ -561,7 +561,7 @@ function ketuntasan_ketrampilan ($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 3A dan 3B
 
 	    //Start - Pewarnaan Capaian Level 2
-	    if (($data['skdi_level']=="2" OR $data['k_level']=="2" OR $data['ipsg_level']=="2" OR $data['kml_level']=="2") AND $blocked == 0)
+	    if (($data[skdi_level]=="2" OR $data[k_level]=="2" OR $data[ipsg_level]=="2" OR $data[kml_level]=="2") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -603,7 +603,7 @@ function ketuntasan_ketrampilan ($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 2
 
 	    //Start - Pewarnaan Capaian Level 1
-	    if (($data['skdi_level']=="1" OR $data['k_level']=="1" OR $data['ipsg_level']=="1" OR $data['kml_level']=="1") AND $blocked == 0)
+	    if (($data[skdi_level]=="1" OR $data[k_level]=="1" OR $data[ipsg_level]=="1" OR $data[kml_level]=="1") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;
@@ -635,7 +635,7 @@ function ketuntasan_ketrampilan ($con,$include_id,$target_id,$mhsw_nim,$user)
 	    //End - Pewarnaan Capaian Level 1
 
 	    //Start - Pewarnaan Capaian MKM
-	    if (($data['skdi_level']=="MKM" OR $data['k_level']=="MKM" OR $data['ipsg_level']=="MKM" OR $data['kml_level']=="MKM") AND $blocked == 0)
+	    if (($data[skdi_level]=="MKM" OR $data[k_level]=="MKM" OR $data[ipsg_level]=="MKM" OR $data[kml_level]=="MKM") AND $blocked == 0)
 	    {
 	      $batas_target = $data[$target_id]/2;
 	      $blocked = 1;

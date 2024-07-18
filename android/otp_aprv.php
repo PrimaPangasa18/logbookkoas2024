@@ -26,11 +26,12 @@ $dosen = $dos_a["nip"];}
 		if($stmt->fetch()){
             
             if($pin==$otp){
-                $response["status"] = 1;
+                //yudhi edit response hilang
                 include 'update_status_approvement.php';
             }
             else{
                 $response["status"] = 0;
+                echo json_encode($response);
             }
         }
         else{
@@ -39,7 +40,6 @@ $dosen = $dos_a["nip"];}
             $stmt->close();
     }
     else{
-
     }
-    echo json_encode($response);
+    //echo json_encode($response);
 ?>

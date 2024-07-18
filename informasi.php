@@ -63,6 +63,23 @@
 		";
 		}
 		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
+		// Menentukan path gambar
+		$foto_path = "foto/" . $data_mhsw['foto'];
+		$default_foto = "images/account.png";
+
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
@@ -77,7 +94,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="images/account.png" class="avatar img-fluid" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 

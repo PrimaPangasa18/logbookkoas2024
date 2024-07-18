@@ -72,6 +72,23 @@
 		";
 		}
 		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
+		// Menentukan path gambar
+		$foto_path = "foto/" . $data_mhsw['foto'];
+		$default_foto = "images/account.png";
+
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
 
 		<!-- End Sidebar -->
 		<div class="main">

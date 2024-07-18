@@ -7,6 +7,9 @@ include "fungsi.php";
 	//$username="21060117130082";
 	//$id_stase = "M113";
 	$id_stase = $input['id_stase'];
+
+	//yudhi menambahkan tgl
+	$tgl = $input['tanggal'];
 	
 
 	

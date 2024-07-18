@@ -30,11 +30,12 @@ $dosen = $dos_a["nip"];}
 		if($stmt->fetch()){
             
             if($qr_code==$qr){
-                $response["status"] = 1;
+                //yudhi menghapus status = 1 , duplicat 2
                 include 'update_status_ri.php';
             }
             else{
                 $response["status"] = 0;
+                echo json_encode($response);
             }
         }
         else{
@@ -45,5 +46,5 @@ $dosen = $dos_a["nip"];}
     else{
 
     }
-    echo json_encode($response);
+    
 ?>

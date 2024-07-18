@@ -188,37 +188,6 @@ a.sidebar-link:hover {
 /* End Navbar */
 
 /* Main */
-.card-body {
-  background-color: #f5f5f5;
-  transition: 0.4s;
-  cursor: pointer;
-  color: #000;
-  margin-bottom: 1rem;
-}
-
-.card-body:hover {
-  background-color: #293b5f;
-  color: #fff;
-  transform: translateY(-10.5px);
-}
-
-.text-success {
-  background-color: #71c664;
-  padding: 0.25rem 0.35rem;
-  font-size: 0.715rem;
-  color: #fff !important;
-  border-radius: 5px;
-}
-
-.table > thead tr {
-  color: #fff;
-  text-align: left;
-}
-
-tr.highlight th {
-  background-color: #293b5f;
-  color: #fff;
-}
 
 .content {
   flex: 1 1 auto;
