@@ -1,98 +1,98 @@
 <HTML>
+
 <head>
 	<link rel="stylesheet" href="menu.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
-<!--</head>-->
+	<!--</head>-->
 </head>
+
 <BODY>
 
-<?php
-	
+	<?php
+
 	include "config.php";
 	include "fungsi.php";
 
 	error_reporting("E_ALL ^ E_NOTICE");
 
-	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
+	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		echo "
 		<script>
 			window.location.href=\"accessdenied.php\";
 		</script>
 		";
-	}
-	else{
-	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND ($_COOKIE['level']==2 OR $_COOKIE['level']==4 OR $_COOKIE['level']==6))
-	{
-		if ($_COOKIE['level']==2) {include "menu2.php";}
-	  if ($_COOKIE['level']==4) {include "menu4.php";}
-		if ($_COOKIE['level']==6) {include "menu6.php";}
+	} else {
+		if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and ($_COOKIE['level'] == 2 or $_COOKIE['level'] == 4 or $_COOKIE['level'] == 6)) {
+			if ($_COOKIE['level'] == 2) {
+				include "menu2.php";
+			}
+			if ($_COOKIE['level'] == 4) {
+				include "menu4.php";
+			}
+			if ($_COOKIE['level'] == 6) {
+				include "menu6.php";
+			}
 
 
-		echo "<div class=\"text_header\" id=\"top\">DAFTAR KEGIATAN DOSEN/RESIDEN</div>";
-		echo "<br><br><br><fieldset class=\"fieldset_art\">
+			echo "<div class=\"text_header\" id=\"top\">DAFTAR KEGIATAN DOSEN/RESIDEN</div>";
+			echo "<br><br><br><fieldset class=\"fieldset_art\">
 	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
 
-		echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">DAFTAR KEGIATAN DOSEN/RESIDEN</font></h4><br>";
+			echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">DAFTAR KEGIATAN DOSEN/RESIDEN</font></h4><br>";
 
-		$user_dosen = $_GET[dosen];
-		$jurnal = $_GET[jurnal];
-		$status_filter = $_GET[appstatus];
-		$mhsw_filter = $_GET[mhsw];
-		$stase_filter = $_GET[stase];
-		$tanggal_filter = $_GET[tgl_kegiatan];
+			$user_dosen = $_GET['dosen'];
+			$jurnal = $_GET['jurnal'];
+			$status_filter = $_GET['appstatus'];
+			$mhsw_filter = $_GET['mhsw'];
+			$stase_filter = $_GET['stase'];
+			$tanggal_filter = $_GET['tgl_kegiatan'];
 
-		if ($mhsw_filter=="all") $filtermhsw = "";
-		else $filtermhsw = "AND `nim`="."'$mhsw_filter'";
-		if ($stase_filter=="all") $filterstase = "";
-		else $filterstase = "AND `stase`="."'$stase_filter'";
-		$filterstatus = "AND `status`= 0";
-		if ($tanggal_filter=="Semua Tanggal") $filtertanggal = "";
-		else $filtertanggal = "AND `tanggal`="."'$tanggal_filter'";
-		if ($_COOKIE[level]==4 OR $_COOKIE[level]==6) $dosen_filter = "`dosen`="."'$_COOKIE[user]'";
-		else $dosen_filter = "`dosen`="."'$user_dosen'";
+			if ($mhsw_filter == "all") $filtermhsw = "";
+			else $filtermhsw = "AND `nim`=" . "'$mhsw_filter'";
+			if ($stase_filter == "all") $filterstase = "";
+			else $filterstase = "AND `stase`=" . "'$stase_filter'";
+			$filterstatus = "AND `status`= 0";
+			if ($tanggal_filter == "Semua Tanggal") $filtertanggal = "";
+			else $filtertanggal = "AND `tanggal`=" . "'$tanggal_filter'";
+			if ($_COOKIE['level'] == 4 or $_COOKIE['level'] == 6) $dosen_filter = "`dosen`=" . "'$_COOKIE[user]'";
+			else $dosen_filter = "`dosen`=" . "'$user_dosen'";
 
-		if ($jurnal == "penyakit")
-		{
-			$update = mysqli_query($con,"UPDATE `jurnal_penyakit` SET `status`='1'
+			if ($jurnal == "penyakit") {
+				$update = mysqli_query($con, "UPDATE `jurnal_penyakit` SET `status`='1'
 				WHERE $dosen_filter $filtermhsw $filterstase $filtertanggal $filterstatus");
-		}
-		if ($jurnal == "ketrampilan")
-		{
-			$update = mysqli_query($con,"UPDATE `jurnal_ketrampilan` SET `status`='1'
+			}
+			if ($jurnal == "ketrampilan") {
+				$update = mysqli_query($con, "UPDATE `jurnal_ketrampilan` SET `status`='1'
 				WHERE $dosen_filter $filtermhsw $filterstase $filtertanggal $filterstatus");
-		}
+			}
 
-		if ($_COOKIE[level]==2)
-		{
-			echo "
+			if ($_COOKIE['level'] == 2) {
+				echo "
 			<script>
 				window.location.href=\"daftar_kegiatan_dosen_admin.php?dosen=\"+\"$user_dosen\"+\"&mhsw=\"+\"$mhsw_filter\"+\"&stase=\"+\"$stase_filter\"+\"&tgl_kegiatan=\"+\"$tanggal_filter\"+\"&appstatus=\"+\"$status_filter\";
 			</script>
 			";
-		}
-		else
-		{
-			echo "
+			} else {
+				echo "
 			<script>
 				window.location.href=\"daftar_kegiatan_dosen.php?mhsw=\"+\"$mhsw_filter\"+\"&stase=\"+\"$stase_filter\"+\"&tgl_kegiatan=\"+\"$tanggal_filter\"+\"&appstatus=\"+\"$status_filter\";
 			</script>
 			";
-		}
+			}
 
-		echo "</fieldset>";
-
-	}
-		else
-		echo "
+			echo "</fieldset>";
+		} else
+			echo "
 		<script>
 			window.location.href=\"accessdenied.php\";
 		</script>
 		";
 	}
-?>
+	?>
 
 
 
-<!--</body></html>-->
+	<!--</body></html>-->
 </BODY>
+
 </HTML>

@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Edit User Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-  <link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -53,9 +53,16 @@
     }
     ?>
     <?php
+    if ($_COOKIE['level'] != 5) {
+      $data_nim = $_GET['nim'];
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+    } else {
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+    }
+
     // Menentukan path gambar
     $foto_path = "foto/" . $data_mhsw['foto'];
-    $default_foto = "images/account.png";
+    $default_foto = "foto/profil_blank.png";
 
     // Mengecek apakah file gambar ada
     if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -68,7 +75,7 @@
       <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
-
+            <img src="images/undipsolid.png" alt="" style="width: 45px;">
           </div>
         </form>
         <div class="navbar-collapse collapse">
@@ -76,7 +83,7 @@
             <li class="nav-item dropdown d-flex align-item-center">
               <span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
               <a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
               </a>
               <div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -93,63 +100,96 @@
       <!-- End Navbar -->
 
       <!-- Main Content -->
-      <?php
+      <main class="content px-3 py-4">
+        <div class="container-fluid">
+          <div class="mb-3">
+            <h3 class="fw-bold fs-4 mb-3">EDIT USER</h3>
+            <br />
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+              EDIT USER DOSEN/RESIDEN
+            </h2>
+            <br><br>
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cari']) && $_POST['cari'] == "CARI") {
+              $kunci = addslashes($_POST['kunci']);
+              if ($_COOKIE['level'] == 2) {
+                $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE (`level`='4' OR `level`='6') AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')");
+              }
+              if ($_COOKIE['level'] == 1) {
+                $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE `level`!='5' AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')");
+              }
+              $jml = mysqli_num_rows($user_kunci);
+            }
+            ?>
+            <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
+              <center>
+                <table class="table table-bordered" style="width: 600px;">
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td class="align-middle" style="width:200px"><span style="font-size: 17px;"><strong>Cari User: </strong></span></td>
+                    <td class="align-middle" style="width: 400px;"><input type="text" class="form-control" name="kunci" style="display: inline-block;" placeholder="masukkan NIP atau nama dosen atau residen" /></td>
+                  </tr>
+                </table>
+                <br>
+                <button type="submit" class="btn btn-success" name="cari" value="CARI">
+                  <i class="fa-solid fa-magnifying-glass me-2"></i>CARI
+                </button>
+                <br><br><br>
+            </form>
+            <?php
+            if ($_POST['cari'] == "CARI") {
+              $kunci = addslashes($_POST['kunci']);
+              if ($_COOKIE['level'] == 2) $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE (`level`='4' OR `level`='6') AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')");
+              if ($_COOKIE['level'] == 1) $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE `level`!='5' AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')");
+              $jml = mysqli_num_rows($user_kunci);
+              if (isset($jml) && $jml >= 1) {
+                echo '<span class="text-danger" style="font-size:0.8em; font-weight:600;">(Klik tombol username untuk edit user)</span>';
+                echo "<table class='table table-bordered'style='width: 1000px;'>";
+                echo "<thead class='table-success'>";
+                echo "<tr>";
+                echo "<th style='text-align: center;'>No</th>";
+                echo "<th style='text-align: center;'>Username (NIM)</th>";
+                echo "<th style='text-align: center; '>Nama Dosen/Residen</th>";
+                echo "<th style='text-align: center; '>Bagian</th>";
+                echo "<th style='text-align: center; '>Level User</th>";
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                $no = 1;
+                while ($data = mysqli_fetch_array($user_kunci)) {
+                  $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data[username]'"));
+                  $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
+                  $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT `level` FROM `level` WHERE `id`='$data[level]'"));
+                  echo "<tr class='table-secondary'>";
+                  echo "<td style='text-align: center;'>$no</td>";
+                  echo "<td style='text-align: center;'><a href='edit_userdosen_action.php?user_name=$data[username]' class='btn btn-outline-primary'>$data[username]</a></td>";
+                  echo "<td style='text-align: center; font-weight: 600;'>$dosen[gelar]</td>";
+                  echo "<td style='text-align: center; font-weight: 600;'>$bagian[bagian]</td>";
+                  echo "<td style='text-align: center; font-weight: 600;'>$level_user[level]</td>";
+                  echo "</tr>";
+                  $no++;
+                }
+                echo "</tbody>";
+                echo "</table>";
+              } elseif (isset($jml)) {
+                echo "<span style='font-size: 1.0em; font-weight:700;color: #dc3545;'>Tidak ada USER dengan kata kunci <span style='color: blue;'>\"$_POST[kunci]\" !</span></span>";
+              }
+            }
 
-      echo "<div class=\"text_header\">EDIT USER</div>";
-      echo "<br><br><br><fieldset class=\"fieldset_art\">
-    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-      echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">EDIT USER DOSEN/RESIDEN</font></h4><br>";
-      echo "</center>";
+            if ($_GET['status'] == "HAPUS") {
+              echo "<font style=\"color:red\">Username tersebut telah dihapus!</font>";
+            }
+            if ($_GET['status'] == "SIMPAN") {
+              echo "<font style=\"color:blue\">Username tersebut telah diedit dan disimpan!</font>";
+            }
 
-      echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-      echo "<center>Cari User: ";
-      echo "<input type=\"text\" name=\"kunci\" style=\"width:200px\"></input><font style=\"font-size:0.625em\"><br><br><i>
-        (masukkan NIP atau nama dosen atau residen)</i></font><br><br>";
-      echo "&nbsp;&nbsp;<input type=\"submit\" class=\"submit1\" name=\"cari\" value=\"CARI\"></input><br><br>";
+            ?>
+            </center>
+            </form>
+          </div>
+        </div>
+      </main>
 
-      if ($_POST['cari'] == "CARI") {
-        $kunci = addslashes($_POST[kunci]);
-        if ($_COOKIE['level'] == 2) $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE (`level`='4' OR `level`='6') AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')");
-        if ($_COOKIE['level'] == 1) $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE `level`!='5' AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')");
-        $jml = mysqli_num_rows($user_kunci);
-        if ($jml >= 1) {
-          echo "<font style=\"font-size:0.625em\"><i>(Klik username untuk edit user)</i></font><p>";
-          echo "<table style=\"border:0;box-shadow: 10px 10px 20px rgba(0,0,0,0.4)\">";
-          echo "<tr class=\"ganjil\">";
-          echo "<td style=\"width:50px;text-align:center\">No</td>";
-          echo "<td style=\"width:150px;text-align:center\">Username</td>";
-          echo "<td style=\"width:400px;text-align:center\">Nama Dosen/Residen</td>";
-          echo "<td style=\"width:300px;text-align:center\">Bagian</td>";
-          echo "<td style=\"width:200px;text-align:center\">Level User</td>";
-          echo "</tr>";
-          $no = 1;
-          while ($data = mysqli_fetch_array($user_kunci)) {
-            $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data[username]'"));
-            $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
-            $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT `level` FROM `level` WHERE `id`='$data[level]'"));
-            echo "<tr class=\"genap\">";
-            echo "<td style=\"text-align:center\">$no</td>";
-            echo "<td><a href=\"edit_userdosen_action.php?user_name=$data[username]\">$data[username]</a></td>";
-            echo "<td>$data[nama], $dosen[gelar]</td>";
-            echo "<td>$bagian[bagian]</td>";
-            echo "<td style=\"text-align:center\">$level_user[level]</td>";
-            echo "</tr>";
-            $no++;
-          }
-          echo "</table>";
-        } else {
-          echo "<font style=\"font-size:1.0em;color:red\">Tidak ada user dengan kata kunci \"<i>$_POST[kunci]\" !!!</i></font>";
-        }
-      }
 
-      if ($_GET['status'] == "HAPUS") {
-        echo "<font style=\"color:red\">Username tersebut telah dihapus!!!</font>";
-      }
-      if ($_GET['status'] == "SIMPAN") {
-        echo "<font style=\"color:blue\">Username tersebut telah diedit dan disimpan!!!</font>";
-      }
-      echo "<br><br></fieldset>";
-      ?>
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -227,6 +267,7 @@
 
   <script src="javascript/script1.js"></script>
   <script src="javascript/buttontopup.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script>
 </body>
 
 </HTML>

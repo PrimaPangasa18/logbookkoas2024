@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Tambah User Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-  <link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -50,9 +50,16 @@
     }
     ?>
     <?php
+    if ($_COOKIE['level'] != 5) {
+      $data_nim = $_GET['nim'];
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+    } else {
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+    }
+
     // Menentukan path gambar
     $foto_path = "foto/" . $data_mhsw['foto'];
-    $default_foto = "images/account.png";
+    $default_foto = "foto/profil_blank.png";
 
     // Mengecek apakah file gambar ada
     if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -65,7 +72,7 @@
       <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
-
+            <img src="images/undipsolid.png" alt="" style="width: 45px;">
           </div>
         </form>
         <div class="navbar-collapse collapse">
@@ -73,7 +80,7 @@
             <li class="nav-item dropdown d-flex align-item-center">
               <span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
               <a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
               </a>
               <div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -90,79 +97,85 @@
       <!-- End Navbar -->
 
       <!-- Main Content -->
-      <?php
+      <main class="content px-3 py-4">
+        <div class="container-fluid">
+          <div class="mb-3">
+            <h3 class="fw-bold fs-4 mb-3">TAMBAH USER</h3>
+            <br />
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+              TAMBAH USER MAHASISWA
+            </h2>
+            <br><br>
+            <?php
+            echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+            ?>
+            <div class="container">
+              <center>
+                <table class="table table-bordered" style="width: 800px;">
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td style="width: 300px;">
+                      <strong>New username (NIM)</strong>
+                    </td>
+                    <td style="width: 500px;">
+                      <?php
+                      echo "<input type=\"text\" name=\"user_name\" class=\"form-control\" required>";
+                      ?>
+                    </td>
+                  </tr>
+                  <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <td style="width: 300px;">
+                      <strong>Nama Lengkap</strong>
+                    </td>
+                    <td style="width: 500px;">
+                      <?php
+                      echo "<input type=\"text\" name=\"user_surename\" class=\"form-control\" required>";
+                      ?>
+                    </td>
+                  </tr>
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td style="width: 300px;">
+                      <strong>Password</strong>
+                    </td>
+                    <td style="width: 500px;">
+                      <?php
+                      echo "<input type=\"password\" id=\"form-password\" name=\"user_pass\" class=\"form-control\" required>";
+                      ?>
+                      <br>
+                      <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px ;transform: scale(1.0); ">&nbsp; Show password
+                    </td>
+                  </tr>
+                </table>
+                <br>
+                <button type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                  <i class="fa-solid fa-user-plus me-2"></i>TAMBAH
+                </button>
+              </center>
+            </div>
+            <?php
+            echo '</form>';
 
-      echo "<div class=\"text_header\">TAMBAH USER</div>";
-      echo "<br><br><br><fieldset class=\"fieldset_art\">
-    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-      echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">TAMBAH USER MAHASISWA</font></h4><br>";
-
-      echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-      echo "<table border=\"0\">";
-      echo "<tr class=\"ganjil\">";
-      echo "<td style=\"width:200px\">";
-      echo "New username (NIM)";
-      echo "</td>";
-      echo "<td>";
-      echo "<input type=\"text\" name=\"user_name\" class=\"select_art\" required>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class=\"ganjil\">";
-      echo "<td>";
-      echo "Nama Lengkap";
-      echo "</td>";
-      echo "<td>";
-      echo "<input type=\"text\" name=\"user_surename\" class=\"select_art\" required>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class=\"ganjil\">";
-      echo "<td>";
-      echo "Password";
-      echo "</td>";
-      echo "<td>";
-      echo "<input type=\"password\" id=\"form-password\" name=\"user_pass\" class=\"select_art\" required>";
-      echo "<br><input type=\"checkbox\" id=\"form-checkbox\"> &nbsp;<font style=\"font-size:0.625em\"><i>Show password</i></font>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class=\"ganjil\">";
-      echo "<td colspan=2 align=\"center\">";
-      echo "<br><input type=\"submit\" class=\"submit1\" name=\"submit\" value=\"SUBMIT\">";
-      echo "<br><br></td>";
-      echo "</tr>";
-      echo "</table></form>";
-
-
-      if ($_POST['submit'] == "SUBMIT") {
-        $jml_username = mysqli_num_rows(mysqli_query($con, "SELECT `username` FROM `admin` WHERE `username`='$_POST[user_name]'"));
-        if ($jml_username >= 1) {
-          echo "
+            if (isset($_POST['submit']) && $_POST['submit'] == "SUBMIT") {
+              $jml_username = mysqli_num_rows(mysqli_query($con, "SELECT `username` FROM `admin` WHERE `username`='$_POST[user_name]'"));
+              if ($jml_username >= 1) {
+                echo "
         <script type=\"text/javascript\">
-          alert(\"Username (NIP) tersebut sudah ada dalam data user!!!\");
-          window.location.href = \"tambah_user.php\";
+          alert(\"Username (NIP) tersebut sudah ada dalam data user!!\");
+          window.location.href = \"tambah_user_mhsw.php\";
         </script>";
-        } else {
-          $user_password = MD5($_POST['user_pass']);
-          $nama = addslashes($_POST[user_surename]);
-          $tambah_admin = mysqli_query($con, "INSERT INTO `admin`
-        (`nama`, `username`, `password`, `level`)
-        VALUES
-        ('$nama','$_POST[user_name]','$user_password','5')");
-          $tambah_mhsw = mysqli_query($con, "INSERT INTO `biodata_mhsw`
-				( `nama`, `nim`, `kota_lahir`, `prop_lahir`, `tanggal_lahir`,
-					`alamat`, `kota_alamat`, `prop_alamat`, `no_hp`, `email`,
-					`nama_ortu`, `alamat_ortu`, `kota_ortu`, `prop_ortu`, `no_hportu`,
-					`foto`,`dosen_wali`)
-				VALUES
-				(	'$nama','$_POST[user_name]','','','2001-01-01',
-					'','','','','',
-					'','','','','',
-					'profil_blank.png','')");
-          echo "<center><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style=\"color:green\">User baru berhasil ditambahkan ...</font>";
-        }
-      }
+              } else {
+                $user_password = MD5($_POST['user_pass']);
+                $nama = addslashes($_POST['user_surename']);
+                $tambah_admin = mysqli_query($con, "INSERT INTO `admin` (`nama`, `username`, `password`, `level`) VALUES ('$nama', '$_POST[user_name]', '$user_password', '5')");
+                $tambah_mhsw = mysqli_query($con, "INSERT INTO `biodata_mhsw` (`nama`, `nim`, `kota_lahir`, `prop_lahir`, `tanggal_lahir`, `alamat`, `kota_alamat`, `prop_alamat`, `no_hp`, `email`, `nama_ortu`, `alamat_ortu`, `kota_ortu`, `prop_ortu`, `no_hportu`, `foto`, `dosen_wali`) VALUES ('$nama', '$_POST[user_name]', '', '', '2001-01-01', '', '', '', '', '', '', '', '', '', '', 'profil_blank.png', '')");
+                echo "<center><br><font style=\"color:green; font-weight: 600;\">User baru berhasil ditambahkan!</font>";
+              }
+            }
+            ?>
+          </div>
+        </div>
+      </main>
 
-      echo "<br><br></fieldset>";
-      ?>
+
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -240,7 +253,8 @@
 
   <script src="javascript/script1.js"></script>
   <script src="javascript/buttontopup.js"></script>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript">
     $(document).ready(function() {
       $('#form-checkbox').click(function() {
         if ($(this).is(':checked')) {
@@ -250,7 +264,7 @@
         }
       });
     });
-  </script> -->
+  </script>
 </body>
 
 </HTML>

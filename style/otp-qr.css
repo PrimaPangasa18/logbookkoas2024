@@ -1,0 +1,42 @@
+.text-primary {
+  color: blue;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.text-danger {
+  color: red;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+}
+
+.btn-primary.submit1 {
+  font-size: 1rem;
+  padding: 10px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.table-bordered {
+  border: 3px solid black;
+  margin: auto;
+}
+
+.otp-cell {
+  width: 200px;
+  padding: 20px;
+}
+
+.otp-code {
+  color: blue;
+  font-size: 50px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+.otp-timer {
+  font-size: 1.5em;
+  display: block;
+  margin-top: 20px;
+  font-family: "Poppins", sans-serif;
+}

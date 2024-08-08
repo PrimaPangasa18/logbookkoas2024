@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Import User Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-  <link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -50,9 +50,16 @@
     }
     ?>
     <?php
+    if ($_COOKIE['level'] != 5) {
+      $data_nim = $_GET['nim'];
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+    } else {
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+    }
+
     // Menentukan path gambar
     $foto_path = "foto/" . $data_mhsw['foto'];
-    $default_foto = "images/account.png";
+    $default_foto = "foto/profil_blank.png";
 
     // Mengecek apakah file gambar ada
     if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -65,7 +72,7 @@
       <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
-
+            <img src="images/undipsolid.png" alt="" style="width: 45px;">
           </div>
         </form>
         <div class="navbar-collapse collapse">
@@ -73,7 +80,7 @@
             <li class="nav-item dropdown d-flex align-item-center">
               <span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
               <a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
               </a>
               <div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -90,38 +97,53 @@
       <!-- End Navbar -->
 
       <!-- Main Content -->
-      <?php
+      <main class="content px-3 py-4">
+        <div class="container-fluid">
+          <div class="mb-3">
+            <h3 class="fw-bold fs-4 mb-3">IMPORT USER MAHASISWA</h3>
+            <br />
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+              IMPORT LIST USER MAHASISWA
+            </h2>
+            <br>
+            <div class="container mt-5">
+              <div class="alert alert-info">
+                <strong>Import file berekstensi csv (*.csv)</strong> dengan kolom yang sama dengan format header tabel di bawah, menggunakan separator <span class="text-danger" style="font-weight: 700;">( , )</span> atau <span class="text-danger" style="font-weight: 700;">( ; )</span>.
+              </div>
+              <div class="alert alert-secondary">
+                <strong>Format header tabel:</strong><br>
+                <span class="text-primary" style="font-weight: 700;">| id | nama | username | password | angkatan | grup |</span>
+              </div>
+              <div class="alert alert-warning">
+                <strong>Catatan:</strong><br>
+                1. Kolom <span class="text-danger" style="font-weight: 700;">id</span> diisi dengan nomor urut.<br>
+                2. Kolom <span class="text-danger" style="font-weight: 700;">nama</span> diisi dengan nama lengkap user.<br>
+                3. Kolom <span class="text-danger" style="font-weight: 700;">username</span> diisi dengan username user <span class="text-danger" style="font-weight: 700;">(gunakan NIM)</span>.<br>
+                4. Kolom <span class="text-danger" style="font-weight: 700;">password</span> diisi dengan password user <span class="text-danger" style="font-weight: 700;">(gunakan NIM untuk password awal)</span>.<br>
+                5. Kolom <span class="text-danger" style="font-weight: 700;">angkatan</span> diisi dengan kode angkatan user <span class="text-danger" style="font-weight: 700;">(angkatan masuk koas)</span>.<br>
+                6. Kolom <span class="text-danger" style="font-weight: 700;">grup</span> diisi dengan kode grup angkatan user <span class="text-danger" style="font-weight: 700;">(grup angkatan masuk koas)</span>.
+              </div>
+              <form name="myForm" id="myForm" onsubmit="return validateForm()" action="csvimport_user_mhsw.php" method="post" enctype="multipart/form-data" class="mt-4">
+                <div class="mb-3">
+                  <label for="import_user_mhsw" class="form-label"><strong>Import file: </strong></label>
+                  <input type="file" class="form-control" id="import_user_mhsw" name="import_user_mhsw" accept=".csv" required>
+                </div>
+                <div class="mb-3">
+                  <label for="separator" class="form-label"><strong>Separator file csv:</strong></label>
+                  <select class="form-select" id="separator" name="separator" required>
+                    <option value="">Pilih Separator</option>
+                    <option value=",">Koma ( , )</option>
+                    <option value=";">Titik Koma ( ; )</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary" name="import"><i class="fa-solid fa-cloud-arrow-up me-2"></i>IMPORT</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
 
-      echo "<div class=\"text_header\">IMPORT USER MAHASISWA</div>";
-      echo "<br><br><br><fieldset class=\"fieldset_art\">
-    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
 
-      echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">IMPORT LIST USER MAHASISWA</font></h4><br></center>";
-
-      echo "Import file berekstensi <i>csv</i> (*.csv) dengan kolom yang sama dengan format header tabel di bawah, menggunakan separator ( , ) atau ( ; ).<br><br>";
-      echo "Format header tabel:<br>";
-      echo "<font color=blue>| <i>id</i> | <i>nama</i> | <i>username</i> | <i>password</i> | <i>angkatan</i> | <i>grup</i> |</font><br>";
-      echo "<br><font color=red>Catatan: <br>";
-      echo "1. Kolom <i>id</i> diisi dengan nomor urut</i>.<br>";
-      echo "2. Kolom <i>nama</i> diisi dengan nama lengkap user.<br>";
-      echo "3. Kolom <i>username</i> diisi dengan username user (gunakan NIM).<br>";
-      echo "4. Kolom <i>password</i> diisi dengan password user (gunakan NIM untuk password awal).<br>";
-      echo "5. Kolom <i>angkatan</i> diisi dengan kode angkatan user (angkatan masuk koas).<br>";
-      echo "6. Kolom <i>grup</i> diisi dengan kode grup angkatan user (grup angkatan masuk koas).<br>";
-      echo "</font><br><br>";
-
-      echo "<form name=\"myForm\" id=\"myForm\" onSubmit=\"return validateForm()\" action=\"csvimport_user_mhsw.php\" method=\"post\" enctype=\"multipart/form-data\" required>";
-      echo "Import file: <input type=\"file\" id=\"import_user_mhsw\" name=\"import_user_mhsw\" accept=\".csv\"></input><br><br>";
-      echo "Separator file csv: ";
-      echo "<select name=\"separator\" required>";
-      echo "<option value=\"\">< Pilihan Separator ></option>";
-      echo "<option value=\",\">Koma --> ( , )</option>";
-      echo "<option value=\";\">Titik Koma --> ( ; )</option>";
-      echo "</select>";
-      echo "<br><br><input type=\"submit\" class=\"submit1\" name=\"import\" value=\"Import\"></input></form><br>";
-
-      echo "<br><br></fieldset>";
-      ?>
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -199,6 +221,7 @@
 
   <script src="javascript/script1.js"></script>
   <script src="javascript/buttontopup.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script>
 </body>
 
 </HTML>

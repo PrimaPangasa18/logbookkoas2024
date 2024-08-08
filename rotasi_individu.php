@@ -5,11 +5,12 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<title>On-line Rotasi Individu Normal Logbook Koas Pendidikan Dokter FK-UNDIP</title>
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
+	<link rel="stylesheet" type="text/css" href="jquery_ui/jquery-ui.css">
+	<link rel="stylesheet" href="select2/dist/css/select2.css" />
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -49,9 +50,16 @@
 		}
 		?>
 		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
 		// Menentukan path gambar
 		$foto_path = "foto/" . $data_mhsw['foto'];
-		$default_foto = "images/account.png";
+		$default_foto = "foto/profil_blank.png";
 
 		// Mengecek apakah file gambar ada
 		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -64,7 +72,7 @@
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -72,7 +80,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -89,144 +97,162 @@
 			<!-- End Navbar -->
 
 			<!-- Main Content -->
-			<?php
-			echo "<div class=\"text_header\">ROTASI KEPANITERAAN (STASE)</div>";
-
-			echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-
-			echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">ROTASI INDIVIDU KEPANITERAAN (STASE) - NORMAL</font></h4><br>";
-			echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">";
-
-			if (empty($_POST[submit])) {
-				$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id`");
-			}
-			?>
-			<table border="0">
-				<tr class="ganjil">
-					<td style="padding:5px 5px 5px 5px;width:300px;">
-						<font style="font-size:1.0em">Nama Mahasiswa [NIM]</font>
-					</td>
-					<td style="padding:5px 5px 5px 5px">
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">ROTASI KEPANITERAAN</h3>
+						<br />
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+							ROTASI INDIVIDU KEPANITERAAN (STASE) - NORMAL
+						</h2>
+						<br><br>
 						<?php
-						echo "<select class=\"select_artwide\" name=\"nim\" id=\"nim\" required>";
-						$data_nim = mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` ORDER BY `nama`");
-						echo "<option value=\"\">< Nama Mahasiswa ></option>";
-						while ($data = mysqli_fetch_array($data_nim)) {
-							echo "<option value=\"$data[nim]\">$data[nama] [NIM: $data[nim]]</option>";
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">";
+						if (empty($_POST['submit'])) {
+							$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id`");
 						}
-						echo "</select>";
 						?>
-					</td>
-				</tr>
-				<tr class="ganjil">
-					<td style="padding:5px 5px 5px 5px">
-						<font style="font-size:1.0em">Jenjang Semester Koas</font>
-					</td>
-					<td style="padding:5px 5px 5px 5px">
+						<center>
+							<div class="container">
+								<table class="table table-bordered" style="width: auto;">
+									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
+										<td style=" width: 300px;">
+											<strong>Nama Mahasiswa <span class="text-danger">[NIM]</span></strong>
+										</td>
+										<td style=" width: 400px;">
+											<?php
+											echo "<select class=\"form-select\" name=\"nim\" id=\"nim\" required>";
+											$data_nim = mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` ORDER BY `nama`");
+											echo "<option value=\"\">< Nama Mahasiswa ></option>";
+											while ($data = mysqli_fetch_array($data_nim)) {
+												echo "<option value=\"$data[nim]\">$data[nama] [NIM: $data[nim]]</option>";
+											}
+											echo "</select>";
+											?>
+										</td>
+									</tr>
+									<tr class="table-success" style="border-width: 1px; border-color: #000;">
+										<td>
+											<strong>Jenjang Semester Koas</strong>
+										</td>
+										<td>
+											<?php
+											echo "<select class=\"form-select\" name=\"semester\" id=\"semester\" required>";
+											echo "<option value=\"\">< Pilihan Semester ></option>";
+											echo "<option value=\"9\">Semester IX (Sembilan)</option>";
+											echo "<option value=\"10\">Semester X (Sepuluh)</option>";
+											echo "<option value=\"11\">Semester XI (Sebelas)</option>";
+											echo "<option value=\"12\">Semester XII (Dua belas)</option>";
+											echo "</select>";
+											?>
+										</td>
+									</tr>
+								</table>
+								<br>
+								<button type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+									<i class="fa-solid fa-floppy-disk me-2"></i>SUBMIT
+								</button>
+							</div>
+						</center>
+
+
 						<?php
-						echo "<select class=\"select_artwide\" name=\"semester\" id=\"semester\" required>";
-						echo "<option value=\"\">< Pilihan Semester ></option>";
-						echo "<option value=\"9\">Semester IX (Sembilan)</option>";
-						echo "<option value=\"10\">Semester X (Sepuluh)</option>";
-						echo "<option value=\"11\">Semester XI (Sebelas)</option>";
-						echo "<option value=\"12\">Semester XII (Dua belas)</option>";
-						echo "</select>";
+						echo '</form>';
 						?>
-					</td>
-				</tr>
+						<br><br>
+						<?php
+						if (!empty($_POST['submit'])) {
+							// Ambil data dari database
+							$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nim`, `nama` FROM `biodata_mhsw` WHERE `nim`='$_POST[nim]'"));
+							$semester = $_POST['semester'];
+							$jumlah_stase = $_POST['jml_stase'];
 
+						?>
+							<div class="container">
+								<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+									HASIL ROTASI INDIVIDU
+								</h2>
+								<center>
+									<table class="table table-bordered" style="width: auto;">
+										<!-- Nama Mahasiswa -->
+										<tr class="table-primary" style="border-width: 1px; border-color: #000;">
+											<td style="width:300px;"><strong>Nama Mahasiswa <span class="text-danger">[NIM]</span></strong></td>
+											<td style="width:500px; font-weight:700;">
+												<?php
+												$nama = htmlspecialchars($data_mhsw['nama']);
+												$nim = htmlspecialchars($data_mhsw['nim']);
+												echo $nama . ' <span style="color:#dc3545;;">[NIM: ' . $nim . ']</span>';
+												?>
+											</td>
+										</tr>
 
-			</table><br>
-			<div id="stase">
-			</div><br><br>
-			<?php
-			echo "<input type=\"submit\" class=\"submit1\" name=\"submit\" value=\"SUBMIT\">";
+										<!-- Jenjang Semester Koas -->
+										<tr class="table-success" style="border-width: 1px; border-color: #000;">
+											<td><strong>Rotasi stase semester</strong></td>
+											<td style="font-weight:700"><?php echo htmlspecialchars($semester); ?></td>
+										</tr>
 
+										<!-- Jumlah Rotasi Stase -->
+										<tr class="table-success" style="border-width: 1px; border-color: #000;">
+											<td><strong>Jumlah rotasi stase</strong></td>
+											<td style="font-weight:700"><?php echo htmlspecialchars($jumlah_stase); ?></td>
+										</tr>
 
-			if (!empty($_POST[submit])) {
-				echo "<table border=\"0\">";
-				echo "<tr class=\"ganjil\">";
-				echo "<td style=\"padding:5px 5px 5px 5px;width:275px;\"><font style=\"font-size:1.0em\">Nama Mahasiswa [NIM]</font></td>";
-				$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` WHERE `nim`='$_POST[nim]'"));
-				echo "<td style=\"padding:5px 5px 5px 5px;width:700px;\">$data_mhsw[nama] [NIM: $data_mhsw[nim]]</td>";
-				echo "</tr>";
-				echo "<tr class=\"ganjil\">";
-				echo "<td style=\"padding:5px 5px 5px 5px\"><font style=\"font-size:1.0em\">Rotasi stase semester</font></td>";
-				echo "<td style=\"padding:5px 5px 5px 5px\">$_POST[semester]</td>";
-				echo "</tr>";
-				echo "<tr class=\"ganjil\">";
-				echo "<td style=\"padding:5px 5px 5px 5px\"><font style=\"font-size:1.0em\">Jumlah rotasi stase</font></td>";
-				echo "<td style=\"padding:5px 5px 5px 5px\">$_POST[jml_stase]</td>";
-				echo "</tr>";
-				echo "<tr class=\"ganjil\">";
-				echo "<td colspan=\"2\" style=\"padding:5px 5px 5px 5px\"><font style=\"font-size:1.0em\">Urutan rotasi kepaniteraan (stase):</font></td>";
-				echo "</tr>";
-				$no = 1;
-				$tgl_selesai_stase = "2000-01-01";
-				while ($no <= $_POST[jml_stase]) {
-					$stase = $_POST['stase' . $no];
-					$data_stase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`='$stase'"));
-					$pekan_stase = $data_stase[hari_stase] / 7;
-					$tgl_mulai_stase = $_POST['tgl_mulai' . $no];
-					$tglmulai_stase = tanggal_indo($tgl_mulai_stase);
-					$hari_tambah = $data_stase['hari_stase'] - 1;
-					$tambah_hari = '+' . $hari_tambah . ' days';
-					$tgl_selesai_stase = date('Y-m-d', strtotime($tambah_hari, strtotime($tgl_mulai_stase)));
-					if (!empty($_POST['tgl_selesai' . $no])) $tgl_selesai_stase = $_POST['tgl_selesai' . $no];
-					$tglselesai_stase = tanggal_indo($tgl_selesai_stase);
+										<!-- Urutan Rotasi Kepaniteraan (Stase) -->
+										<tr class="table-success" style="border-width: 1px; border-color: #000;">
+											<td colspan="2"><strong>Urutan rotasi kepaniteraan (stase):</strong></td>
+										</tr>
 
-					echo "<tr class=\"genap\">";
-					echo "<td style=\"padding:5px 5px 5px 15px\"><font style=\"font-size:1.0em\">Urutan ke-$no</font></td>";
-					if ($stase != "") {
-						echo "<td style=\"padding:5px 5px 5px 5px\"><b>$data_stase[kepaniteraan] - Periode: $pekan_stase pekan ($data_stase[hari_stase] hari)</b><br>";
-						echo "<i>Mulai tanggal: $tglmulai_stase<br>";
-						echo "Selesai tanggal: $tglselesai_stase</i></td>";
+										<?php
+										// Menghitung urutan stase
+										$no = 1;
+										$tgl_selesai_stase = "2000-01-01";
+										while ($no <= $jumlah_stase) {
+											$stase = $_POST['stase' . $no];
+											$data_stase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`='$stase'"));
+											$pekan_stase = $data_stase['hari_stase'] / 7;
+											$tgl_mulai_stase = $_POST['tgl_mulai' . $no];
+											$tglmulai_stase = tanggal_indo($tgl_mulai_stase);
+											$hari_tambah = $data_stase['hari_stase'] - 1;
+											$tambah_hari = '+' . $hari_tambah . ' days';
+											$tgl_selesai_stase = date('Y-m-d', strtotime($tambah_hari, strtotime($tgl_mulai_stase)));
+											if (!empty($_POST['tgl_selesai' . $no])) $tgl_selesai_stase = $_POST['tgl_selesai' . $no];
+											$tglselesai_stase = tanggal_indo($tgl_selesai_stase);
 
-						$stase_id = "stase_" . $stase;
-						$jml_mhsw = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `$stase_id` WHERE `nim`='$data_mhsw[nim]'"));
-						if ($jml_mhsw >= 1) {
-							$status_stase_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `status` FROM `$stase_id` WHERE `nim`='$data_mhsw[nim]'"));
-							if ($status_stase_mhsw[status] == '0') {
-								$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-								SET
-								`rotasi`='$no',`tgl_mulai`='$tgl_mulai_stase',`tgl_selesai`='$tgl_selesai_stase',`status`='0'
-								WHERE `nim`='$data_mhsw[nim]'");
-							} else {
-								if ($tgl_mulai_stase <= $tgl) {
-									$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-									SET
-									`rotasi`='$no',`tgl_mulai`='$tgl_mulai_stase',`tgl_selesai`='$tgl_selesai_stase',`status`='1'
-									WHERE `nim`='$data_mhsw[nim]'");
-								} else {
-									$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-									SET
-									`rotasi`='$no',`tgl_mulai`='$tgl_mulai_stase',`tgl_selesai`='$tgl_selesai_stase',`status`='0'
-									WHERE `nim`='$data_mhsw[nim]'");
-								}
-							}
-						} else {
-							$insert_stase = mysqli_query($con, "INSERT INTO `$stase_id`
-							( `nim`, `rotasi`,
-								`tgl_mulai`, `tgl_selesai`, `status`)
-							VALUES
-							( '$data_mhsw[nim]','$no',
-								'$tgl_mulai_stase','$tgl_selesai_stase','0')");
+											// Menampilkan informasi stase
+										?>
+											<tr class="table-info" style="border-width: 1px; border-color: #000;">>
+												<td>Urutan ke-<?php echo htmlspecialchars($no); ?></td>
+												<?php if ($stase != "") : ?>
+													<td>
+														<b><?php echo htmlspecialchars($data_stase['kepaniteraan']) . ' - Periode: ' . htmlspecialchars($pekan_stase) . ' pekan (' . htmlspecialchars($data_stase['hari_stase']) . ' hari)'; ?></b><br>
+														<i>Mulai tanggal: <?php echo htmlspecialchars($tglmulai_stase); ?><br>
+															Selesai tanggal: <?php echo htmlspecialchars($tglselesai_stase); ?></i>
+													</td>
+												<?php else : ?>
+													<td>
+														<font style="color:red">
+															<< BELUM TERJADWAL>>
+														</font>
+													</td>
+												<?php endif; ?>
+											</tr>
+										<?php
+											$no++;
+										}
+										?>
+									</table>
+								</center>
+							</div>
+						<?php
 						}
-					} else {
-						echo "<td style=\"padding:5px 5px 5px 5px\"><font style=\"color:red\"><< BELUM TERJADWAL >></font></td>";
-					}
+						?>
 
-					echo "</tr>";
-					$no++;
-				}
-				echo "</table><br>";
-			}
+					</div>
+				</div>
+			</main>
 
 
-			echo "</form>";
-			echo "</fieldset>";
-			?>
 			<!-- End Content -->
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -307,7 +333,7 @@
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="jquery_ui/jquery-ui.js"></script>
 	<script src="select2/dist/js/select2.js"></script>
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function() {
 
 			$('#input-tanggal').datepicker({
@@ -333,12 +359,8 @@
 			$("#nim").select2({
 				placeholder: "< Nama Mahasiswa >"
 			});
-
-
-
-
 		});
-	</script> -->
+	</script>
 </body>
 
 </HTML>

@@ -5,11 +5,11 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<title>On-line Penilaian Bagian Logbook Koas Pendidikan Dokter FK-UNDIP</title>
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -49,6 +49,13 @@
 		}
 		?>
 		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
 		// Menentukan path gambar
 		$foto_path = "foto/" . $data_mhsw['foto'];
 		$default_foto = "images/account.png";
@@ -64,7 +71,7 @@
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -72,7 +79,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -89,68 +96,168 @@
 			<!-- End Navbar -->
 
 			<!-- Main Content -->
-			<?php
-			echo "<div class=\"text_header\">PENILAIAN BAGIAN / KEPANITERAAN (STASE) LOGBOOK</div>";
-			echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">PENILAIAN BAGIAN / KEPANITERAAN (STASE) LOGBOOK</h3>
+						<br />
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+							PENILAIAN BAGIAN / KEPANITERAAN (STASE)
+						</h2>
+						<br><br>
+						<?php
+						$sekarang = date_create($tgl);
+						$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id` ASC");
 
-			echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">PENILAIAN BAGIAN / KEPANITERAAN (STASE)</font></h4><br>";
+						$kelas_baris = "table-primary";
+						$no = 1;
+						?>
+						<table class="table table-bordered">
+							<thead style="text-align: center;">
+								<tr class="table-warning" style="border-width: 1px; border-color: #000;">
+									<th>Kepaniteraan</th>
+									<th>Skedul</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								while ($data_stase = mysqli_fetch_array($stase)) {
+									$stase_id = "stase_" . $data_stase['id'];
+									$jml_data = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
+									if ($no == 1) {
+										echo "<tr class=\"$kelas_baris\" style=\"border-width: 1px; border-color: #000;\">";
+									}
+									if ($jml_data > 0) {
+										$data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
+										$tglmulai = tanggal_indo($data['tgl_mulai']);
+										$tglselesai = tanggal_indo($data['tgl_selesai']);
 
-			$sekarang = date_create($tgl);
-			$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id` ASC");
+										// Determine the URL and icon based on `stase_id`
+										switch ($data_stase['id']) {
+											case "M091":
+												$icon = "fa-stethoscope";
+												$url = "bag_ipd/penilaian_ipd.php";
+												break;
+											case "M092":
+												$icon = "fa-brain";
+												$url = "bag_neuro/penilaian_neuro.php";
+												break;
+											case "M093":
+												$icon = "fa-head-side-cough";
+												$url = "bag_psikiatri/penilaian_psikiatri.php";
+												break;
+											case "M094":
+												$icon = "fa-heartbeat";
+												$url = "bag_ikfr/penilaian_ikfr.php";
+												break;
+											case "M095":
+												$icon = "fa-hospital";
+												$url = "bag_ikmkp/penilaian_ikmkp.php";
+												break;
+											case "M096":
+												$icon = "fa-x-ray";
+												$url = "/";
+												break;
+											case "M101":
+												$icon = "fa-user-md";
+												$url = "bag_bedah/penilaian_bedah.php";
+												break;
+											case "M102":
+												$icon = "fa-syringe";
+												$url = "bag_anestesi/penilaian_anestesi.php";
+												break;
+											case "M103":
+												$icon = "fa-diagnoses";
+												$url = "bag_radiologi/penilaian_radiologi.php";
+												break;
+											case "M104":
+												$icon = "fa-eye";
+												$url = "bag_mata/penilaian_mata.php";
+												break;
+											case "M105":
+												$icon = "fa-ear";
+												$url = "bag_thtkl/penilaian_thtkl.php";
+												break;
+											case "M106":
+												$icon = "fa-tooth";
+												$url = "bag_ikgm/penilaian_ikgm.php";
+												break;
+											case "M111":
+												$icon = "fa-pills";
+												$url = "bag_obsgyn/penilaian_obsgyn.php";
+												break;
+											case "M112":
+												$icon = "fa-gavel";
+												$url = "bag_forensik/penilaian_forensik.php";
+												break;
+											case "M113":
+												$icon = "fa-pastafarianism";
+												$url = "bag_ika/penilaian_ika.php";
+												break;
+											case "M114":
+												$icon = "fa-thermometer";
+												$url = "bag_kulit/penilaian_kulit.php";
+												break;
+											case "M121":
+												echo "<td align=center style=\"width:200px\">";
+												echo "<a href=\"bag_kompre/penilaian_kompre.php\" title=\"Penilaian Komprehensif\" class=\"btn btn-outline-success\">";
+												echo "<i class=\"fa-solid fa-book\"></i> Komprehensif";
+												echo "</a><br>";
+												echo "<font style=\"font-size:0.75em\"><i>Skedul: - (Belum terjadwal)</i></font>";
+												echo "</td>";
 
-			$kelas_baris = "ganjil";
-			$no = 1;
-			echo "<table border=\"1\">";
-			while ($data_stase = mysqli_fetch_array($stase)) {
-				$stase_id = "stase_" . $data_stase[id];
-				$jml_data = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
-				if ($no == 1) {
-					echo "<tr class=\"$kelas_baris\">";
-					$baris++;
-				}
-				if ($jml_data > 0) {
-					$data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
-					$tglmulai = tanggal_indo($data[tgl_mulai]);
-					$tglselesai = tanggal_indo($data[tgl_selesai]);
-					if ($data_stase[id] == "M091") echo "<td align=center style=\"width:400px\"><a href=\"bag_ipd/penilaian_ipd.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M092") echo "<td align=center style=\"width:400px\"><a href=\"bag_neuro/penilaian_neuro.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M093") echo "<td align=center style=\"width:400px\"><a href=\"bag_psikiatri/penilaian_psikiatri.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M094") echo "<td align=center style=\"width:400px\"><a href=\"bag_ikfr/penilaian_ikfr.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M095") echo "<td align=center style=\"width:400px\"><a href=\"bag_ikmkp/penilaian_ikmkp.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					//if ($data_stase[id]=="M096") echo "<td align=center style=\"width:400px\"><a href=\"bag_ijp/penilaian_ijp.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M096") echo "<td align=center style=\"width:400px\"><a href=\"/\" onclick=\"return false;\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:grey\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M101") echo "<td align=center style=\"width:400px\"><a href=\"bag_bedah/penilaian_bedah.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M102") echo "<td align=center style=\"width:400px\"><a href=\"bag_anestesi/penilaian_anestesi.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M103") echo "<td align=center style=\"width:400px\"><a href=\"bag_radiologi/penilaian_radiologi.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M104") echo "<td align=center style=\"width:400px\"><a href=\"bag_mata/penilaian_mata.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M105") echo "<td align=center style=\"width:400px\"><a href=\"bag_thtkl/penilaian_thtkl.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M106") echo "<td align=center style=\"width:400px\"><a href=\"bag_ikgm/penilaian_ikgm.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M111") echo "<td align=center style=\"width:400px\"><a href=\"bag_obsgyn/penilaian_obsgyn.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M112") echo "<td align=center style=\"width:400px\"><a href=\"bag_forensik/penilaian_forensik.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M113") echo "<td align=center style=\"width:400px\"><a href=\"bag_ika/penilaian_ika.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M114") echo "<td align=center style=\"width:400px\"><a href=\"bag_kulit/penilaian_kulit.php\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-					if ($data_stase[id] == "M121") {
-						echo "<td align=center style=\"width:400px\"><a href=\"bag_kompre/penilaian_kompre.php\" title=\"Penilaian Komprehensip\"><font style=\"color:green\">Komprehensip</font></a> dan ";
-						echo "<a href=\"bag_kdk/penilaian_kdk.php\" title=\"Penilaian Kedokteran Keluarga\"><font style=\"color:green\">Kedokteran Keluarga</font></a><br>";
-					}
-					echo "<font style=\"font-size:0.75em\"><i>Skedul: $tglmulai - $tglselesai</i></font></td>";
-				} else echo "<td align=center style=\"width:400px\"><a href=\"/\" onclick=\"return false;\" title=\"Penilaian $data_stase[kepaniteraan]\"><font style=\"color:grey\">$data_stase[kepaniteraan]</a><br></font><font style=\"color:red;font-size:0.75em\"><i>Skedul: - (Belum terjadwal)</i></font></td>";
+												echo "<td align=center style=\"width:200px\">";
+												echo "<a href=\"bag_kdk/penilaian_kdk.php\" title=\"Penilaian Kedokteran Keluarga\" class=\"btn btn-outline-success\">";
+												echo "<i class=\"fa-solid fa-user-md\"></i> Kedokteran Keluarga";
+												echo "</a><br>";
+												echo "<font style=\"font-size:0.75em\"><i>Skedul: - (Belum terjadwal)</i></font>";
+												echo "</td>";
 
-				if ($no == 2) {
-					echo "</tr>";
-					if ($kelas_baris == "ganjil") $kelas_baris = "genap";
-					else $kelas_baris = "ganjil";
-					$no = 0;
-				}
-				$no++;
-			}
-			if ($no == 2) echo "<td>&nbsp;</td></tr>";
+												$no = 0;
+												$kelas_baris = ($kelas_baris == "table-primary") ? "table-success" : "table-primary";
+												echo "</tr>";
+												continue 2; // Skip to next iteration
+											default:
+												$icon = "fa-question";
+												$url = "#";
+												break;
+										}
 
-			echo "</table><br>";
+										echo "<td align=center style=\"width:400px\">";
+										echo "<a href=\"$url\" title=\"Penilaian $data_stase[kepaniteraan]\" class=\"btn btn-outline-success\">";
+										echo "<i class=\"fa-solid $icon\"></i> $data_stase[kepaniteraan]";
+										echo "</a><br>";
+										echo "<font style=\"font-size:0.75em;font-weight:700;\">Skedul: </font>";
+										echo "<font style=\"font-size:0.75em;font-weight:700; color:darkblue\"> $tglmulai - $tglselesai</font>";
+										echo "</td>";
+									} else {
+										echo "<td align=center style=\"width:400px\">";
+										echo "<a href=\"/\" onclick=\"return false;\" title=\"Penilaian $data_stase[kepaniteraan]\" class=\"btn btn-outline-secondary\">";
+										echo "<i class=\"fa-solid fa-times\"></i> $data_stase[kepaniteraan]";
+										echo "</a><br>";
+										echo "<font style=\"color:red;font-size:0.75em;font-weight:700;\">Skedul: (Belum terjadwal)</font>";
+										echo "</td>";
+									}
 
-			echo "</fieldset>";
-			?>
+									if ($no == 2) {
+										echo "</tr>";
+										if ($kelas_baris == "table-primary") $kelas_baris = "table-success";
+										else $kelas_baris = "table-primary";
+										$no = 0;
+									}
+									$no++;
+								}
+								if ($no == 2) echo "<td colspan='2'>&nbsp;</td></tr>";
+								?>
+							</tbody>
+						</table>
+						<br>
+
+					</div>
+				</div>
+			</main>
+
+
 			<!-- End Content -->
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">

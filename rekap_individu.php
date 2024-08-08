@@ -9,7 +9,7 @@
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -49,6 +49,13 @@
 		}
 		?>
 		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
 		// Menentukan path gambar
 		$foto_path = "foto/" . $data_mhsw['foto'];
 		$default_foto = "images/account.png";
@@ -64,7 +71,7 @@
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -72,7 +79,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -89,57 +96,123 @@
 			<!-- End Navbar -->
 
 			<!-- Main Content -->
-			<?php
-			echo "<div class=\"text_header\">REKAP LOGBOOK</div>";
-			echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">REKAP LOGBOOK</h3>
+						<br />
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+							REKAP LOGBOOK KEPANITERAAN (STASE)
+						</h2>
+						<br><br>
+						<?php
+						echo '<div class="text_header"></div>';
 
-			echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">REKAP LOGBOOK KEPANITERAAN (STASE)</font></h4><br>";
+						$sekarang = date_create($tgl);
+						$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id` ASC");
 
-			$sekarang = date_create($tgl);
-			$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id` ASC");
+						$kelas_baris = "table-primary";
+						$no = 1;
+						?>
+						<table class="table table-bordered">
+							<thead class="table-warning" style="border-width: 1px; border-color: #000;">
+								<tr style="text-align: center;">
+									<th>Kepaniteraan</th>
+									<th>Skedul</th>
+									<th>Status</th>
+									<th>Kepaniteraan</th>
+									<th>Skedul</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								while ($data_stase = mysqli_fetch_array($stase)) {
+									$stase_id = "stase_" . $data_stase['id'];
+									$jml_data = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
+									if ($no == 1) {
+										echo "<tr class=\"$kelas_baris\" style=\"border-width: 1px; border-color: #000;\">";
+									}
+									if ($jml_data > 0) {
+										$data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
+										$tglmulai = tanggal_indo($data['tgl_mulai']);
+										$tglselesai = tanggal_indo($data['tgl_selesai']);
+										if (strtotime($data['tgl_mulai']) <= strtotime($tgl) and strtotime($tgl) <= strtotime($data['tgl_selesai'])) {
+								?>
+											<td align="center"><a href="rekap_indstase.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
 
-			$kelas_baris = "ganjil";
-			$no = 1;
-			echo "<table border=\"1\">";
-			while ($data_stase = mysqli_fetch_array($stase)) {
-				$stase_id = "stase_" . $data_stase[id];
-				$jml_data = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
-				if ($no == 1) {
-					echo "<tr class=\"$kelas_baris\">";
-					$baris++;
-				}
-				if ($jml_data > 0) {
-					$data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'"));
-					$tglmulai = tanggal_indo($data[tgl_mulai]);
-					$tglselesai = tanggal_indo($data[tgl_selesai]);
-					if (strtotime($data[tgl_mulai]) <= strtotime($tgl) and strtotime($tgl) <= strtotime($data[tgl_selesai])) {
-						echo "<td align=center style=\"width:400px\"><a href=\"rekap_indstase.php?id=$data_stase[id]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-						echo "<font style=\"color:green;font-size:0.75em\"><i>Skedul: $tglmulai - $tglselesai<br>(Aktif)</i></font></td>";
-					}
-					if (strtotime($tgl) > strtotime($data[tgl_selesai])) {
-						echo "<td align=center style=\"width:400px\"><a href=\"rekap_indstase.php?id=$data_stase[id]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-						echo "<font style=\"color:blue;font-size:0.75em\"><i>Skedul: $tglmulai - $tglselesai<br>(Sudah Terlewat)</i></font></td>";
-					}
-					if (strtotime($tgl) < strtotime($data[tgl_mulai])) {
-						echo "<td align=center style=\"width:400px\"><a href=\"rekap_indstase.php?id=$data_stase[id]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font>";
-						echo "<font style=\"color:grey;font-size:0.75em\"><i>Skedul: $tglmulai - $tglselesai<br>(Belum aktif)</i></font></td>";
-					}
-				} else echo "<td align=center style=\"width:400px\"><a href=\"rekap_indstase.php?id=$data_stase[id]\"><font style=\"color:green\">$data_stase[kepaniteraan]</a><br></font><font style=\"color:red;font-size:0.75em\"><i>Skedul: - <br>(Belum terjadwal)</i></font></td>";
+														<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+													</button></a></td>
+											<td align="center">
+												<font style="color:green; font-size:1.1em;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Aktif)</font>
+											</td>
+											<td align="center">
+												<font style="color:green; font-size:1.1em;">Aktif</font>
+											</td>
+										<?php
+											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='1' WHERE `nim`='$_COOKIE[user]'");
+										} elseif (strtotime($tgl) > strtotime($data['tgl_selesai'])) {
+										?>
+											<td align="center"><a href="rekap_indstase.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
+														<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+													</button></a></td>
+											<td align="center">
+												<font style="color:blue; font-size:1.1em;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Sudah Terlewat)</font>
+											</td>
+											<td align="center">
+												<font style="color:blue; font-size:1.1em;">Sudah Terlewat</font>
+											</td>
+										<?php
+											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='2' WHERE `nim`='$_COOKIE[user]'");
+										} elseif (strtotime($tgl) < strtotime($data['tgl_mulai'])) {
+										?>
+											<td align="center"><a href="rekap_indstase.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
 
-				if ($no == 2) {
-					echo "</tr>";
-					if ($kelas_baris == "ganjil") $kelas_baris = "genap";
-					else $kelas_baris = "ganjil";
-					$no = 0;
-				}
-				$no++;
-			}
-			if ($no == 2) echo "<td>&nbsp;</td></tr>";
+														<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+													</button></a></td>
+											<td align="center">
+												<font style="color:grey; font-size:1.1em;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Belum aktif)</font>
+											</td>
+											<td align="center">
+												<font style="color:grey; font-size:1.1em;">Belum aktif</font>
+											</td>
+										<?php
+											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='0' WHERE `nim`='$_COOKIE[user]'");
+										}
+									} else {
+										?>
+										<td align="center"><a href="rekap_indstase.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
 
-			echo "</table><br>";
-			echo "</fieldset>";
-			?>
+													<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+												</button></a></td>
+										<td align="center">
+											<font style="color:red; font-size:1.1em;">-<br>(Belum terjadwal)</font>
+										</td>
+										<td align="center">
+											<font style="color:red; font-size:1.1em;">Belum terjadwal</font>
+										</td>
+								<?php
+									}
+
+									if ($no == 2) {
+										echo "</tr>";
+										if ($kelas_baris == "table-primary") $kelas_baris = "table-success";
+										else $kelas_baris = "table-primary";
+										$no = 0;
+									}
+									$no++;
+								}
+								if ($no == 2) echo "<td colspan=\"3\">&nbsp;</td></tr>";
+								?>
+							</tbody>
+						</table>
+						<br>
+
+					</div>
+				</div>
+			</main>
+
+
 			<!-- End Content -->
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">

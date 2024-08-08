@@ -73,7 +73,7 @@
 
 		// Menentukan path gambar
 		$foto_path = "foto/" . $data_mhsw['foto'];
-		$default_foto = "images/account.png";
+		$default_foto = "foto/profil_blank.png";
 
 		// Mengecek apakah file gambar ada
 		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -86,7 +86,7 @@
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -94,7 +94,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -283,10 +283,10 @@
 			</button>
 
 			<!-- Start Footer -->
-			<footer class="footer">
+			<footer class="footer py-3">
 				<div class="container-fluid">
 					<div class="row text-body-secondary">
-						<div class="col-6 text-start">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
 							<a href="#" class="text-body-secondary">
 								<strong>Program Studi Pendidikan Profesi Dokter <br>
 									Universitas Diponegoro
@@ -313,7 +313,7 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-6 text-end text-body-secondary d-none d-md-block">
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
 							<a href="#" class="text-body-secondary">
 								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
 									Fakultas Kedokteran UNDIP - Gd A Lt. 2
@@ -333,8 +333,8 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-12 text-center  d-none d-md-block" style="color: #0A3967; ">
-							<a href=" https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
 								<strong>
 									<<< Install Aplikasi Android di Playstore>>>
 								</strong>

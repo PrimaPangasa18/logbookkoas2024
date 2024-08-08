@@ -5,17 +5,20 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Update Profil Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-  <link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="style/updateadmin.css">
+
+
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <!-- Link CDN Icon -->
   <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -53,9 +56,16 @@
     }
     ?>
     <?php
+    if ($_COOKIE['level'] != 5) {
+      $data_nim = $_GET['nim'];
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+    } else {
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+    }
+
     // Menentukan path gambar
     $foto_path = "foto/" . $data_mhsw['foto'];
-    $default_foto = "images/account.png";
+    $default_foto = "foto/profil_blank.png";
 
     // Mengecek apakah file gambar ada
     if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -68,7 +78,7 @@
       <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
-
+            <img src="images/undipsolid.png" alt="" style="width: 45px;">
           </div>
         </form>
         <div class="navbar-collapse collapse">
@@ -93,145 +103,119 @@
       <!-- End Navbar -->
 
       <!-- Main Content -->
-      <?php
+      <main class="content px-3 py-4">
+        <div class="container-fluid">
+          <div class="mb-3">
+            <h3 class="fw-bold fs-4 mb-3">UPDATE PROFIL</h3>
+            <br />
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+              SILAHKAN UPDATE PROFIL
+            </h2>
+            <br><br>
 
-      echo "<div class=\"text_header\">UPDATE PROFIL</div>";
-      echo "<br><br><br><fieldset class=\"fieldset_art\">
-    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-      echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">UPDATE PROFIL</font></h4>";
+            <!-- DISINI -->
+            <?php
+            if (empty($_POST['cancel']) and empty($_POST['simpan']) and empty($_POST['hapus'])) {
+              $data_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$_COOKIE[user]'"));
+              $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_user[username]'"));
+              $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
+              $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `level` WHERE `id`='$data_user[level]'"));
+            }
+            ?>
+            <div class="table-container">
+              <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
+                <table class="table table-bordered ">
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td><strong>Username</strong></td>
+                    <td>
+                      <strong><?= $data_user['username'] ?><br></strong>
+                      <p class="text-danger" style="font-weight: 600;"> Note: (Username tidak bisa diubah, NIP/NIDK/NIM/ID dari user)</p>
+                      <input type="hidden" name="user_name" value="<?= $data_user['username'] ?>" />
+                    </td>
+                  </tr>
+                  <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <td>Password Baru</td>
+                    <td>
+                      <input type="password" id="form-password" name="user_pass" class="form-control">
+                      <br>
+                      <label for="form-checkbox">
+                        <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px ;transform: scale(1.3); ">&nbsp; Show password
+                      </label>
+                      <br><br>
+                      <p class="text-danger" style="font-weight: 600;">Note: (Jika kosong/tidak diisi, password tidak berubah)</p>
+                    </td>
+                  </tr>
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td><strong>Nama Lengkap</strong></td>
+                    <td><strong><?= $dosen['nama'] ?></strong></td>
+                  </tr>
+                  <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <td>Nama Lengkap Baru</td>
+                    <td><input type="text" name="user_surename" value="<?= $dosen['nama'] ?>" class="form-control"></td>
+                  </tr>
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td><strong>Gelar</strong></td>
+                    <td><strong><?= $dosen['gelar'] ?></strong></td>
+                  </tr>
+                  <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <td>Gelar Baru</td>
+                    <td><input type="text" name="user_gelar" value="<?= $dosen['gelar'] ?>" class="form-control"></td>
+                  </tr>
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td><strong>Bagian</strong></td>
+                    <td><strong><?= $bagian['bagian'] ?></strong></td>
+                  </tr>
+                  <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <td>Bagian Baru</td>
+                    <td>
+                      <select name="bagian" class="form-select">
+                        <option value="<?= $bagian['id'] ?>"><?= $bagian['id'] ?> - <?= $bagian['bagian'] ?></option>
+                        <?php
+                        $action_bag = mysqli_query($con, "SELECT * FROM `bagian_ilmu` ORDER BY `id` ASC");
+                        while ($for_bag = mysqli_fetch_array($action_bag)) {
+                          echo "<option value=\"$for_bag[id]\">$for_bag[id] - $for_bag[bagian]</option>";
+                        }
+                        ?>
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+                <br><br>
+                <div class="button-group">
+                  <button type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
+                    <i class="fa-solid fa-circle-xmark me-2"></i>
+                    CANCEL
+                  </button>
+                  <button type="submit" class="btn btn-success" name="simpan" value="SIMPAN">
+                    <i class="fa-solid fa-floppy-disk me-2"></i>
+                    SIMPAN
+                  </button>
+                </div>
 
+              </form>
+            </div>
+            <?php
+            if ($_POST['cancel'] == "CANCEL") {
+              echo "<script>window.location.href='profil_dosen.php';</script>";
+            }
 
-      if (empty($_POST[cancel]) and empty($_POST[simpan]) and empty($_POST[hapus])) {
-        $data_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$_COOKIE[user]'"));
-        $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_user[username]'"));
-        $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
-        $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `level` WHERE `id`='$data_user[level]'"));
+            if ($_POST['simpan'] == "SIMPAN") {
+              if ($_POST['user_pass'] != "") {
+                $user_password = MD5($_POST['user_pass']);
+                $update_admin = mysqli_query($con, "UPDATE admin SET nama='$_POST[user_surename]', password='$user_password', level='$_COOKIE[level]' WHERE username='$_POST[user_name]'");
+              } else {
+                $update_admin = mysqli_query($con, "UPDATE admin SET nama='$_POST[user_surename]', level='$_COOKIE[level]' WHERE username='$_POST[user_name]'");
+              }
 
-        echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-        echo "<table>";
-        echo "<tr class=\"ganjil\">";
-        echo "<td style=\"width:200px\">";
-        echo "Username";
-        echo "</td>";
-        echo "<td>";
-        echo "$data_user[username]";
-        echo "<br>&nbsp;<font style=\"font-size:0.625em;font-family:GEORGIA\"><i>(Username tidak bisa diubah, NIP/NIDK/NIM/ID dari user)</i></font>";
-        echo "<input type=\"hidden\" name=\"user_name\" value=\"$data_user[username]\" />";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"genap\">";
-        echo "<td style=\"width:200px\">";
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;<i>Password Baru</i>";
-        echo "</td>";
-        echo "<td>";
-        echo "<input type=\"password\" id=\"form-password\" value=\"\" name=\"user_pass\" class=\"select_art\">";
-        echo "<br><input type=\"checkbox\" id=\"form-checkbox\">&nbsp;<font style=\"font-size:0.625em\"><i>Show password</i></font>";
-        echo "<br>&nbsp;<font style=\"font-size:0.625em;font-family:GEORGIA\"><i>(Jika kosong/tidak diisi, password tidak berubah)</i></font>";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"ganjil\">";
-        echo "<td>";
-        echo "Nama Lengkap";
-        echo "</td>";
-        echo "<td>";
-        echo "$dosen[nama]";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"genap\">";
-        echo "<td>";
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;<i>Nama Lengkap Baru</i>";
-        echo "</td>";
-        echo "<td>";
-        echo "<input class=\"select_art\" type=\"text\" name=\"user_surename\" value=\"$dosen[nama]\" >";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"ganjil\">";
-        echo "<td>";
-        echo "Gelar";
-        echo "</td>";
-        echo "<td>";
-        echo "$dosen[gelar]";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"genap\">";
-        echo "<td>";
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;<i>Gelar Baru</i>";
-        echo "</td>";
-        echo "<td>";
-        echo "<input class=\"select_art\" type=\"text\" name=\"user_gelar\" value=\"$dosen[gelar]\">";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"ganjil\">";
-        echo "<td>";
-        echo "Bagian";
-        echo "</td>";
-        echo "<td>";
-        echo "$bagian[bagian]";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"genap\">";
-        echo "<td>";
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;<i>Bagian Baru</i>";
-        echo "</td>";
-        echo "<td>";
-        echo "<select name=\"bagian\" class=\"select_art\" >";
-        $action_bag = mysqli_query($con, "SELECT * FROM `bagian_ilmu` ORDER BY `id` ASC");
-        echo "<option value=\"$bagian[id]\">$bagian[id] - $bagian[bagian]</option>";
-        while ($for_bag = mysqli_fetch_array($action_bag)) {
-          echo "<option value=\"$for_bag[id]\">$for_bag[id] - $for_bag[bagian]</option>";
-        }
-        echo "</select>";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr class=\"genap\">";
-        echo "<td colspan=2 style=\"text-align:center\">";
-        echo "<br><input type=\"submit\" class=\"submit1\" name=\"cancel\" value=\"CANCEL\">";
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" class=\"submit1\" name=\"simpan\" value=\"SIMPAN\">";
-        echo "<br><br></td>";
-        echo "</tr>";
-        echo "</table></form>";
-      }
+              $update_dosen = mysqli_query($con, "UPDATE dosen SET nama='$_POST[user_surename]', gelar='$_POST[user_gelar]', kode_bagian='$_POST[bagian]' WHERE nip='$_POST[user_name]'");
+              echo "<script>window.location.href='profil_dosen.php';</script>";
+            }
+            ?>
+            <!-- BERAKHIR -->
+          </div>
+        </div>
+      </main>
 
-      if ($_POST['cancel'] == "CANCEL") {
-        echo "
-		<script>
-			window.location.href=\"profil_dosen.php\";
-		</script>
-		";
-      }
-
-      if ($_POST['simpan'] == "SIMPAN") {
-        if ($_POST['user_pass'] != "") {
-          $user_password = MD5($_POST['user_pass']);
-          $update_admin = mysqli_query($con, "UPDATE `admin`
-          SET
-          `nama`='$_POST[user_surename]',
-          `password`='$user_password',
-          `level`='$_COOKIE[level]'
-          WHERE `username`='$_POST[user_name]'");
-        } else {
-          $update_admin = mysqli_query($con, "UPDATE `admin`
-          SET
-          `nama`='$_POST[user_surename]',
-          `level`='$_COOKIE[level]'
-          WHERE `username`='$_POST[user_name]'");
-        }
-
-        $update_dosen = mysqli_query($con, "UPDATE `dosen`
-        SET
-        `nama`='$_POST[user_surename]',
-        `gelar`='$_POST[user_gelar]',
-        `kode_bagian`='$_POST[bagian]'
-        WHERE `nip`='$_POST[user_name]'");
-        echo "
-    	<script>
-    		window.location.href=\"profil_dosen.php\";
-  		</script>
-  		";
-      }
-
-      echo "</fieldset>";
-      ?>
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -309,7 +293,8 @@
 
   <script src="javascript/script1.js"></script>
   <script src="javascript/buttontopup.js"></script>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript">
     $(document).ready(function() {
       $('#form-checkbox').click(function() {
         if ($(this).is(':checked')) {
@@ -319,7 +304,8 @@
         }
       });
     });
-  </script> -->
+  </script>
+
 
 </body>
 

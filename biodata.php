@@ -9,7 +9,6 @@
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-	<link rel="stylesheet" href="style/biodata.css">
 
 
 	<!-- Link Bootstrap -->
@@ -86,7 +85,7 @@
 
 		// Menentukan path gambar
 		$foto_path = "foto/" . $data_mhsw['foto'];
-		$default_foto = "images/account.png";
+		$default_foto = "foto/profil_blank.png";
 
 		// Mengecek apakah file gambar ada
 		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -100,7 +99,7 @@
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -108,7 +107,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -133,63 +132,65 @@
 						<!-- ISI DISINI -->
 
 						<div class="text-center">
-							<img src="<?php echo $foto_path; ?>" class="img-thumbnail" style="width:150px;height:auto;">
+							<img src="<?php echo $foto_path; ?>" class="img-thumbnail" style="width:150px;height:auto; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">
 						</div>
 						<br><br><br>
 						<div class="container mt-4">
 							<form>
-								<table class="table table-bordered table-striped">
-									<tbody>
-										<tr>
-											<td>Nama Peserta</td>
-											<td><?php echo $data_mhsw['nama']; ?></td>
-										</tr>
-										<tr>
-											<td>NIM Peserta</td>
-											<td><?php echo $data_mhsw['nim']; ?></td>
-										</tr>
-										<tr>
-											<td>Tempat, Tgl Lahir</td>
-											<td>
-												<?php
-												if ($data_mhsw['tanggal_lahir'] == "2000-01-01") {
-													echo "&nbsp;";
-												} else {
-													echo $kota_lahir['kota'] . ", " . $tgl_lahir;
-												}
-												?>
-											</td>
-										</tr>
-										<tr>
-											<td>Alamat</td>
-											<td><?php echo $data_mhsw['alamat'] . " - " . $kota_alamat['kota'] . " - " . $prop_alamat['prop']; ?></td>
-										</tr>
-										<tr>
-											<td>No HP</td>
-											<td><?php echo $data_mhsw['no_hp']; ?></td>
-										</tr>
-										<tr>
-											<td>Email</td>
-											<td><?php echo $data_mhsw['email']; ?></td>
-										</tr>
-										<tr>
-											<td>Nama Orang Tua</td>
-											<td><?php echo $data_mhsw['nama_ortu']; ?></td>
-										</tr>
-										<tr>
-											<td>Alamat Orang Tua</td>
-											<td><?php echo $data_mhsw['alamat_ortu'] . " - " . $kota_ortu['kota'] . " - " . $prop_ortu['prop']; ?></td>
-										</tr>
-										<tr>
-											<td>No HP Orang Tua</td>
-											<td><?php echo $data_mhsw['no_hportu']; ?></td>
-										</tr>
-										<tr>
-											<td>Dosen Wali</td>
-											<td><?php echo $dosen_wali['nama'] . ", " . $dosen_wali['gelar'] . " (NIP. " . $data_mhsw['dosen_wali'] . ")"; ?></td>
-										</tr>
-									</tbody>
-								</table>
+								<center>
+									<table class="table table-bordered" style="width: auto;">
+										<tbody>
+											<tr class="table-primary">
+												<td style="width: 400px;"><strong>Nama Peserta</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['nama']; ?></td>
+											</tr>
+											<tr class="table-success">
+												<td style="width: 400px;"><strong>NIM Peserta</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['nim']; ?></td>
+											</tr>
+											<tr class="table-primary">
+												<td style="width: 400px;"><strong>Tempat, Tgl Lahir</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen">
+													<?php
+													if ($data_mhsw['tanggal_lahir'] == "2000-01-01") {
+														echo "&nbsp;";
+													} else {
+														echo $kota_lahir['kota'] . ", " . $tgl_lahir;
+													}
+													?>
+												</td>
+											</tr>
+											<tr class="table-success">
+												<td style="width: 400px;"><strong>Alamat</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['alamat'] . " - " . $kota_alamat['kota'] . " - " . $prop_alamat['prop']; ?></td>
+											</tr>
+											<tr class="table-primary">
+												<td style="width: 400px;"><strong>No HP</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['no_hp']; ?></td>
+											</tr>
+											<tr class="table-success">
+												<td style="width: 400px;"><strong>Email</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['email']; ?></td>
+											</tr>
+											<tr class="table-primary">
+												<td style="width: 400px;"><strong>Nama Orang Tua</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['nama_ortu']; ?></td>
+											</tr>
+											<tr class="table-success">
+												<td style="width: 400px;"><strong>Alamat Orang Tua</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['alamat_ortu'] . " - " . $kota_ortu['kota'] . " - " . $prop_ortu['prop']; ?></td>
+											</tr>
+											<tr class="table-primary">
+												<td style="width: 400px;"><strong>No HP Orang Tua</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['no_hportu']; ?></td>
+											</tr>
+											<tr class="table-success">
+												<td style="width: 400px;"><strong>Dosen Wali</strong></td>
+												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $dosen_wali['nama'] . ", " . $dosen_wali['gelar'] . " (NIP. " . $data_mhsw['dosen_wali'] . ")"; ?></td>
+											</tr>
+										</tbody>
+									</table>
+								</center>
 							</form>
 						</div>
 						<!-- END DISINI -->

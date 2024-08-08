@@ -5,11 +5,12 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Biodata User Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-  <link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
+
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -17,6 +18,7 @@
   <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 
 <body>
   <div class="wrapper">
@@ -61,9 +63,16 @@
     }
     ?>
     <?php
+    if ($_COOKIE['level'] != 5) {
+      $data_nim = $_GET['nim'];
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+    } else {
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+    }
+
     // Menentukan path gambar
     $foto_path = "foto/" . $data_mhsw['foto'];
-    $default_foto = "images/account.png";
+    $default_foto = "foto/profil_blank.png";
 
     // Mengecek apakah file gambar ada
     if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -76,7 +85,7 @@
       <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
-
+            <img src="images/undipsolid.png" alt="" style="width: 45px;">
           </div>
         </form>
         <div class="navbar-collapse collapse">
@@ -84,7 +93,7 @@
             <li class="nav-item dropdown d-flex align-item-center">
               <span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
               <a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
               </a>
               <div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -101,55 +110,58 @@
       <!-- End Navbar -->
 
       <!-- Main Content -->
-      <?php
+      <main class="content px-3 py-4">
+        <div class="container-fluid">
+          <div class="mb-3">
 
-      echo "<div class=\"text_header\">PROFIL USER</div>";
-      echo "<br><br><br><fieldset class=\"fieldset_art\">
-    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-      echo "<center><font style=\"font-family:Georgia;text-shadow:1px 1px black;color:#006400;font-size:1.25em\">PROFIL USER</font>";
-      echo "<br><br><br>";
+            <br />
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">DATA DIRI USER</h2>
+            <br>
+            <?php
 
-      $data_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$_COOKIE[user]'"));
-      $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_user[username]'"));
-      $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
-      $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `level` WHERE `id`='$data_user[level]'"));
+            $data_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$_COOKIE[user]'"));
+            $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_user[username]'"));
+            $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
+            $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `level` WHERE `id`='$data_user[level]'"));
+            ?>
+            <div class="container mt-3">
+              <form>
+                <center>
+                  <table class="table table-bordered" style="width: auto;">
+                    <tbody>
+                      <tr class="table-primary">
+                        <td style="width: 300px;"><strong>Username</strong></td>
+                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $data_user['username']; ?></td>
+                      </tr>
+                      <tr class="table-success">
+                        <td style="width: 300px;"><strong>Nama Lengkap</strong></td>
+                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $dosen['nama']; ?></td>
+                      </tr>
+                      <tr class="table-primary">
+                        <td style="width: 300px;"><strong>Gelar</strong></td>
+                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $dosen['gelar']; ?></td>
+                      </tr>
+                      <tr class="table-success">
+                        <td style="width: 300px;"><strong>Bagian</strong></td>
+                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $bagian['bagian']; ?></td>
+                      </tr>
+                      <tr class="table-primary">
+                        <td style="width: 300px;"><strong>Level User</strong></td>
+                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $level_user['level']; ?></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </center>
+              </form>
+            </div>
 
-      echo "<table>";
-      echo "<tr class=\"ganjil\">";
-      echo "<td style=\"width:200px\">";
-      echo "Username";
-      echo "</td>";
-      echo "<td>";
-      echo "$data_user[username]";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class=\"genap\">";
-      echo "<td>";
-      echo "Nama Lengkap";
-      echo "</td>";
-      echo "<td>";
-      echo "$dosen[nama]";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class=\"ganjil\">";
-      echo "<td>";
-      echo "Gelar";
-      echo "</td>";
-      echo "<td>";
-      echo "$dosen[gelar]";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class=\"genap\">";
-      echo "<td>";
-      echo "Bagian";
-      echo "</td>";
-      echo "<td>";
-      echo "$bagian[bagian]";
-      echo "</td>";
-      echo "</tr>";
-      echo "</table><br><br>";
-      echo "</fieldset>";
-      ?>
+          </div>
+        </div>
+      </main>
+
+
+
+
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -158,10 +170,10 @@
       </button>
 
       <!-- Start Footer -->
-      <footer class="footer">
+      <footer class="footer py-3">
         <div class="container-fluid">
           <div class="row text-body-secondary">
-            <div class="col-6 text-start">
+            <div class="col-12 col-md-6 text-start mb-3 mb-md-0">
               <a href="#" class="text-body-secondary">
                 <strong>Program Studi Pendidikan Profesi Dokter <br>
                   Universitas Diponegoro
@@ -188,7 +200,7 @@
                 </strong>
               </a>
             </div>
-            <div class="col-6 text-end text-body-secondary d-none d-md-block">
+            <div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
               <a href="#" class="text-body-secondary">
                 <strong>Ketua Prodi Pendidikan Profesi Dokter <br>
                   Fakultas Kedokteran UNDIP - Gd A Lt. 2
@@ -208,8 +220,8 @@
                 </strong>
               </a>
             </div>
-            <div class="col-12 text-center  d-none d-md-block" style="color: #0A3967; ">
-              <a href=" https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+            <div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+              <a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
                 <strong>
                   <<< Install Aplikasi Android di Playstore>>>
                 </strong>

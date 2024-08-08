@@ -5,11 +5,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Rekap Individu Evaluasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-  <link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -56,9 +55,16 @@
     }
     ?>
     <?php
+    if ($_COOKIE['level'] != 5) {
+      $data_nim = $_GET['nim'];
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+    } else {
+      $data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+    }
+
     // Menentukan path gambar
     $foto_path = "foto/" . $data_mhsw['foto'];
-    $default_foto = "images/account.png";
+    $default_foto = "foto/profil_blank.png";
 
     // Mengecek apakah file gambar ada
     if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -71,7 +77,7 @@
       <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
-
+            <img src="images/undipsolid.png" alt="" style="width: 45px;">
           </div>
         </form>
         <div class="navbar-collapse collapse">
@@ -79,7 +85,7 @@
             <li class="nav-item dropdown d-flex align-item-center">
               <span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
               <a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+                <img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
               </a>
               <div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -96,57 +102,80 @@
       <!-- End Navbar -->
 
       <!-- Main Content -->
-      <?php
+      <main class="content px-3 py-4">
+        <div class="container-fluid">
+          <div class="mb-3">
+            <h3 class="fw-bold fs-4 mb-3">EVALUASI INDIVIDU KEPANITERAAN (STASE)</h3>
+            <br />
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+              EVALUASI INDIVIDU KEPANITERAAN (STASE)
+            </h2>
+            <br><br>
+            <?php
+            // Form
+            echo '<form method="POST" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '">';
+            ?>
+            <div class="container mt-5">
+              <div class="text-center mb-4">
+                <center>
+                  <table class="table table-bordered" style="width: auto;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                      <td class="align-middle" style="width:200px"><span style="font-size: 17px;"><strong>Cari Mahasiswa: </strong></span></td>
+                      <td class="align-middle" style="width: 400px;"><input type="text" class="form-control" name="kunci" id="kunci" style="display: inline-block;" placeholder="masukkan NIM atau nama mahasiswa" /></td>
+                    </tr>
+                  </table>
+                </center>
+                <br>
+                <button type="submit" class="btn btn-success" name="cari" value="CARI">
+                  <i class="fa-solid fa-magnifying-glass me-2"></i>CARI
+                </button>
+              </div>
+              <br>
 
-      echo "<div class=\"text_header\">EVALUASI INDIVIDU KEPANITERAAN (STASE)</div>";
+              <?php
+              if (isset($_POST['cari']) && $_POST['cari'] === "CARI") {
+                $kunci = mysqli_real_escape_string($con, $_POST['kunci']);
+                $query = "SELECT * FROM `admin` WHERE `level`='5' AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')";
+                $user_kunci = mysqli_query($con, $query);
+                $jml = mysqli_num_rows($user_kunci);
 
-      echo "<br><br><br><fieldset class=\"fieldset_art\">
-    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-
-      echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">EVALUASI INDIVIDU KEPANITERAAN (STASE)</font></h4><br>";
-      echo "</center>";
-
-      echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-      echo "<center>Cari Mahasiswa: ";
-      echo "<input type=\"text\" name=\"kunci\" style=\"width:200px\" /><br><br>
-      <font style=\"font-size:0.625em\"><i>(masukkan NIM atau nama mahasiswa)</i></font><br><br>";
-      echo "<input type=\"submit\" class=\"submit1\" name=\"cari\" value=\"CARI\" /><br><br>";
-
-      if ($_POST['cari'] == "CARI") {
-        $user_kunci = mysqli_query($con, "SELECT * FROM `admin` WHERE `level`='5' AND (`username` LIKE '%$_POST[kunci]%' OR `nama` LIKE '%$_POST[kunci]%')");
-        $jml = mysqli_num_rows($user_kunci);
-        if ($jml >= 1) {
-          echo "<table style=\"border:0\">";
-          echo "<tr>";
-          echo "<td>";
-          echo "<font style=\"font-size:0.625em\"><i>(Klik username untuk melihat rotasi kepaniteraan/stase)</i></font>";
-          echo "</td>";
-          echo "</tr>";
-          echo "</table><br>";
-          echo "<table style=\"border:0;box-shadow: 10px 10px 20px rgba(0,0,0,0.4)\">";
-          echo "<tr class=\"ganjil\">";
-          echo "<td style=\"width:50px;text-align:center\">No</td>";
-          echo "<td style=\"width:150px;text-align:center\">Username (NIM)</td>";
-          echo "<td style=\"width:400px;text-align:center\">Nama Mahasiswa</td>";
-          echo "</tr>";
-          $no = 1;
-          while ($data = mysqli_fetch_array($user_kunci)) {
-            $biodata_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data[username]'"));
-            echo "<tr class=\"genap\">";
-            echo "<td style=\"text-align:center\">$no</td>";
-            echo "<td><a href=\"rotasi_internal.php?user_name=$data[username]\">$data[username]</a></td>";
-            echo "<td>$data[nama]</td>";
-            echo "</tr>";
-            $no++;
-          }
-          echo "</table>";
-        } else {
-          echo "<font style=\"font-size:1.0em;color:red\">Tidak ada user dengan kata kunci \"<i>$_POST[kunci]\" !!!</i></font>";
-        }
-      }
-
-      echo "<br><br></fieldset>";
-      ?>
+                if ($jml >= 1) {
+                  echo '<div class="text-center mb-4">';
+                  echo '<small class="text-danger" style="font-weight:700">(Klik username untuk melihat rotasi kepaniteraan/stase)</small>';
+                  echo '<p></p>';
+                  echo '<table class="table table-bordered" ';
+                  echo '<thead>';
+                  echo '<tr class="table-success">';
+                  echo '<th style="width:5px;text-align:center">No</th>';
+                  echo '<th style="width:150px;text-align:center">Username (NIM)</th>';
+                  echo '<th style="width:250px;text-align:center">Nama Mahasiswa</th>';
+                  echo '</tr>';
+                  echo '</thead>';
+                  echo '<tbody>';
+                  $no = 1;
+                  while ($data = mysqli_fetch_array($user_kunci)) {
+                    $biodata_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='" . $data['username'] . "'"));
+                    echo '<tr class="table-secondary">';
+                    echo '<td style="text-align:center;font-weight:700">' . htmlspecialchars($no) . '</td>';
+                    echo '<td style="text-align:center"><a href="rotasi_internal.php?user_name=' . urlencode($data['username']) . '" class="btn btn-outline-primary">' . htmlspecialchars($data['username']) . '</a></td>';
+                    echo '<td style="text-align:center;font-weight:700">' . htmlspecialchars($biodata_mhsw['nama']) . '</td>';
+                    echo '</tr>';
+                    $no++;
+                  }
+                  echo '</tbody>';
+                  echo '</table>';
+                  echo '</div>';
+                } else {
+                  echo '<div class="text-center mb-4">';
+                  echo '<span style="font-size:1.0em; font-weight:700; color:#dc3545">Tidak ada USER dengan kata kunci "<i style="color:blue">' . htmlspecialchars($_POST['kunci']) . '</i>" !</span>';
+                  echo '</div>';
+                }
+              }
+              ?>
+              </form>
+            </div>
+          </div>
+      </main>
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -155,10 +184,10 @@
       </button>
 
       <!-- Start Footer -->
-      <footer class="footer">
+      <footer class="footer py-3">
         <div class="container-fluid">
           <div class="row text-body-secondary">
-            <div class="col-6 text-start">
+            <div class="col-12 col-md-6 text-start mb-3 mb-md-0">
               <a href="#" class="text-body-secondary">
                 <strong>Program Studi Pendidikan Profesi Dokter <br>
                   Universitas Diponegoro
@@ -185,7 +214,7 @@
                 </strong>
               </a>
             </div>
-            <div class="col-6 text-end text-body-secondary d-none d-md-block">
+            <div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
               <a href="#" class="text-body-secondary">
                 <strong>Ketua Prodi Pendidikan Profesi Dokter <br>
                   Fakultas Kedokteran UNDIP - Gd A Lt. 2
@@ -205,8 +234,8 @@
                 </strong>
               </a>
             </div>
-            <div class="col-12 text-center  d-none d-md-block" style="color: #0A3967; ">
-              <a href=" https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+            <div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+              <a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
                 <strong>
                   <<< Install Aplikasi Android di Playstore>>>
                 </strong>
@@ -224,6 +253,8 @@
 
   <script src="javascript/script1.js"></script>
   <script src="javascript/buttontopup.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script>
+
 </body>
 
 </HTML>

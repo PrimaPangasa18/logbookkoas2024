@@ -9,7 +9,6 @@
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -60,13 +59,30 @@
 		";
 		}
 		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
+		// Menentukan path gambar
+		$foto_path = "foto/" . $data_mhsw['foto'];
+		$default_foto = "foto/profil_blank.png";
+
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -74,7 +90,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="images/account.png" class="avatar img-fluid" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -95,122 +111,167 @@
 				<div class="container-fluid">
 					<div class="mb-3">
 						<h3 class="fw-bold fs-4 mb-3">ROTASI KEPANITERAAN (STASE)</h3>
+						<br />
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+							ROTASI INDIVIDU KEPANITERAAN (STASE)
+						</h2>
+						<br><br>
 						<?php
 						if ($_COOKIE['level'] == 5) {
-							echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    	<legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-
-							echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">ROTASI KEPANITERAAN (STASE)</font></h4><br>";
-							$nim_mhsw = $_COOKIE[user];
+							$nim_mhsw = $_COOKIE['user'];
 						} else {
-							echo "<div class=\"text_header\">ROTASI INDIVIDU KEPANITERAAN (STASE)</div>";
-							echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    	<legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-
-							echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">ROTASI INDIVIDU KEPANITERAAN (STASE)</font></h4><br>";
-							$nim_mhsw = $_GET[user_name];
-							//Informasi data mahasiswa
-							$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` WHERE `nim`='$nim_mhsw'"));
-							echo "<table>";
-							echo "<tr>";
-							echo "<td style=\"width:150px\">Nama Mahasiswa</td>";
-							echo "<td style=\"width:400px\">: $data_mhsw[nama]</td>";
-							echo "</tr>";
-							echo "<tr>";
-							echo "<td>NIM</td>";
-							echo "<td>: $data_mhsw[nim]</td>";
-							echo "</tr>";
-							echo "</table><br><br>";
+							$nim_mhsw = $_GET['user_name'];
+							// Informasi data mahasiswa
+							$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nim`, `nama` FROM `biodata_mhsw` WHERE `nim`='$nim_mhsw'"));
+						?>
+							<center>
+								<table class="table table-bordered" style="width: 800px;">
+									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
+										<td style="width:300px"><strong>Nama Mahasiswa</strong></td>
+										<td style="width:500px; font-weight:600"><?= $data_mhsw['nama']; ?></td>
+									</tr>
+									<tr class="table-success" style="border-width: 1px; border-color: #000;">
+										<td style="width:300px"><strong>NIM</strong></td>
+										<td style="width:500px; font-weight:600"><?= $data_mhsw['nim']; ?></td>
+									</tr>
+								</table>
+							</center>
+							<br><br>
+						<?php
 						}
 
 						$semester = mysqli_query($con, "SELECT DISTINCT `semester` FROM `kepaniteraan` ORDER BY `semester`");
-						echo "<table style=\"width:100%\">";
-						echo "<tr class=\"ganjil\">";
-						echo "<td colspan=\"6\"><i>Catatan Penting:<br>";
-						echo "- Evaluasi akhir kepaniteraan (stase) wajib diisi sebagai syarat pemrosesan Grade Ketuntasan tiap kepaniteraan (stase)<i>";
-						echo "</td></tr>";
-						echo "<tr class=\"genap\"><td colspan=\"6\">&nbsp;</td></tr>";
-						while ($data_smt = mysqli_fetch_array($semester)) {
-							//Semester i
-							echo "<tr class=\"ganjil\">";
-							echo "<td colspan=\"6\"><b>SEMESTER $data_smt[semester]</b></td>";
-							echo "</tr>";
-							echo "<tr class=\"ganjil\">";
-							echo "<th align=\"center\" style=\"width:10%\">Urutan</th>";
-							echo "<th align=\"center\" style=\"width:30%\">Kepaniteraan (Stase)</th>";
-							echo "<th align=\"center\" style=\"width:15%\">Tanggal Mulai</th>";
-							echo "<th align=\"center\" style=\"width:15%\">Tanggal Selesai</th>";
-							echo "<th align=\"center\" style=\"width:15%\">Status</th>";
-							echo "<th align=\"center\" style=\"width:15%\">Evaluasi</th>";
-							echo "</tr>";
-							$stase_smt = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`= '$data_smt[semester]' ORDER BY `id`");
-							$hapus_dummy = mysqli_query($con, "DELETE FROM `dummy_rotasi` WHERE `username`='$_COOKIE[user]'");
-							while ($data_stase = mysqli_fetch_array($stase_smt)) {
-								$stase_id = "stase_" . $data_stase[id];
-								$urutan_stase = mysqli_query($con, "SELECT `rotasi` FROM `$stase_id` WHERE `nim`='$nim_mhsw'");
-								$jml_mhsw = mysqli_num_rows($urutan_stase);
-								$urutan_rotasi = mysqli_fetch_array($urutan_stase);
-								if ($jml_mhsw == 0) $urutan = 8;
-								else $urutan = $urutan_rotasi[rotasi];
-								$insert_dummy = mysqli_query($con, "INSERT INTO `dummy_rotasi`
-					(`id`, `urutan`,`username`)
-					VALUES
-					('$data_stase[id]','$urutan','$_COOKIE[user]')");
-							}
-							$rotasi_stase = mysqli_query($con, "SELECT * FROM `dummy_rotasi` ORDER BY `urutan`,`id`");
-							$no = 1;
-							while ($data_rotasi = mysqli_fetch_array($rotasi_stase)) {
-								$id_stase = $data_rotasi[id];
-								$stase_id = "stase_" . $data_rotasi[id];
-								$nama_stase = mysqli_fetch_array(mysqli_query($con, "SELECT `kepaniteraan` FROM `kepaniteraan` WHERE `id`='$data_rotasi[id]'"));
-								echo "<tr class=\"genap\">";
-								if ($data_rotasi[urutan] == 9) echo "<td align=\"center\">#</td>";
-								else echo "<td align=\"center\">$no</td>";
-								if ($data_rotasi[urutan] == 8) {
-									echo "<td>$nama_stase[kepaniteraan]</td>";
-									echo "<td colspan=4><font style=\"color:red\"><i><< BELUM DIJADWALKAN ATAU DIJADWAL ULANG >></i></font></td>";
-								} else {
-									echo "<td>$nama_stase[kepaniteraan]</td>";
-									$datastase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$nim_mhsw'"));
-									$tgl_mulai = tanggal_indo($datastase[tgl_mulai]);
-									$tgl_selesai = tanggal_indo($datastase[tgl_selesai]);
-									echo "<td align=\"center\">$tgl_mulai</td>";
-									echo "<td align=\"center\">$tgl_selesai</td>";
-									if ($datastase[status] == "0") echo "<td><font style=\"color:blue\">Belum Aktif</font></td>";
-									if ($datastase[status] == "1") echo "<td><font style=\"color:green\">Aktif</font></td>";
-									if ($datastase[status] == "2") echo "<td><font style=\"color:red\">Sudah Lewat</font></td>";
-									if ($_COOKIE[level] == "5") {
-										if ($datastase[evaluasi] == "0") {
-											echo "<td><font style=\"color:red\">Belum &nbsp;</font>";
-											echo "<a href=\"isi_evaluasi.php?id=$id_stase\"><input type=\"button\" name=\"entry_$id_stase\" value=\"ENTRY\"></a>";
-											echo "</td>";
-										} else {
-											echo "<td><font style=\"color:green\">Sudah &nbsp;</font>";
-											echo "<a href=\"edit_evaluasi.php?id=$id_stase\"><input type=\"button\" name=\"edit_$id_stase\" value=\"EDIT\"></a>";
-											echo "</td>";
-										}
-									} else {
-										if ($datastase[evaluasi] == "0") {
-											echo "<td><font style=\"color:red\">Belum</font>";
-											echo "</td>";
-										} else {
-											echo "<td><font style=\"color:green\">Sudah &nbsp;</font>";
-											echo "<a href=\"lihat_evaluasi.php?id=$id_stase&nim=$nim_mhsw&menu=rotasi\"><input type=\"button\" name=\"lihat_$id_stase\" value=\"LIHAT\"></a>";
-											echo "</td>";
-										}
-									}
-								}
-								echo "</tr>";
-								$no++;
-							}
-							echo "<tr class=\"ganjil\"><td colspan=\"6\">&nbsp;</td></tr>";
-						}
-
-						echo "</table><br><br>";
-						$hapus_dummy = mysqli_query($con, "DELETE FROM `dummy_rotasi` WHERE `username`='$_COOKIE[user]'");
-
-						echo "</fieldset>";
 						?>
+						<table class="table table-bordered table-primary" style="width:100%">
+							<tr class="table-warning" style="border-width: 1px; border-color: #000;">
+								<td colspan="6"> <strong>Catatan Penting:</strong><br><br>
+									<span style="font-weight: 500;">- Evaluasi akhir kepaniteraan (stase) <span class="text-danger" style="font-weight:bold;">wajib</span> diisi sebagai syarat pemrosesan Grade Ketuntasan tiap kepaniteraan (stase)</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">&nbsp;</td>
+							</tr>
+							<?php
+							while ($data_smt = mysqli_fetch_array($semester)) {
+							?>
+								<tr>
+									<td colspan="6" style="border-width: 1px; border-color: #000;"><b>SEMESTER <?= $data_smt['semester']; ?></b></td>
+								</tr>
+								<tr>
+									<th style="text-align: center; border-width: 1px; border-color: #000;">Urutan</th>
+									<th style="text-align: center; border-width: 1px; border-color: #000;">Kepaniteraan (Stase)</th>
+									<th style="text-align: center; border-width: 1px; border-color: #000;">Tanggal Mulai</th>
+									<th style="text-align: center; border-width: 1px; border-color: #000;">Tanggal Selesai</th>
+									<th style="text-align: center; border-width: 1px; border-color: #000;">Status</th>
+									<th style="text-align: center; border-width: 1px; border-color: #000;">Evaluasi</th>
+								</tr>
+								<?php
+								$stase_smt = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`= '$data_smt[semester]' ORDER BY `id`");
+								$hapus_dummy = mysqli_query($con, "DELETE FROM `dummy_rotasi` WHERE `username`='$_COOKIE[user]'");
+								while ($data_stase = mysqli_fetch_array($stase_smt)) {
+									$stase_id = "stase_" . $data_stase['id'];
+									$urutan_stase = mysqli_query($con, "SELECT `rotasi` FROM `$stase_id` WHERE `nim`='$nim_mhsw'");
+									$jml_mhsw = mysqli_num_rows($urutan_stase);
+									$urutan_rotasi = mysqli_fetch_array($urutan_stase);
+									$urutan = ($jml_mhsw == 0) ? 8 : $urutan_rotasi['rotasi'];
+									$insert_dummy = mysqli_query($con, "INSERT INTO `dummy_rotasi` (`id`, `urutan`, `username`) VALUES ('$data_stase[id]', '$urutan', '$_COOKIE[user]')");
+								}
+								$rotasi_stase = mysqli_query($con, "SELECT * FROM `dummy_rotasi` ORDER BY `urutan`, `id`");
+								$no = 1;
+								while ($data_rotasi = mysqli_fetch_array($rotasi_stase)) {
+									$id_stase = $data_rotasi['id'];
+									$stase_id = "stase_" . $data_rotasi['id'];
+									$nama_stase = mysqli_fetch_array(mysqli_query($con, "SELECT `kepaniteraan` FROM `kepaniteraan` WHERE `id`='$data_rotasi[id]'"));
+								?>
+									<tr class="table-success" style="border-width: 1px; border-color: #000;">
+										<td style="text-align: center;font-weight:600"><?= ($data_rotasi['urutan'] == 9) ? '#' : $no; ?></td>
+										<td style="font-weight:600;"><?= $nama_stase['kepaniteraan']; ?></td>
+										<?php
+										if ($data_rotasi['urutan'] == 8) {
+										?>
+											<td colspan="4">
+												<font style="color: red;"><strong>
+														<< BELUM DIJADWALKAN ATAU DIJADWAL ULANG>>
+													</strong>
+												</font>
+											</td>
+										<?php
+										} else {
+											$datastase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$nim_mhsw'"));
+											$tgl_mulai = tanggal_indo($datastase['tgl_mulai']);
+											$tgl_selesai = tanggal_indo($datastase['tgl_selesai']);
+										?>
+											<td style="text-align: center; font-weight:600; color:purple; "><?= $tgl_mulai; ?></td>
+											<td style="text-align: center; font-weight:600; color:purple; "><?= $tgl_selesai; ?></td>
+											<td>
+												<strong>
+													<font style="color:<?= ($datastase['status'] == "0") ? 'blue' : (($datastase['status'] == "1") ? 'green' : 'blue'); ?>"><?= ($datastase['status'] == "0") ? 'Belum Aktif' : (($datastase['status'] == "1") ? 'Aktif' : 'Sudah Lewat'); ?></font>
+												</strong>
+											</td>
+											<td>
+												<?php
+												if ($_COOKIE['level'] == "5") {
+													if ($datastase['evaluasi'] == "0") {
+												?>
+														<font style="color:red;"><strong>Belum</strong></font>
+														&nbsp;&nbsp;&nbsp;&nbsp;
+														<a href="isi_evaluasi.php?id=<?= $id_stase; ?>" name="entry_<?= $id_stase; ?>">
+															<button type="button" class="btn btn-primary btn-sm" value="ENTRY">
+																<i class="fa-solid fa-pen-to-square me-2"></i> ENTRY
+															</button>
+														</a>
+
+
+													<?php
+													} else {
+													?>
+														<font style="color:green"><strong>Sudah &nbsp;</strong></font>
+														<a href="edit_evaluasi.php?id=<?= $id_stase; ?>&nim=<?= $nim_mhsw; ?>&menu=rotasi">
+															<button type="button" class="btn btn-warning btn-sm" name="edit_<?= $id_stase; ?>" value="EDIT">
+																<i class="fa fa-pencil-alt me-2"></i> EDIT
+															</button>
+														<?php
+													}
+												} else {
+													if ($datastase['evaluasi'] == "0") {
+														?>
+															<font style="color:red"><strong>Belum</strong></font>
+														<?php
+													} else {
+														?>
+															<font style="color:darkgreen"><strong>Sudah</strong></font>
+															<a href="lihat_evaluasi.php?id=<?= $id_stase; ?>&nim=<?= $nim_mhsw; ?>&menu=rotasi">
+																<button type="button" class="btn btn-success btn-sm" name="lihat_<?= $id_stase; ?>">
+																	<i class="fa fa-eye"></i> LIHAT
+																</button>
+															</a>
+
+													<?php
+													}
+												}
+													?>
+											</td>
+										<?php
+										}
+										?>
+									</tr>
+								<?php
+									$no++;
+								}
+								?>
+								<tr>
+									<td colspan="6">&nbsp;</td>
+								</tr>
+							<?php
+							}
+							?>
+						</table>
+						<br><br>
+						<?php
+						$hapus_dummy = mysqli_query($con, "DELETE FROM `dummy_rotasi` WHERE `username`='$_COOKIE[user]'");
+						?>
+
+
 					</div>
 			</main>
 			<!-- Back to Top Button -->
@@ -220,10 +281,10 @@
 			</button>
 
 			<!-- Start Footer -->
-			<footer class="footer">
+			<footer class="footer py-3">
 				<div class="container-fluid">
 					<div class="row text-body-secondary">
-						<div class="col-6 text-start">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
 							<a href="#" class="text-body-secondary">
 								<strong>Program Studi Pendidikan Profesi Dokter <br>
 									Universitas Diponegoro
@@ -250,7 +311,7 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-6 text-end text-body-secondary d-none d-md-block">
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
 							<a href="#" class="text-body-secondary">
 								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
 									Fakultas Kedokteran UNDIP - Gd A Lt. 2
@@ -270,8 +331,8 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-12 text-center  d-none d-md-block" style="color: #0A3967; ">
-							<a href=" https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
 								<strong>
 									<<< Install Aplikasi Android di Playstore>>>
 								</strong>

@@ -5,11 +5,12 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>On-line Rotasi Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<title>On-line Rotasi Angkatan Logbook Koas Pendidikan Dokter FK-UNDIP</title>
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
+	<link rel="stylesheet" href="select2/dist/css/select2.css" />
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
+
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -55,9 +56,16 @@
 		}
 		?>
 		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
 		// Menentukan path gambar
 		$foto_path = "foto/" . $data_mhsw['foto'];
-		$default_foto = "images/account.png";
+		$default_foto = "foto/profil_blank.png";
 
 		// Mengecek apakah file gambar ada
 		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
@@ -70,7 +78,7 @@
 			<nav class="navbar navbar-expand px-4 py-3">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
-
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
 					</div>
 				</form>
 				<div class="navbar-collapse collapse">
@@ -78,7 +86,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -95,41 +103,54 @@
 			<!-- End Navbar -->
 
 			<!-- Main Content -->
-			<?php
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">ROTASI KEPANITERAAN (STASE)</h3>
+						<br />
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
+							ROTASI ANGKATAN
+						</h2>
+						<br><br>
+						<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+							<center>
+								<table class="table table-bordered" style="width: 500px;">
+									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
+										<td class="align-middle"><strong>Angkatan Mahasiswa</strong></td>
+										<td>
+											<select class="form-select" name="angk_mhsw" id="angk_mhsw">
+												<option value="all">Semua Angkatan</option>
+												<?php
+												$angk_mhsw = mysqli_query($con, "SELECT DISTINCT `angkatan` FROM `biodata_mhsw` ORDER BY `angkatan`");
+												while ($data1 = mysqli_fetch_array($angk_mhsw)) {
+													echo "<option value=\"$data1[angkatan]\">Angkatan $data1[angkatan]</option>";
+												}
+												?>
+											</select>
+										</td>
+									</tr>
+								</table>
+								<br>
+								<button type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+									<i class="fa-solid fa-magnifying-glass me-2"></i>SEARCH
+								</button>
+							</center>
+						</form>
 
-			echo "<div class=\"text_header\">ROTASI KEPANITERAAN (STASE)</div>";
-			echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
+						<?php
+						if (isset($_POST['submit']) && $_POST['submit'] == "SUBMIT") {
+							echo "
+    <script>
+        window.location.href='view_rotasi_all.php?angk=' + '$_POST[angk_mhsw]';
+    </script>
+    ";
+						}
+						?>
 
-			echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">ROTASI KEPANITERAAN (STASE)</font></h4><br>";
+					</div>
+				</div>
+			</main>
 
-			echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-
-			echo "<table border=\"0\">";
-			echo "<tr class=\"ganjil\">";
-			echo "<td class=\"td_mid\">Angkatan Mahasiswa</td>";
-			echo "<td class=\"td_mid\">";
-			echo "<select class=\"select_artwide\" name=\"angk_mhsw\" id=\"angk_mhsw\">";
-			$angk_mhsw = mysqli_query($con, "SELECT DISTINCT `angkatan` FROM `biodata_mhsw` ORDER BY `angkatan`");
-			echo "<option value=\"all\">Semua Angkatan</option>";
-			while ($data1 = mysqli_fetch_array($angk_mhsw))
-				echo "<option value=\"$data1[angkatan]\">Angkatan $data1[angkatan]</option>";
-			echo "</select>";
-			echo "</td>";
-			echo "</tr>";
-			echo "</table>";
-			echo "<br><br><input type=\"submit\" class=\"submit1\" name=\"submit\" value=\"SUBMIT\">";
-			echo "</form>";
-
-			if ($_POST[submit] == "SUBMIT")
-				echo "
-		<script>
-			window.location.href=\"view_rotasi_all.php?angk=\"+\"$_POST[angk_mhsw]\";
-		</script>
-		";
-
-			echo "</fieldset>";
-			?>
 			<!-- End Content -->
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
@@ -207,6 +228,17 @@
 
 	<script src="javascript/script1.js"></script>
 	<script src="javascript/buttontopup.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script src="select2/dist/js/select2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#angk_mhsw").select2({
+				placeholder: "Semua Angkatan",
+				allowClear: true
+			});
+
+		});
+	</script>
 </body>
 
 </HTML>

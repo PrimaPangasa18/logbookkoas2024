@@ -1,132 +1,300 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<link rel="stylesheet" href="menu.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="mytable.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="select2/dist/css/select2.css"/>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>On-line Daftar Kegiatan Dosen/Residen Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
+	<link rel="stylesheet" href="style/style1.css" />
+	<link rel="stylesheet" href="style/buttontopup.css">
+	<link rel="stylesheet" href="style/informasi.css">
+	<link rel="stylesheet" href="select2/dist/css/select2.css" />
 	<link rel="stylesheet" type="text/css" href="jquery_ui/jquery-ui.css">
-	<meta name="viewport" content="width=device-width, maximum-scale=1">
-<!--</head>-->
+
+	<!-- Link Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+	<!-- Link CDN Icon -->
+	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<BODY>
 
-<?php
+<body>
+	<div class="wrapper">
+		<?php
 
-	include "config.php";
-	include "fungsi.php";
+		include "config.php";
+		include "fungsi.php";
 
-	error_reporting("E_ALL ^ E_NOTICE");
+		error_reporting("E_ALL ^ E_NOTICE");
 
-	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
-		echo "
+		if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
+			echo "
 		<script>
 			window.location.href=\"accessdenied.php\";
 		</script>
 		";
-	}
-	else{
-	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND $_COOKIE['level']==2)
-	{
-		if ($_COOKIE['level']==2) {include "menu2.php";}
-
-		echo "<div class=\"text_header\" id=\"top\">DAFTAR KEGIATAN DOSEN/RESIDEN</div>";
-		echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-
-		echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">FILTER TAMPIL DAFTAR KEGIATAN DOSEN/RESIDEN</font></h4><br>";
-		echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-
-		$user_dosen = $_GET[user_name];
-		echo "<input type=\"hidden\" name=\"userdosen\" value=\"$user_dosen\"/>";
-		$data_dosen = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `dosen` WHERE `nip`='$user_dosen'"));
-		echo "<table>";
-		echo "<tr class=\"ganjil\">";
-		echo "<td class=\"td_mid\">Nama Dosen/Residen</td>";
-		echo "<td class=\"td_mid\">$data_dosen[nama], $data_dosen[gelar]</td>";
-		echo "</tr>";
-		echo "<tr class=\"ganjil\">";
-		echo "<td class=\"td_mid\">Username Dosen/Residen</td>";
-		echo "<td class=\"td_mid\">$data_dosen[nip]</td>";
-		echo "</tr>";
-		echo "<tr class=\"ganjil\">";
-		echo "<td class=\"td_mid\">Kepaniteraan (stase)</td>";
-		echo "<td class=\"td_mid\">";
-		echo "<select class=\"select_artwide\" name=\"stase\" id=\"stase\">";
-		$data_stase = mysqli_query($con,"SELECT * FROM `kepaniteraan` ORDER BY `id`");
-		echo "<option value=\"all\">Semua Kepaniteraan (Stase)</option>";
-		while ($data=mysqli_fetch_array($data_stase))
-		echo "<option value=\"$data[id]\">$data[kepaniteraan]</option>";
-		echo "</select>";
-		echo "</td>";
-		echo "</tr>";
-		echo "<tr class=\"ganjil\">";
-		echo "<td class=\"td_mid\">Nama Mahasiswa</td>";
-		echo "<td class=\"td_mid\">";
-		echo "<select class=\"select_artwide\" name=\"mhsw\" id=\"mhsw\">";
-		$data_mhsw = mysqli_query($con,"SELECT `nim`,`nama` FROM `biodata_mhsw` ORDER BY `nama`");
-		echo "<option value=\"all\">Semua Mahasiswa</option>";
-		while ($data1=mysqli_fetch_array($data_mhsw))
-		echo "<option value=\"$data1[nim]\">$data1[nama]</option>";
-		echo "</select>";
-		echo "</td>";
-		echo "</tr>";
-		echo "<tr class=\"ganjil\">";
-		echo "<td class=\"td_mid\">Status Approval</td>";
-		echo "<td class=\"td_mid\">";
-		echo "<select class=\"select_artwide\" name=\"appstatus\" id=\"appstatus\">";
-		echo "<option value=\"all\">Semua Status</option>";
-		echo "<option value=\"1\">Approved</option>";
-		echo "<option value=\"0\">Unapproved</option>";
-		echo "</select>";
-		echo "</td>";
-		echo "</tr>";
-		echo "<tr class=\"ganjil\">";
-		echo "<td class=\"td_mid\">Tanggal kegiatan (yyyy-mm-dd)</td><td class=\"td_mid\"><input type=\"text\" class=\"input-tanggal\" name=\"tgl_kegiatan\" value=\"Semua Tanggal\" style=\"font-size:1em;font-family:TAHOMA;padding:0 0 0 7px;height:27px;border:0.5px solid grey;border-radius:5px;\" /></td>";
-		echo "</tr>";
-		echo "</table>";
-		echo "<br><br><input type=\"submit\" class=\"submit1\" name=\"submit\" value=\"SUBMIT\">";
-		echo "</form>";
-
-		if ($_POST[submit]=="SUBMIT")
-		echo "
-		<script>
-			window.location.href=\"daftar_kegiatan_dosen_admin.php?dosen=\"+\"$_POST[userdosen]\"+\"&mhsw=\"+\"$_POST[mhsw]\"+\"&stase=\"+\"$_POST[stase]\"+\"&tgl_kegiatan=\"+\"$_POST[tgl_kegiatan]\"+\"&appstatus=\"+\"$_POST[appstatus]\";
-		</script>
-		";
-
-		echo "</fieldset>";
-
-	}
-		else
-		echo "
+		} else {
+			if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 2) {
+				if ($_COOKIE['level'] == 2) {
+					include "menu2.php";
+				}
+				$nama = isset($_COOKIE['nama']) ? $_COOKIE['nama'] : 'User';
+				$gelar = isset($_COOKIE['gelar']) ? $_COOKIE['gelar'] : '';
+			} else
+				echo "
 		<script>
 			window.location.href=\"accessdenied.php\";
 		</script>
 		";
-	}
-?>
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="jquery_ui/jquery-ui.js"></script>
-<script src="select2/dist/js/select2.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('.input-tanggal').datepicker({ dateFormat: 'yy-mm-dd' });
-		$("#stase").select2({
-			 	placeholder: "< Kepaniteraan (Stase) >",
-	      allowClear: true
-		 	});
-		$("#mhsw").select2({
-		   	placeholder: "< Nama Mahasiswa >",
-	      allowClear: true
-	 		});
-		$("#appstatus").select2({
-			 	placeholder: "< Status Approval >",
-	      allowClear: true
+		}
+		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
+
+		// Menentukan path gambar
+		$foto_path = "foto/" . $data_mhsw['foto'];
+		$default_foto = "foto/profil_blank.png";
+
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
+		<!-- End Sidebar -->
+		<div class="main">
+			<!-- Start Navbar -->
+			<nav class="navbar navbar-expand px-4 py-3">
+				<form action="#" class="d-none d-sm-inline-block">
+					<div class="input-group input-group-navbar">
+						<img src="images/undipsolid.png" alt="" style="width: 45px;">
+					</div>
+				</form>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item dropdown d-flex align-item-center">
+							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
+							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
+							</a>
+							<div class="dropdown-menu dropdown-menu-end rounded">
+
+								<div class="dropdown-menu dropdown-menu-end rounded"></div>
+								<a href="logout.php" class="dropdown-item">
+									<i class="lni lni-exit"></i>
+									<span>Logout</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+
+			<!-- Main Content -->
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">DAFTAR KEGIATAN DOSEN/RESIDEN</h3>
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">FILTER TAMPIL DAFTAR KEGIATAN DOSEN/RESIDEN</h2>
+						<br>
+						<div class="container mt-5">
+							<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+								<input type="hidden" name="userdosen" value="<?php echo $_GET['user_name']; ?>" />
+								<?php
+								$user_dosen = $_GET['user_name'];
+								$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$user_dosen'"));
+								?>
+								<center>
+									<div class="table-responsive">
+										<table class="table table-bordered" style="width: auto;">
+											<tbody>
+												<tr style="border-width: 1px; border-color: #000;" class="table-primary">
+													<td style="width: 300px"><strong>Nama Dosen/Residen</strong></td>
+													<td style="width: 500px; font-weight:600;">
+														<span style="color: darkblue;"><?php echo $data_dosen['nama']; ?></span>,
+														<span style="color: red;"><?php echo $data_dosen['gelar']; ?></span>
+													</td>
+
+												</tr>
+												<tr style="border-width: 1px; border-color: #000;" class="table-success">
+													<td><strong>Username Dosen/Residen</strong></td>
+													<td style="font-weight: 600; color:darkred"><?php echo $data_dosen['nip']; ?></td>
+												</tr>
+												<tr style="border-width: 1px; border-color: #000;" class="table-primary">
+													<td><strong>Kepaniteraan <span class="text-danger">(stase)</span></strong></td>
+													<td>
+														<select class="form-select" name="stase" id="stase">
+															<option value="all">Semua Kepaniteraan (Stase)</option>
+															<?php
+															$data_stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id`");
+															while ($data = mysqli_fetch_array($data_stase)) {
+																echo "<option value=\"$data[id]\">$data[kepaniteraan]</option>";
+															}
+															?>
+														</select>
+													</td>
+												</tr>
+												<tr style="border-width: 1px; border-color: #000;" class="table-success">
+													<td><strong>Nama Mahasiswa</strong></td>
+													<td>
+														<select class="form-select" name="mhsw" id="mhsw">
+															<option value="all">Semua Mahasiswa</option>
+															<?php
+															$data_mhsw = mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` ORDER BY `nama`");
+															while ($data1 = mysqli_fetch_array($data_mhsw)) {
+																echo "<option value=\"$data1[nim]\">$data1[nama]</option>";
+															}
+															?>
+														</select>
+													</td>
+												</tr>
+												<tr style="border-width: 1px; border-color: #000;" class="table-primary">
+													<td><strong>Status Approval</strong></td>
+													<td>
+														<select class="form-select" name="appstatus" id="appstatus">
+															<option value="all">Semua Status</option>
+															<option value="1">Approved</option>
+															<option value="0">Unapproved</option>
+														</select>
+													</td>
+												</tr>
+												<tr style="border-width: 1px; border-color: #000;" class="table-success">
+													<td><strong>Tanggal kegiatan <span class="text-danger">(yyyy-mm-dd)</span></strong></td>
+													<td>
+														<input type="text" class="form-select input-tanggal" name="tgl_kegiatan" style="font-size: 1em;" placeholder="Tanggal Kegiatan">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<br>
+
+										<button type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+											<i class="fas fa-magnifying-glass me-2"></i> SEARCH
+										</button>
+									</div>
+
+									<?php
+									if ($_POST['submit'] == "SUBMIT") {
+										echo "
+						<script>
+							window.location.href = \"daftar_kegiatan_dosen_admin.php?dosen=\"+\"$_POST[userdosen]\"+\"&mhsw=\"+\"$_POST[mhsw]\"+\"&stase=\"+\"$_POST[stase]\"+\"&tgl_kegiatan=\"+\"$_POST[tgl_kegiatan]\"+\"&appstatus=\"+\"$_POST[appstatus]\";
+						</script>";
+									}
+									?>
+								</center>
+							</form>
+						</div>
+
+					</div>
+			</main>
+			<!-- Back to Top Button -->
+			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
+				<i class="fa-solid fa-arrow-up"></i>
+				<div>Top</div>
+			</button>
+
+			<!-- Start Footer -->
+			<footer class="footer py-3">
+				<div class="container-fluid">
+					<div class="row text-body-secondary">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Program Studi Pendidikan Profesi Dokter <br>
+									Universitas Diponegoro
+									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
+								</strong>
+								<br>
+								<strong>
+									Kode Pos: 50275 |
+								</strong>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:024 – 76928010 |
+								</strong>
+								<strong>
+									Kotak Pos: 1269
+								</strong>
+								<br>
+								<strong>
+									Fax.: 024 – 76928011 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:dean@fk.undip.ac.id
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
+									Fakultas Kedokteran UNDIP - Gd A Lt. 2
+								</strong>
+								<br>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:+62 812-2868-576 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:cnawangsih@yahoo.com
+								</strong>
+								<br>
+								<strong style="color: #0A3967;">
+									Build since @2024
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+								<strong>
+									<<< Install Aplikasi Android di Playstore>>>
+								</strong>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
+
+		</div>
+
+	</div>
+
+	<!-- Script Bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<script src="javascript/script1.js"></script>
+	<script src="javascript/buttontopup.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery_ui/jquery-ui.js"></script>
+	<script src="select2/dist/js/select2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.input-tanggal').datepicker({
+				dateFormat: 'yy-mm-dd'
 			});
-	});
-</script>
+			$("#stase").select2({
+				placeholder: "< Kepaniteraan (Stase) >",
+				allowClear: true
+			});
+			$("#mhsw").select2({
+				placeholder: "< Nama Mahasiswa >",
+				allowClear: true
+			});
+			$("#appstatus").select2({
+				placeholder: "< Status Approval >",
+				allowClear: true
+			});
+		});
+	</script>
+</body>
 
-
-
-<!--</body></html>-->
-</BODY>
-</HTML>
+</html>

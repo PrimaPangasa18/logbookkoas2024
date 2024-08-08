@@ -1,0 +1,14 @@
+.button-group {
+  display: flex;
+  justify-content: center;
+  /* Menempatkan tombol-tombol di tengah secara horizontal */
+  gap: 10px;
+  /* Jarak antar tombol, sesuaikan sesuai kebutuhan */
+  margin-top: 10px;
+  /* Jarak antara tabel dan tombol */
+}
+
+.button-group button {
+  padding: 10px 20px;
+  /* Jarak dalam tombol, sesuaikan sesuai kebutuhan */
+}

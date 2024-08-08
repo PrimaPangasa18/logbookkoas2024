@@ -1,41 +1,41 @@
 <HTML>
+
 <head>
-<!--</head>-->
+	<!--</head>-->
 </head>
+
 <BODY>
 
-<?php
+	<?php
 
 	include "../config.php";
 	error_reporting("E_ALL ^ E_NOTICE");
 
-	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
+	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		echo "
 		<script>
 			window.location.href=\"../accessdenied.php\";
 		</script>
 		";
-	}
-	else{
-	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND $_COOKIE['level']==5)
-	{
-		$id = $_GET['id'];
-		$hapus_kasus = mysqli_query($con,"DELETE FROM `ipd_nilai_kasus` WHERE `id`='$id'");
-		echo "
+	} else {
+		if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 5) {
+			$id = $_GET['id'];
+			$hapus_kasus = mysqli_query($con, "DELETE FROM `ipd_nilai_kasus` WHERE `id`='$id'");
+			echo "
 				<script>
 					window.location.href=\"penilaian_ipd.php\";
 				</script>
 				";
-	}
-	else
-		echo "
+		} else
+			echo "
 		<script>
 			window.location.href=\"../accessdenied.php\";
 		</script>
 		";
 	}
-?>
+	?>
 
-<!--</body></html>-->
+	<!--</body></html>-->
 </BODY>
+
 </HTML>

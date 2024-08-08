@@ -46,6 +46,41 @@
         </a>
       </li>
       <li class="sidebar-item">
+        <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#multi-six" aria-expanded="false" aria-controls="multi-six">
+          <i class="lni lni-control-panel"></i>
+          <span>Edit Daftar</span>
+        </a>
+        <ul id="multi-six" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-seven" aria-expanded="false" aria-controls="multi-seven">
+              Penyakit
+            </a>
+            <ul id="multi-seven" class="sidebar-dropdown list-unstyled collapse">
+              <li class="sidebar-item">
+                <a href="cari_penyakit.php" class="sidebar-link">Edit Penyakit</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="tambah_daftar_penyakit.php" class="sidebar-link">Tambah Penyakit</a>
+              </li>
+
+            </ul>
+        </ul>
+        <ul id="multi-six" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-eight" aria-expanded="false" aria-controls="multi-eight">
+              Keterampilan
+            </a>
+            <ul id="multi-eight" class="sidebar-dropdown list-unstyled collapse">
+              <li class="sidebar-item">
+                <a href="cari_ketrampilan.php" class="sidebar-link">Edit Keterampilan</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="tambah_daftar_ketrampilan.php" class="sidebar-link">Tambah Keterampilan</a>
+              </li>
+            </ul>
+        </ul>
+      </li>
+      <li class="sidebar-item">
         <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
           <i class="lni lni-files"></i>
           <span>Lihat Rotasi</span>
@@ -129,13 +164,68 @@
         </ul>
       </li>
       <li class="sidebar-item">
+        <a href="generate_pin_search.php" class="sidebar-link">
+          <i class="lni lni-key"></i>
+          <span>Generate OTP</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="generate_qr_search.php" class="sidebar-link">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>Generate QR</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#multi-nine" aria-expanded="false" aria-controls="multi-nine">
+          <i class="lni lni-pencil-alt"></i>
+          <span>Kegiatan</span>
+        </a>
+        <ul id="multi-nine" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+          <li class="sidebar-item">
+            <a href="filter_kegiatan_dosen_search.php" class="sidebar-link">Daftar Kegiatan</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-ten" aria-expanded="false" aria-controls="multi-ten">
+              Entry Nilai
+            </a>
+            <ul id="multi-ten" class="sidebar-dropdown list-unstyled collapse">
+              <li class="sidebar-item">
+                <a href="upload_nilai.php" class="sidebar-link">Upload Nilai</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="entry_nilai_manual.php" class="sidebar-link">Entry Manual</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="hapus_nilai_manual.php" class="sidebar-link">Hapus Manual</a>
+              </li>
+            </ul>
+        </ul>
+      </li>
+      <li class="sidebar-item">
+        <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#edit-user" aria-expanded="false" aria-controls="edit-user">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Edit User</span>
+        </a>
+        <ul id="edit-user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+          <li class="sidebar-item">
+            <a href="edit_user_mhsw.php" class="sidebar-link">User Mahasiswa</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="edit_user_dosen.php" class="sidebar-link">User Dosen/Residen</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidebar-item">
         <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#user-interface" aria-expanded="false" aria-controls="user-interface">
           <i class="lni lni-users"></i>
           <span>User Interface</span>
         </a>
         <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
+            <a href="update_admin.php" class="sidebar-link">Update Profil</a>
           </li>
         </ul>
       </li>
