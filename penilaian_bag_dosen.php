@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="select2/dist/css/select2.css" />
 	<link rel="stylesheet" type="text/css" href="jquery_ui/jquery-ui.css">
 
-
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 	<!-- Link CDN Icon -->
@@ -81,7 +80,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" />
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
@@ -102,152 +101,229 @@
 				<div class="container-fluid">
 					<div class="mb-3">
 						<h3 class="fw-bold fs-4 mb-3">PENILAIAN BAGIAN / KEPANITERAAN (STASE)</h3>
-						<br />
-						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
-							PENILAIAN BAGIAN / KEPANITERAAN (STASE)
-						</h2>
-						<br><br>
-						<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-							<center>
-								<table class="table table-bordered" style="width: auto;">
-									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
-										<td class="align-middle"><strong>Kepaniteraan <span class="text-danger">(STASE)</span></strong></td>
-										<td>
-											<select class="form-select" name="stase" id="stase" required>
-												<option value="">
-													< Pilihan Bagian / Kepaniteraan (Stase)>
-												</option>
-												<?php
-												$data_stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`!='M121' ORDER BY `id`");
-												while ($data = mysqli_fetch_array($data_stase)) {
-													echo "<option value=\"$data[id]\">$data[kepaniteraan]</option>";
-												}
-												?>
-												<option value="M121_kompre">Kepaniteraan Komprehensip</option>
-												<option value="M121_kdk">Kepaniteraan Kedokteran Keluarga</option>
-											</select>
-										</td>
-									</tr>
-
-									<tr class="table-success" style="border-width: 1px; border-color: #000;">
-										<td class="align-middle"><strong>Tanggal mulai isi penilaian <span class="text-danger">(yyyy-mm-dd)</span></strong></td>
-										<td><input type="text" id="tanggal_mulai" class="form-select input-tanggal" placeholder="Tanggal Mulai" required /></td>
-									</tr>
-
-									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
-										<td class="align-middle"><strong>Tanggal selesai isi penilaian <span class="text-danger">(yyyy-mm-dd)</span></strong></td>
-										<td><input type="text" id="tanggal_selesai" class="form-select input-tanggal" placeholder="Tanggal Selesai" required /></td>
-									</tr>
-
-									<tr class="table-success" style="border-width: 1px; border-color: #000;">
-										<td class="align-middle"><strong>Status Approval</strong></td>
-										<td>
-											<select class="form-select" name="approval" id="approval">
-												<option value="all">Semua Status</option>
-												<option value="0">Belum Disetujui</option>
-												<option value="1">Sudah Disetujui</option>
-											</select>
-										</td>
-									</tr>
-
-									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
-										<td class="align-middle"><strong>Nama/NIM Mahasiswa</strong></td>
-										<td>
-											<select class="form-select" name="mhsw" id="mhsw" required>
-												<?php
-												$mhsw = mysqli_query($con, "SELECT `nim`, `nama` FROM `biodata_mhsw` ORDER BY `nama`");
-												echo "<option value=\"all\">Semua Mahasiswa</option>";
-												while ($data1 = mysqli_fetch_array($mhsw)) {
-													echo "<option value=\"$data1[nim]\">$data1[nama] ($data1[nim])</option>";
-												}
-												?>
-											</select>
-										</td>
-									</tr>
-								</table>
-
-								<br><br>
-								<button type="submit" class="btn btn-success" name="submit" value="SUBMIT"><i class="fa-solid fa-magnifying-glass me-2"></i>SEARCH</button>
-							</center>
-						</form>
-
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">PENILAIAN BAGIAN / KEPANITERAAN (STASE)</h2>
+						<br>
 						<?php
-						if (isset($_POST['submit']) && $_POST['submit'] == "SUBMIT") {
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+						echo "<div class=\"table-responsive\">";
+						echo "<center>";
+						echo "<table class=\"table table-bordered\" style=\"width:800px\">";
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td class=\"td_mid\" style=\"width:300px\"><strong>Kepaniteraan (STASE)<strong></td>";
+						echo "<td class=\"td_mid\" style=\"width:500px\">";
+						echo "<select class=\"form-select\" name=\"stase\" id=\"stase\">";
+						$data_stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`!='M121' ORDER BY `id`");
+						echo "<option value=\"\">< Pilihan Bagian / Kepaniteraan (Stase) ></option>";
+						while ($data = mysqli_fetch_array($data_stase))
+							echo "<option value=\"$data[id]\">$data[kepaniteraan]</option>";
+						echo "<option value=\"M121_kompre\">Kepaniteraan Komprehensif</option>";
+						echo "<option value=\"M121_kdk\">Kepaniteraan Kedokteran Keluarga</option>";
+						echo "</select>";
+						echo "</td>";
+						echo "</tr>";
+
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td class=\"td_mid\"><strong>Tanggal mulai isi penilaian <span class=\"text-danger\">(yyyy-mm-dd)</span></strong></td>";
+						echo "<td class=\"td_mid\"><input type=\"text\" class=\"form-select tanggal_mulai\" name=\"tanggal_mulai\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" placeholder=\"Tanggal mulai\" /></td>";
+						echo "</tr>";
+
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td class=\"td_mid\"><strong>Tanggal selesai isi penilaian <span class=\"text-danger\">(yyyy-mm-dd)</span></strong></td>";
+						echo "<td class=\"td_mid\"><input type=\"text\" class=\"form-select tanggal_selesai\" name=\"tanggal_selesai\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" placeholder=\"Tanggal selesai\" /></td>";
+						echo "</tr>";
+
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td class=\"td_mid\"><strong>Status Approval</strong></td>";
+						echo "<td class=\"td_mid\">";
+						echo "<select class=\"form-select\" name=\"approval\" id=\"approval\">";
+						echo "<option value=\"all\">Semua Status</option>";
+						echo "<option value=\"0\">Belum Disetujui</option>";
+						echo "<option value=\"1\">Sudah Disetujui</option>";
+						echo "</select>";
+						echo "</td>";
+						echo "</tr>";
+
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td class=\"td_mid\"><strong>Nama/NIM Mahasiswa</strong></td>";
+						echo "<td class=\"td_mid\">";
+						echo "<select class=\"form-select\" name=\"mhsw\" id=\"mhsw\" required>";
+						$mhsw = mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` ORDER BY `nama`");
+						echo "<option value=\"all\">Semua Mahasiswa</option>";
+						while ($data1 = mysqli_fetch_array($mhsw))
+							echo "<option value=\"$data1[nim]\">$data1[nama] ($data1[nim])</option>";
+						echo "</select>";
+						echo "</td>";
+						echo "</tr>";
+
+						echo "</table>";
+						echo "<br><br><button type=\"submit\" class=\"btn btn-success\" name=\"submit\" value=\"SUBMIT\">";
+						echo "<i class=\"fa fa-search me-2\"></i> SUBMIT";
+						echo "</button>";
+						echo "</form>";
+						echo "</center>";
+						echo "</div>";
+
+
+						if ($_POST['submit'] == "SUBMIT") {
 							$bag = $_POST['stase'];
 							$mulai = $_POST['tanggal_mulai'];
 							$selesai = $_POST['tanggal_selesai'];
 							$approval = $_POST['approval'];
 							$mhsw = $_POST['mhsw'];
 
-							$url = '';
-							switch ($bag) {
-								case 'M091':
-									$url = "bag_ipd/penilaian_ipd_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M092':
-									$url = "bag_neuro/penilaian_neuro_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M093':
-									$url = "bag_psikiatri/penilaian_psikiatri_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M094':
-									$url = "bag_ikfr/penilaian_ikfr_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M095':
-									$url = "bag_ikmkp/penilaian_ikmkp_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M096':
-									// echo "<script>alert('Sorry ... under-construction!!');</script>";
-									break;
-								case 'M101':
-									$url = "bag_bedah/penilaian_bedah_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M102':
-									$url = "bag_anestesi/penilaian_anestesi_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M103':
-									$url = "bag_radiologi/penilaian_radiologi_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M104':
-									$url = "bag_mata/penilaian_mata_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M105':
-									$url = "bag_thtkl/penilaian_thtkl_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M106':
-									$url = "bag_ikgm/penilaian_ikgm_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M111':
-									$url = "bag_obsgyn/penilaian_obsgyn_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M112':
-									$url = "bag_forensik/penilaian_forensik_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M113':
-									$url = "bag_ika/penilaian_ika_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M114':
-									$url = "bag_kulit/penilaian_kulit_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M121_kdk':
-									$url = "bag_kdk/penilaian_kdk_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
-								case 'M121_kompre':
-									$url = "bag_kompre/penilaian_kompre_dosen.php?mulai=$mulai&selesai=$selesai&approval=$approval&mhsw=$mhsw";
-									break;
+							if ($bag == "M091") {
+								echo "
+				<script>
+					window.location.href=\"bag_ipd/penilaian_ipd_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
 							}
 
-							if ($url) {
-								echo "<script>window.location.href='$url';</script>";
+							if ($bag == "M092") {
+								echo "
+				<script>
+					window.location.href=\"bag_neuro/penilaian_neuro_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M093") {
+								echo "
+				<script>
+					window.location.href=\"bag_psikiatri/penilaian_psikiatri_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M094") {
+								echo "
+				<script>
+					window.location.href=\"bag_ikfr/penilaian_ikfr_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M095") {
+								echo "
+				<script>
+					window.location.href=\"bag_ikmkp/penilaian_ikmkp_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M096") {
+								/*echo "
+				<script>
+					window.location.href=\"bag_ikmkp/penilaian_ikmkp_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";*/
+								echo "
+				<script>
+					window.alert(\"Sorry ... under-construction!!\");
+				</script>
+				";
+							}
+
+							if ($bag == "M101") {
+								echo "
+				<script>
+					window.location.href=\"bag_bedah/penilaian_bedah_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M102") {
+								echo "
+				<script>
+					window.location.href=\"bag_anestesi/penilaian_anestesi_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M103") {
+								echo "
+				<script>
+					window.location.href=\"bag_radiologi/penilaian_radiologi_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M104") {
+								echo "
+				<script>
+					window.location.href=\"bag_mata/penilaian_mata_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M105") {
+								echo "
+				<script>
+					window.location.href=\"bag_thtkl/penilaian_thtkl_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+
+							if ($bag == "M106") {
+								echo "
+				<script>
+					window.location.href=\"bag_ikgm/penilaian_ikgm_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M111") {
+								echo "
+				<script>
+					window.location.href=\"bag_obsgyn/penilaian_obsgyn_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M112") {
+								echo "
+				<script>
+					window.location.href=\"bag_forensik/penilaian_forensik_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M113") {
+								echo "
+				<script>
+					window.location.href=\"bag_ika/penilaian_ika_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M114") {
+								echo "
+				<script>
+					window.location.href=\"bag_kulit/penilaian_kulit_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+
+							if ($bag == "M121_kdk") {
+								echo "
+				<script>
+					window.location.href=\"bag_kdk/penilaian_kdk_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
+							}
+							if ($bag == "M121_kompre") {
+								echo "
+				<script>
+					window.location.href=\"bag_kompre/penilaian_kompre_dosen.php?mulai=\"+\"$mulai\"+\"&selesai=\"+\"$selesai\"+\"&approval=\"+\"$approval\"+\"&mhsw=\"+\"$mhsw\";
+				</script>
+				";
 							}
 						}
 						?>
 					</div>
-				</div>
 			</main>
-
-
-			<!-- End Content -->
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
 				<i class="fa-solid fa-arrow-up"></i>
@@ -255,10 +331,10 @@
 			</button>
 
 			<!-- Start Footer -->
-			<footer class="footer">
+			<footer class="footer py-3">
 				<div class="container-fluid">
 					<div class="row text-body-secondary">
-						<div class="col-6 text-start">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
 							<a href="#" class="text-body-secondary">
 								<strong>Program Studi Pendidikan Profesi Dokter <br>
 									Universitas Diponegoro
@@ -285,7 +361,7 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-6 text-end text-body-secondary d-none d-md-block">
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
 							<a href="#" class="text-body-secondary">
 								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
 									Fakultas Kedokteran UNDIP - Gd A Lt. 2
@@ -305,8 +381,8 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-12 text-center  d-none d-md-block" style="color: #0A3967; ">
-							<a href=" https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
 								<strong>
 									<<< Install Aplikasi Android di Playstore>>>
 								</strong>
@@ -318,7 +394,9 @@
 			<!-- End Footer -->
 
 		</div>
+
 	</div>
+
 	<!-- Script Bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -341,14 +419,14 @@
 				placeholder: "< Pilihan Mahasiswa >",
 				allowClear: true
 			});
-			$('#tanggal_mulai').datepicker({
+			$('.tanggal_mulai').datepicker({
 				dateFormat: 'yy-mm-dd'
 			});
-			$('#tanggal_selesai').datepicker({
+			$('.tanggal_selesai').datepicker({
 				dateFormat: 'yy-mm-dd'
 			});
 		});
 	</script>
 </body>
 
-</HTML>
+</html>

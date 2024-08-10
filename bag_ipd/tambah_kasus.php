@@ -144,7 +144,7 @@
 						//Tanggal Penyajian
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td class=\"td_mid\"><strong>anggal Penyajian <span class=\"text-danger\">(yyyy-mm-dd)</span><strong></td>";
-						echo "<td class=\"td_mid\"><input type=\"text\" class=\"form-select tgl_penyajian\" name=\"tgl_penyajian\" style=\"font-size:1em;font-family:TAHOMA;padding:0 0 0 7px;height:27px;border:0.5px solid grey;border-radius:5px;\" placeholder=\"yyyy-mm-dd\" /></td>";
+						echo "<td class=\"td_mid\"><input type=\"text\" class=\"form-select tgl_penyajian\" name=\"tgl_penyajian\"  style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" placeholder=\"yyyy-mm-dd\" /></td>";
 						echo "</tr>";
 						//Dosen Penilai
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
@@ -258,7 +258,7 @@
 						//Nilai Rata-Rata
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td colspan=3 align=right><strong>Rata-Rata Nilai <span class=\"text-danger\">(Jumlah Bobot x Nilai)</span></strong></td>";
-						echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:70%;border:0.2px solid black;border-radius:3px;font-size:0.85em;text-align:center\" id=\"nilai_rata\" value=\"0\" required/></td>";
+						echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:70%;border:0.2px solid black;border-radius:3px;font-size:0.85em;text-align:center\" id=\"nilai_rata\" value=\"0\" required disabled/></td>";
 						echo "</tr>";
 						echo "</table><br>";
 

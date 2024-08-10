@@ -223,7 +223,7 @@
         										<button type=\"button\" class=\"btn btn-success btn-sm\" name=\"view_$data_minicex[id]\" value=\"VIEW\">
             								<i class=\"fas fa-eye me-2\"></i> VIEW
         									</button>
-      										</a><p>";
+      										</a>";
 									}
 									echo "</td>";
 									echo "</tr>";
@@ -286,14 +286,13 @@
 									echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
 									echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 									echo "<td style=\"text-align:center;color:darkblue; font-weight:600;\">$tanggal_isi</td>";
-									echo "<td style=\"font-weight:600;\">";
-									echo "Penilaian Mini-Cex<br>";
-									echo "<span style=\"color:green;\">Ruangan/Bangsal: $data_minicex[ruangan]</span><br><br>";
-									echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br>";
-									echo "<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
-									echo "<span style=\"color:blue;\">Tanggal Penilaian: $tanggal_ujian</span><br>";
-									echo "Rata-Rata Nilai: $data_minicex[nilai_rata]</span></td>";
-
+									echo "<td style=\"font-weight:600;\">
+									Penilaian Penyajian Kasus Besar<br>
+									<span style=\"color:blue;\">Periode Stase: $periode</span><br><br>";
+									echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br>
+									<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
+									echo "<span style=\"color:green;\">Kasus: $data_kasus[kasus]</span><br>";
+									echo "Nilai: $data_kasus[nilai_rata]</td>";
 									echo "<td style=\"font-weight:600;\">$data_dosen[nama], <span style=\"color:red;\">$data_dosen[gelar]</span> (NIP. <span style=\"color:blue;\">$data_dosen[nip]</span>)<br><br>";
 									if ($data_kasus['status_approval'] == '0')
 										echo " <a href=\"approve_kasus.php?id=$data_kasus[id]\">
@@ -383,16 +382,12 @@
 									echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
 									echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 									echo "<td style=\"text-align:center;color:darkblue; font-weight:600;\">$tanggal_isi</td>";
-									echo "<td style=\"font-weight:600;\">";
-									echo "Penilaian Mini-Cex<br>";
-									echo "<span style=\"color:green;\">Ruangan/Bangsal: $data_minicex[ruangan]</span><br><br>";
-									echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br>";
-									echo "<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
-									echo "<span style=\"color:blue;\">Tanggal Penilaian: $tanggal_ujian</span><br>";
-									echo "Rata-Rata Nilai: $data_minicex[nilai_rata]</span></td>";
+									echo "<td style=\"font-weight:600;\">Penilaian Ujian Akhir<br><span style=\"color:blue;\">Periode Stase: $periode</span><br><br>";
+									echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br><span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
+									echo "Nilai Ujian: $data_ujian[nilai_rata]</td>";
 									echo "<td style=\"font-weight:600;\">$data_dosen[nama], <span style=\"color:red;\">$data_dosen[gelar]</span> (NIP. <span style=\"color:blue;\">$data_dosen[nip]</span>)<br><br>";
 									if ($data_ujian['status_approval'] == '0')
-										echo " <a href=\"approve_kasus.php?id=$data_ujian[id]\">
+										echo " <a href=\"approve_ujian.php?id=$data_ujian[id]\">
    												<button type=\"button\"  class=\"btn btn-primary btn-sm\" name=\"approve_$data_ujian[id]\" >
     											<i class=\"fas fa-notes-medical me-2\"></i> APPROVE
 												</button></a>";

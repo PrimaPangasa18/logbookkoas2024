@@ -135,18 +135,10 @@
 						//Dosen Penilai
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td><strong>Dosen Penilai</strong></td>";
-						echo "<td>";
-						echo "<select class=\"form-select\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"dosen\" id=\"dosen\" required>";
-						$data_dosen_isian = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
-						echo "<option value=\"$data_dosen_isian[nip]\">$data_dosen_isian[nama], $data_dosen_isian[gelar] ($data_dosen_isian[nip])</option>";
-						$dosen = mysqli_query($con, "SELECT `username`,`nama` FROM `admin` WHERE `level`='4' OR (`level`='6' AND `stase`='$id_stase') ORDER BY `nama`");
-						while ($data = mysqli_fetch_array($dosen)) {
-							$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data[username]'"));
-							echo "<option value=\"$data[username]\">$data_dosen[nama], $data_dosen[gelar] ($data_dosen[nip])</option>";
-						}
-						echo "</select>";
-						echo "</td>";
+						$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
+						echo "<td style=\"font-weight:600;\" >$data_dosen[nama], <span style=\"color:red;\" >$data_dosen[gelar]</span> (<span style=\"color:blue;\">$data_dosen[nip]</span>)</td>";
 						echo "</tr>";
+
 						//Ruangan / Bangsal
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td><strong>Ruangan / Bangsal</strong></td>";
@@ -238,7 +230,7 @@
 						//Rata Nilai
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td align=right colspan=2><strong>Rata-Rata Nilai <span class=\"text-danger\">(Total Nilai / 8)<span></strong></td>";
-						echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:60%;border:0.2px solid black;border-radius:3px;font-size:0.85em;text-align:center\" value=\"$data_minicex[nilai_rata]\" id=\"nilai_rata\"  required/></td>";
+						echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:60%;border:0.2px solid black;border-radius:3px;font-size:0.85em;text-align:center\" value=\"$data_minicex[nilai_rata]\" id=\"nilai_rata\"  required disabled/></td>";
 						echo "</tr>";
 						echo "</table><br><br>";
 
@@ -253,6 +245,7 @@
 						<textarea name=\"saran\" rows=5 style=\"width:100%;margin-top:10px;font-family:Poppins;font-size:1em\" >$data_minicex[saran]</textarea></td>";
 						echo "</tr>";
 						echo "</table><br>";
+
 						?>
 						<div class="container mt-5" style="width: 1000px;">
 							<center>
@@ -360,14 +353,14 @@
 
 								echo "
 					<script>
-					alert(\"Approval SUKSES ...\");
+					alert(\"Approval SUKSES !\");
 					window.location.href = \"penilaian_ipd.php\";
 	        </script>
 					";
 							} else {
 								echo "
 				<script>
-				alert(\"Approval GAGAL ...\");
+				alert(\"Approval GAGAL !\");
 				window.location.href = \"approve_minicex.php?id=\"+\"$_POST[id]\";
         </script>
 				";

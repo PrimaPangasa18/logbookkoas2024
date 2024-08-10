@@ -241,7 +241,7 @@
 						//Rata Nilai
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td align=right colspan=2><strong>Rata-Rata Nilai <span class=\"text-danger\">(Total Nilai / 8)<span></strong></td>";
-						echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:60%;border:0.2px solid black;border-radius:3px;font-size:0.85em;text-align:center\" value=\"$data_minicex[nilai_rata]\" id=\"nilai_rata\"  required/></td>";
+						echo "<td align=center><input type=\"number\" step=\"0.01\" min=\"0\" max=\"100\" name=\"nilai_rata\" style=\"width:60%;border:0.2px solid black;border-radius:3px;font-size:0.85em;text-align:center\" value=\"$data_minicex[nilai_rata]\" id=\"nilai_rata\"  required disabled/></td>";
 						echo "</tr>";
 						echo "</table><br><br>";
 
@@ -262,7 +262,7 @@
             					<i class=\"fas fa-times me-2\"></i> CANCEL
         						</button>";
 						echo "<button type=\"submit\" class=\"btn btn-success\" name=\"ubah\" value=\"UBAH\">
-            			<i class=\"fas fa-pencil-alt me-2\"></i> UBAH
+            			<i class=\"fas fa-edit me-2\"></i> UBAH
         			</button>
       				</form><br><br>";
 						echo "</center>";
