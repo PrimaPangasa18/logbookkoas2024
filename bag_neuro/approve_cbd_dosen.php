@@ -172,19 +172,10 @@
 						echo "</td>";
 						echo "</tr>";
 						//Dosen Penilai/Penguji
-						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
-						echo "<td><strong>Dosen Penilai</strong></td>";
-						echo "<td>";
-						echo "<select class=\"form-select\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"dosen\" id=\"dosen\" required>";
-						$data_dosen_isian = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_cbd[dosen]'"));
-						echo "<option value=\"$data_dosen_isian[nip]\">$data_dosen_isian[nama], $data_dosen_isian[gelar] ($data_dosen_isian[nip])</option>";
-						$dosen = mysqli_query($con, "SELECT `username`,`nama` FROM `admin` WHERE `level`='4' OR (`level`='6' AND `stase`='$id_stase') ORDER BY `nama`");
-						while ($data = mysqli_fetch_array($dosen)) {
-							$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data[username]'"));
-							echo "<option value=\"$data[username]\">$data_dosen[nama], $data_dosen[gelar] ($data_dosen[nip])</option>";
-						}
-						echo "</select>";
-						echo "</td>";
+						echo "<tr>";
+						echo "<td><strong>Dosen Penilai/Penguji</strong></td>";
+						$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_cbd[dosen]'"));
+						echo "<td style=\"font-weight:600;\">$data_dosen[nama], <span style=\"color:red\">$data_dosen[gelar]</span> (<span style=\"color:blue;\">$data_dosen[nip]</span>)";
 						echo "</tr>";
 						//Situasi Ruangan
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";

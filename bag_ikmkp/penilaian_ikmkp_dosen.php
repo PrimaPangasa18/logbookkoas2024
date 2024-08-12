@@ -1,272 +1,452 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<link rel="stylesheet" href="../menu.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="../mytable.css" type="text/css" media="screen" />
-<!--</head>-->
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>On-line Penilaian Bagian IKMKP Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<link rel="shortcut icon" type="x-icon" href="../images/undipsolid.png">
+	<link rel="stylesheet" href="../style/style1.css" />
+	<link rel="stylesheet" href="../style/buttonotoup2.css">
+
+
+	<!-- Link Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+	<!-- Link CDN Icon -->
+	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<BODY>
 
-<?php
+<body>
+	<div class="wrapper">
+		<?php
 
-	include "../config.php";
-	include "../fungsi.php";
+		include "../config.php";
+		include "../fungsi.php";
 
-	error_reporting("E_ALL ^ E_NOTICE");
+		error_reporting("E_ALL ^ E_NOTICE");
 
-	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
-		echo "
+		if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
+			echo "
 		<script>
-			window.location.href=\"../accessdenied.php\";
+			window.location.href=\"accessdenied.php\";
 		</script>
 		";
-	}
-	else{
-	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND $_COOKIE['level']==4)
-	{
-		if ($_COOKIE['level']==4) {include "menu4.php";}
-
-		echo "<div class=\"text_header\">PENILAIAN KEPANITERAAN (STASE) IKM-KP</div>";
-
-		echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-
-		echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">PENILAIAN KEPANITERAAN (STASE) IKM-KP</font></h4>";
-		$tgl_mulai = $_GET[mulai];
-		$tgl_selesai = $_GET[selesai];
-		$approval = $_GET[approval];
-		$mhsw = $_GET[mhsw];
-
-		if ($approval=="all")
-		{
-			if ($mhsw=="all")
-			{
-				$filter_approval ="";
-				$statusapproval = "Semua Status";
-				$statusmhsw = "Semua Mahasiswa";
-			}
-			else
-			{
-				$nama_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT `nama` FROM `biodata_mhsw` WHERE `nim`='$mhsw'"));
-				$filter_approval ="AND `nim`='$mhsw'";
-				$statusapproval = "Semua Status";
-				$statusmhsw = "$nama_mhsw[nama] (NIM: $mhsw)";
-			}
-
+		} else {
+			if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 4) {
+				if ($_COOKIE['level'] == 4) {
+					include "menu4.php";
+				}
+				$nama = isset($_COOKIE['nama']) ? $_COOKIE['nama'] : 'User';
+				$gelar = isset($_COOKIE['gelar']) ? $_COOKIE['gelar'] : '';
+			} else
+				echo "
+		<script>
+			window.location.href=\"accessdenied.php\";
+		</script>
+		";
 		}
-		else
-		{
-			if ($mhsw=="all")
-			{
-				$filter_approval = "AND `status_approval`='$approval'";
-				if ($approval=="0") $statusapproval = "Belum Disetujui";
-				if ($approval=="1") $statusapproval = "Sudah Disetujui";
-				$statusmhsw = "Semua Mahasiswa";
-			}
-			else
-			{
-				$nama_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT `nama` FROM `biodata_mhsw` WHERE `nim`='$mhsw'"));
-				$filter_approval = "AND `nim`='$mhsw' AND `status_approval`='$approval'";
-				if ($approval=="0") $statusapproval = "Belum Disetujui";
-				if ($approval=="1") $statusapproval = "Sudah Disetujui";
-				$statusmhsw = "$nama_mhsw[nama] (NIM: $mhsw)";
-			}
+		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
 		}
 
-		$mulai = tanggal_indo($tgl_mulai);
-		$selesai = tanggal_indo($tgl_selesai);
-		echo "<table class=\"tabel_normal\" style=\"font-size:0.85em;\">";
-		echo "<tr><td style=\"padding:0 0 0 0;\">Periode Tanggal Pengisian</td><td style=\"padding:0 0 0 0;\">:</td><td style=\"padding:0 0 0 0;\"><i>$mulai s.d. $selesai</i></td></tr>";
-		echo "<tr><td style=\"padding:0 0 0 0;\">Status Approval</td><td style=\"padding:0 0 0 0;\">:</td><td style=\"padding:0 0 0 0;\"><i>$statusapproval</i></td></tr>";
-		echo "<tr><td style=\"padding:0 0 0 0;\">Mahasiswa</td><td style=\"padding:0 0 0 0;\">:</td><td style=\"padding:0 0 0 0;\"><i>$statusmhsw</i></td></tr>";
-		echo "</table><br>";
+		// Menentukan path gambar
+		$foto_path = "../foto/" . $data_mhsw['foto'];
+		$default_foto = "../foto/profil_blank.png";
 
-		$id_stase = "M095";
-		$data_stase = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
-		echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-		echo "<input type=\"hidden\" name=\"id_stase\" value=\"$id_stase\">";
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
+		<!-- End Sidebar -->
+		<div class="main">
+			<!-- Start Navbar -->
+			<nav class="navbar navbar-expand px-4 py-3">
+				<form action="#" class="d-none d-sm-inline-block">
+					<div class="input-group input-group-navbar">
+						<img src="../images/undipsolid.png" alt="" style="width: 45px;">
+					</div>
+				</form>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item dropdown d-flex align-item-center">
+							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
+							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
+							</a>
+							<div class="dropdown-menu dropdown-menu-end rounded">
 
-		echo "</center><br><a href=\"#pkbi\"><i>Penilaian Kegiatan di PKBI</i></a><br>";
-		echo "<a href=\"#p2ukm\"><i>Penilaian Kegiatan di P2UKM</i></a><br>";
-		echo "<a href=\"#komprehensip\"><i>Penilaian Ujian Komprehensip</i></a><br><br>";
+								<div class="dropdown-menu dropdown-menu-end rounded"></div>
+								<a href="../logout.php" class="dropdown-item">
+									<i class="lni lni-exit"></i>
+									<span>Logout</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
 
-		//Penilaian Kegiatan di PKBI
-		echo "<a id=\"pkbi\"><font style=\"font-size:1.125em;font-weight:bold;font-family:GEORGIA\">Penilaian Kegiatan di PKBI</font></a><br><br>";
-		$nilai_pkbi = mysqli_query($con,"SELECT * FROM `ikmkp_nilai_pkbi` WHERE `dosen`='$_COOKIE[user]' AND `tgl_isi`>='$tgl_mulai' AND `tgl_isi`<='$tgl_selesai' $filter_approval ORDER BY `id`");
-		echo "<table id=\"freeze1\" style=\"width:100%\">";
-		echo "<thead>
-					<th style=\"width:5%\">No</th>
-					<th style=\"width:15%\">Tanggal Pengisian</th>
-					<th style=\"width:65%\">Jenis Penilaian</th>
-					<th style=\"width:15%\">Status Approval</th>
+			<!-- Main Content -->
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">PENILAIAN KEPANITERAAN (STASE) IKM-KP</h3>
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">PENILAIAN KEPANITERAAN (STASE) IKM-KP</h2>
+						<br>
+						<?php
+						$tgl_mulai = $_GET['mulai'];
+						$tgl_selesai = $_GET['selesai'];
+						$approval = $_GET['approval'];
+						$mhsw = $_GET['mhsw'];
+
+						if ($approval == "all") {
+							if ($mhsw == "all") {
+								$filter_approval = "";
+								$statusapproval = "Semua Status";
+								$statusmhsw = "Semua Mahasiswa";
+							} else {
+								$nama_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nama` FROM `biodata_mhsw` WHERE `nim`='$mhsw'"));
+								$filter_approval = "AND `nim`='$mhsw'";
+								$statusapproval = "Semua Status";
+								$statusmhsw = "$nama_mhsw[nama] (NIM: $mhsw)";
+							}
+						} else {
+							if ($mhsw == "all") {
+								$filter_approval = "AND `status_approval`='$approval'";
+								if ($approval == "0") $statusapproval = "Belum Disetujui";
+								if ($approval == "1") $statusapproval = "Sudah Disetujui";
+								$statusmhsw = "Semua Mahasiswa";
+							} else {
+								$nama_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nama` FROM `biodata_mhsw` WHERE `nim`='$mhsw'"));
+								$filter_approval = "AND `nim`='$mhsw' AND `status_approval`='$approval'";
+								if ($approval == "0") $statusapproval = "Belum Disetujui";
+								if ($approval == "1") $statusapproval = "Sudah Disetujui";
+								$statusmhsw = "$nama_mhsw[nama] (NIM: $mhsw)";
+							}
+						}
+
+						$mulai = tanggal_indo($tgl_mulai);
+						$selesai = tanggal_indo($tgl_selesai);
+						echo "<center>";
+						echo "<table class=\"table table-bordered\" style=\"width:50%\" id=\"freeze\" >";
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+						<td style=\"width:50%;\"><strong>Periode Tanggal Pengisian</strong></td>
+						<td  style=\"font-weight:600;\"><span style=\"color:darkblue;\">$mulai</span> s.d. <span style=\"color:darkblue;\">$selesai</span></td></tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">
+						<td><strong>Status Approval</strong></td>
+						<td style=\"font-weight:600;\"><span style=\"color:darkgreen;\">$statusapproval</span></td></tr>";
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+						<td><strong>Mahasiswa</strong></td>
+						<td style=\"font-weight:600;\">$statusmhsw</td></tr>";
+						echo "</table><br>";
+
+						$id_stase = "M095";
+						$data_stase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+						echo "<input type=\"hidden\" name=\"id_stase\" value=\"$id_stase\">";
+
+						echo "
+								<span class=\"text-danger\" style=\"font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600\">Tekan tombol dibawah ini untuk melihat penilaian</span>
+								<br><br>
+								<a href=\"#pkbi\" class=\"btn btn-success me-3\">Penilaian Kegiatan di PKBI</a>
+								<a href=\"#p2ukm\" class=\"btn btn-primary me-3\">Penilaian Kegiatan di P2UKM</a>
+								<a href=\"#komprehensip\" class=\"btn me-3\" style=\"background-color: #800080; color: white;\">Penilaian Ujian Komprehensip</a>								
+								<br><br>
+								";
+						echo "</center>";
+						echo "<br><br>";
+
+						//Penilaian Kegiatan di PKBI
+						echo "<a id=\"pkbi\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Penilaian Kegiatan di PKBI</a><br><br>";
+						$nilai_pkbi = mysqli_query($con, "SELECT * FROM `ikmkp_nilai_pkbi` WHERE `dosen`='$_COOKIE[user]' AND `tgl_isi`>='$tgl_mulai' AND `tgl_isi`<='$tgl_selesai' $filter_approval ORDER BY `id`");
+						echo "<table class=\"table table-bordered\" style=\"width:100%\" id=\"freeze1\">";
+						echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+					<th style=\"width:5%;text-align:center;\">No</th>
+					<th style=\"width:15%;text-align:center;\">Tanggal Pengisian</th>
+					<th style=\"width:65%;text-align:center;\">Jenis Penilaian</th>
+					<th style=\"width:15%;text-align:center;\">Status Approval</th>
 					</thead>";
-		$cek_nilai_pkbi = mysqli_num_rows($nilai_pkbi);
-		if ($cek_nilai_pkbi<1)
-		{
-			echo "<tr><td colspan=4 align=center><<< E M P T Y >>></td></tr>";
-		}
-		else
-		{
-			$no=1;
-			$kelas = "ganjil";
-			while ($data_pkbi=mysqli_fetch_array($nilai_pkbi))
-			{
-				$tanggal_isi = tanggal_indo($data_pkbi[tgl_isi]);
-				$tanggal_approval = tanggal_indo($data_pkbi[tgl_approval]);
-				$data_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_pkbi[nim]'"));
-				echo "<tr class=\"$kelas\">";
-				echo "<td align=center>$no</td>";
-				echo "<td>$tanggal_isi</td>";
-				echo "<td>Penilaian Kegiatan di PKBI<br><br>";
-				echo "<i>Nama Mahasiswa: $data_mhsw[nama]<br>NIM: $data_mhsw[nim]<br>Nilai: $data_pkbi[nilai_total]</i></td>";
-				echo "<td align=center>";
-				if ($data_pkbi[status_approval]=='0')
-				{
-					echo "<font style=\"color:red\">BELUM DISETUJUI</font><br><br>";
-					echo "<a href=\"approve_pkbi_dosen.php?id=$data_pkbi[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"approve\".\"$data_pkbi[id]\" style=\"color:red\" value=\"VIEW & APPROVE\"></a>";
-				}
-				else
-				{
-					echo "<font style=\"color:green\">DISETUJUI</font><br>";
-					echo "per tanggal<br>";
-					echo "$tanggal_approval<p>";
-					echo "<a href=\"view_form_pkbi.php?id=$data_pkbi[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"view\".\"$data_pkbi[id]\" value=\"VIEW\"></a><p>";
-					echo "<a href=\"unapprove_pkbi_dosen.php?id=$data_pkbi[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"unapprove\".\"$data_pkbi[id]\" style=\"color:green\" value=\"UNAPPROVE\"></a>";
-				}
-				echo "</td>";
-				echo "</tr>";
-				$no++;
-				if ($kelas=="ganjil") $kelas="genap";
-				else $kelas="ganjil";
-			}
-		}
-		echo "</table><br><br>";
+						$cek_nilai_pkbi = mysqli_num_rows($nilai_pkbi);
+						if ($cek_nilai_pkbi < 1) {
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">
+							<td colspan=4 align=center style=\"color:red; font-weight:600;\"><<< E M P T Y >>></td></tr>";
+						} else {
+							$no = 1;
+							$kelas = "ganjil";
+							while ($data_pkbi = mysqli_fetch_array($nilai_pkbi)) {
+								$tanggal_isi = tanggal_indo($data_pkbi['tgl_isi']);
+								$tanggal_approval = tanggal_indo($data_pkbi['tgl_approval']);
+								$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_pkbi[nim]'"));
+								echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+								echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
+								echo "<td style=\"text-align:center;color:darkblue; font-weight:600;\">$tanggal_isi</td>";
+								echo "<td style=\"font-weight:600;\">Penilaian Kegiatan di PKBI<br><br>";
+								echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br>";
+								echo "<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
+								echo "Nilai: $data_pkbi[nilai_total]</span></td>";
+								echo "<td align=center>";
+								if ($data_pkbi['status_approval'] == '0') {
+									echo "<font style=\"color:red; font-weight:600;\">BELUM DISETUJUI</font>";
+									echo "<br><br>
+										<a href=\"approve_pkbi_dosen.php?id=$data_pkbi[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+        										<button type=\"button\" class=\"btn btn-warning btn-sm\" name=\"approve_$data_pkbi[id]\" value=\"VIEW & APPROVE\">
+            								<i class=\"fas fa-eye me-2\"></i> VIEW & APPROVE
+        									</button>
+      										</a>";
+								} else {
+									echo "<font style=\"color:darkgreen; font-weight:600;\">DISETUJUI</font><br>";
+									echo "<span style=\" font-weight:600;\">per tanggal</span><br>";
+									echo "<span style=\"color:darkblue; font-weight:600;\">$tanggal_approval</span>";
+									echo "<br><br>
+										<a href=\"view_form_pkbi.php?id=$data_pkbi[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+        										<button type=\"button\" class=\"btn btn-success btn-sm\" name=\"view_$data_pkbi[id]\" value=\"VIEW\">
+            								<i class=\"fas fa-eye me-2\"></i> VIEW
+        									</button>
+      										</a>";
 
-		//Penilaian Kegiatan di P2UKM
-		echo "<a id=\"p2ukm\"><font style=\"font-size:1.125em;font-weight:bold;font-family:GEORGIA\">Penilaian Kegiatan di P2UKM</font></a><br><br>";
-		$nilai_p2ukm = mysqli_query($con,"SELECT * FROM `ikmkp_nilai_p2ukm` WHERE `dosen`='$_COOKIE[user]' AND `tgl_isi`>='$tgl_mulai' AND `tgl_isi`<='$tgl_selesai' $filter_approval ORDER BY `id`");
-		echo "<table id=\"freeze2\" style=\"width:100%\">";
-		echo "<thead>
-		      <th style=\"width:5%\">No</th>
-		      <th style=\"width:15%\">Tanggal Pengisian</th>
-		      <th style=\"width:65%\">Jenis Penilaian</th>
-		      <th style=\"width:15%\">Status Approval</th>
+									echo "<br><br>
+									<a href=\"unapprove_pkbi_dosen.php?id=$data_pkbi[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+									<button type=\"button\" class=\"btn btn-danger btn-sm\" name=\"unapprove\".\"$data_pkbi[id]\"  value=\"UNAPPROVE\">
+									<i class=\"fas fa-circle-xmark me-2\"></i> UNAPPROVE
+									</button></a>";
+								}
+								echo "</td>";
+								echo "</tr>";
+								$no++;
+								if ($kelas == "ganjil") $kelas = "genap";
+								else $kelas = "ganjil";
+							}
+						}
+						echo "</table><br><br>";
+						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
+
+						//Penilaian Kegiatan di P2UKM
+						echo "<a id=\"p2ukm\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Penilaian Kegiatan di P2UKM</a><br><br>";
+						$nilai_p2ukm = mysqli_query($con, "SELECT * FROM `ikmkp_nilai_p2ukm` WHERE `dosen`='$_COOKIE[user]' AND `tgl_isi`>='$tgl_mulai' AND `tgl_isi`<='$tgl_selesai' $filter_approval ORDER BY `id`");
+						echo "<table class=\"table table-bordered\" style=\"width:100%\" id=\"freeze2\">";
+						echo "<thead class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">
+		      <th style=\"width:5%;text-align:center;\">No</th>
+		      <th style=\"width:15%;text-align:center;\">Tanggal Pengisian</th>
+		      <th style=\"width:65%;text-align:center;\">Jenis Penilaian</th>
+		      <th style=\"width:15%;text-align:center;\">Status Approval</th>
 		      </thead>";
-		$cek_nilai_p2ukm = mysqli_num_rows($nilai_p2ukm);
-		if ($cek_nilai_p2ukm<1)
-		{
-		  echo "<tr><td colspan=4 align=center><<< E M P T Y >>></td></tr>";
-		}
-		else
-		{
-		  $no=1;
-		  $kelas = "ganjil";
-		  while ($data_p2ukm=mysqli_fetch_array($nilai_p2ukm))
-		  {
-		    $tanggal_isi = tanggal_indo($data_p2ukm[tgl_isi]);
-		    $tanggal_approval = tanggal_indo($data_p2ukm[tgl_approval]);
-		    $data_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_p2ukm[nim]'"));
-		    echo "<tr class=\"$kelas\">";
-		    echo "<td align=center>$no</td>";
-		    echo "<td>$tanggal_isi</td>";
-				echo "<td>Penilaian $data_p2ukm[jenis_penilaian]<br><br>";
-				echo "<i>Nama Mahasiswa: $data_mhsw[nama]<br>NIM: $data_mhsw[nim]<br>Nilai: $data_p2ukm[nilai_total]</i></td>";
-				echo "<td align=center>";
-		    if ($data_p2ukm[status_approval]=='0')
-		    {
-		      echo "<font style=\"color:red\">BELUM DISETUJUI</font><br><br>";
-		      echo "<a href=\"approve_p2ukm_dosen.php?id=$data_p2ukm[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"approve\".\"$data_p2ukm[id]\" style=\"color:red\" value=\"VIEW & APPROVE\"></a>";
-		    }
-		    else
-		    {
-		      echo "<font style=\"color:green\">DISETUJUI</font><br>";
-		      echo "per tanggal<br>";
-		      echo "$tanggal_approval<p>";
-		      echo "<a href=\"view_form_p2ukm.php?id=$data_p2ukm[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"view\".\"$data_p2ukm[id]\" value=\"VIEW\"></a><p>";
-		      echo "<a href=\"unapprove_p2ukm_dosen.php?id=$data_p2ukm[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"unapprove\".\"$data_p2ukm[id]\" style=\"color:green\" value=\"UNAPPROVE\"></a>";
-		    }
-		    echo "</td>";
-		    echo "</tr>";
-		    $no++;
-		    if ($kelas=="ganjil") $kelas="genap";
-		    else $kelas="ganjil";
-		  }
-		}
-		echo "</table><br><br>";
+						$cek_nilai_p2ukm = mysqli_num_rows($nilai_p2ukm);
+						if ($cek_nilai_p2ukm < 1) {
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">
+							<td colspan=4 align=center style=\"color:red; font-weight:600;\"><<< E M P T Y >>></td></tr>";
+						} else {
+							$no = 1;
+							$kelas = "ganjil";
+							while ($data_p2ukm = mysqli_fetch_array($nilai_p2ukm)) {
+								$tanggal_isi = tanggal_indo($data_p2ukm['tgl_isi']);
+								$tanggal_approval = tanggal_indo($data_p2ukm['tgl_approval']);
+								$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_p2ukm[nim]'"));
+								echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+								echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
+								echo "<td style=\"text-align:center;color:darkblue; font-weight:600;\">$tanggal_isi</td>";
+								echo "<td style=\"font-weight:600;\">
+									Penilaian $data_p2ukm[jenis_penilaian]<br><br>";
+								echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br>
+									<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
+								echo "Nilai: $data_p2ukm[nilai_total]</span></td>";
+								echo "<td align=center>";
+								if ($data_p2ukm['status_approval'] == '0') {
+									echo "<font style=\"color:red; font-weight:600;\">BELUM DISETUJUI</font>";
+									echo "<br><br>
+										<a href=\"approve_p2ukm_dosen.php?id=$data_p2ukm[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+        										<button type=\"button\" class=\"btn btn-warning btn-sm\" name=\"approve_$data_p2ukm[id]\" value=\"VIEW & APPROVE\">
+            								<i class=\"fas fa-eye me-2\"></i> VIEW & APPROVE
+        									</button>
+      										</a>";
+								} else {
+									echo "<font style=\"color:darkgreen; font-weight:600;\">DISETUJUI</font><br>";
+									echo "<span style=\" font-weight:600;\">per tanggal</span><br>";
+									echo "<span style=\"color:darkblue; font-weight:600;\">$tanggal_approval</span>";
+									echo "<br><br>
+										<a href=\"view_form_p2ukm.php?id=$data_p2ukm[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+        										<button type=\"button\" class=\"btn btn-success btn-sm\" name=\"view_$data_p2ukm[id]\" value=\"VIEW\">
+            								<i class=\"fas fa-eye me-2\"></i> VIEW
+        									</button>
+      										</a>";
+									echo "<br><br>
+									<a href=\"unapprove_p2ukm_dosen.php?id=$data_p2ukm[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+									<button type=\"button\" class=\"btn btn-danger btn-sm\" name=\"unapprove\".\"$data_p2ukm[id]\"  value=\"UNAPPROVE\">
+									<i class=\"fas fa-circle-xmark me-2\"></i> UNAPPROVE
+									</button></a>";
+								}
+								echo "</td>";
+								echo "</tr>";
+								$no++;
+								if ($kelas == "ganjil") $kelas = "genap";
+								else $kelas = "ganjil";
+							}
+						}
+						echo "</table><br><br>";
+						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
 
-		//Nilai Ujian Komprehensip
-		echo "<a id=\"komprehensip\"><font style=\"font-size:1.125em;font-weight:bold;font-family:GEORGIA\">Penilaian Ujian Komprehensip</font></a><br><br>";
-		$nilai_komprehensip = mysqli_query($con,"SELECT * FROM `ikmkp_nilai_komprehensip` WHERE `dosen`='$_COOKIE[user]' AND `tgl_isi`>='$tgl_mulai' AND `tgl_isi`<='$tgl_selesai' $filter_approval ORDER BY `id`");
-		echo "<table id=\"freeze3\" style=\"width:100%\">";
-		echo "<thead>
-		      <th style=\"width:5%\">No</th>
-		      <th style=\"width:15%\">Tanggal Pengisian</th>
-		      <th style=\"width:65%\">Jenis Penilaian</th>
-		      <th style=\"width:15%\">Status Approval</th>
+						//Nilai Ujian Komprehensip
+						echo "<a id=\"komprehensip\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Penilaian Ujian Komprehensip</a><br><br>";
+						$nilai_komprehensip = mysqli_query($con, "SELECT * FROM `ikmkp_nilai_komprehensip` WHERE `dosen`='$_COOKIE[user]' AND `tgl_isi`>='$tgl_mulai' AND `tgl_isi`<='$tgl_selesai' $filter_approval ORDER BY `id`");
+						echo "<table class=\"table table-bordered\" style=\"width:100%\" id=\"freeze3\">";
+						echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+		      <th style=\"width:5%; text-align: center;\">No</th>
+		      <th style=\"width:15%; text-align: center;\">Tanggal Pengisian</th>
+		      <th style=\"width:65%; text-align: center;\">Jenis Penilaian</th>
+		      <th style=\"width:15%; text-align: center;\">Status Approval</th>
 		      </thead>";
-		$cek_nilai_komprehensip = mysqli_num_rows($nilai_komprehensip);
-		if ($cek_nilai_komprehensip<1)
-		{
-		  echo "<tr><td colspan=4 align=center><<< E M P T Y >>></td></tr>";
-		}
-		else
-		{
-		  $no=1;
-		  $kelas = "ganjil";
-		  while ($data_komprehensip=mysqli_fetch_array($nilai_komprehensip))
-		  {
-		    $tanggal_isi = tanggal_indo($data_komprehensip[tgl_isi]);
-		    $tanggal_approval = tanggal_indo($data_komprehensip[tgl_approval]);
-		    $data_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_komprehensip[nim]'"));
-		    echo "<tr class=\"$kelas\">";
-		    echo "<td align=center>$no</td>";
-		    echo "<td>$tanggal_isi</td>";
-				echo "<td>Penilaian Ujian Komprehensip<br><br>";
-				echo "<i>Nama Mahasiswa: $data_mhsw[nama]<br>NIM: $data_mhsw[nim]<br>Nilai: $data_komprehensip[nilai_total]</i></td>";
-		    echo "<td align=center>";
-		    if ($data_komprehensip[status_approval]=='0')
-		    {
-		      echo "<font style=\"color:red\">BELUM DISETUJUI</font><br><br>";
-		      echo "<a href=\"approve_komprehensip_dosen.php?id=$data_komprehensip[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"approve\".\"$data_komprehensip[id]\" style=\"color:red\" value=\"VIEW & APPROVE\"></a>";
-		    }
-		    else
-		    {
-		      echo "<font style=\"color:green\">DISETUJUI</font><br>";
-		      echo "per tanggal<br>";
-		      echo "$tanggal_approval<p>";
-		      echo "<a href=\"view_form_komprehensip.php?id=$data_komprehensip[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"view\".\"$data_komprehensip[id]\" value=\"VIEW\"></a><p>";
-		      echo "<a href=\"unapprove_komprehensip_dosen.php?id=$data_komprehensip[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\"><input type=\"button\" name=\"unapprove\".\"$data_komprehensip[id]\" style=\"color:green\" value=\"UNAPPROVE\"></a>";
-		    }
-		    echo "</td>";
-		    echo "</tr>";
-		    $no++;
-		    if ($kelas=="ganjil") $kelas="genap";
-		    else $kelas="ganjil";
-		  }
-		}
-		echo "</table><br><br>";
+						$cek_nilai_komprehensip = mysqli_num_rows($nilai_komprehensip);
+						if ($cek_nilai_komprehensip < 1) {
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">
+							<td colspan=4 align=center style=\"color:red; font-weight:600;\"><<< E M P T Y >>></td></tr>";
+						} else {
+							$no = 1;
+							$kelas = "ganjil";
+							while ($data_komprehensip = mysqli_fetch_array($nilai_komprehensip)) {
+								$tanggal_isi = tanggal_indo($data_komprehensip['tgl_isi']);
+								$tanggal_approval = tanggal_indo($data_komprehensip['tgl_approval']);
+								$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_komprehensip[nim]'"));
+								echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+								echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
+								echo "<td style=\"text-align:center;color:darkblue; font-weight:600;\">$tanggal_isi</td>";
+								echo "<td style=\"font-weight:600;\">Penilaian Ujian Komprehensip<br><br>";
+								echo "<span style=\"color:purple;\">Nama Mahasiswa: $data_mhsw[nama]</span><br>
+									<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
+								echo "Nilai: $data_komprehensip[nilai_total]</span></td>";
+								echo "<td align=center>";
+								if ($data_komprehensip['status_approval'] == '0') {
+									echo "<font style=\"color:red; font-weight:600;\">BELUM DISETUJUI</font>";
+									echo "<br><br>
+										<a href=\"approve_komprehensip_dosen.php?id=$data_komprehensip[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+        										<button type=\"button\" class=\"btn btn-warning btn-sm\" name=\"approve_$data_komprehensip[id]\" value=\"VIEW & APPROVE\">
+            								<i class=\"fas fa-eye me-2\"></i> VIEW & APPROVE
+        									</button>
+      										</a>";
+								} else {
+									echo "<font style=\"color:darkgreen; font-weight:600;\">DISETUJUI</font><br>";
+									echo "<span style=\" font-weight:600;\">per tanggal</span><br>";
+									echo "<span style=\"color:darkblue; font-weight:600;\">$tanggal_approval</span>";
+									echo "<br><br>
+										<a href=\"view_form_komprehensip.php?id=$data_komprehensip[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+        										<button type=\"button\" class=\"btn btn-success btn-sm\" name=\"view_$data_komprehensip[id]\" value=\"VIEW\">
+            								<i class=\"fas fa-eye me-2\"></i> VIEW
+        									</button>
+      										</a>";
+									echo "<br><br>
+									<a href=\"unapprove_komprehensip_dosen.php?id=$data_komprehensip[id]&mulai=$tgl_mulai&selesai=$tgl_selesai&approval=$approval&mhsw=$mhsw\">
+									<button type=\"button\" class=\"btn btn-danger btn-sm\" name=\"unapprove\".\"$data_komprehensip[id]\"  value=\"UNAPPROVE\">
+									<i class=\"fas fa-circle-xmark me-2\"></i> UNAPPROVE
+									</button></a>";
+								}
+								echo "</td>";
+								echo "</tr>";
+								$no++;
+								if ($kelas == "ganjil") $kelas = "genap";
+								else $kelas = "ganjil";
+							}
+						}
+						echo "</table><br><br>";
+						?>
 
-		echo "<center><a href=\"#top\"><i>Goto top</i></a></center><br><br>";
-		echo "</fieldset>";
+					</div>
+			</main>
+			<!-- Back to Top Button -->
+			<button id="back-to-top" title="Back to Top">
+				<i class="fa-solid fa-arrow-up" style="margin-bottom: 2px;"></i>
+				<div>Top</div>
+			</button>
 
-	}
-		else
-		echo "
-		<script>
-			window.location.href=\"../accessdenied.php\";
-		</script>
-		";
-	}
-?>
-<script type="text/javascript" src="../jquery.min.js"></script>
-<script type="text/javascript" src="../freezeheader/js/jquery.freezeheader.js"></script>
-<script>
-  $(document).ready(function(){
-	   $("#freeze1").freezeHeader();
-		 $("#freeze2").freezeHeader();
-		 $("#freeze3").freezeHeader();
-		 $("#freeze4").freezeHeader();
-  });
-</script>
-<!--</body></html>-->
-</BODY>
-</HTML>
+			<!-- Start Footer -->
+			<footer class="footer py-3">
+				<div class="container-fluid">
+					<div class="row text-body-secondary">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Program Studi Pendidikan Profesi Dokter <br>
+									Universitas Diponegoro
+									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
+								</strong>
+								<br>
+								<strong>
+									Kode Pos: 50275 |
+								</strong>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:024 – 76928010 |
+								</strong>
+								<strong>
+									Kotak Pos: 1269
+								</strong>
+								<br>
+								<strong>
+									Fax.: 024 – 76928011 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:dean@fk.undip.ac.id
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
+									Fakultas Kedokteran UNDIP - Gd A Lt. 2
+								</strong>
+								<br>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:+62 812-2868-576 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:cnawangsih@yahoo.com
+								</strong>
+								<br>
+								<strong style="color: #0A3967;">
+									Build since @2024
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+								<strong>
+									<<< Install Aplikasi Android di Playstore>>>
+								</strong>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
+
+		</div>
+
+	</div>
+
+	<!-- Script Bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<script src="../javascript/script1.js"></script>
+	<script src="../javascript/buttontopup2.js"></script>
+	<script type="text/javascript" src="../jquery.min.js"></script>
+	<script type="text/javascript" src="../freezeheader/js/jquery.freezeheader.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#freeze1").freezeHeader();
+			$("#freeze2").freezeHeader();
+			$("#freeze3").freezeHeader();
+			$("#freeze4").freezeHeader();
+		});
+	</script>
+</body>
+
+</html>
