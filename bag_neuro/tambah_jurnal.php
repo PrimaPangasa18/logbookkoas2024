@@ -246,7 +246,7 @@
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
 						<td align=center><b>Catatan Dosen Penguji (Tutor) Terhadap Kegiatan:</b></td></tr>";
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
-						echo "<td><strong>Catatan:</strong><br><textarea name=\"catatan\" rows=5 style=\"width:100%;margin-top:10px;font-family:Poppins;font-size:1em\"></textarea></td>";
+						echo "<td><strong>Catatan:</strong><br><textarea name=\"catatan\" rows=5 style=\"width:100%;margin-top:10px;font-family:Poppins;font-size:1em\" placeholder=\"<< Catatan >>\"></textarea></td>";
 						echo "</tr>";
 						echo "</table><br>";
 

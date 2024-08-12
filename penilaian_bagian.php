@@ -203,14 +203,14 @@
 												echo "<a href=\"bag_kompre/penilaian_kompre.php\" title=\"Penilaian Komprehensif\" class=\"btn btn-outline-success\">";
 												echo "<i class=\"fa-solid fa-book\"></i> Komprehensif";
 												echo "</a><br>";
-												echo "<font style=\"font-size:0.75em\"><i>Skedul: - (Belum terjadwal)</i></font>";
+												echo "<font style=\"font-size:0.75em; font-weight:700; color:red\"><span>Skedul: - (Belum terjadwal)</span></font>";
 												echo "</td>";
 
 												echo "<td align=center style=\"width:200px\">";
 												echo "<a href=\"bag_kdk/penilaian_kdk.php\" title=\"Penilaian Kedokteran Keluarga\" class=\"btn btn-outline-success\">";
 												echo "<i class=\"fa-solid fa-user-md\"></i> Kedokteran Keluarga";
 												echo "</a><br>";
-												echo "<font style=\"font-size:0.75em\"><i>Skedul: - (Belum terjadwal)</i></font>";
+												echo "<font style=\"font-size:0.75em;font-weight:700;color:red\"><span>Skedul: - (Belum terjadwal)</span></font>";
 												echo "</td>";
 
 												$no = 0;

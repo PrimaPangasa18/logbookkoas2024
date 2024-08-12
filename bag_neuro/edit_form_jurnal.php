@@ -420,6 +420,9 @@
 
 	<script src="../javascript/script1.js"></script>
 	<script src="../javascript/buttontopup.js"></script>
+	<script src="../jquery.min.js"></script>
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+	<script src="../select2/dist/js/select2.js"></script>
 	<script>
 		$(document).ready(function() {
 			$("#dosen").select2({
@@ -436,6 +439,8 @@
 			});
 		});
 	</script>
+
+
 	<script>
 		function sum() {
 			var aspek1 = $("input[name=aspek_1]:checked").val();

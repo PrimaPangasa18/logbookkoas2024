@@ -1,238 +1,393 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<link rel="stylesheet" href="../menu.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="../mytable.css" type="text/css" media="screen" />
-	<meta name="viewport" content="width=device-width, maximum-scale=1">
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>On-line Preview MiniCex Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<link rel="shortcut icon" type="x-icon" href="../images/undipsolid.png">
+	<link rel="stylesheet" href="../style/style1.css" />
+	<link rel="stylesheet" href="../style/buttontopup.css">
 
-<!--</head>-->
+
+	<!-- Link Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+	<!-- Link CDN Icon -->
+	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<BODY>
 
-<?php
+<body>
+	<div class="wrapper">
+		<?php
 
-	include "../config.php";
-	include "../fungsi.php";
+		include "../config.php";
+		include "../fungsi.php";
 
-	error_reporting("E_ALL ^ E_NOTICE");
+		error_reporting("E_ALL ^ E_NOTICE");
 
-	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
-		echo "
+		if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
+			echo "
 		<script>
-			window.location.href=\"../accessdenied.php\";
+			window.location.href=\"accessdenied.php\";
 		</script>
 		";
-	}
-	else{
-	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND $_COOKIE['level']==5)
-	{
-		if ($_COOKIE['level']==5) {include "menu5.php";}
+		} else {
+			if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 5) {
+				if ($_COOKIE['level'] == 5) {
+					include "menu5.php";
+				}
 
-		echo "<div class=\"text_header\">PENILAIAN KEPANITERAAN (STASE) ILMU KESEHATAN JIWA</div>";
+				$nama = isset($_COOKIE['nama']) ? $_COOKIE['nama'] : 'User';
+				$gelar = isset($_COOKIE['gelar']) ? $_COOKIE['gelar'] : '';
+			} else
+				echo "
+		<script>
+			window.location.href=\"accessdenied.php\";
+		</script>
+		";
+		}
+		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
 
-		echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-		echo "<center><h4 id=\"top\"><font style=\"color:#006400;text-shadow:1px 1px black;\">PREVIEW NILAI UJIAN MINI-CEX - UJIAN KOMPETENSI KLINIK<p>Kepaniteraan (Stase) Ilmu Kesehatan Jiwa</font></h4>";
+		// Menentukan path gambar
+		$foto_path = "../foto/" . $data_mhsw['foto'];
+		$default_foto = "../foto/profil_blank.png";
 
-		$id_stase = "M093";
-		$id = $_GET['id'];
-		$data_stase = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
-		$data_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
-		$stase_id = "stase_".$id_stase;
-		$data_stase_mhsw = mysqli_query($con,"SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'");
-		$datastase_mhsw = mysqli_fetch_array($data_stase_mhsw);
-		$data_minicex = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `psikiatri_nilai_minicex` WHERE `id`='$id'"));
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
+		<!-- End Sidebar -->
+		<div class="main">
+			<!-- Start Navbar -->
+			<nav class="navbar navbar-expand px-4 py-3">
+				<form action="#" class="d-none d-sm-inline-block">
+					<div class="input-group input-group-navbar">
+						<img src="../images/undipsolid.png" alt="" style="width: 45px;">
+					</div>
+				</form>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item dropdown d-flex align-item-center">
+							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
+							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
+							</a>
+							<div class="dropdown-menu dropdown-menu-end rounded">
 
-		$tanggal_ujian = tanggal_indo($data_minicex[tgl_ujian]);
-		$tanggal_approval = tanggal_indo($data_minicex[tgl_approval]);
-		$awal_periode = tanggal_indo($data_minicex[tgl_awal]);
-		$akhir_periode = tanggal_indo($data_minicex[tgl_akhir]);
+								<div class="dropdown-menu dropdown-menu-end rounded"></div>
+								<a href="../logout.php" class="dropdown-item">
+									<i class="lni lni-exit"></i>
+									<span>Logout</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
 
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
+			<!-- Main Content -->
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">PENILAIAN KEPANITERAAN (STASE) ILMU KESEHATAN JIWA</h3>
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">PREVIEW NILAI UJIAN MINI-CEX - UJIAN KOMPETENSI KLINIK<br>KEPANITERAAN (STASE) ILMU KESEHATAN JIWA</h2>
+						<br>
+						<?php
+						$id_stase = "M093";
+						$id = $_GET['id'];
+						$data_stase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
+						$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+						$stase_id = "stase_" . $id_stase;
+						$data_stase_mhsw = mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'");
+						$datastase_mhsw = mysqli_fetch_array($data_stase_mhsw);
+						$data_minicex = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `psikiatri_nilai_minicex` WHERE `id`='$id'"));
 
-		//Nama mahasiswa
-		echo "<tr>";
-			echo "<td style=\"width:40%\">Nama Mahasiswa Koas</td>";
-			echo "<td style=\"width:60%\">$data_mhsw[nama]</td>";
-		echo "</tr>";
-		//NIM
-		echo "<tr>";
-			echo "<td>NIM</td>";
-			echo "<td>$data_mhsw[nim]</td>";
-		echo "</tr>";
-		//Periode Kegiatan
-		echo "<tr>";
-			echo "<td>Periode Kegiatan</td>";
-			echo "<td>$awal_periode s.d. $akhir_periode</td>";
-		echo "</tr>";
-		//Tanggal Ujian
-		echo "<tr>";
-			echo "<td>Tanggal Ujian</td>";
-			echo "<td>$tanggal_ujian</td>";
-		echo "</tr>";
-		//Dosen Penilai/Penguji
-		echo "<tr>";
-			echo "<td>Dosen Penilai/Penguji</td>";
-			echo "<td>";
-			$data_dosen = mysqli_fetch_array(mysqli_query($con,"SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
-			echo "$data_dosen[nama], $data_dosen[gelar] ($data_dosen[nip])";
-			echo "</select>";
-			echo "</td>";
-		echo "</tr>";
-		//Tempat/Lokasi
-		echo "<tr>";
-			echo "<td>Tempat / Lokasi</td>";
-			echo "<td>$data_minicex[lokasi]</td>";
-		echo "</tr>";
-		//Nama Pasien
-		echo "<tr>";
-			echo "<td>Nama Pasien</td>";
-			echo "<td>$data_minicex[nama_pasien]</td>";
-		echo "</tr>";
-		//Nama Pasien
-		echo "<tr>";
-			echo "<td>Umur Pasien</td>";
-			echo "<td>$data_minicex[umur_pasien] tahun</td>";
-		echo "</tr>";
-		//Jenis Kelamin Pasien
-		echo "<tr>";
-			echo "<td>Jenis Kelamin Pasien</td>";
-			echo "<td>$data_minicex[jk_pasien]</td>";
-		echo "</tr>";
-		//Status Kasus
-		echo "<tr>";
-			echo "<td>Status Kasus</td>";
-			echo "<td>$data_minicex[status_kasus]</td>";
-		echo "</tr>";
-		echo "</table><br><br>";
+						$tanggal_ujian = tanggal_indo($data_minicex['tgl_ujian']);
+						$tanggal_approval = tanggal_indo($data_minicex['tgl_approval']);
+						$awal_periode = tanggal_indo($data_minicex['tgl_awal']);
+						$akhir_periode = tanggal_indo($data_minicex['tgl_akhir']);
 
-		//Form nilai
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<tr><td><b>Form Penilaian:</b></td></tr>";
-		echo "</table>";
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<thead>";
-		 	echo "<th style=\"width:7%\">No</th>";
-			echo "<th style=\"width:78%\">Aspek Yang Dinilai</th>";
-			echo "<th style=\"width:15%\">Nilai (0-100)</th>";
-		echo "</thead>";
-		//No A.1
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">A.1</td>";
-			echo "<td>Kemampuan wawancara</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_1]</td>";
-		echo "</tr>";
-		//No A.2
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">A.2</td>";
-			echo "<td>Pemeriksaan status mental</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_2]</td>";
-		echo "</tr>";
-		//No A.3
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">A.3</td>";
-			echo "<td>Kemampuanan diagnosis</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_3]</td>";
-		echo "</tr>";
-		//No A.4
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">A.4</td>";
-			echo "<td>Kemampuan terapi</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_4]</td>";
-		echo "</tr>";
-		//No A.5
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">A.5</td>";
-			echo "<td>Kemampuan konseling</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_5]</td>";
-		echo "</tr>";
-		//No A.6
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">A.6</td>";
-			echo "<td>Profesionalisme dan etika</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_6]</td>";
-		echo "</tr>";
-		//No B
-		echo "<tr>";
-			echo "<td align=center class=\"td_mid\">B</td>";
-			echo "<td>Teori</td>";
-			echo "<td align=center class=\"td_mid\">$data_minicex[aspek_7]</td>";
-		echo "</tr>";
+						echo "<center>";
+						echo "<table  class=\"table table-bordered\" style=\"width:70%\">";
 
-		//Rata-Rata Nilai
-		if ($data_minicex[nilai_rata]>=80) $nilai_huruf = "A";
-		if ($data_minicex[nilai_rata]>=70 AND $data_minicex[nilai_rata]<80) $nilai_huruf = "B";
-		if ($data_minicex[nilai_rata]<70) $nilai_huruf = "C";
-		echo "<tr>";
-			echo "<td colspan=2 align=right class=\"td_mid\">Rata-Rata Nilai (Nilai Total / 7)</td>";
-			echo "<td align=center class=\"td_mid\"><b>$data_minicex[nilai_rata]</b></td>";
-		echo "</tr>";
-		echo "<tr>";
-			echo "<td colspan=2 align=right class=\"td_mid\">Konversi Nilai ke Huruf</td>";
-			echo "<td align=center class=\"td_mid\"><b>$nilai_huruf</b></td>";
-		echo "</tr>";
-		echo "<tr><td colspan=3><font style=\"font-size:0.75em;\">";
-		echo "<i>Keterangan:<br>";
-		echo "Nilai Batas Lulus (NBL) = 70<br>";
-		echo "Nilai A = 80.00 - 100.00 (SUPERIOR)<br>";
-		echo "Nilai B = 70.00 - 79.99 (LULUS)<br>";
-		echo "Nilai C < 70.00 (TIDAK LULUS)";
-		echo "</i></font></td></tr>";
-		echo "</table><br><br>";
+						//Nama mahasiswa
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td style=\"width:40%\"><strong>Nama Mahasiswa Koas</strong></td>";
+						echo "<td style=\"width:60%;font-weight:600; color:darkgreen\">$data_mhsw[nama]</td>";
+						echo "</tr>";
+						//NIM
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>NIM</strong></td>";
+						echo "<td style=\" font-weight:600; color:red\">$data_mhsw[nim]</td>";
+						echo "</tr>";
+						//Periode Kegiatan
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Periode Kegiatan</strong></td>";
+						echo "<td style=\"font-weight:600;\"><span style=\"color:darkblue\">$awal_periode</span> s.d. <span style=\"color:darkblue\">$akhir_periode</span></td>";
+						echo "</tr>";
+						//Tanggal Ujian
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Tanggal Ujian</strong></td>";
+						echo "<td style=\"font-weight:600;\"><span style=\"color:darkblue\">$tanggal_ujian</span></td>";
+						echo "</tr>";
+						//Dosen Penilai/Penguji
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Dosen Penilai/Penguji</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
+						echo "$data_dosen[nama], <span style=\"color:red\">$data_dosen[gelar]</span> (<span style=\"color:blue\">$data_dosen[nip]</span>)";
+						echo "</select>";
+						echo "</td>";
+						echo "</tr>";
+						//Tempat/Lokasi
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Tempat / Lokasi</strong></td>";
+						echo "<td style=\"font-weight:600;\"><span style=\"color:green\">$data_minicex[lokasi]</span></td>";
+						echo "</tr>";
+						//Nama Pasien
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Nama Pasien</strong></td>";
+						echo "<td style=\"font-weight:600;\">$data_minicex[nama_pasien]</td>";
+						echo "</tr>";
+						//Nama Pasien
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Umur Pasien</strong></td>";
+						echo "<td style=\"font-weight:600;\"><span style=\"color:red\">$data_minicex[umur_pasien]</span> Tahun</td>";
+						echo "</tr>";
+						//Jenis Kelamin Pasien
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Jenis Kelamin Pasien</strong></td>";
+						echo "<td style=\"font-weight:600;\">$data_minicex[jk_pasien]</td>";
+						echo "</tr>";
+						//Status Kasus
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Status Kasus</strong></td>";
+						echo "<td style=\"font-weight:600;\">$data_minicex[status_kasus]</td>";
+						echo "</tr>";
+						echo "</table><br><br>";
 
-		//Umpan Balik
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<tr><td colspan=2>1. Waktu Penilaian MINI-CEX:</td></tr>";
-		echo "<tr>";
-			echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;Observasi</td>";
-			echo "<td>";
-			echo "$data_minicex[waktu_observasi] menit";
-			echo "</td>";
-		echo "</tr>";
-		echo "<tr>";
-			echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;Memberikan umpan balik</td>";
-			echo "<td>";
-			echo "$data_minicex[waktu_ub] menit";
-			echo "</td>";
-		echo "</tr>";
-		//Kepuasaan penilai terhadap minicex
-		echo "<tr>";
-			echo "<td colspan=2>2. Kepuasaan penilai terhadap MINI-CEX: <i>$data_minicex[kepuasan1]</i></td>";
-		echo "</tr>";
-		//Kepuasaan peserta terhadap minicex
-		echo "<tr>";
-			echo "<td colspan=2>3. Kepuasaan peserta ujian terhadap MINI-CEX: <i>$data_minicex[kepuasan2]</i></td>";
-		echo "</tr>";
-		echo "<tr><td colspan=2 align=right><br><i>Status: <b>BELUM DISETUJUI</b><br>";
-		echo "Dosen Penilai/Penguji<p>$data_dosen[nama], $data_dosen[gelar]<br>NIP. $data_dosen[nip]</i>";
-		echo "</td></tr>";
-		echo "</table><br>";
+						//Form nilai
+						echo "<table border=2 style=\"width:70%;  background:rgba(255, 243, 205, 1);\" >";
+						echo "<tr><td style=\"text-align:center; font-size:1.1em;\"><strong >Form Penilaian:</strong></td></tr>";
+						echo "</table>";
+						echo "<table class=\"table table-bordered\" style=\"width:70%\">";
+						echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<th style=\"width:7%;text-align:center;\">No</th>";
+						echo "<th style=\"width:78%;text-align:center;\">Aspek Yang Dinilai</th>";
+						echo "<th style=\"width:15%;text-align:center;\">Nilai (0-100)</th>";
+						echo "</thead>";
+						//No A.1
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>A.1</strong></td>";
+						echo "<td><strong>Kemampuan wawancara</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_1]</strong></td>";
+						echo "</tr>";
+						//No A.2
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>A.2</strong></td>";
+						echo "<td><strong>Pemeriksaan status mental</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_2]</strong></td>";
+						echo "</tr>";
+						//No A.3
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>A.3</strong></td>";
+						echo "<td><strong>Kemampuanan diagnosis</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_3]</strong></td>";
+						echo "</tr>";
+						//No A.4
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>A.4</strong></td>";
+						echo "<td><strong>Kemampuan terapi</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_4]</strong></td>";
+						echo "</tr>";
+						//No A.5
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>A.5</strong></td>";
+						echo "<td><strong>Kemampuan konseling</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_5]</strong></td>";
+						echo "</tr>";
+						//No A.6
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>A.6</strong></td>";
+						echo "<td><strong>Profesionalisme dan etika</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_6]</strong></td>";
+						echo "</tr>";
+						//No B
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>B</strong></td>";
+						echo "<td><strong>Teori</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong>$data_minicex[aspek_7]</strong></td>";
+						echo "</tr>";
 
-		echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-		echo "<br><center><input type=\"submit\" class=\"submit1\" name=\"back\" value=\"BACK\" />";
-		echo "<br><br></form></fieldset>";
+						//Rata-Rata Nilai
+						if ($data_osce['nilai_rata'] >= 80) {
+							$nilai_huruf = "A";
+							$warna = "green";
+						} elseif ($data_osce['nilai_rata'] >= 70) {
+							$nilai_huruf = "B";
+							$warna = "blue";
+						} else {
+							$nilai_huruf = "C";
+							$warna = "red";
+						}
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td colspan=2 align=right class=\"td_mid\"><strong>Rata-Rata Nilai <span class=\"text-danger\">(Nilai Total / 7)</span></strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong style=\"color:blue\">$data_minicex[nilai_rata]</strong></td>";
+						echo "</tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td colspan=2 align=right class=\"td_mid\"><strong>Konversi Nilai ke Huruf</strong></td>";
+						echo "<td align=center class=\"td_mid\"><strong style=\"color: $warna;\">$nilai_huruf</strong></td>";
+						echo "</tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\"><td colspan=3>
+						<font style=\"font-size:0.9em; font-weight:700;\">";
+						echo "<span>Keterangan:<br>";
+						echo "Nilai Batas Lulus (NBL) = <span class=\"text-danger\">70</span><br>";
+						echo "Nilai A <span style=\"color:green\">= 80.00 - 100.00 (SUPERIOR)</span><br>";
+						echo "Nilai B <span style=\"color:blue\">= 70.00 - 79.99 (LULUS)</span><br>";
+						echo "Nilai C <span style=\"color:red\"> < 70.00 (TIDAK LULUS)</span>";
+						echo "</font></td></tr>";
+						echo "</table><br>";
 
-		if ($_POST[back]=="BACK")
-		{
-			echo "
+						//Umpan Balik
+						echo "<table class=\"table table-bordered\" style=\"width:70%\">";
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+						<td colspan=2><strong>1. Waktu Penilaian MINI-CEX:</strong></td></tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td style=\"font-weight:600;\">&nbsp;&nbsp;&nbsp;&nbsp;Observasi</td>";
+						echo "<td style=\"font-weight:600;\">";
+						echo "$data_minicex[waktu_observasi] Menit";
+						echo "</td>";
+						echo "</tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td style=\"font-weight:600;\">&nbsp;&nbsp;&nbsp;&nbsp;Memberikan umpan balik</td>";
+						echo "<td style=\"font-weight:600;\">";
+						echo "$data_minicex[waktu_ub] Menit";
+						echo "</td>";
+						echo "</tr>";
+						//Kepuasaan penilai terhadap minicex
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td colspan=2><strong>2. Kepuasaan penilai terhadap MINI-CEX: <span style=\"color:blue\">$data_minicex[kepuasan1]</span></strong></td>";
+						echo "</tr>";
+						//Kepuasaan peserta terhadap minicex
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td colspan=2><strong>3. Kepuasaan peserta ujian terhadap MINI-CEX: <span style=\"color:blue\">$data_minicex[kepuasan2]</span></strong></td>";
+						echo "</tr>";
+						echo "<tr  class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">
+						<td colspan=2 align=right><br><span style=\"font-weight:600;\">Status: </span><strong class=\"text-danger\" >BELUM DISETUJUI</strong><br>";
+						echo "<span style=\"font-weight:600;\">Dosen Penilai/Penguji:<p><span style=\"font-weight:500;\">$data_dosen[nama]</span>, <span style=\"font-weight:500; color:red\">$data_dosen[gelar]</span><br>NIP. <span style=\"font-weight:600; color:blue;\">$data_dosen[nip]</span></span>";
+						echo "</td></tr>";
+						echo "</table><br>";
+
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+						echo "<br>
+						<button type=\"submit\" class=\"btn btn-primary\" name=\"back\" value=\"BACK\">
+            					<i class=\"fa-solid fa-backward me-2\"></i> BACK
+        						</button>";
+						echo "<br><br></form>";
+						echo "</center>";
+
+						if ($_POST['back'] == "BACK") {
+							echo "
 					<script>
 					window.location.href=\"penilaian_psikiatri.php\";
 					</script>
 					";
+						}
+						?>
 
-		}
-	}
-		else
-		echo "
-		<script>
-			window.location.href=\"../accessdenied.php\";
-		</script>
-		";
-	}
-?>
-<script src="../jquery.min.js"></script>
+					</div>
+			</main>
+			<!-- Back to Top Button -->
+			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
+				<i class="fa-solid fa-arrow-up"></i>
+				<div>Top</div>
+			</button>
 
+			<!-- Start Footer -->
+			<footer class="footer py-3">
+				<div class="container-fluid">
+					<div class="row text-body-secondary">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Program Studi Pendidikan Profesi Dokter <br>
+									Universitas Diponegoro
+									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
+								</strong>
+								<br>
+								<strong>
+									Kode Pos: 50275 |
+								</strong>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:024 – 76928010 |
+								</strong>
+								<strong>
+									Kotak Pos: 1269
+								</strong>
+								<br>
+								<strong>
+									Fax.: 024 – 76928011 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:dean@fk.undip.ac.id
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
+									Fakultas Kedokteran UNDIP - Gd A Lt. 2
+								</strong>
+								<br>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:+62 812-2868-576 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:cnawangsih@yahoo.com
+								</strong>
+								<br>
+								<strong style="color: #0A3967;">
+									Build since @2024
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+								<strong>
+									<<< Install Aplikasi Android di Playstore>>>
+								</strong>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
 
+		</div>
 
-<!--</body></html>-->
-</BODY>
-</HTML>
+	</div>
+
+	<!-- Script Bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<script src="../javascript/script1.js"></script>
+	<script src="../javascript/buttontopup.js"></script>
+	<script src="../jquery.min.js"></script>
+</body>
+
+</html>

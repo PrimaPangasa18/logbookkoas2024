@@ -552,9 +552,9 @@
 							echo "<br>";
 							$cek_approved_test = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `neuro_nilai_test` WHERE `nim`='$_COOKIE[user]' AND `status_approval`='1'"));
 							if ($cek_approved_test > 0)
-								echo "<br><a href=\"cetak_nilai_test.php\" target=\"_BLANK\">";
-							echo "<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-primary\" name=\"cetak\" value=\"CETAK\"><i class=\"fas fa-print\"></i> CETAK</button>";
-							echo "</a>";
+								echo "<br><center><a href=\"cetak_nilai_test.php\" target=\"_BLANK\">
+								<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-primary\" name=\"cetak\" value=\"CETAK\"><i class=\"fas fa-print\"></i> CETAK</button>
+								</a>";
 							echo "<br><br><br><a href=\"cetak_nilai_neuro.php\" target=\"_BLANK\">";
 							echo "<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-success\" id=\"cetak_nilai\" name=\"cetak_nilai\" value=\"CETAK NILAI\"><i class=\"fas fa-print\"></i> CETAK NILAI</button>";
 							echo "</a>";
