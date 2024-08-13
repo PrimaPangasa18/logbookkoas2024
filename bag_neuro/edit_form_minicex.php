@@ -284,7 +284,7 @@
 						//Umpan Balik
 						echo "<table  class=\"table table-bordered\" style=\"width:70%\">";
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
-						<td colspan=2 align=center><strong>UMPAN BALIK TERHADAP DISKUSI KASUS</strong></td></tr>";
+						<td colspan=2 align=center><strong>UMPAN BALIK TERHADAP MINI-CEX</strong></td></tr>";
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
 						echo "<td align=center style=\"width:50%\"><strong style=\"color:blue\">Sudah bagus</strong></td>";
 						echo "<td align=center style=\"width:50%\"><strong style=\"color:red\">Perlu perbaikan</strong></td>";
