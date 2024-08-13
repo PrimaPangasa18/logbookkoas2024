@@ -131,7 +131,7 @@
 						echo "</tr>";
 						//Tanggal Ujian
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
-						echo "<td class=\"td_mid\"><strong>Tanggal Ujian <span class\"text-danger\">(yyyy-mm-dd)</span></strong></td>";
+						echo "<td class=\"td_mid\"><strong>Tanggal Ujian <span class=\"text-danger\">(yyyy-mm-dd)</span></strong></td>";
 						echo "<td class=\"td_mid\"><input type=\"text\" class=\"form-select tanggal_ujian\" name=\"tanggal_ujian\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" placeholder=\"yyyy-mm-dd\" /></td>";
 						echo "</tr>";
 						//Dosen Penguji
