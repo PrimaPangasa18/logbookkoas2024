@@ -305,7 +305,7 @@
 										echo "<span style=\"color:darkblue; font-weight:600;\">$tanggal_approval</span>";
 										echo "<br><br>
 										<a href=\"view_form_jurnal.php?id=$data_jurnal[id]\">
-        										<button type=\"button\" class=\"btn btn-success btn-sm\" name=\"view_$data_kasus[id]\" value=\"VIEW\">
+        										<button type=\"button\" class=\"btn btn-success btn-sm\" name=\"view_$data_jurnal[id]\" value=\"VIEW\">
             								<i class=\"fas fa-eye me-2\"></i> VIEW
         									</button>
       										</a><p>";

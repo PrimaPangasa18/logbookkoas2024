@@ -155,7 +155,7 @@
 						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
 						echo "<input type=\"hidden\" name=\"id_stase\" value=\"$id_stase\">";
 						echo "
-								<span class=\"text-danger\" style=\"font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600\">Tekan tombol dibawah ini untuk pengisian form/preview nilai</span>
+								<span class=\"text-danger\" style=\"font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600\">Tekan tombol dibawah ini untuk melihat penilaian</span>
 								<br><br>
 								<a href=\"#cbd1\" class=\"btn btn-success me-3\">Penilaian Kasus CBD - Radiodiagnostik</a>
 								<a href=\"#cbd2\" class=\"btn btn-primary me-3\">Penilaian Kasus CBD - Radioterapi</a>
