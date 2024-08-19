@@ -358,7 +358,7 @@
 									echo "Tanggal Yudisium: <span style=\"color:blue\">$tanggal_approval</span>";
 									echo "</td>";
 									$nilai = number_format($data_test['nilai'], 2);
-									echo "<td align=center>$nilai</td>";
+									echo "<td align=center style=\"font-weight:600;\">$nilai</td>";
 									echo "</tr>";
 									$no++;
 									if ($kelas == "ganjil") $kelas = "genap";
