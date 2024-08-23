@@ -1,436 +1,588 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../menu.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="../mytable.css" type="text/css" media="screen" />
-<!--</head>-->
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>On-line Preview MiniCex Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<link rel="shortcut icon" type="x-icon" href="../images/undipsolid.png">
+	<link rel="stylesheet" href="../style/style1.css" />
+	<link rel="stylesheet" href="../style/buttontopup.css">
+
+
+	<!-- Link Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+	<!-- Link CDN Icon -->
+	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<BODY>
 
-<?php
+<body>
+	<div class="wrapper">
+		<?php
 
-include "../config.php";
-include "../fungsi.php";
+		include "../config.php";
+		include "../fungsi.php";
 
-error_reporting("E_ALL ^ E_NOTICE");
+		error_reporting("E_ALL ^ E_NOTICE");
 
-	if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])){
-		echo "
+		if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
+			echo "
 		<script>
-			window.location.href=\"../accessdenied.php\";
+			window.location.href=\"accessdenied.php\";
 		</script>
 		";
-	}
-	else{
-	if (!empty($_COOKIE['user']) AND !empty($_COOKIE['pass']) AND $_COOKIE['level']==5)
-	{
-		if ($_COOKIE['level']==5) {include "menu5.php";}
+		} else {
+			if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 5) {
+				if ($_COOKIE['level'] == 5) {
+					include "menu5.php";
+				}
+				$nama = isset($_COOKIE['nama']) ? $_COOKIE['nama'] : 'User';
+				$gelar = isset($_COOKIE['gelar']) ? $_COOKIE['gelar'] : '';
+			} else
+				echo "
+		<script>
+			window.location.href=\"accessdenied.php\";
+		</script>
+		";
+		}
+		?>
+		<?php
+		if ($_COOKIE['level'] != 5) {
+			$data_nim = $_GET['nim'];
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
+		} else {
+			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+		}
 
-		echo "<div class=\"text_header\">PENILAIAN KEPANITERAAN KEDOKTERAN KELUARGA</div>";
+		// Menentukan path gambar
+		$foto_path = "../foto/" . $data_mhsw['foto'];
+		$default_foto = "../foto/profil_blank.png";
 
-		echo "<br><br><br><fieldset class=\"fieldset_art\">
-	    <legend align=left><font style=\"color:black;font-style:italic;font-size:0.825em;\">[user: $_COOKIE[nama], $_COOKIE[gelar]]</font></legend>";
-		echo "<center><h4 id=\"top\"><font style=\"color:#006400;text-shadow:1px 1px black;\">PREVIEW NILAI MINI-CEX</font></h4>";
+		// Mengecek apakah file gambar ada
+		if (!file_exists($foto_path) || empty($data_mhsw['foto'])) {
+			$foto_path = $default_foto;
+		}
+		?>
+		<!-- End Sidebar -->
+		<div class="main">
+			<!-- Start Navbar -->
+			<nav class="navbar navbar-expand px-4 py-3">
+				<form action="#" class="d-none d-sm-inline-block">
+					<div class="input-group input-group-navbar">
+						<img src="../images/undipsolid.png" alt="" style="width: 45px;">
+					</div>
+				</form>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item dropdown d-flex align-item-center">
+							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
+							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
+								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
+							</a>
+							<div class="dropdown-menu dropdown-menu-end rounded">
 
-		$id = $_GET['id'];
-		$data_minicex = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `kdk_nilai_minicex` WHERE `id`='$id'"));
-		$data_mhsw = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_minicex[nim]'"));
+								<div class="dropdown-menu dropdown-menu-end rounded"></div>
+								<a href="../logout.php" class="dropdown-item">
+									<i class="lni lni-exit"></i>
+									<span>Logout</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
 
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
+			<!-- Main Content -->
+			<main class="content px-3 py-4">
+				<div class="container-fluid">
+					<div class="mb-3">
+						<h3 class="fw-bold fs-4 mb-3">PENILAIAN KEPANITERAAN KEDOKTERAN KELUARGA</h3>
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">PREVIEW NILAI MINI-CEX</h2>
+						<br>
+						<?php
+						$id = $_GET['id'];
+						$data_minicex = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kdk_nilai_minicex` WHERE `id`='$id'"));
+						$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_minicex[nim]'"));
 
-		//Instansi
-		echo "<tr>";
-			echo "<td style=\"width:40%\">Instansi</td>";
-			echo "<td style=\"width:60%\">$data_minicex[instansi]</td>";
-		echo "</tr>";
-		//Lokasi Puskesmas/Klinik
-		echo "<tr>";
-			echo "<td>Nama Puskesmas / Klinik Pratama</td>";
-			echo "<td>$data_minicex[lokasi]</td>";
-		echo "</tr>";
-		//DPJP
-		echo "<tr>";
-			echo "<td>Nama Penilai/DPJP</td>";
-			echo "<td>";
-			$data_dosen = mysqli_fetch_array(mysqli_query($con,"SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
-			echo "$data_dosen[nama], $data_dosen[gelar] ($data_dosen[nip])";
-			echo "</td>";
-		echo "</tr>";
-		//Nama dokter muda/koas
-		echo "<tr>";
-			echo "<td>Nama dokter muda</td>";
-			echo "<td>$data_mhsw[nama]</td>";
-		echo "</tr>";
-		//NIM
-		echo "<tr>";
-			echo "<td>NIM</td>";
-			echo "<td>$data_mhsw[nim]</td>";
-		echo "</tr>";
-		//Tahap
-		echo "<tr>";
-			echo "<td>Tahap</td>";
-			echo "<td>Kepaniteraan Kedokteran Keluarga</td>";
-		echo "</tr>";
-		//Ujian ke-
-		echo "<tr>";
-			echo "<td>Ujian ke-</td>";
-			echo "<td>";
-			if ($data_minicex[no_ujian]=="1")
-				echo "<input type=\"radio\" name=\"no_ujian\" value=\"1\" checked/>&nbsp;&nbsp;1";
-			else echo "<input type=\"radio\" name=\"no_ujian\" value=\"1\" disabled/>&nbsp;&nbsp;1";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[no_ujian]=="2")
-				echo "<input type=\"radio\" name=\"no_ujian\" value=\"2\" checked/>&nbsp;&nbsp;2";
-			else echo "<input type=\"radio\" name=\"no_ujian\" value=\"2\" disabled/>&nbsp;&nbsp;2";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[no_ujian]=="3")
-				echo "<input type=\"radio\" name=\"no_ujian\" value=\"3\" checked/>&nbsp;&nbsp;3";
-			else echo "<input type=\"radio\" name=\"no_ujian\" value=\"3\" disabled/>&nbsp;&nbsp;3";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[no_ujian]=="4")
-				echo "<input type=\"radio\" name=\"no_ujian\" value=\"4\" checked/>&nbsp;&nbsp;4";
-			else echo "<input type=\"radio\" name=\"no_ujian\" value=\"4\" disabled/>&nbsp;&nbsp;4";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[no_ujian]=="5")
-				echo "<input type=\"radio\" name=\"no_ujian\" value=\"5\" checked/>&nbsp;&nbsp;5";
-			else echo "<input type=\"radio\" name=\"no_ujian\" value=\"5\" disabled/>&nbsp;&nbsp;5";
-			echo "</td>";
-		echo "</tr>";
-		//Problem Pasien/Diagnosis
-		echo "<tr>";
-			echo "<td>Problem Pasien/Diagnosis</td>";
-			echo "<td>$data_minicex[diagnosis]</td>";
-		echo "</tr>";
-		//Situasi Ruangan
-		echo "<tr>";
-			echo "<td>Situasi Ruangan</td>";
-			echo "<td>";
-			if ($data_minicex[situasi_ruangan]=="Rawat Jalan")
-				echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Jalan\" checked/>&nbsp;&nbsp;Rawat Jalan";
-			else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Jalan\" disabled/>&nbsp;&nbsp;Rawat Jalan";
-			echo "<br>";
-			if ($data_minicex[situasi_ruangan]=="Rawat Inap")
-				echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Inap\" checked/>&nbsp;&nbsp;Rawat Inap";
-			else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Inap\" disabled/>&nbsp;&nbsp;Rawat Inap";
-			echo "<br>";
-			if ($data_minicex[situasi_ruangan]=="IRD")
-				echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"IRD\" checked/>&nbsp;&nbsp;IRD";
-			else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"IRD\" disabled/>&nbsp;&nbsp;IRD";
-			echo "<br>";
-			if ($data_minicex[situasi_ruangan]=="Lain-lain")
-				echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Lain-lain\" checked/>&nbsp;&nbsp;Lain-lain";
-			else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Lain-lain\" disabled/>&nbsp;&nbsp;Lain-lain";
-			echo "</td>";
-		echo "</tr>";
-		//Umur Pasien
-		echo "<tr>";
-			echo "<td>Umur Pasien</td>";
-			echo "<td>$data_minicex[umur_pasien]&nbsp;&nbsp;tahun</td>";
-		echo "</tr>";
-		//Jenis Kelamin Pasien
-		echo "<tr>";
-			echo "<td>Jenis Kelamin Pasien</td>";
-			echo "<td>";
-			if ($data_minicex[jk_pasien]=="Laki-Laki")
-				echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Laki-Laki\" checked/>&nbsp;&nbsp;Laki-Laki";
-			else echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Laki-Laki\" disabled/>&nbsp;&nbsp;Laki-Laki";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[jk_pasien]=="Perempuan")
-				echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Perempuan\" checked />&nbsp;&nbsp;Perempuan";
-			else echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Perempuan\" disabled/>&nbsp;&nbsp;Perempuan";
-			echo "</td>";
-		echo "</tr>";
-		//Status Pasien
-		echo "<tr>";
-			echo "<td>Status Pasien</td>";
-			echo "<td>";
-			if ($data_minicex[status_pasien]=="Baru")
-				echo "<input type=\"radio\" name=\"status_pasien\" value=\"Baru\" checked/>&nbsp;&nbsp;Baru";
-			else echo "<input type=\"radio\" name=\"status_pasien\" value=\"Baru\" disabled/>&nbsp;&nbsp;Baru";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[status_pasien]=="Follow-up")
-				echo "<input type=\"radio\" name=\"status_pasien\" value=\"Follow-up\" checked/>&nbsp;&nbsp;Follow-up";
-			else echo "<input type=\"radio\" name=\"status_pasien\" value=\"Follow-up\" disabled/>&nbsp;&nbsp;Follow-up";
-			echo "</td>";
-		echo "</tr>";
-		//Tingkat Kesulitan
-		echo "<tr>";
-			echo "<td>Tingkat Kesulitan</td>";
-			echo "<td>";
-			if ($data_minicex[tingkat_kesulitan]=="Rendah")
-				echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Rendah\" checked/>&nbsp;&nbsp;Rendah";
-			else echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Rendah\" disabled/>&nbsp;&nbsp;Rendah";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[tingkat_kesulitan]=="Sedang")
-				echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Sedang\" checked/>&nbsp;&nbsp;Sedang";
-			else echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Sedang\" disabled/>&nbsp;&nbsp;Sedang";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[tingkat_kesulitan]=="Tinggi")
-				echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Tinggi\" checked/>&nbsp;&nbsp;Tinggi";
-			else echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Tinggi\" disabled/>&nbsp;&nbsp;Tinggi";
-			echo "</td>";
-		echo "</tr>";
-		//Fokus Kasus
-		echo "<tr>";
-			echo "<td>Fokus Kasus</td>";
-			echo "<td>";
-			if ($data_minicex[fokus_kasus]=="Anamnesis")
-				echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Anamnesis\" checked/>&nbsp;&nbsp;Anamnesis<br>";
-			else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Anamnesis\" disabled/>&nbsp;&nbsp;Anamnesis<br>";
-			if ($data_minicex[fokus_kasus]=="Pemeriksaan fisik")
-				echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Pemeriksaan fisik\" checked/>&nbsp;&nbsp;Pemeriksaan fisik<br>";
-			else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Pemeriksaan fisik\" disabled/>&nbsp;&nbsp;Pemeriksaan fisik<br>";
-			if ($data_minicex[fokus_kasus]=="Diagnosis")
-				echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Diagnosis\" checked/>&nbsp;&nbsp;Diagnosis<br>";
-			else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Diagnosis\" disabled/>&nbsp;&nbsp;Diagnosis<br>";
-			if ($data_minicex[fokus_kasus]=="Terapi")
-				echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Terapi\" checked/>&nbsp;&nbsp;Terapi<br>";
-			else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Terapi\" disabled/>&nbsp;&nbsp;Terapi<br>";
-			if ($data_minicex[fokus_kasus]=="Konseling")
-				echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Konseling\" checked/>&nbsp;&nbsp;Konseling";
-			else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Konseling\" disabled/>&nbsp;&nbsp;Konseling";
-			echo "</td>";
-		echo "</tr>";
-		echo "</table><br><br>";
+						echo "<center>";
+						echo "<table  class=\"table table-bordered\" style=\"width:70%\">";
 
-		//Form nilai
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<tr><td><b>Form Penilaian:</b></td></tr>";
-		echo "</table>";
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<thead>";
-		 	echo "<th style=\"width:5%\">No</th>";
-			echo "<th style=\"width:55%\">Aspek Yang Dinilai</th>";
-			echo "<th style=\"width:20%\">Status Observasi</th>";
-			echo "<th style=\"width:20%\">Nilai (0-100)</th>";
-		echo "</thead>";
-		//No 1
-		echo "<tr>";
-			echo "<td align=center>1</td>";
-			echo "<td>Kemampuan wawancara medis</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_1]=="1")
-				echo "<input type=\"radio\" name=\"observasi_1\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_1\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_1]=="0")
-				echo "<input type=\"radio\" name=\"observasi_1\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_1\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_1]</td>";
-		echo "</tr>";
-		//No 2
-		echo "<tr>";
-			echo "<td align=center>2</td>";
-			echo "<td>Kemampuan pemeriksaan fisik</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_2]=="1")
-				echo "<input type=\"radio\" name=\"observasi_2\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_2\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_2]=="0")
-				echo "<input type=\"radio\" name=\"observasi_2\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_2\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_2]</td>";
-		echo "</tr>";
-		//No 3
-		echo "<tr>";
-			echo "<td align=center>3</td>";
-			echo "<td>Kualitas humanistik/profesionalisme</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_3]=="1")
-				echo "<input type=\"radio\" name=\"observasi_3\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_3\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_3]=="0")
-				echo "<input type=\"radio\" name=\"observasi_3\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_3\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_3]</td>";
-		echo "</tr>";
-		//No 4
-		echo "<tr>";
-			echo "<td align=center>4</td>";
-			echo "<td>Keputusan klinis/diagnostis</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_4]=="1")
-				echo "<input type=\"radio\" name=\"observasi_4\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_4\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_4]=="0")
-				echo "<input type=\"radio\" name=\"observasi_4\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_4\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_4]</td>";
-		echo "</tr>";
-		//No 5
-		echo "<tr>";
-			echo "<td align=center>5</td>";
-			echo "<td>Kemampuan mengelola pasien</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_5]=="1")
-				echo "<input type=\"radio\" name=\"observasi_5\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_5\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_5]=="0")
-				echo "<input type=\"radio\" name=\"observasi_5\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_5\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_5]</td>";
-		echo "</tr>";
-		//No 6
-		echo "<tr>";
-			echo "<td align=center>6</td>";
-			echo "<td>Kemampuan konseling</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_6]=="1")
-				echo "<input type=\"radio\" name=\"observasi_6\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_6\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_6]=="0")
-				echo "<input type=\"radio\" name=\"observasi_6\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_6\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_6]</td>";
-		echo "</tr>";
-		//No 7
-		echo "<tr>";
-			echo "<td align=center>7</td>";
-			echo "<td>Organisasi/efisiensi</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_7]=="1")
-				echo "<input type=\"radio\" name=\"observasi_7\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_7\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_7]=="0")
-				echo "<input type=\"radio\" name=\"observasi_7\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_7\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_7]</td>";
-		echo "</tr>";
-		//No 8
-		echo "<tr>";
-			echo "<td align=center>8</td>";
-			echo "<td>Kompetensi klinis keseluruhan</td>";
-			echo "<td align=center>";
-			if ($data_minicex[observasi_8]=="1")
-				echo "<input type=\"radio\" name=\"observasi_8\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
-			else echo "<input type=\"radio\" name=\"observasi_8\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-			if ($data_minicex[observasi_8]=="0")
-				echo "<input type=\"radio\" name=\"observasi_8\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
-			else echo "<input type=\"radio\" name=\"observasi_8\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
-			echo "<td align=center>$data_minicex[aspek_8]</td>";
-		echo "</tr>";
-		//Rata Nilai
-		echo "<tr>";
-			echo "<td align=right colspan=3>Rata-Rata Nilai (Jumlah Nilai / Jumlah Observasi)</td>";
-			echo "<td align=center><b>$data_minicex[nilai_rata]</b></td>";
-		echo "</tr>";
-		echo "<tr><td colspan=4><font style=\"font-size:0.75em;\"><i>Keterangan: Nilai Batas Lulus (NBL) = 70</i></font></td></tr>";
-		echo "</table><br><br>";
+						//Instansi
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td style=\"width:40%\"><strong>Instansi</strong></td>";
+						echo "<td style=\"width:60%;font-weight:600;\">$data_minicex[instansi]</td>";
+						echo "</tr>";
+						//Lokasi Puskesmas/Klinik
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Nama Puskesmas / Klinik Pratama</strong></td>";
+						echo "<td style=\"font-weight:600;\">$data_minicex[lokasi]</td>";
+						echo "</tr>";
+						//DPJP
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Nama Penilai/DPJP</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
+						echo "$data_dosen[nama], <span style=\"color:red\">$data_dosen[gelar]</span> (<span style=\"color:blue\">$data_dosen[nip]</span>)";
+						echo "</td>";
+						echo "</tr>";
+						//Nama dokter muda/koas
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Nama dokter muda</strong></td>";
+						echo "<td style=\"font-weight:600; color:darkgreen\">$data_mhsw[nama]</td>";
+						echo "</tr>";
+						//NIM
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>NIM</strong></td>";
+						echo "<td style=\" font-weight:600; color:red\">$data_mhsw[nim]</td>";
+						echo "</tr>";
+						//Tahap
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Tahap</strong></td>";
+						echo "<td style=\" font-weight:600;\">Kepaniteraan Kedokteran Keluarga</td>";
+						echo "</tr>";
+						//Ujian ke-
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Ujian ke-</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						if ($data_minicex['no_ujian'] == "1")
+							echo "<input type=\"radio\" name=\"no_ujian\" value=\"1\" checked/>&nbsp;&nbsp;1";
+						else echo "<input type=\"radio\" name=\"no_ujian\" value=\"1\" disabled/>&nbsp;&nbsp;1";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['no_ujian'] == "2")
+							echo "<input type=\"radio\" name=\"no_ujian\" value=\"2\" checked/>&nbsp;&nbsp;2";
+						else echo "<input type=\"radio\" name=\"no_ujian\" value=\"2\" disabled/>&nbsp;&nbsp;2";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['no_ujian'] == "3")
+							echo "<input type=\"radio\" name=\"no_ujian\" value=\"3\" checked/>&nbsp;&nbsp;3";
+						else echo "<input type=\"radio\" name=\"no_ujian\" value=\"3\" disabled/>&nbsp;&nbsp;3";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['no_ujian'] == "4")
+							echo "<input type=\"radio\" name=\"no_ujian\" value=\"4\" checked/>&nbsp;&nbsp;4";
+						else echo "<input type=\"radio\" name=\"no_ujian\" value=\"4\" disabled/>&nbsp;&nbsp;4";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['no_ujian'] == "5")
+							echo "<input type=\"radio\" name=\"no_ujian\" value=\"5\" checked/>&nbsp;&nbsp;5";
+						else echo "<input type=\"radio\" name=\"no_ujian\" value=\"5\" disabled/>&nbsp;&nbsp;5";
+						echo "</td>";
+						echo "</tr>";
+						//Problem Pasien/Diagnosis
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Problem Pasien/Diagnosis</strong></td>";
+						echo "<td style=\"font-weight:600;\">$data_minicex[diagnosis]</td>";
+						echo "</tr>";
+						//Situasi Ruangan
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Situasi Ruangan</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						if ($data_minicex['situasi_ruangan'] == "Rawat Jalan")
+							echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Jalan\" checked/>&nbsp;&nbsp;Rawat Jalan";
+						else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Jalan\" disabled/>&nbsp;&nbsp;Rawat Jalan";
+						echo "<br>";
+						if ($data_minicex['situasi_ruangan'] == "Rawat Inap")
+							echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Inap\" checked/>&nbsp;&nbsp;Rawat Inap";
+						else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Rawat Inap\" disabled/>&nbsp;&nbsp;Rawat Inap";
+						echo "<br>";
+						if ($data_minicex['situasi_ruangan'] == "IRD")
+							echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"IRD\" checked/>&nbsp;&nbsp;IRD";
+						else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"IRD\" disabled/>&nbsp;&nbsp;IRD";
+						echo "<br>";
+						if ($data_minicex['situasi_ruangan'] == "Lain-lain")
+							echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Lain-lain\" checked/>&nbsp;&nbsp;Lain-lain";
+						else echo "<input type=\"radio\" name=\"situasi_ruangan\" value=\"Lain-lain\" disabled/>&nbsp;&nbsp;Lain-lain";
+						echo "</td>";
+						echo "</tr>";
+						//Umur Pasien
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Umur Pasien</strong></td>";
+						echo "<td style=\"font-weight:600;\">$data_minicex[umur_pasien]&nbsp;&nbsp;Tahun</td>";
+						echo "</tr>";
+						//Jenis Kelamin Pasien
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Jenis Kelamin Pasien</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						if ($data_minicex['jk_pasien'] == "Laki-Laki")
+							echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Laki-Laki\" checked/>&nbsp;&nbsp;Laki-Laki";
+						else echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Laki-Laki\" disabled/>&nbsp;&nbsp;Laki-Laki";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['jk_pasien'] == "Perempuan")
+							echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Perempuan\" checked />&nbsp;&nbsp;Perempuan";
+						else echo "<input type=\"radio\" name=\"jk_pasien\" value=\"Perempuan\" disabled/>&nbsp;&nbsp;Perempuan";
+						echo "</td>";
+						echo "</tr>";
+						//Status Pasien
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Status Pasien</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						if ($data_minicex['status_pasien'] == "Baru")
+							echo "<input type=\"radio\" name=\"status_pasien\" value=\"Baru\" checked/>&nbsp;&nbsp;Baru";
+						else echo "<input type=\"radio\" name=\"status_pasien\" value=\"Baru\" disabled/>&nbsp;&nbsp;Baru";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['status_pasien'] == "Follow-up")
+							echo "<input type=\"radio\" name=\"status_pasien\" value=\"Follow-up\" checked/>&nbsp;&nbsp;Follow-up";
+						else echo "<input type=\"radio\" name=\"status_pasien\" value=\"Follow-up\" disabled/>&nbsp;&nbsp;Follow-up";
+						echo "</td>";
+						echo "</tr>";
+						//Tingkat Kesulitan
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Tingkat Kesulitan</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						if ($data_minicex['tingkat_kesulitan'] == "Rendah")
+							echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Rendah\" checked/>&nbsp;&nbsp;Rendah";
+						else echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Rendah\" disabled/>&nbsp;&nbsp;Rendah";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['tingkat_kesulitan'] == "Sedang")
+							echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Sedang\" checked/>&nbsp;&nbsp;Sedang";
+						else echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Sedang\" disabled/>&nbsp;&nbsp;Sedang";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['tingkat_kesulitan'] == "Tinggi")
+							echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Tinggi\" checked/>&nbsp;&nbsp;Tinggi";
+						else echo "<input type=\"radio\" name=\"tingkat_kesulitan\" value=\"Tinggi\" disabled/>&nbsp;&nbsp;Tinggi";
+						echo "</td>";
+						echo "</tr>";
+						//Fokus Kasus
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td><strong>Fokus Kasus</strong></td>";
+						echo "<td style=\"font-weight:600;\">";
+						if ($data_minicex['fokus_kasus'] == "Anamnesis")
+							echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Anamnesis\" checked/>&nbsp;&nbsp;Anamnesis<br>";
+						else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Anamnesis\" disabled/>&nbsp;&nbsp;Anamnesis<br>";
+						if ($data_minicex['fokus_kasus'] == "Pemeriksaan fisik")
+							echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Pemeriksaan fisik\" checked/>&nbsp;&nbsp;Pemeriksaan fisik<br>";
+						else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Pemeriksaan fisik\" disabled/>&nbsp;&nbsp;Pemeriksaan fisik<br>";
+						if ($data_minicex['fokus_kasus'] == "Diagnosis")
+							echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Diagnosis\" checked/>&nbsp;&nbsp;Diagnosis<br>";
+						else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Diagnosis\" disabled/>&nbsp;&nbsp;Diagnosis<br>";
+						if ($data_minicex['fokus_kasus'] == "Terapi")
+							echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Terapi\" checked/>&nbsp;&nbsp;Terapi<br>";
+						else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Terapi\" disabled/>&nbsp;&nbsp;Terapi<br>";
+						if ($data_minicex['fokus_kasus'] == "Konseling")
+							echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Konseling\" checked/>&nbsp;&nbsp;Konseling";
+						else echo "<input type=\"radio\" name=\"fokus_kasus\" value=\"Konseling\" disabled/>&nbsp;&nbsp;Konseling";
+						echo "</td>";
+						echo "</tr>";
+						echo "</table><br><br>";
 
-		//Umpan Balik
-		echo "<table border=1 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<tr><td colspan=2 align=center><b>UMPAN BALIK KOMPETENSI KLINIS</b></td></tr>";
-		echo "<tr>";
-			echo "<td align=center style=\"width:50%\">Sudah bagus</td>";
-			echo "<td align=center style=\"width:50%\">Perlu perbaikan</td>";
-		echo "</tr>";
-		echo "<tr>";
-			echo "<td><i>$data_minicex[ub_bagus]</i></td>";
-			echo "<td><i>$data_minicex[ub_perbaikan]</i></td>";
-		echo "</tr>";
-		echo "<tr>";
-			echo "<td colspan=2>Action plan yang disetujui bersama:<br><i>$data_minicex[action_plan]</i></td>";
-		echo "</tr>";
-		echo "</table><br><br>";
+						//Form nilai
+						echo "<table border=2 style=\"width:70%;  background:rgba(255, 243, 205, 1);\" >";
+						echo "<tr><td style=\"text-align:center; font-size:1.1em;\"><strong >Form Penilaian:</strong></td></tr>";
+						echo "</table>";
+						echo "<table class=\"table table-bordered\" style=\"width:70%\">";
+						echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<th style=\"width:5%;text-align:center;\">No</th>";
+						echo "<th style=\"width:55%;text-align:center;\">Aspek Yang Dinilai</th>";
+						echo "<th style=\"width:20%;text-align:center;\">Status Observasi</th>";
+						echo "<th style=\"width:20%;text-align:center;\">Nilai (0-100)</th>";
+						echo "</thead>";
+						//No 1
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>1</strong></td>";
+						echo "<td><strong>Kemampuan wawancara medis</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_1'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_1\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_1\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_1'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_1\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_1\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_1]</td>";
+						echo "</tr>";
+						//No 2
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>2</strong></td>";
+						echo "<td><strong>Kemampuan pemeriksaan fisik</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_2'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_2\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_2\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_2'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_2\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_2\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_2]</td>";
+						echo "</tr>";
+						//No 3
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>3</strong></td>";
+						echo "<td><strong>Kualitas humanistik/profesionalisme</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_3'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_3\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_3\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_3'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_3\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_3\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_3]</td>";
+						echo "</tr>";
+						//No 4
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>4</strong></td>";
+						echo "<td><strong>Keputusan klinis/diagnostis</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_4'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_4\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_4\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_4'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_4\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_4\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_4]</td>";
+						echo "</tr>";
+						//No 5
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>5</strong></td>";
+						echo "<td><strong>Kemampuan mengelola pasien</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_5'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_5\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_5\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_5'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_5\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_5\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_5]</td>";
+						echo "</tr>";
+						//No 6
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>6</strong></td>";
+						echo "<td><strong>Kemampuan konseling</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_6'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_6\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_6\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_6'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_6\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_6\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_6]</td>";
+						echo "</tr>";
+						//No 7
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>7</strong></td>";
+						echo "<td><strong>Organisasi/efisiensi</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_7'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_7\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_7\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_7'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_7\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_7\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_7]</td>";
+						echo "</tr>";
+						//No 8
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center class=\"td_mid\"><strong>8</strong></td>";
+						echo "<td><strong>Kompetensi klinis keseluruhan</strong></td>";
+						echo "<td align=center style=\"font-weight:600;\">";
+						if ($data_minicex['observasi_8'] == "1")
+							echo "<input type=\"radio\" name=\"observasi_8\" value=\"1\" checked/>&nbsp;&nbsp;Ya";
+						else echo "<input type=\"radio\" name=\"observasi_8\" value=\"1\" disabled/>&nbsp;&nbsp;Ya";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['observasi_8'] == "0")
+							echo "<input type=\"radio\" name=\"observasi_8\" value=\"0\" checked/>&nbsp;&nbsp;Tidak</td>";
+						else echo "<input type=\"radio\" name=\"observasi_8\" value=\"0\" disabled/>&nbsp;&nbsp;Tidak</td>";
+						echo "<td align=center style=\"font-weight:600;\">$data_minicex[aspek_8]</td>";
+						echo "</tr>";
+						//Rata Nilai
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=right colspan=3><strong>Rata-Rata Nilai <span class=\"text-danger\">(Jumlah Nilai / Jumlah Observasi)</span></strong></td>";
+						echo "<td align=center style=\"font-weight:600; color:blue;\">$data_minicex[nilai_rata]</td>";
+						echo "</tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">
+						<td colspan=4><font style=\"font-size:0.9em; font-weight:600;\">Keterangan: Nilai Batas Lulus (NBL) = <span class=\"text-danger\">70</span></font></td></tr>";
+						echo "</table><br><br>";
 
-		//Catatan
-		echo "<table border=0 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<tr><td colspan=2><b>Catatan:</b></td></tr>";
-		echo "<tr><td colspan=2>1. Waktu Mini-CEX:</td></tr>";
-		echo "<tr>";
-			echo "<td style=\"width:30%;padding:5px 5px 5px 25px;\">Observasi</td>";
-			echo "<td style=\"width:70%\">";
-			echo ": $data_minicex[waktu_observasi]&nbsp;&nbsp;menit<br>";
-			echo "</td>";
-		echo "</tr>";
-		echo "<tr>";
-			echo "<td style=\"width:30%;padding:5px 5px 5px 25px;\">Memberikan umpan balik</td>";
-			echo "<td style=\"width:70%\">";
-			echo ": $data_minicex[waktu_ub]&nbsp;&nbsp;menit<br>";
-			echo "</td>";
-		echo "</tr>";
-		echo "<tr><td colspan=2>2. Kepuasan penilai terhadap Mini-CEX:</td></tr>";
-		echo "<tr><td colspan=2 style=\"padding:5px 5px 5px 25px;\">";
-		if ($data_minicex[kepuasan_penilai]=="Kurang sekali")
-			echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang sekali\" checked/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang sekali\" disabled/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_penilai]=="Kurang")
-			echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang\" checked/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang\" disabled/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_penilai]=="Cukup")
-			echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Cukup\" checked/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Cukup\" disabled/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_penilai]=="Baik")
-			echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik\" checked/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik\" disabled/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_penilai]=="Baik sekali")
-			echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik sekali\" checked/>&nbsp;&nbsp;Baik sekali";
-		else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik sekali\" disabled/>&nbsp;&nbsp;Baik sekali";
-		echo "</td></tr>";
-		echo "<tr><td colspan=2>2. Kepuasan residen terhadap Mini-CEX:</td></tr>";
-		echo "<tr><td colspan=2 style=\"padding:5px 5px 5px 25px;\">";
-		if ($data_minicex[kepuasan_residen]=="Kurang sekali")
-			echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang sekali\" checked/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang sekali\" disabled/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_residen]=="Kurang")
-			echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang\" checked/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang\" disabled/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_residen]=="Cukup")
-			echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Cukup\" checked/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Cukup\" disabled/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_residen]=="Baik")
-			echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik\" checked/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
-		else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik\" disabled/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
-		if ($data_minicex[kepuasan_residen]=="Baik sekali")
-			echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik sekali\" checked/>&nbsp;&nbsp;Baik sekali";
-		else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik sekali\" disabled/>&nbsp;&nbsp;Baik sekali";
-		echo "</td></tr></table>";
-		echo "<table border=0 style=\"width:70%;background:rgb(244, 241, 217);\">";
-		echo "<tr><td align=right><br><i>Status: <b>BELUM DISETUJUI</b><br>";
-		echo "Penilai/DPJP<p>$data_dosen[nama], $data_dosen[gelar]<br>NIP. $data_dosen[nip]</i>";
-		echo "</td></tr>";
-		echo "</table><br>";
-		echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
-		echo "<br><center><input type=\"submit\" class=\"submit1\" name=\"back\" value=\"BACK\" />";
-		echo "<br><br></form></fieldset>";
+						//Umpan Balik
+						echo "<table  class=\"table table-bordered\" style=\"width:70%\">";
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+						<td colspan=2 align=center><strong>UMPAN BALIK KOMPETENSI KLINIS</strong></td></tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td align=center style=\"width:50%\"><strong style=\"color:blue\">Sudah bagus</strong></td>";
+						echo "<td align=center style=\"width:50%\"><strong style=\"color:red\">Perlu perbaikan</strong></td>";
+						echo "</tr>";
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
+						echo "<td>$data_minicex[ub_bagus]</td>";
+						echo "<td>$data_minicex[ub_perbaikan]</td>";
+						echo "</tr>";
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td colspan=2 ><strong>Action plan yang disetujui bersama:</strong>
+						<br><br>
+						<span style=\"font-weight:600;\">$data_minicex[action_plan]</span></td>";
+						echo "</tr>";
+						echo "</table><br><br>";
 
-		if ($_POST[back]=="BACK")
-		{
-			if ($_COOKIE['level']==5)
-			echo "
+						//Catatan
+						echo "<table  class=\"table table-bordered\" style=\"width:70%\">";
+						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+						<td colspan=2 align=center><strong>Catatan:</strong></td></tr>";
+						echo "<tr  class=\"table-success\" style=\"border-width: 1px; border-color: #000;\"><td colspan=2><strong>1. Waktu Mini-CEX:</td></strong></tr>";
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td style=\"width:30%;padding:5px 5px 5px 25px; font-weight:600;\">Observasi</td>";
+						echo "<td style=\"width:70%;  font-weight:600;\">";
+						echo ": $data_minicex[waktu_observasi]&nbsp;&nbsp;menit<br>";
+						echo "</td>";
+						echo "</tr>";
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+						echo "<td style=\"width:30%;padding:5px 5px 5px 25px; font-weight:600;\">Memberikan umpan balik</td>";
+						echo "<td style=\"width:70%;  font-weight:600;\">";
+						echo ": $data_minicex[waktu_ub]&nbsp;&nbsp;menit<br>";
+						echo "</td>";
+						echo "</tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\"><td colspan=2><strong>2. Kepuasan penilai terhadap Mini-CEX:</strong></td></tr>";
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\"><td colspan=2 style=\"padding:5px 5px 5px 25px; font-weight:600;\">";
+						if ($data_minicex['kepuasan_penilai'] == "Kurang sekali")
+							echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang sekali\" checked/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang sekali\" disabled/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_penilai'] == "Kurang")
+							echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang\" checked/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Kurang\" disabled/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_penilai'] == "Cukup")
+							echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Cukup\" checked/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Cukup\" disabled/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_penilai'] == "Baik")
+							echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik\" checked/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik\" disabled/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_penilai'] == "Baik sekali")
+							echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik sekali\" checked/>&nbsp;&nbsp;Baik sekali";
+						else echo "<input type=\"radio\" name=\"kepuasan_penilai\" value=\"Baik sekali\" disabled/>&nbsp;&nbsp;Baik sekali";
+						echo "</td></tr>";
+						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\"><td colspan=2><strong>3. Kepuasan residen terhadap Mini-CEX:</strong></td></tr>";
+						echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\"><td colspan=2 style=\"padding:5px 5px 5px 25px; font-weight:600;\">";
+						if ($data_minicex['kepuasan_residen'] == "Kurang sekali")
+							echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang sekali\" checked/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang sekali\" disabled/>&nbsp;&nbsp;Kurang sekali&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_residen'] == "Kurang")
+							echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang\" checked/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Kurang\" disabled/>&nbsp;&nbsp;Kurang&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_residen'] == "Cukup")
+							echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Cukup\" checked/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Cukup\" disabled/>&nbsp;&nbsp;Cukup&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_residen'] == "Baik")
+							echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik\" checked/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
+						else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik\" disabled/>&nbsp;&nbsp;Baik&nbsp;&nbsp;&nbsp;&nbsp;";
+						if ($data_minicex['kepuasan_residen'] == "Baik sekali")
+							echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik sekali\" checked/>&nbsp;&nbsp;Baik sekali";
+						else echo "<input type=\"radio\" name=\"kepuasan_residen\" value=\"Baik sekali\" disabled/>&nbsp;&nbsp;Baik sekali";
+						echo "</td></tr>";
+
+						echo "<tr  class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">
+						<td colspan=2 align=right><br><span style=\"font-weight:600;\">Status: </span><strong class=\"text-danger\" >BELUM DISETUJUI</strong><br>";
+						echo "<span style=\"font-weight:600;\">Penilai/DPJP:<p><span style=\"font-weight:500;\">$data_dosen[nama]</span>, <span style=\"font-weight:500; color:red\">$data_dosen[gelar]</span><br>NIP. <span style=\"font-weight:600; color:blue;\">$data_dosen[nip]</span></span>";
+						echo "</td></tr>";
+						echo "</table><br>";
+
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+						echo "<br>
+						<button type=\"submit\" class=\"btn btn-primary\" name=\"back\" value=\"BACK\">
+            					<i class=\"fa-solid fa-backward me-2\"></i> BACK
+        						</button>";
+						echo "<br><br></form>";
+						echo "</center>";
+
+						if ($_POST['back'] == "BACK") {
+							if ($_COOKIE['level'] == 5)
+								echo "
 					<script>
 					window.location.href=\"penilaian_kdk.php\";
 					</script>
 					";
 
-			if ($_COOKIE['level']==4)
-			echo "
+							if ($_COOKIE['level'] == 4)
+								echo "
 				<script>
 				window.location.href=\"penilaian_kdk_dosen.php\";
 				</script>
 				";
-		}
+						}
+						?>
 
+					</div>
+			</main>
+			<!-- Back to Top Button -->
+			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
+				<i class="fa-solid fa-arrow-up"></i>
+				<div>Top</div>
+			</button>
 
-	}
-	else
-		echo "
-		<script>
-			window.location.href=\"../accessdenied.php\";
-		</script>
-		";
-	}
-?>
+			<!-- Start Footer -->
+			<footer class="footer py-3">
+				<div class="container-fluid">
+					<div class="row text-body-secondary">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Program Studi Pendidikan Profesi Dokter <br>
+									Universitas Diponegoro
+									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
+								</strong>
+								<br>
+								<strong>
+									Kode Pos: 50275 |
+								</strong>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:024 – 76928010 |
+								</strong>
+								<strong>
+									Kotak Pos: 1269
+								</strong>
+								<br>
+								<strong>
+									Fax.: 024 – 76928011 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:dean@fk.undip.ac.id
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
+							<a href="#" class="text-body-secondary">
+								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
+									Fakultas Kedokteran UNDIP - Gd A Lt. 2
+								</strong>
+								<br>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:+62 812-2868-576 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:cnawangsih@yahoo.com
+								</strong>
+								<br>
+								<strong style="color: #0A3967;">
+									Build since @2024
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+								<strong>
+									<<< Install Aplikasi Android di Playstore>>>
+								</strong>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
 
-<script src="../jquery.min.js"></script>
+		</div>
 
-<!--</body></html>-->
-</BODY>
-</HTML>
+	</div>
+
+	<!-- Script Bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<script src="../javascript/script1.js"></script>
+	<script src="../javascript/buttontopup.js"></script>
+	<script src="../jquery.min.js"></script>
+</body>
+
+</html>

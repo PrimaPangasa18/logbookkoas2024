@@ -324,7 +324,7 @@
 								</a>";
 							$cek_approved_jurnal = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `neuro_nilai_jurnal` WHERE `nim`='$_COOKIE[user]' AND `status_approval`='1'"));
 							if ($cek_approved_jurnal > 0)
-								echo "<br><center><a href=\"cetak_jurnal.php\" target=\"_BLANK\">
+								echo "<br><br><center><a href=\"cetak_jurnal.php\" target=\"_BLANK\">
 								<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-primary\" name=\"cetak\" value=\"CETAK\"><i class=\"fas fa-print\"></i> CETAK</button>
 								</a>";
 							echo "</center><br><br>";
@@ -411,7 +411,7 @@
 								</a>";
 							$cek_approved_spv = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `neuro_nilai_spv` WHERE `nim`='$_COOKIE[user]' AND `status_approval`='1'"));
 							if ($cek_approved_spv > 0)
-								echo "<br><center><a href=\"cetak_spv.php\" target=\"_BLANK\">
+								echo "<br><br><center><a href=\"cetak_spv.php\" target=\"_BLANK\">
 								<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-primary\" name=\"cetak\" value=\"CETAK\"><i class=\"fas fa-print\"></i> CETAK</button>
 								</a>";
 							echo "</center><br><br>";
@@ -500,7 +500,7 @@
 								</a>";
 							$cek_approved_minicex = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `neuro_nilai_minicex` WHERE `nim`='$_COOKIE[user]' AND `status_approval`='1'"));
 							if ($cek_approved_minicex > 0)
-								echo "<br><center><a href=\"cetak_minicex.php\" target=\"_BLANK\">
+								echo "<br><br><center><a href=\"cetak_minicex.php\" target=\"_BLANK\">
 								<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-primary\" name=\"cetak\" value=\"CETAK\"><i class=\"fas fa-print\"></i> CETAK</button>
 								</a>";
 							echo "</center><br><br>";
@@ -552,12 +552,14 @@
 							echo "<br>";
 							$cek_approved_test = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `neuro_nilai_test` WHERE `nim`='$_COOKIE[user]' AND `status_approval`='1'"));
 							if ($cek_approved_test > 0)
-								echo "<br><center><a href=\"cetak_nilai_test.php\" target=\"_BLANK\">
+								echo "<br><br><center><a href=\"cetak_nilai_test.php\" target=\"_BLANK\">
 								<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-primary\" name=\"cetak\" value=\"CETAK\"><i class=\"fas fa-print\"></i> CETAK</button>
 								</a>";
 							echo "<br><br><br><a href=\"cetak_nilai_neuro.php\" target=\"_BLANK\">";
 							echo "<button type=\"button\" style=\"margin-right: 10px;\" class=\"btn btn-success\" id=\"cetak_nilai\" name=\"cetak_nilai\" value=\"CETAK NILAI\"><i class=\"fas fa-print\"></i> CETAK NILAI</button>";
 							echo "</a>";
+							echo "</center><br><br>";
+							echo "</center>";
 						}
 
 						?>
