@@ -145,7 +145,7 @@
 						echo "</tr>";
 						//Dosen Penguji
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
-						echo "<td><strong>Dosen Penilai</strong></td>";
+						echo "<td><strong>Dosen Penguji</strong></td>";
 						echo "<td style=\"font-weight:600;\">";
 						$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_spv[dosen]'"));
 						echo "$data_dosen[nama], <span style=\"color:red\">$data_dosen[gelar]</span> (<span style=\"color:blue\">$data_dosen[nip]</span>)";

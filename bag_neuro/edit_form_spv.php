@@ -142,7 +142,7 @@
 						echo "</tr>";
 						//Dosen Penguji
 						echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
-						echo "<td><strong>Dosen Penilai</strong></td>";
+						echo "<td><strong>Dosen Penguji</strong></td>";
 						echo "<td>";
 						echo "<select class=\"form-select\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"dosen\" id=\"dosen\" required>";
 						$data_dosen_isian = mysqli_fetch_array(mysqli_query($con, "SELECT `nip`,`nama`,`gelar` FROM `dosen` WHERE `nip`='$data_spv[dosen]'"));
