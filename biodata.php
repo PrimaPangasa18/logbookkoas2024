@@ -96,7 +96,7 @@
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
-			<nav class="navbar navbar-expand px-4 py-3">
+			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #ff6f61; ">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
 						<img src="images/undipsolid.png" alt="" style="width: 45px;">
@@ -124,7 +124,7 @@
 			<!-- End Navbar -->
 
 			<!-- Main Content -->
-			<main class="content px-3 py-4">
+			<main class="content px-3 py-4" style="background-image: url('images/undip_watermark_color.png'), url('images/undip_watermark_color.png'); ">
 				<div class="container-fluid">
 					<div class="mb-3">
 						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">BIODATA MAHASISWA</h2>
