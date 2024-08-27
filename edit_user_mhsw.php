@@ -72,7 +72,7 @@
     <!-- End Sidebar -->
     <div class="main">
       <!-- Start Navbar -->
-      <nav class="navbar navbar-expand px-4 py-3">
+      <nav class="navbar navbar-expand px-4 py-3" style="background-color: #ff6f61; ">
         <form action="#" class="d-none d-sm-inline-block">
           <div class="input-group input-group-navbar">
             <img src="images/undipsolid.png" alt="" style="width: 45px;">

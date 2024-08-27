@@ -83,7 +83,7 @@
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
-			<nav class="navbar navbar-expand px-4 py-3">
+			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #ff6f61; ">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
 						<img src="images/undipsolid.png" alt="" style="width: 45px;">
@@ -92,7 +92,7 @@
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item dropdown d-flex align-item-center">
-							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
+							<span class="navbar-text me-2" style="color: white;">Halo, <?php echo $nama . ' , <span class="gelar" >' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
 								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
@@ -111,7 +111,7 @@
 			<!-- End Navbar -->
 
 			<!-- Main Content -->
-			<main class="content px-3 py-4">
+			<main class="content px-3 py-4" style="background-image: url('images/undip_watermark_color.png'), url('images/undip_watermark_color.png'); ">
 				<div class="container-fluid">
 					<div class="mb-3">
 						<h3 class="fw-bold fs-4 mb-3">INFORMASI E-LOGBOOK KOAS</h3>
