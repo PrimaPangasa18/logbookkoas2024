@@ -84,7 +84,7 @@
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item dropdown d-flex align-item-center">
-							<span class="navbar-text me-2">Halo, <?php echo $nama . ' , <span class="gelar" style="color:red">' . $gelar . '</span>'; ?></span>
+							<span class="navbar-text me-2" style="color: white;">Halo, <?php echo $nama . ' , <span class="gelar" >' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
 								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
