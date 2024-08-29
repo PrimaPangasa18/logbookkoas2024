@@ -568,7 +568,7 @@
 						echo "</table>";
 
 						echo "<br><br><button type=\"submit\" class=\"btn btn-danger\" name=\"batal\" value=\"BATAL\">
-       						 <i class=\"fa fa-circle-xmark me-2\"></i> SUBMIT
+       						 <i class=\"fa fa-circle-xmark me-2\"></i> BATAL
       							</button>";
 						echo "&nbsp;&nbsp;&nbsp;&nbsp;<button type=\"submit\" class=\"btn btn-success\" name=\"ubah\" value=\"UBAH\">
        						 <i class=\"fa fa-edit me-2\"></i> UBAH

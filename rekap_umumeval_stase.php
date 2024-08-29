@@ -9,6 +9,8 @@
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
+	<script src="js/Chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 
@@ -259,10 +261,7 @@
 	    </div>";
 						?>
 							<script type="text/javascript">
-								<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-								?>
+								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 								var data = {
 									labels: [
 										<?php
@@ -387,10 +386,7 @@
 	    </div>";
 						?>
 						<script type="text/javascript">
-							<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-							?>
+							var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 							var data = {
 								labels: [
 									<?php
@@ -472,10 +468,7 @@
 	    </div>";
 						?>
 						<script type="text/javascript">
-							<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-							?>
+							var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 							var data = {
 								labels: [
 									<?php
@@ -586,10 +579,7 @@
 	    </div>";
 						?>
 							<script type="text/javascript">
-								<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-								?>
+								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 								var data = {
 									labels: [
 										<?php
@@ -788,10 +778,7 @@
 	    </div>";
 						?>
 							<script type="text/javascript">
-								<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-								?>
+								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 								var data = {
 									labels: [
 										<?php
@@ -925,10 +912,7 @@
 	    </div>";
 						?>
 							<script type="text/javascript">
-								<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-								?>
+								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 								var data = {
 									labels: [
 										<?php
@@ -1099,7 +1083,6 @@
 
 	<script src="javascript/script1.js"></script>
 	<script src="javascript/buttontopup.js"></script>
-	<script src="js/Chart.js"></script>
 	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="freezeheader/js/jquery.freezeheader.js"></script>
 	<script>
