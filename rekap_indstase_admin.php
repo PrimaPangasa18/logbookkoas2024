@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>On-line Rekap Individu Stase Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<title>On-line Rekap Jurnal Logbook Koas Pendidikan Dokter FK-UNDIP</title>
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttonotoup2.css">
@@ -44,7 +44,6 @@
 				if ($_COOKIE['level'] == 3) {
 					include "menu3.php";
 				}
-
 				$nama = isset($_COOKIE['nama']) ? $_COOKIE['nama'] : 'User';
 				$gelar = isset($_COOKIE['gelar']) ? $_COOKIE['gelar'] : '';
 			} else
@@ -56,7 +55,7 @@
 		}
 		?>
 		<?php
-		if ($_COOKIE['level'] != 1) {
+		if ($_COOKIE['level'] != 5) {
 			$data_nim = $_GET['nim'];
 			$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data_nim'"));
 		} else {
@@ -75,7 +74,7 @@
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
-			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #ff6f61; ">
+			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #006400; ">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
 						<img src="images/undipsolid.png" alt="" style="width: 45px;">
@@ -107,11 +106,9 @@
 				<div class="container-fluid">
 					<div class="mb-3">
 						<h3 class="fw-bold fs-4 mb-3">REKAP INDIVIDU LOGBOOK</h3>
-						<br />
-						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
-							REKAP INDIVIDU JURNAL KEPANITERAAN (STASE)
-						</h2>
-						<br><br>
+						<br>
+						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">REKAP INDIVIDU JURNAL KEPANITERAAN (STASE)</h2>
+						<br>
 						<?php
 						$mhsw_nim = $_GET['nim'];
 						$id_stase = $_GET['id'];
@@ -139,6 +136,7 @@
 		*/
 
 						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\">";
+
 						echo "<center>";
 						echo "<table class=\"table table-bordered\" style=\"width:auto\">";
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
@@ -235,6 +233,7 @@
 						echo "</tr>";
 						echo "</thead>";
 
+
 						$data_jurnal_penyakit = mysqli_query($con, "SELECT * FROM `jurnal_penyakit` WHERE `nim`='$mhsw_nim' AND `stase`='$id_stase' AND `status`='1'");
 						$delete_dummy_penyakit = mysqli_query($con, "DELETE FROM `jurnal_penyakit_dummy` WHERE `username` LIKE '%$_COOKIE[user]%'");
 						while ($data = mysqli_fetch_array($data_jurnal_penyakit)) {
@@ -275,7 +274,7 @@
 						$item = 0;
 						$ketuntasan = 0;
 						while ($data = mysqli_fetch_array($daftar_penyakit)) {
-							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
 							echo "<td align=center  style=\"font-weight:600;\">$no</td>";
 							echo "<td style=\"font-weight:600;\">$data[penyakit]</td>";
 							echo "<td align=center style=\"font-weight:600;\">
@@ -329,12 +328,12 @@
 									$item++;
 									blok_warna("hijautua", $jml_1, $jml_2, $jml_3, $jml_4A, $jml_U, $jml_MKM);
 								} else {
-									echo "<td style=\"width:5%;font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%; font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%;font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%;font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%;font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%;font-weight:600;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
 								}
 							} else
 							//Kasus ada target
@@ -570,8 +569,6 @@
 						echo "</tr>";
 						echo "</table><br><br>";
 
-
-						// Keterampilan
 						echo "<a id=\"ketrampilan\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Rekap Jurnal Ketrampilan Klinik</a><br><br>";
 						echo "<table class=\"table table-bordered\" style=\"width:100%\" id=\"freeze1\">";
 						echo "<thead class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
@@ -598,7 +595,7 @@
 						$item = 0;
 						$ketuntasan = 0;
 						while ($data = mysqli_fetch_array($daftar_ketrampilan)) {
-							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
 							echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 							echo "<td style=\"font-weight:600;\">$data[ketrampilan]</td>";
 							echo "<td align=center style=\"font-weight:600;\">
@@ -653,12 +650,12 @@
 									$item++;
 									blok_warna("hijautua", $jml_1, $jml_2, $jml_3, $jml_4A, $jml_U, $jml_MKM);
 								} else {
-									echo "<td style=\"width:5%;font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%; font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%; font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%; font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%; font-weight:600;\">&nbsp;</td>";
-									echo "<td style=\"width:5%; font-weight:600;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
+									echo "<td style=\"width:5%;\">&nbsp;</td>";
 								}
 							} else
 							//Kasus ada target
@@ -966,7 +963,6 @@
 						echo "</table><br><br>";
 						echo "</center>";
 
-
 						// Evaluasi Akhir Kepaniteraan/Stase
 						echo "<center>";
 						echo "<br><a id=\"evaluasi\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Evaluasi Akhir Kepaniteraan/Stase</a><br><br>";
@@ -974,12 +970,10 @@
 						echo "<div class='alert alert-info' role='alert' style='width:60%; margin: auto; text-align: center; font-family: \'Poppins\', sans-serif;'>";
 
 						if ($data_stase_mhsw['evaluasi'] == '1') {
-							echo "<p style='color:green;'>Sudah terisi ... </p>";
-							echo "<a href='lihat_evaluasi.php?id=$id_stase&nim=$_COOKIE[user]&menu=rekap' class='btn btn-success'>LIHAT EVALUASI</a><br><br>";
+							echo "<p style='color:green; font-weight:600;'>Sudah terisi!! </p>";
+							echo "<a href=\"lihat_evaluasi.php?id=$id_stase&nim=$mhsw_nim&menu=rekap\" class=\"btn btn-success\">LIHAT EVALUASI</a><br><br>";
 						} else {
 							echo "<p style='color:red;'><strong>&lt;&lt; BELUM MENGISI EVALUASI AKHIR!! &gt;&gt;</strong></p><br>";
-							echo "<p style='color:black; font-weight:600;'>Silakan mengisi <span class='text-danger'>evaluasi akhir kepaniteraan/stase</span> dengan menekan button menu di bawah ini, setelah jadwal kegiatan berakhir:</p>";
-							echo "<a href='rotasi_internal.php' class='btn btn-success'>Rotasi Stase</a><br><br>";
 							echo "<p class='text-danger'><strong>Catatan: Rekap Akhir Kepaniteraan/Stase hanya bisa dicetak setelah mengisi evaluasi akhir Kepaniteraan/Stase!</strong></p><br>";
 						}
 
@@ -1063,12 +1057,9 @@
 						$delete_dummy_penyakit = mysqli_query($con, "DELETE FROM `jurnal_penyakit_dummy` WHERE `username` LIKE '%$_COOKIE[user]%'");
 						$delete_dummy_ketrampilan = mysqli_query($con, "DELETE FROM `jurnal_ketrampilan_dummy` WHERE `username` LIKE '%$_COOKIE[user]%'");
 						?>
+
 					</div>
-				</div>
 			</main>
-
-
-			<!-- End Content -->
 			<!-- Back to Top Button -->
 			<button id="back-to-top" title="Back to Top">
 				<i class="fa-solid fa-arrow-up" style="margin-bottom: 2px;"></i>
@@ -1076,11 +1067,11 @@
 			</button>
 
 			<!-- Start Footer -->
-			<footer class="footer py-3">
+			<footer class="footer py-3" style="background-color: #0e2238;; color: #fff;">
 				<div class="container-fluid">
-					<div class="row text-body-secondary">
+					<div class="row text-white">
 						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
-							<a href="#" class="text-body-secondary">
+							<a href="#" class="text-white">
 								<strong>Program Studi Pendidikan Profesi Dokter <br>
 									Universitas Diponegoro
 									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
@@ -1106,8 +1097,8 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-12 col-md-6 text-end text-body-secondary mb-3 mb-md-0">
-							<a href="#" class="text-body-secondary">
+						<div class="col-12 col-md-6 text-end text-white mb-3 mb-md-0">
+							<a href="#" class="text-white">
 								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
 									Fakultas Kedokteran UNDIP - Gd A Lt. 2
 								</strong>
@@ -1121,13 +1112,13 @@
 									:cnawangsih@yahoo.com
 								</strong>
 								<br>
-								<strong style="color: #0A3967;">
+								<strong style="color: inherit;">
 									Build since @2024
 								</strong>
 							</a>
 						</div>
-						<div class="col-12 text-center mt-3 mt-md-0" style="color: #0A3967;">
-							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: white;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank" style="color: inherit; text-decoration: underline;">
 								<strong>
 									<<< Install Aplikasi Android di Playstore>>>
 								</strong>
@@ -1139,7 +1130,9 @@
 			<!-- End Footer -->
 
 		</div>
+
 	</div>
+
 	<!-- Script Bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -1155,4 +1148,4 @@
 	</script>
 </body>
 
-</HTML>
+</html>

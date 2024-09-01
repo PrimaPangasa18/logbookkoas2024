@@ -67,7 +67,7 @@
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
-			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #ff6f61; ">
+			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #006400; ">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
 						<img src="images/undipsolid.png" alt="" style="width: 45px;">
@@ -252,7 +252,7 @@
 						$item = 0;
 						$ketuntasan = 0;
 						while ($data = mysqli_fetch_array($daftar_penyakit)) {
-							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
 							echo "<td align=center  style=\"font-weight:600;\">$no</td>";
 							echo "<td style=\"font-weight:600;\">$data[penyakit]</td>";
 							echo "<td align=center style=\"font-weight:600;\">
@@ -574,7 +574,7 @@
 						$item = 0;
 						$ketuntasan = 0;
 						while ($data = mysqli_fetch_array($daftar_ketrampilan)) {
-							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
 							echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 							echo "<td style=\"font-weight:600;\">$data[ketrampilan]</td>";
 							echo "<td align=center style=\"font-weight:600;\">
@@ -949,7 +949,7 @@
 						echo "<div class='alert alert-info' role='alert' style='width:60%; margin: auto; text-align: center; font-family: \'Poppins\', sans-serif;'>";
 
 						if ($data_stase_mhsw['evaluasi'] == '1') {
-							echo "<p style='color:green;'>Sudah terisi ... </p>";
+							echo "<p style='color:green; font-weight:600;'>Sudah terisi!! </p>";
 							echo "<a href='lihat_evaluasi.php?id=$id_stase&nim=$_COOKIE[user]&menu=rekap' class='btn btn-success'>LIHAT EVALUASI</a><br><br>";
 						} else {
 							echo "<p style='color:red;'><strong>&lt;&lt; BELUM MENGISI EVALUASI AKHIR!! &gt;&gt;</strong></p><br>";

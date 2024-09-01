@@ -68,7 +68,7 @@
 		<!-- End Sidebar -->
 		<div class="main">
 			<!-- Start Navbar -->
-			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #ff6f61; ">
+			<nav class="navbar navbar-expand px-4 py-3" style="background-color: #006400; ">
 				<form action="#" class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
 						<img src="../images/undipsolid.png" alt="" style="width: 45px;">
@@ -187,7 +187,6 @@
 									echo "<span style=\"color:red;\">NIM: $data_mhsw[nim]</span><br>";
 									echo "<span style=\"color:blue;\">Tanggal Penilaian: $tanggal_ujian</span><br>";
 									echo "Rata-Rata Nilai: $data_minicex[nilai_rata]</span></td>";
-
 									echo "<td style=\"font-weight:600;\">$data_dosen[nama], <span style=\"color:red;\">$data_dosen[gelar]</span> (NIP. <span style=\"color:blue;\">$data_dosen[nip]</span>)<br><br>";
 
 									if ($data_minicex['status_approval'] == '0')

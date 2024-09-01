@@ -662,7 +662,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 				$kolom1,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 0,
 					'cols' => array('item' => array('justification' => 'left'))
 				)
 			);
@@ -681,7 +690,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 				$kolom2,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 0,
 					'cols' => array('item' => array('justification' => 'left', 'width' => 110))
 				)
 			);
@@ -708,11 +726,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 				$kolom_header,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 8,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 2,
+					'titleFontSize' => 9,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 1,
+					'showBgCol' => 0,
 					'cols' => array(
-						'NO' => array('width' => 30, 'justification' => 'center'), 'ITEM' => array('justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-						'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-						'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35)
+						'NO' => array('width' => 30, 'justification' => 'center'),
+						'ITEM' => array('justification' => 'center'),
+						'TARGET' => array('width' => 35, 'justification' => 'center'),
+						'LEVEL' => array('width' => 65, 'justification' => 'center'),
+						'C1' => array('width' => 25, 'justification' => 'center'),
+						'C2' => array('width' => 25, 'justification' => 'center'),
+						'C3' => array('width' => 25, 'justification' => 'center'),
+						'C4A' => array('width' => 25, 'justification' => 'center'),
+						'CMK' => array('width' => 25, 'justification' => 'center'),
+						'CU' => array('width' => 25, 'justification' => 'center'),
+						'GRADE' => array('width' => 35)
 					)
 				)
 			);
@@ -937,8 +973,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					if ($jml_MKM == 0) $jml_MKM = "";
 					if ($jml_U == 0) $jml_U = "";
 					$baris = array(
-						'NO' => $j, 'ITEM' => $data['penyakit'], 'LEVEL' => $data['skdi_level'] . "/" . $data['k_level'] . "/" . $data['ipsg_level'] . "/" . $data['kml_level'], 'TARGET' => $data[$target_id],
-						'C1' => $jml_1, 'C2' => $jml_2, 'C3' => $jml_3, 'C4A' => $jml_4A, 'CMK' => $jml_MKM, 'CU' => $jml_U, 'GRADE' => '<b>' . $bintang . '</b>'
+						'NO' => $j,
+						'ITEM' => $data['penyakit'],
+						'LEVEL' => $data['skdi_level'] . "/" . $data['k_level'] . "/" . $data['ipsg_level'] . "/" . $data['kml_level'],
+						'TARGET' => $data[$target_id],
+						'C1' => $jml_1,
+						'C2' => $jml_2,
+						'C3' => $jml_3,
+						'C4A' => $jml_4A,
+						'CMK' => $jml_MKM,
+						'CU' => $jml_U,
+						'GRADE' => '<b>' . $bintang . '</b>'
 					);
 				}
 
@@ -1156,8 +1201,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					if ($jml_MKM == 0) $jml_MKM = "";
 					if ($jml_U == 0) $jml_U = "";
 					$baris = array(
-						'NO' => $j, 'ITEM' => $data['ketrampilan'], 'LEVEL' => $data['skdi_level'] . "/" . $data['k_level'] . "/" . $data['ipsg_level'] . "/" . $data['kml_level'], 'TARGET' => $data[$target_id],
-						'C1' => $jml_1, 'C2' => $jml_2, 'C3' => $jml_3, 'C4A' => $jml_4A, 'CMK' => $jml_MKM, 'CU' => $jml_U, 'GRADE' => '<b>' . $bintang . '</b>'
+						'NO' => $j,
+						'ITEM' => $data['ketrampilan'],
+						'LEVEL' => $data['skdi_level'] . "/" . $data['k_level'] . "/" . $data['ipsg_level'] . "/" . $data['kml_level'],
+						'TARGET' => $data[$target_id],
+						'C1' => $jml_1,
+						'C2' => $jml_2,
+						'C3' => $jml_3,
+						'C4A' => $jml_4A,
+						'CMK' => $jml_MKM,
+						'CU' => $jml_U,
+						'GRADE' => '<b>' . $bintang . '</b>'
 					);
 				}
 				$tabel3{
@@ -1175,11 +1229,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 							$kolom_header,
 							"",
 							array(
-								'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => $shaded, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 1, 'shadeCol2' => array(0.9, 0.9, 0.9),
+								'maxWidth' => 540,
+								'width' => 520,
+								'fontSize' => 8,
+								'showHeadings' => 0,
+								'shaded' => $shaded,
+								'showLines' => 2,
+								'titleFontSize' => 9,
+								'xPos' => 'center',
+								'xOrientation' => 'center',
+								'rowGap' => 1,
+								'showBgCol' => 1,
+								'shadeCol2' => array(0.9, 0.9, 0.9),
 								'cols' => array(
-									'NO' => array('width' => 30, 'justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-									'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-									'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35, 'bgcolor' => array(0, 150 / 250, 0))
+									'NO' => array('width' => 30, 'justification' => 'center'),
+									'TARGET' => array('width' => 35, 'justification' => 'center'),
+									'LEVEL' => array('width' => 65, 'justification' => 'center'),
+									'C1' => array('width' => 25, 'justification' => 'center'),
+									'C2' => array('width' => 25, 'justification' => 'center'),
+									'C3' => array('width' => 25, 'justification' => 'center'),
+									'C4A' => array('width' => 25, 'justification' => 'center'),
+									'CMK' => array('width' => 25, 'justification' => 'center'),
+									'CU' => array('width' => 25, 'justification' => 'center'),
+									'GRADE' => array('width' => 35, 'bgcolor' => array(0, 150 / 250, 0))
 								)
 							)
 						);
@@ -1189,11 +1261,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 							$kolom_header,
 							"",
 							array(
-								'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => $shaded, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 1, 'shadeCol2' => array(0.9, 0.9, 0.9),
+								'maxWidth' => 540,
+								'width' => 520,
+								'fontSize' => 8,
+								'showHeadings' => 0,
+								'shaded' => $shaded,
+								'showLines' => 2,
+								'titleFontSize' => 9,
+								'xPos' => 'center',
+								'xOrientation' => 'center',
+								'rowGap' => 1,
+								'showBgCol' => 1,
+								'shadeCol2' => array(0.9, 0.9, 0.9),
 								'cols' => array(
-									'NO' => array('width' => 30, 'justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-									'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-									'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35, 'bgcolor' => array(0.95, 0.95, 0.95))
+									'NO' => array('width' => 30, 'justification' => 'center'),
+									'TARGET' => array('width' => 35, 'justification' => 'center'),
+									'LEVEL' => array('width' => 65, 'justification' => 'center'),
+									'C1' => array('width' => 25, 'justification' => 'center'),
+									'C2' => array('width' => 25, 'justification' => 'center'),
+									'C3' => array('width' => 25, 'justification' => 'center'),
+									'C4A' => array('width' => 25, 'justification' => 'center'),
+									'CMK' => array('width' => 25, 'justification' => 'center'),
+									'CU' => array('width' => 25, 'justification' => 'center'),
+									'GRADE' => array('width' => 35, 'bgcolor' => array(0.95, 0.95, 0.95))
 								)
 							)
 						);
@@ -1204,11 +1294,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 							$kolom_header,
 							"",
 							array(
-								'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => $shaded, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 1, 'shadeCol2' => array(0.9, 0.9, 0.9),
+								'maxWidth' => 540,
+								'width' => 520,
+								'fontSize' => 8,
+								'showHeadings' => 0,
+								'shaded' => $shaded,
+								'showLines' => 2,
+								'titleFontSize' => 9,
+								'xPos' => 'center',
+								'xOrientation' => 'center',
+								'rowGap' => 1,
+								'showBgCol' => 1,
+								'shadeCol2' => array(0.9, 0.9, 0.9),
 								'cols' => array(
-									'NO' => array('width' => 30, 'justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-									'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-									'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35, 'bgcolor' => array(0, 150 / 250, 0))
+									'NO' => array('width' => 30, 'justification' => 'center'),
+									'TARGET' => array('width' => 35, 'justification' => 'center'),
+									'LEVEL' => array('width' => 65, 'justification' => 'center'),
+									'C1' => array('width' => 25, 'justification' => 'center'),
+									'C2' => array('width' => 25, 'justification' => 'center'),
+									'C3' => array('width' => 25, 'justification' => 'center'),
+									'C4A' => array('width' => 25, 'justification' => 'center'),
+									'CMK' => array('width' => 25, 'justification' => 'center'),
+									'CU' => array('width' => 25, 'justification' => 'center'),
+									'GRADE' => array('width' => 35, 'bgcolor' => array(0, 150 / 250, 0))
 								)
 							)
 						);
@@ -1218,11 +1326,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 							$kolom_header,
 							"",
 							array(
-								'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => $shaded, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 1, 'shadeCol2' => array(0.9, 0.9, 0.9),
+								'maxWidth' => 540,
+								'width' => 520,
+								'fontSize' => 8,
+								'showHeadings' => 0,
+								'shaded' => $shaded,
+								'showLines' => 2,
+								'titleFontSize' => 9,
+								'xPos' => 'center',
+								'xOrientation' => 'center',
+								'rowGap' => 1,
+								'showBgCol' => 1,
+								'shadeCol2' => array(0.9, 0.9, 0.9),
 								'cols' => array(
-									'NO' => array('width' => 30, 'justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-									'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-									'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35, 'bgcolor' => array(0, 250 / 250, 0))
+									'NO' => array('width' => 30, 'justification' => 'center'),
+									'TARGET' => array('width' => 35, 'justification' => 'center'),
+									'LEVEL' => array('width' => 65, 'justification' => 'center'),
+									'C1' => array('width' => 25, 'justification' => 'center'),
+									'C2' => array('width' => 25, 'justification' => 'center'),
+									'C3' => array('width' => 25, 'justification' => 'center'),
+									'C4A' => array('width' => 25, 'justification' => 'center'),
+									'CMK' => array('width' => 25, 'justification' => 'center'),
+									'CU' => array('width' => 25, 'justification' => 'center'),
+									'GRADE' => array('width' => 35, 'bgcolor' => array(0, 250 / 250, 0))
 								)
 							)
 						);
@@ -1232,11 +1358,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 							$kolom_header,
 							"",
 							array(
-								'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => $shaded, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 1, 'shadeCol2' => array(0.9, 0.9, 0.9),
+								'maxWidth' => 540,
+								'width' => 520,
+								'fontSize' => 8,
+								'showHeadings' => 0,
+								'shaded' => $shaded,
+								'showLines' => 2,
+								'titleFontSize' => 9,
+								'xPos' => 'center',
+								'xOrientation' => 'center',
+								'rowGap' => 1,
+								'showBgCol' => 1,
+								'shadeCol2' => array(0.9, 0.9, 0.9),
 								'cols' => array(
-									'NO' => array('width' => 30, 'justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-									'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-									'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35, 'bgcolor' => array(250 / 250, 250 / 250, 0))
+									'NO' => array('width' => 30, 'justification' => 'center'),
+									'TARGET' => array('width' => 35, 'justification' => 'center'),
+									'LEVEL' => array('width' => 65, 'justification' => 'center'),
+									'C1' => array('width' => 25, 'justification' => 'center'),
+									'C2' => array('width' => 25, 'justification' => 'center'),
+									'C3' => array('width' => 25, 'justification' => 'center'),
+									'C4A' => array('width' => 25, 'justification' => 'center'),
+									'CMK' => array('width' => 25, 'justification' => 'center'),
+									'CU' => array('width' => 25, 'justification' => 'center'),
+									'GRADE' => array('width' => 35, 'bgcolor' => array(250 / 250, 250 / 250, 0))
 								)
 							)
 						);
@@ -1246,11 +1390,29 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 							$kolom_header,
 							"",
 							array(
-								'maxWidth' => 540, 'width' => 520, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => $shaded, 'showLines' => 2, 'titleFontSize' => 9, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 1, 'shadeCol2' => array(0.9, 0.9, 0.9),
+								'maxWidth' => 540,
+								'width' => 520,
+								'fontSize' => 8,
+								'showHeadings' => 0,
+								'shaded' => $shaded,
+								'showLines' => 2,
+								'titleFontSize' => 9,
+								'xPos' => 'center',
+								'xOrientation' => 'center',
+								'rowGap' => 1,
+								'showBgCol' => 1,
+								'shadeCol2' => array(0.9, 0.9, 0.9),
 								'cols' => array(
-									'NO' => array('width' => 30, 'justification' => 'center'), 'TARGET' => array('width' => 35, 'justification' => 'center'), 'LEVEL' => array('width' => 65, 'justification' => 'center'),
-									'C1' => array('width' => 25, 'justification' => 'center'), 'C2' => array('width' => 25, 'justification' => 'center'), 'C3' => array('width' => 25, 'justification' => 'center'),
-									'C4A' => array('width' => 25, 'justification' => 'center'), 'CMK' => array('width' => 25, 'justification' => 'center'), 'CU' => array('width' => 25, 'justification' => 'center'), 'GRADE' => array('width' => 35, 'bgcolor' => array(250 / 250, 75 / 250, 0))
+									'NO' => array('width' => 30, 'justification' => 'center'),
+									'TARGET' => array('width' => 35, 'justification' => 'center'),
+									'LEVEL' => array('width' => 65, 'justification' => 'center'),
+									'C1' => array('width' => 25, 'justification' => 'center'),
+									'C2' => array('width' => 25, 'justification' => 'center'),
+									'C3' => array('width' => 25, 'justification' => 'center'),
+									'C4A' => array('width' => 25, 'justification' => 'center'),
+									'CMK' => array('width' => 25, 'justification' => 'center'),
+									'CU' => array('width' => 25, 'justification' => 'center'),
+									'GRADE' => array('width' => 35, 'bgcolor' => array(250 / 250, 75 / 250, 0))
 								)
 							)
 						);
@@ -1283,7 +1445,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 1,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 1,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25, 'bgcolor' => array(0, 150 / 250, 0)))
 					)
 				);
@@ -1295,7 +1467,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 1,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 1,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25, 'bgcolor' => array(0, 250 / 250, 0)))
 					)
 				);
@@ -1307,7 +1489,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 1,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 1,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25, 'bgcolor' => array(250 / 250, 250 / 250, 0)))
 					)
 				);
@@ -1319,7 +1511,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 1,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 1,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25, 'bgcolor' => array(250 / 250, 75 / 250, 0)))
 					)
 				);
@@ -1331,7 +1533,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 1,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 1,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25, 'bgcolor' => array(0.95, 0.95, 0.95)))
 					)
 				);
@@ -1343,7 +1555,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 0,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 0,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25))
 					)
 				);
@@ -1355,7 +1577,17 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom8,
 					"",
 					array(
-						'maxWidth' => 540, 'width' => 520, 'fontSize' => 6, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0, 'showBgCol' => 0,
+						'maxWidth' => 540,
+						'width' => 520,
+						'fontSize' => 6,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
+						'showBgCol' => 0,
 						'cols' => array('item' => array('width' => 50), 'ket1' => array('width' => 210), 'grade' => array('width' => 25))
 					)
 				);
@@ -1378,7 +1610,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom4,
 					"",
 					array(
-						'maxWidth' => 520, 'width' => 500, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+						'maxWidth' => 520,
+						'width' => 500,
+						'fontSize' => 10,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
 						'cols' => array('item' => array('justification' => 'left', 'width' => 190))
 					)
 				);
@@ -1409,7 +1650,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 						$kolom5,
 						"",
 						array(
-							'maxWidth' => 520, 'width' => 500, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+							'maxWidth' => 520,
+							'width' => 500,
+							'fontSize' => 10,
+							'showHeadings' => 0,
+							'shaded' => 0,
+							'showLines' => 0,
+							'titleFontSize' => 12,
+							'xPos' => 'center',
+							'xOrientation' => 'center',
+							'rowGap' => 0,
 							'cols' => array('item1' => array('justification' => 'left', 'width' => 275), 'item2' => array('justification' => 'left', 'width' => 225))
 						)
 					);
@@ -1437,7 +1687,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 						$kolom5,
 						"",
 						array(
-							'maxWidth' => 520, 'width' => 500, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+							'maxWidth' => 520,
+							'width' => 500,
+							'fontSize' => 10,
+							'showHeadings' => 0,
+							'shaded' => 0,
+							'showLines' => 0,
+							'titleFontSize' => 12,
+							'xPos' => 'center',
+							'xOrientation' => 'center',
+							'rowGap' => 0,
 							'cols' => array('item1' => array('justification' => 'left'))
 						)
 					);
@@ -1453,7 +1712,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom6,
 					"",
 					array(
-						'maxWidth' => 520, 'width' => 500, 'fontSize' => 8, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+						'maxWidth' => 520,
+						'width' => 500,
+						'fontSize' => 8,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 0,
 						'cols' => array('item' => array('justification' => 'left'))
 					)
 				);
@@ -1467,7 +1735,16 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 					$kolom7,
 					"",
 					array(
-						'maxWidth' => 520, 'width' => 500, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 4,
+						'maxWidth' => 520,
+						'width' => 500,
+						'fontSize' => 10,
+						'showHeadings' => 0,
+						'shaded' => 0,
+						'showLines' => 0,
+						'titleFontSize' => 12,
+						'xPos' => 'center',
+						'xOrientation' => 'center',
+						'rowGap' => 4,
 						'cols' => array('item' => array('justification' => 'left'))
 					)
 				);

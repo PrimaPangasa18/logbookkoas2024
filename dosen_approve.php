@@ -40,14 +40,14 @@
 
 			echo "<center><h4><font style=\"color:#006400;text-shadow:1px 1px black;\">DAFTAR KEGIATAN DOSEN/RESIDEN</font></h4><br>";
 
-			$user_dosen = $_GET[dosen];
-			$jurnal = $_GET[jurnal];
-			$id_jurnal = $_GET[id];
-			$status = $_GET[status];
-			$status_filter = $_GET[appstatus];
-			$mhsw_filter = $_GET[mhsw];
-			$stase_filter = $_GET[stase];
-			$tanggal_filter = $_GET[tgl_kegiatan];
+			$user_dosen = $_GET['dosen'];
+			$jurnal = $_GET['jurnal'];
+			$id_jurnal = $_GET['id'];
+			$status = $_GET['status'];
+			$status_filter = $_GET['appstatus'];
+			$mhsw_filter = $_GET['mhsw'];
+			$stase_filter = $_GET['stase'];
+			$tanggal_filter = $_GET['tgl_kegiatan'];
 
 			if ($jurnal == "penyakit") {
 				$update = mysqli_query($con, "UPDATE `jurnal_penyakit` SET `status`='$status' WHERE `id`='$id_jurnal'");
@@ -56,7 +56,7 @@
 				$update = mysqli_query($con, "UPDATE `jurnal_ketrampilan` SET `status`='$status' WHERE `id`='$id_jurnal'");
 			}
 
-			if ($_COOKIE[level] == 2) {
+			if ($_COOKIE['level'] == 2) {
 				echo "
 			<script>
 				window.location.href=\"daftar_kegiatan_dosen_admin.php?dosen=\"+\"$user_dosen\"+\"&mhsw=\"+\"$mhsw_filter\"+\"&stase=\"+\"$stase_filter\"+\"&tgl_kegiatan=\"+\"$tanggal_filter\"+\"&appstatus=\"+\"$status_filter\";
