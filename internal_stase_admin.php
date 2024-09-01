@@ -268,6 +268,69 @@
 				<i class="fa-solid fa-arrow-up"></i>
 				<div>Top</div>
 			</button>
+			<!-- Start Footer -->
+			<footer class="footer py-3" style="background-color: #0e2238;; color: #fff;">
+				<div class="container-fluid">
+					<div class="row text-white">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
+							<a href="#" class="text-white">
+								<strong>Program Studi Pendidikan Profesi Dokter <br>
+									Universitas Diponegoro
+									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
+								</strong>
+								<br>
+								<strong>
+									Kode Pos: 50275 |
+								</strong>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:024 – 76928010 |
+								</strong>
+								<strong>
+									Kotak Pos: 1269
+								</strong>
+								<br>
+								<strong>
+									Fax.: 024 – 76928011 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:dean@fk.undip.ac.id
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 text-end text-white mb-3 mb-md-0">
+							<a href="#" class="text-white">
+								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
+									Fakultas Kedokteran UNDIP - Gd A Lt. 2
+								</strong>
+								<br>
+								<strong>
+									<i class="lni lni-phone" style="color: inherit;"></i>
+									:+62 812-2868-576 |
+								</strong>
+								<strong>
+									<i class="lni lni-envelope" style="color: inherit;"></i>
+									:cnawangsih@yahoo.com
+								</strong>
+								<br>
+								<strong style="color: inherit;">
+									Build since @2024
+								</strong>
+							</a>
+						</div>
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: white;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank" style="color: inherit; text-decoration: underline;">
+								<strong>
+									<<< Install Aplikasi Android di Playstore>>>
+								</strong>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
+
 		</div>
 	</div>
 

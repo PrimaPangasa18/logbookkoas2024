@@ -643,11 +643,11 @@
 			</button>
 
 			<!-- Start Footer -->
-			<footer class="footer">
+			<footer class="footer py-3" style="background-color: #0e2238;; color: #fff;">
 				<div class="container-fluid">
-					<div class="row text-body-secondary">
-						<div class="col-6 text-start">
-							<a href="#" class="text-body-secondary">
+					<div class="row text-white">
+						<div class="col-12 col-md-6 text-start mb-3 mb-md-0">
+							<a href="#" class="text-white">
 								<strong>Program Studi Pendidikan Profesi Dokter <br>
 									Universitas Diponegoro
 									Jl.Prof. H. Soedarto, SH. Tembalang Semarang
@@ -673,8 +673,8 @@
 								</strong>
 							</a>
 						</div>
-						<div class="col-6 text-end text-body-secondary d-none d-md-block">
-							<a href="#" class="text-body-secondary">
+						<div class="col-12 col-md-6 text-end text-white mb-3 mb-md-0">
+							<a href="#" class="text-white">
 								<strong>Ketua Prodi Pendidikan Profesi Dokter <br>
 									Fakultas Kedokteran UNDIP - Gd A Lt. 2
 								</strong>
@@ -688,13 +688,13 @@
 									:cnawangsih@yahoo.com
 								</strong>
 								<br>
-								<strong style="color: #0A3967;">
+								<strong style="color: inherit;">
 									Build since @2024
 								</strong>
 							</a>
 						</div>
-						<div class="col-12 text-center  d-none d-md-block" style="color: #0A3967; ">
-							<a href=" https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank">
+						<div class="col-12 text-center mt-3 mt-md-0" style="color: white;">
+							<a href="https://play.google.com/store/apps/details?id=logbook.koas.logbookkoas&hl=in" target="blank" style="color: inherit; text-decoration: underline;">
 								<strong>
 									<<< Install Aplikasi Android di Playstore>>>
 								</strong>
