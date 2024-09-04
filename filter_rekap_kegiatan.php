@@ -165,12 +165,12 @@
 
 										<tr style="border-width: 1px; border-color: #000;" class="table-primary">
 											<td class="align-middle"><strong>Tanggal mulai kegiatan <span class="text-danger">(dd-mm-yyyy)</span></strong></td>
-											<td><input type="date" class="form-control input-tanggal" name="tgl_mulai" required placeholder="Tanggal Mulai Kegiatan" /></td>
+											<td><input type="text" class="form-select input-tanggal" name="tgl_mulai" required placeholder="Tanggal Mulai Kegiatan" /></td>
 										</tr>
 
 										<tr style="border-width: 1px; border-color: #000;" class="table-success">
 											<td class="align-middle"><strong>Tanggal akhir kegiatan <span class="text-danger">(dd-mm-yyyy)</span></strong></td>
-											<td><input type="date" class="form-control input-tanggal" name="tgl_akhir" required placeholder="Tanggal Akhir Kegiatan" /></td>
+											<td><input type="text" class="form-select input-tanggal" name="tgl_akhir" required placeholder="Tanggal Akhir Kegiatan" /></td>
 										</tr>
 									</table>
 								</div>
@@ -275,9 +275,9 @@
 	<script src="select2/dist/js/select2.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			// $('.input-tanggal').datepicker({
-			// 	dateFormat: 'yy-mm-dd'
-			// });
+			$('.input-tanggal').datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
 			$("#stase").select2({
 				placeholder: "< Kepaniteraan (Stase) >",
 				allowClear: true

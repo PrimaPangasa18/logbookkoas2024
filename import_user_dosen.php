@@ -124,11 +124,11 @@
               <form name="myForm" id="myForm" onsubmit="return validateForm()" action="csvimport_user_dosen.php" method="post" enctype="multipart/form-data" class="mt-4">
                 <div class="mb-3">
                   <label for="import_user_dosen" class="form-label"><strong>Import file:</strong></label>
-                  <input type="file" class="form-control" id="import_user_dosen" name="import_user_dosen" accept=".csv" required>
+                  <input type="file" class="form-control" id="import_user_dosen" name="import_user_dosen" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" accept=".csv" required>
                 </div>
                 <div class="mb-3">
                   <label for="separator" class="form-label"><strong>Separator file csv:</strong></label>
-                  <select class="form-select" id="separator" name="separator" required>
+                  <select class="form-select" id="separator" name="separator" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" required>
                     <option value="">Pilih Separator</option>
                     <option value=",">Koma ( , )</option>
                     <option value=";">Titik Koma ( ; )</option>

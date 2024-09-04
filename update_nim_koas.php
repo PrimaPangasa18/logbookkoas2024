@@ -124,11 +124,11 @@
               <form name="myForm" id="myForm" onsubmit="return validateForm()" action="csvupdate_nim_koas.php" method="post" enctype="multipart/form-data" class="mt-4">
                 <div class="mb-3">
                   <label for="update_nim_koas" class="form-label"><strong>Import file:</strong></label>
-                  <input type="file" class="form-control" id="update_nim_koas" name="update_nim_koas" accept=".csv" required>
+                  <input type="file" class="form-control" id="update_nim_koas" name="update_nim_koas" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" accept=".csv" required>
                 </div>
                 <div class="mb-3">
                   <label for="separator" class="form-label"><strong>Separator file csv:</strong></label>
-                  <select class="form-select" id="separator" name="separator" required>
+                  <select class="form-select" id="separator" name="separator" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" required>
                     <option value="">Pilih Separator</option>
                     <option value=",">Koma ( , )</option>
                     <option value=";">Titik Koma ( ; )</option>

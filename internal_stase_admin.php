@@ -127,11 +127,11 @@
 							<table class="table table-bordered" style="width: auto;">
 								<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 									<td style="width: 300px;"><strong>Nama Mahasiswa</strong></td>
-									<td style="width: 500px; color:brown; font-weight:700">&nbsp; <?php echo $data_mhsw['nama']; ?> <span class="text-danger">(NIM: <?php echo $data_mhsw['nim']; ?>)</span></td>
+									<td style="width: 500px; font-weight:600">&nbsp; <?php echo $data_mhsw['nama']; ?> <span class="text-danger">(NIM: <?php echo $data_mhsw['nim']; ?>)</span></td>
 								</tr>
 								<tr class="table-success" style="border-width: 1px; border-color: #000;">
 									<td style="width: 300px;"><strong>Kepaniteraan (STASE)</strong></td>
-									<td style="width: 500px; color:purple; font-weight:700">&nbsp; <?php echo $data_stase['kepaniteraan']; ?></td>
+									<td style="width: 500px;  font-weight:600">&nbsp; <?php echo $data_stase['kepaniteraan']; ?></td>
 								</tr>
 								<?php
 								if ($jml_stase_mhsw > 0) {
@@ -160,20 +160,20 @@
 						if ($cek_internal == 0) {
 						?>
 							<table class="table table-bordered">
-								<thead class="thead-primary" style="border-width: 1px; border-color: #000;">
+								<thead class="table-primary" style="border-width: 1px; border-color: #000;">
 									<tr>
-										<th style="width:5%">No</th>
-										<th style="width:20%">Rotasi Internal</th>
-										<th style="width:15%">Lama Pelaksanaan</th>
-										<th style="width:15%">Tanggal Mulai</th>
-										<th style="width:15%">Tanggal Selesai</th>
-										<th style="width:30%">Status Approval</th>
+										<th style="width:5%; text-align:center">No</th>
+										<th style="width:20%; text-align:center">Rotasi Internal</th>
+										<th style="width:15%; text-align:center">Lama Pelaksanaan</th>
+										<th style="width:15%; text-align:center">Tanggal Mulai</th>
+										<th style="width:15%; text-align:center">Tanggal Selesai</th>
+										<th style="width:30%; text-align:center">Status Approval</th>
 									</tr>
 								</thead>
-								<tbody style="border-width: 1px; border-color: #000;">
-									<tr>
+								<tbody class="table-primary" style="border-width: 1px; border-color: #000;">
+									<tr class="table-warning" style="border-width: 1px; border-color: #000;">
 										<td colspan="6" class="text-center" style="padding:10px">
-											<span class="text-danger">Status rotasi internal stase belum aktif!</span>
+											<span class="text-danger" style="font-weight: 600;">Status rotasi internal stase belum aktif!</span>
 										</td>
 									</tr>
 								</tbody>
