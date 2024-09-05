@@ -144,10 +144,10 @@
 														<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
-												<font style="color:green; font-size:1.1em;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Aktif)</font>
+												<font style="color:green; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Aktif)</font>
 											</td>
 											<td align="center">
-												<font style="color:green; font-size:1.1em;">Aktif</font>
+												<font style="color:green; font-size:1.1em; font-weight:600;">Aktif</font>
 											</td>
 										<?php
 											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='1' WHERE `nim`='$_COOKIE[user]'");
@@ -157,10 +157,10 @@
 														<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
-												<font style="color:blue; font-size:1.1em;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Sudah Terlewat)</font>
+												<font style="color:blue; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Sudah Terlewat)</font>
 											</td>
 											<td align="center">
-												<font style="color:blue; font-size:1.1em;">Sudah Terlewat</font>
+												<font style="color:blue; font-size:1.1em; font-weight:600;">Sudah Terlewat</font>
 											</td>
 										<?php
 											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='2' WHERE `nim`='$_COOKIE[user]'");
@@ -171,10 +171,10 @@
 														<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
-												<font style="color:grey; font-size:1.1em;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Belum aktif)</font>
+												<font style="color:grey; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Belum aktif)</font>
 											</td>
 											<td align="center">
-												<font style="color:grey; font-size:1.1em;">Belum aktif</font>
+												<font style="color:grey; font-size:1.1em; font-weight:600;">Belum aktif</font>
 											</td>
 										<?php
 											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='0' WHERE `nim`='$_COOKIE[user]'");
@@ -186,10 +186,10 @@
 													<font style="color:white;font-weight:400; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 												</button></a></td>
 										<td align="center">
-											<font style="color:red; font-size:1.1em;">-<br>(Belum terjadwal)</font>
+											<font style="color:red; font-size:1.1em; font-weight:600;">-<br>(Belum terjadwal)</font>
 										</td>
 										<td align="center">
-											<font style="color:red; font-size:1.1em;">Belum terjadwal</font>
+											<font style="color:red; font-size:1.1em; font-weight:600;">Belum terjadwal</font>
 										</td>
 								<?php
 									}

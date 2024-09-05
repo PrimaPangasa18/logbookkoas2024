@@ -267,7 +267,7 @@
 						<table class="table table-bordered" id="freeze1" style="width:100%;">
 							<thead class="table-success" style="border-width: 1px; border-color: #000;">
 								<th style="width:4%;line-height:1.2em;">No</th>
-								<th style="width:21%;line-height:1.2em;">Nama Mahasiswa (NIM)/<br>Tanggal/Waktu</th>
+								<th style="width:21%;line-height:1.2em;">Nama Mahasiswa <span class="text-danger">(NIM)</span>/<br>Tanggal/Waktu</th>
 								<th style="width:25%;line-height:1.2em;">Kegiatan (Level Penguasaan)/<br>Lokasi</th>
 								<th style="width:25%;line-height:1.2em;">Ketrampilan<br>(Level SKDI/Kepmenkes/<br>IPSG/Muatan Lokal)</th>
 								<th style="width:25%;line-height:1.2em;">Kegiatan Dosen/Residen<br>Approval</th>

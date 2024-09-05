@@ -118,7 +118,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_name\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_name\" class=\"form-control\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" required>";
                       ?>
                     </td>
                   </tr>
@@ -128,7 +128,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_surename\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_surename\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
@@ -138,7 +138,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"password\" id=\"form-password\" name=\"user_pass\" class=\"form-control\" required>";
+                      echo "<input type=\"password\" id=\"form-password\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"user_pass\" class=\"form-control\" required>";
                       ?>
                       <br>
                       <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px ;transform: scale(1.0); ">&nbsp; Show password

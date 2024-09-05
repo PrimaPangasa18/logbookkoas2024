@@ -132,7 +132,7 @@
 										<td><strong>Password Approval</strong></td>
 										<td>
 											<div class="position-relative">
-												<input type="password" name="dosenpass" class="form-control" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" id="dosenpass" />
+												<input type="password" name="dosenpass" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" class="form-control" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" id="dosenpass" />
 												<i class="fa fa-eye position-absolute" id="toggleEye" onclick="togglePasswordVisibility()" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
 											</div>
 										</td>
@@ -140,15 +140,15 @@
 									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 										<td><strong>Masukkan OTP Dosen/Dokter/Residen</strong></td>
 										<td>
-											<input name="dosenpin" autocomplete="off" type="text" class="form-control" />
+											<input name="dosenpin" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" autocomplete="off" type="text" class="form-control" />
 										</td>
 									</tr>
 									<tr class="table-warning" style="border-width: 1px; border-color: #000;">
 										<td><strong>Scanning QR Code</strong><br><small class="text-danger" style="font-weight: 600;">(gunakan smartphone)</small></td>
 										<td>
-											<input type="text" name="dosenqr" placeholder="Tracking QR-Code" class="form-control" />
+											<input type="text" name="dosenqr" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" placeholder="Tracking QR-Code" class="form-control" />
 											<label class="form-label mt-2">
-												<input type="file" accept="image/*" capture="environment" class="form-control" onchange="openQRCamera(this);" tabindex="-1">
+												<input type="file" accept="image/*" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" capture="environment" class="form-control" onchange="openQRCamera(this);" tabindex="-1">
 											</label>
 
 										</td>

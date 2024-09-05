@@ -118,7 +118,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<select name=\"user_level\" class=\"form-select\" required>";
+                      echo "<select name=\"user_level\" class=\"form-select\"  style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" required>";
                       $action_level = mysqli_query($con, "SELECT * FROM `level` ORDER BY `id` ASC");
                       echo "<option value=\"\">< Pilih Level User ></option>";
                       while ($for_level = mysqli_fetch_array($action_level)) {
@@ -134,7 +134,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_name\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_name\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
@@ -144,7 +144,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"password\" id=\"form-password\" name=\"user_pass\" class=\"form-control\" required>";
+                      echo "<input type=\"password\" id=\"form-password\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"user_pass\" class=\"form-control\" required>";
                       ?>
                       <br>
                       <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px ;transform: scale(1.0); ">&nbsp; Show password
@@ -156,7 +156,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_surename\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_surename\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
@@ -166,7 +166,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_gelar\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_gelar\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
@@ -176,7 +176,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<select name=\"bagian\" class=\"form-select\" required>";
+                      echo "<select name=\"bagian\" class=\"form-select\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" required>";
                       $action_bag = mysqli_query($con, "SELECT * FROM `bagian_ilmu` ORDER BY `id` ASC");
                       echo "<option value=\"\">< Pilih Bagian Ilmu ></option>";
                       while ($for_bag = mysqli_fetch_array($action_bag)) {

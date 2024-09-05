@@ -207,7 +207,7 @@
 											<td class="text-center"><strong><?php echo $i; ?></strong></td>
 											<td style="font-weight: 600; color:darkblue"><?php echo $data['internal']; ?></td>
 											<td class="text-center" style="font-weight: 600; color:purple"><?php echo $data['hari']; ?> hari</td>
-											<td class="text-center">
+											<td class="text-center" style="font-weight: 600;">
 												<?php
 												if (!is_null($rotasi_internal[$tgl_i])) {
 													$tgl_mulai = tanggal_indo($rotasi_internal[$tgl_i]);
@@ -217,7 +217,7 @@
 												}
 												?>
 											</td>
-											<td class="text-center">
+											<td class="text-center" style="font-weight: 600;">
 												<?php
 												if (!is_null($rotasi_internal[$tgl_i])) {
 													$hari_tambah = $data['hari'] - 1;

@@ -190,9 +190,9 @@
 														Kolom <span class="text-danger">catatan</span> diisi catatan khusus mengenai nilai ujian/test mahasiswa koas.<br>
 													</span>
 													<br>
-													Import file: <input type="file" class="form-control" id="import_nilai" name="import_nilai" accept=".csv" required><br>
-													Separator file csv:
-													<select class="form-select" name="separator" required>
+													<strong>Import file:</strong> <input type="file" class="form-control" id="import_nilai" name="import_nilai" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" accept=".csv" required><br>
+													<strong>Separator file csv:</strong>
+													<select class="form-select" name="separator" style="font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;" required>
 														<option value="">
 															< Pilihan Separator>
 														</option>
