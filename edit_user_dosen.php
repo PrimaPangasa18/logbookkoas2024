@@ -148,7 +148,7 @@
                 echo "<tr>";
                 echo "<th style='text-align: center;'>No</th>";
                 echo "<th style='text-align: center;'>Username (NIM)</th>";
-                echo "<th style='text-align: center; '>Nama Dosen/Residen</th>";
+                echo "<th style='text-align: center; '>Nama Dosen/Residen, Gelar</th>";
                 echo "<th style='text-align: center; '>Bagian</th>";
                 echo "<th style='text-align: center; '>Level User</th>";
                 echo "</tr>";
