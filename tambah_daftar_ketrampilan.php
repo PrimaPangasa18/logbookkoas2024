@@ -263,43 +263,52 @@
 				'$_POST[include_M113]', '$_POST[target_M113]',
 				'$_POST[include_M111]', '$_POST[target_M111]',
 				'$_POST[include_M121]', '$_POST[target_M121]')");
-							echo "<br><br>Nama ketrampilan berhasil ditambahkan ...<br>";
-
-							echo "<table>";
-							echo "<thead><th colspan=2 align=center>Data Ketrampilan</th></thead>";
-							echo "<tr class=\"ganjil\">";
-							echo "<td>Nama Ketrampilan</td>";
-							echo "<td>$_POST[ketrampilan]</td>";
+							echo "<center>";
+							echo "<br>
+							<span style=\"color:darkblue;font-weight:600;\">Nama keterampilan berhasil ditambahkan!<span><br>";
+							echo "<br>";
+							echo "<table class=\"table table-bordered\" style=\"width:auto;\">";
+							echo "<thead  class=\"table-success\"><tr style =\"border-width: 1px; border-color: #000;\"><th colspan=\"2\" class=\"text-center\">DATA KETERAMPILAN</th></tr></thead>";
+							echo "<tbody style =\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style =\"border-width: 1px; border-color: #000;\">";
+							echo "<td style=\"width:30%;\"><strong>Nama Ketrampilan<strong></td>";
+							echo "<td style=\"width:50%;font-weight:600;\">$_POST[ketrampilan]</td>";
 							echo "</tr>";
-							echo "<tr class=\"ganjil\">";
-							echo "<td>Level SKDI</td>";
+							echo "<tr  class=\"table-warning\" style =\"border-width: 1px; border-color: #000;\">";
+							echo "<td><strong>Level SKDI</strong></td>";
 							echo "<td>$_POST[skdi_level]</td>";
 							echo "</tr>";
-							echo "<tr class=\"ganjil\">";
-							echo "<td>Level Kepmenkes</td>";
+							echo "<tr  class=\"table-warning\" style =\"border-width: 1px; border-color: #000;\">";
+							echo "<td><strong>Level Kepmenkes</strong></td>";
 							echo "<td>$_POST[k_level]</td>";
 							echo "</tr>";
-							echo "<tr class=\"ganjil\">";
-							echo "<td>Level IPSG</td>";
+							echo "<tr  class=\"table-warning\" style =\"border-width: 1px; border-color: #000;\">";
+							echo "<td><strong>Level IPSG</strong></td>";
 							echo "<td>$_POST[ipsg_level]</td>";
 							echo "</tr>";
-							echo "<tr class=\"ganjil\">";
-							echo "<td>Level Muatan Lokal</td>";
+							echo "<tr  class=\"table-warning\" style =\"border-width: 1px; border-color: #000;\">";
+							echo "<td><strong>Level Muatan Lokal</strong></td>";
 							echo "<td>$_POST[kml_level]</td>";
 							echo "</tr>";
-							echo "<thead><th colspan=2 align=center>Kepaniteraan (Stase)</th></thead>";
+							echo "</tbody>";
+							echo "<thead class=\"text-center\" ><tr class=\"table-success\" style =\"border-width: 1px; border-color: #000;\">
+							<th colspan=2 align=center>KEPANITERAAN (STASE)</th></tr></thead>";
+							echo "<tbody>";
 							$no = 1;
 							$daftar_stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id`");
 							while ($data = mysqli_fetch_array($daftar_stase)) {
 								$nama_cek = "include_" . $data['id'];
 								$target = "target_" . $data['id'];
-								echo "<tr class=\"ganjil\">";
-								echo "<td>$no. $data[kepaniteraan]</td>";
-								if ($_POST[$nama_cek] == '1') echo "<td>Included, Target: $_POST[$target]</td>";
-								else echo "<td> - </td>";
+								echo "<tr class=\"table-secondary\" style =\"border-width: 1px; border-color: #000;\">";
+								echo "<td style=\"font-weight:600;\">$no. $data[kepaniteraan]</td>";
+								if ($_POST[$nama_cek] == '1') echo "<td style=\"font-weight:600;\">Included, Target: $_POST[$target]</td>";
+								else echo "<td style=\"font-weight:600; color:red;\"> - </td>";
 								echo "</tr>";
 								$no++;
 							}
+							echo "</tbody>";
+							echo "</table>";
+							echo "</center>";
 						}
 						?>
 
