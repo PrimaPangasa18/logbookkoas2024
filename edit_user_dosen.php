@@ -162,7 +162,7 @@
                   echo "<tr class='table-secondary'>";
                   echo "<td style='text-align: center;'>$no</td>";
                   echo "<td style='text-align: center;'><a href='edit_userdosen_action.php?user_name=$data[username]' class='btn btn-outline-primary'>$data[username]</a></td>";
-                  echo "<td style='text-align: center; font-weight: 600;'>$dosen[gelar]</td>";
+                  echo "<td style='text-align: center; font-weight: 600;'>$data[nama], $dosen[gelar]</td>";
                   echo "<td style='text-align: center; font-weight: 600;'>$bagian[bagian]</td>";
                   echo "<td style='text-align: center; font-weight: 600;'>$level_user[level]</td>";
                   echo "</tr>";
