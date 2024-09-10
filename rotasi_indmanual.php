@@ -162,12 +162,12 @@
 											</td>
 											<td>
 												<?php
-												echo "<input type=\"text\" id=\"input-tanggal\" class=\"form-select\" name=\"tgl_mulai\">";
+												echo "<input type=\"text\" id=\"input-tanggal\" placeholder=\"Rencana Tanggal Mulai\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-select\" name=\"tgl_mulai\">";
 												echo "<div id=\"tanggal\"></div>";
 												echo "<div id=\"input_selesai\">";
 												echo "<span>Edit Tanggal Selesai (yyyy-mm-dd):</span><p>";
 												echo "</br>";
-												echo "<input type=\"text\" id=\"input-selesai\" class=\"form-control\" name=\"tgl_selesai\" placeholder=\"Kosongi jika tidak ada perubahan!\">";
+												echo "<input type=\"text\" id=\"input-selesai\" class=\"form-select\"  style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"tgl_selesai\" placeholder=\"Kosongi jika tidak ada perubahan!\">";
 												echo "</div>";
 												?>
 											</td>
