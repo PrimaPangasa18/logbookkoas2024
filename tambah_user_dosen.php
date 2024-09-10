@@ -134,7 +134,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_name\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_name\" placeholder=\"Masukkan NIP\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
@@ -144,7 +144,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"password\" id=\"form-password\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"user_pass\" class=\"form-control\" required>";
+                      echo "<input type=\"password\" placeholder=\"Buat Password\" id=\"form-password\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" name=\"user_pass\" class=\"form-control\" required>";
                       ?>
                       <br>
                       <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px ;transform: scale(1.0); ">&nbsp; Show password
@@ -156,7 +156,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_surename\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_surename\" placeholder=\"Masukkan Nama Lengkap\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
@@ -166,7 +166,7 @@
                     </td>
                     <td style="width: 500px;">
                       <?php
-                      echo "<input type=\"text\" name=\"user_gelar\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
+                      echo "<input type=\"text\" name=\"user_gelar\" placeholder=\"Masukkan Gelar Dosen/Residen\" style=\"font-size:1em;font-family:Poppins;border:0.5px solid black;border-radius:5px;\" class=\"form-control\" required>";
                       ?>
                     </td>
                   </tr>
