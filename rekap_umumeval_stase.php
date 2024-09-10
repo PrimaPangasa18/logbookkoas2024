@@ -25,6 +25,12 @@
 		width: 50%;
 		margin: 15px auto;
 	}
+
+	canvas {
+		width: 500px !important;
+		/* Gunakan !important jika perlu untuk mengatasi pengaturan internal dari Chart.js */
+		height: 500px !important;
+	}
 </style>
 
 <body>
@@ -255,10 +261,12 @@
 							echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
 							echo "<tr><td><font style=\"font-size:0.9em; font-weight:600;\">$data_pemb[pertanyaan]</font><br>";
 							$piechart = "piechart" . "$no";
+							echo "<center>";
 							echo "
-			<div class=\"pie_container\">
+			<div class=\"pie_container\" >
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+							echo "</center>";
 						?>
 							<script type="text/javascript">
 								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
@@ -318,7 +326,16 @@
 									type: 'pie',
 									data: data,
 									options: {
-										responsive: true
+										responsive: true,
+										plugins: {
+											legend: {
+												labels: {
+													font: {
+														weight: '600'
+													}
+												}
+											}
+										}
 									}
 								});
 							</script>
@@ -380,10 +397,12 @@
 						echo "<td colspan=2><font style=\"font-size:0.9em; font-weight:600;\">Menurut Anda, seberapa banyak pencapaian kompetensi level 3A, 3B, 4A yang Anda capai dalam kepaniteraan Bagian ini (termasuk dengan stase luar kepaniteraan ini)?<br>";
 
 						$piechart = "piechart" . "$no";
+						echo "<center>";
 						echo "
 			<div class=\"pie_container\">
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+						echo "</center>";
 						?>
 						<script type="text/javascript">
 							var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
@@ -443,7 +462,16 @@
 								type: 'pie',
 								data: data,
 								options: {
-									responsive: true
+									responsive: true,
+									plugins: {
+										legend: {
+											labels: {
+												font: {
+													weight: '600'
+												}
+											}
+										}
+									}
 								}
 							});
 						</script>
@@ -462,10 +490,12 @@
 						echo "<td colspan=2><font style=\"font-size:0.9em; font-weight:600;\">Seberapa besar kepuasan Anda terhadap keseluruhan program stase di Bagian ini (termasuk program stase luar)?<br>";
 
 						$piechart = "piechart" . "$no";
+						echo "<center>";
 						echo "
 			<div class=\"pie_container\">
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+						echo "</center>";
 						?>
 						<script type="text/javascript">
 							var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
@@ -525,7 +555,16 @@
 								type: 'pie',
 								data: data,
 								options: {
-									responsive: true
+									responsive: true,
+									plugins: {
+										legend: {
+											labels: {
+												font: {
+													weight: '600'
+												}
+											}
+										}
+									}
 								}
 							});
 						</script>
@@ -573,10 +612,12 @@
 							echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
 							echo "<tr><td><font style=\"font-size:0.9em; font-weight:600;\">$data_eval[pertanyaan]</font><br>";
 							$piechart = "piechart" . "$no";
+							echo "<center>";
 							echo "
 			<div class=\"pie_container\">
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+							echo "</center>";
 						?>
 							<script type="text/javascript">
 								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
@@ -650,7 +691,16 @@
 									type: 'pie',
 									data: data,
 									options: {
-										responsive: true
+										responsive: true,
+										plugins: {
+											legend: {
+												labels: {
+													font: {
+														weight: '600'
+													}
+												}
+											}
+										}
 									}
 								});
 							</script>
@@ -671,16 +721,15 @@
 							echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
 							echo "<tr><td><font style=\"font-size:0.9em; font-weight:600;\">$data_eval[pertanyaan]</font><br>";
 							$piechart = "piechart" . "$no";
+							echo "<center>";
 							echo "
 			<div class=\"pie_container\">
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+							echo "</center>";
 						?>
 							<script type="text/javascript">
-								<? echo "
-						var ctx = document.getElementById(\"$piechart\").getContext(\"2d\");
-						";
-								?>
+								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
 								var data = {
 									labels: [
 										<?php
@@ -751,7 +800,16 @@
 									type: 'pie',
 									data: data,
 									options: {
-										responsive: true
+										responsive: true,
+										plugins: {
+											legend: {
+												labels: {
+													font: {
+														weight: '600'
+													}
+												}
+											}
+										}
 									}
 								});
 							</script>
@@ -772,10 +830,12 @@
 							echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
 							echo "<tr><td><font style=\"font-size:0.9em; font-weight:600;\">$data_eval[pertanyaan]</font><br>";
 							$piechart = "piechart" . "$no";
+							echo "<center>";
 							echo "
 			<div class=\"pie_container\">
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+							echo "</center>";
 						?>
 							<script type="text/javascript">
 								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
@@ -849,7 +909,16 @@
 									type: 'pie',
 									data: data,
 									options: {
-										responsive: true
+										responsive: true,
+										plugins: {
+											legend: {
+												labels: {
+													font: {
+														weight: '600'
+													}
+												}
+											}
+										}
 									}
 								});
 							</script>
@@ -906,10 +975,12 @@
 							echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
 							echo "<tr><td><font style=\"font-size:0.9em; font-weight:600;\">$data_pemb[pertanyaan]</font><br>";
 							$piechart = "piechart" . "$no";
+							echo "<center>";
 							echo "
 			<div class=\"pie_container\">
 	            <canvas id=\"$piechart\" width=\"100\" height=\"100\"></canvas>
 	    </div>";
+							echo "</center>";
 						?>
 							<script type="text/javascript">
 								var ctx = document.getElementById("<?php echo $piechart; ?>").getContext("2d");
@@ -969,7 +1040,16 @@
 									type: 'pie',
 									data: data,
 									options: {
-										responsive: true
+										responsive: true,
+										plugins: {
+											legend: {
+												labels: {
+													font: {
+														weight: '600'
+													}
+												}
+											}
+										}
 									}
 								});
 							</script>

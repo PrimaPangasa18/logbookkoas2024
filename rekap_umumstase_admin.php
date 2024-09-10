@@ -257,7 +257,7 @@
 						$item = 0;
 						$ketuntasan = 0;
 						while ($data = mysqli_fetch_array($daftar_penyakit)) {
-							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
 							echo "<td align=center  style=\"font-weight:600;\">$no</td>";
 							echo "<td style=\"font-weight:600;\">$data[penyakit]</td>";
 							echo "<td align=center style=\"font-weight:600;\">
@@ -602,7 +602,7 @@
 						$daftar_ketrampilan = mysqli_query($con, "SELECT * FROM `daftar_ketrampilan` WHERE `$include_id`='1' ORDER BY `$target_id` DESC,`ketrampilan` ASC");
 						$no = 1;
 						while ($data = mysqli_fetch_array($daftar_ketrampilan)) {
-							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000; font-weight:600;\">";
 							echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 							echo "<td style=\"font-weight:600;\">$data[ketrampilan]</td>";
 							echo "<td align=center style=\"font-weight:600;\">
