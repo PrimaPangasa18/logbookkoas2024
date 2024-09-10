@@ -325,7 +325,8 @@
 			      					</thead>";
 							$cek_nilai_test = mysqli_num_rows($nilai_test);
 							if ($cek_nilai_test < 1) {
-								echo "<tr><td colspan=5 align=center><<< E M P T Y >>></td></tr>";
+								echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">
+								<td colspan=5 align=center  style=\"color:red; font-weight:600;\"><<< E M P T Y >>></td></tr>";
 							} else {
 								$no = 1;
 								$kelas = "ganjil";
@@ -4143,8 +4144,8 @@
 					</div>
 			</main>
 			<!-- Back to Top Button -->
-			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
-				<i class="fa-solid fa-arrow-up"></i>
+			<button id="back-to-top" title="Back to Top">
+				<i class="fa-solid fa-arrow-up" style="margin-bottom: 2px;"></i>
 				<div>Top</div>
 			</button>
 
