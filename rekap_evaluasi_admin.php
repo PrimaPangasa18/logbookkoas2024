@@ -150,24 +150,24 @@
 
 									if (strtotime($data['tgl_mulai']) <= strtotime($tgl) && strtotime($tgl) <= strtotime($data['tgl_selesai'])) {
 										echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-success btn-sm\"><i class=\"fa fa-hourglass-half me-2\"></i><font style=\"color:white; font-size:1.1em;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-										echo "<td align=\"center\"><font style=\"color:green; font-size:1.1em;\">{$tglmulai} - {$tglselesai}<br>(Aktif)</font></td>";
-										echo "<td align=\"center\"><font style=\"color:green; font-size:1.1em;\">Aktif</font></td>";
+										echo "<td align=\"center\"><font style=\"color:green; font-size:1.1em; font-weight:600;\">{$tglmulai} - {$tglselesai}<br>(Aktif)</font></td>";
+										echo "<td align=\"center\"><font style=\"color:green; font-size:1.1em; font-weight:600;\">Aktif</font></td>";
 										$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='1' WHERE `nim`='$mhsw_nim'");
 									} elseif (strtotime($tgl) > strtotime($data['tgl_selesai'])) {
 										echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-info btn-sm\"><i class=\"fa fa-check-circle me-2\"></i><font style=\"color:black;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-										echo "<td align=\"center\"><font style=\"color:blue; font-size:1.1em;\">{$tglmulai} - {$tglselesai}<br>(Sudah Terlewat)</font></td>";
-										echo "<td align=\"center\"><font style=\"color:blue; font-size:1.1em;\">Sudah Terlewat</font></td>";
+										echo "<td align=\"center\"><font style=\"color:blue; font-size:1.1em; font-weight:600;\">{$tglmulai} - {$tglselesai}<br>(Sudah Terlewat)</font></td>";
+										echo "<td align=\"center\"><font style=\"color:blue; font-size:1.1em; font-weight:600;\">Sudah Terlewat</font></td>";
 										$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='2' WHERE `nim`='$mhsw_nim'");
 									} elseif (strtotime($tgl) < strtotime($data['tgl_mulai'])) {
 										echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-times-circle me-2\"></i><font style=\"color:grey; font-size:1.1em;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-										echo "<td align=\"center\"><font style=\"color:grey; font-size:1.1em;\">{$tglmulai} - {$tglselesai}<br>(Belum aktif)</font></td>";
-										echo "<td align=\"center\"><font style=\"color:grey; font-size:1.1em;\">Belum aktif</font></td>";
+										echo "<td align=\"center\"><font style=\"color:grey; font-size:1.1em; font-weight:600;\">{$tglmulai} - {$tglselesai}<br>(Belum aktif)</font></td>";
+										echo "<td align=\"center\"><font style=\"color:grey; font-size:1.1em; font-weight:600;\">Belum aktif</font></td>";
 										$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='0' WHERE `nim`='$mhsw_nim'");
 									}
 								} else {
 									echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-secondary btn-sm\"><i class=\"fa fa-times-circle me-2\"></i><font style=\"color:white;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-									echo "<td align=\"center\"><font style=\"color:red; font-size:1.1em;\">-<br>(Belum terjadwal)</font></td>";
-									echo "<td align=\"center\"><font style=\"color:red; font-size:1.1em;\">Belum terjadwal</font></td>";
+									echo "<td align=\"center\"><font style=\"color:red; font-size:1.1em; font-weight:600;\">-<br>(Belum terjadwal)</font></td>";
+									echo "<td align=\"center\"><font style=\"color:red; font-size:1.1em; font-weight:600;\">Belum terjadwal</font></td>";
 								}
 
 								if ($no == 2) {
