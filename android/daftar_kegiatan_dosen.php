@@ -15,6 +15,7 @@
 	$status_filter = $input['status'];
 	$jenis_filter=$input['jenisJurnal'];
 	$tanggal_filter = $input['tanggal'];*/
+	error_reporting(E_ERROR | E_PARSE);
 
 
 	if ($mhsw_filter=="all") $filtermhsw = "";

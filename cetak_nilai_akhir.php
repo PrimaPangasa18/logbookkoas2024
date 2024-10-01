@@ -15,8 +15,9 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 } else {
 	if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and ($_COOKIE['level'] == 1 or $_COOKIE['level'] == 2 or $_COOKIE['level'] == 3 or $_COOKIE['level'] == 5)) {
 		if ($_COOKIE[level] == '5') $nim_mhsw = $_COOKIE[user];
-		if ($_COOKIE[level] == '1' or $_COOKIE[level] == '2' or $_COOKIE[level] == '3') $nim_mhsw = $_GET[nim];
-
+		if ($_COOKIE[level] == '1' or $_COOKIE[level] == '2' or $_COOKIE[level] == '3') 
+		
+		$nim_mhsw = $_GET[nim];
 		$id_stase = $_GET[stase];
 		$stase_id = "stase_" . $id_stase;
 		$include_id = "include_" . $id_stase;
@@ -1058,12 +1059,11 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		$nama_kepaniteraan = strtoupper($nama_stase[kepaniteraan]);
 
 		$kolom1 = array('item' => "");
-		$tabel1{
-			1} = array('item' => "REKAP NILAI KEPANITERAAN (STASE) $nama_kepaniteraan");
-		$tabel1{
-			2} = array('item' => "LOGBOOK KOAS PENDIDIKAN PROFESI DOKTER");
-		$tabel1{
-			3} = array('item' => "FAKULTAS KEDOKTERAN - UNIVERSITAS DIPONEGORO");
+		$tabel1[1] = array('item' => "REKAP NILAI KEPANITERAAN (STASE) $nama_kepaniteraan");
+		$tabel1[
+			2] = array('item' => "LOGBOOK KOAS PENDIDIKAN PROFESI DOKTER");
+		$tabel1[
+			3] = array('item' => "FAKULTAS KEDOKTERAN - UNIVERSITAS DIPONEGORO");
 		$pdf->ezTable(
 			$tabel1,
 			$kolom1,
@@ -1077,14 +1077,14 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		//Data Mahasiswa
 		$pdf->ezSetDy(-20, '');
 		$kolom2 = array('item' => "", 'isi' => "");
-		$tabel2{
-			1} = array('item' => "Nama Mahasiswa", 'isi' => ": " . "$data_mhsw[nama]");
-		$tabel2{
-			2} = array('item' => "NIM", 'isi' => ": " . "$data_mhsw[nim]");
-		$tabel2{
-			3} = array('item' => "Kepaniteraan (Stase)", 'isi' => ": " . "$nama_stase[kepaniteraan]");
-		$tabel2{
-			4} = array('item' => "Periode", 'isi' => ": " . "$periode");
+		$tabel2[
+			1] = array('item' => "Nama Mahasiswa", 'isi' => ": " . "$data_mhsw[nama]");
+		$tabel2[
+			2] = array('item' => "NIM", 'isi' => ": " . "$data_mhsw[nim]");
+		$tabel2[
+			3] = array('item' => "Kepaniteraan (Stase)", 'isi' => ": " . "$nama_stase[kepaniteraan]");
+		$tabel2[
+			4] = array('item' => "Periode", 'isi' => ": " . "$periode");
 		$pdf->ezTable(
 			$tabel2,
 			$kolom2,
@@ -1099,8 +1099,8 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		if ($id_stase != "M121") {
 			//Header Tabel Rekap
 			$kolom3 = array('NO' => '', 'ITEM' => '', 'NILAI' => '');
-			$tabel3{
-				1} = array('NO' => '<b>No</b>', 'ITEM' => '<b>Item Penilaian</b>', 'NILAI' => '<b>Nilai / Grade</b>');
+			$tabel3[
+				1] = array('NO' => '<b>No</b>', 'ITEM' => '<b>Item Penilaian</b>', 'NILAI' => '<b>Nilai / Grade</b>');
 			$pdf->ezTable(
 				$tabel3,
 				$kolom3,
@@ -1113,10 +1113,10 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Isi Tabel Rekap
 			$kolom4 = array('NO' => '', 'ITEM' => '', 'NILAI' => '');
-			$tabel4{
-				1} = array('NO' => '1', 'ITEM' => "Grade Ketuntasan, rata-rata dari:\r\na. Grade Jurnal Penyakit = $grade_penyakit\r\nb. Grade Jurnal Ketrampilan = $grade_ketrampilan", 'NILAI' => "$ketuntasan %");
-			$tabel4{
-				2} = array('NO' => '2', 'ITEM' => 'Penilaian Bagian', 'NILAI' => $nilai_bagian);
+			$tabel4[
+				1] = array('NO' => '1', 'ITEM' => "Grade Ketuntasan, rata-rata dari:\r\na. Grade Jurnal Penyakit = $grade_penyakit\r\nb. Grade Jurnal Ketrampilan = $grade_ketrampilan", 'NILAI' => "$ketuntasan %");
+			$tabel4[
+				2] = array('NO' => '2', 'ITEM' => 'Penilaian Bagian', 'NILAI' => $nilai_bagian);
 			$pdf->ezTable(
 				$tabel4,
 				$kolom4,
@@ -1129,10 +1129,10 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Nilai Total Rata-rata
 			$kolom6 = array('TOTAL' => '', 'NILAI' => '');
-			$tabel6{
-				1} = array('TOTAL' => "Nilai Akhir ( $persen_ketuntasan% x $nilai_bagian ):", 'NILAI' => "<b>$nilai_akhir</b>");
-			$tabel6{
-				2} = array('TOTAL' => 'Ekivalensi Nilai Huruf:', 'NILAI' => "<b>$grade_akhir</b>");
+			$tabel6[
+				1] = array('TOTAL' => "Nilai Akhir ( $persen_ketuntasan% x $nilai_bagian ):", 'NILAI' => "<b>$nilai_akhir</b>");
+			$tabel6[
+				2] = array('TOTAL' => 'Ekivalensi Nilai Huruf:', 'NILAI' => "<b>$grade_akhir</b>");
 			$pdf->ezTable(
 				$tabel6,
 				$kolom6,
@@ -1145,24 +1145,24 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Rumus Nilai
 			$kolom4a = array('ITEM' => "");
-			$tabel4a{
-				1} = array('ITEM' => "\r\n<b>Nilai Akhir = Rasio Ketuntasan x Nilai Bagian</b>");
-			$tabel4a{
-				2} = array('ITEM' => "");
-			$tabel4a{
-				3} = array('ITEM' => "  Grade Ketuntasan >= 70% --> Rasio Ketuntasan = 100%");
-			$tabel4a{
-				4} = array('ITEM' => "  60% <= Grade Ketuntasan < 70% --> Rasio Ketuntasan = 80%");
-			$tabel4a{
-				5} = array('ITEM' => "  50% <= Grade Ketuntasan < 60% --> Rasio Ketuntasan = 60%");
-			$tabel4a{
-				6} = array('ITEM' => "  Grade Ketuntasan < 50% --> Rasio Ketuntasan = 40%");
-			$tabel4a{
-				7} = array('ITEM' => "");
-			$tabel4a{
-				8} = array('ITEM' => "  <i>Ctt: Grade Ketuntasan = (Grade Jurnal Penyakit + Grade Jurnal Ketrampilan)/2</i>");
-			$tabel4a{
-				9} = array('ITEM' => "");
+			$tabel4a[
+				1] = array('ITEM' => "\r\n<b>Nilai Akhir = Rasio Ketuntasan x Nilai Bagian</b>");
+			$tabel4a[
+				2] = array('ITEM' => "");
+			$tabel4a[
+				3] = array('ITEM' => "  Grade Ketuntasan >= 70% --> Rasio Ketuntasan = 100%");
+			$tabel4a[
+				4] = array('ITEM' => "  60% <= Grade Ketuntasan < 70% --> Rasio Ketuntasan = 80%");
+			$tabel4a[
+				5] = array('ITEM' => "  50% <= Grade Ketuntasan < 60% --> Rasio Ketuntasan = 60%");
+			$tabel4a[
+				6] = array('ITEM' => "  Grade Ketuntasan < 50% --> Rasio Ketuntasan = 40%");
+			$tabel4a[
+				7] = array('ITEM' => "");
+			$tabel4a[
+				8] = array('ITEM' => "  <i>Ctt: Grade Ketuntasan = (Grade Jurnal Penyakit + Grade Jurnal Ketrampilan)/2</i>");
+			$tabel4a[
+				9] = array('ITEM' => "");
 			$pdf->ezTable(
 				$tabel4a,
 				$kolom4a,
@@ -1182,20 +1182,20 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 			$data_kordik = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$nip_kordik[username]'"));
 			$kordik = $data_kordik[nama] . ", " . $data_kordik[gelar];
 			$kolom6a = array('ITEM' => '');
-			$tabel6a{
-				1} = array('ITEM' => 'Status: <b>DISETUJUI</b>');
-			$tabel6a{
-				2} = array('ITEM' => 'pada tanggal _____________________');
-			$tabel6a{
-				3} = array('ITEM' => "Kordik Kepaniteraan (Stase) $nama_stase[kepaniteraan]");
-			$tabel6a{
-				4} = array('ITEM' => '');
-			$tabel6a{
-				5} = array('ITEM' => '');
-			$tabel6a{
-				6} = array('ITEM' => $kordik);
-			$tabel6a{
-				7} = array('ITEM' => 'NIP: ' . $data_kordik[nip]);
+			$tabel6a[
+				1] = array('ITEM' => 'Status: <b>DISETUJUI</b>');
+			$tabel6a[
+				2] = array('ITEM' => 'pada tanggal _____________________');
+			$tabel6a[
+				3] = array('ITEM' => "Kordik Kepaniteraan (Stase) $nama_stase[kepaniteraan]");
+			$tabel6a[
+				4] = array('ITEM' => '');
+			$tabel6a[
+				5] = array('ITEM' => '');
+			$tabel6a[
+				6] = array('ITEM' => $kordik);
+			$tabel6a[
+				7] = array('ITEM' => 'NIP: ' . $data_kordik[nip]);
 			$pdf->ezTable(
 				$tabel6a,
 				$kolom6a,
@@ -1208,8 +1208,8 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		} else {
 			//Header Tabel Rekap
 			$kolom3 = array('NO' => '', 'ITEM' => '', 'NILAI' => '');
-			$tabel3{
-				1} = array('NO' => '<b>No</b>', 'ITEM' => '<b>Item Penilaian</b>', 'NILAI' => '<b>Nilai / Grade</b>');
+			$tabel3[
+				1] = array('NO' => '<b>No</b>', 'ITEM' => '<b>Item Penilaian</b>', 'NILAI' => '<b>Nilai / Grade</b>');
 			$pdf->ezTable(
 				$tabel3,
 				$kolom3,
@@ -1224,10 +1224,10 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 			$nilai_kompre = number_format($rata_nilai_kompre, 2);
 			$nilai_kdk = number_format($rata_nilai_kdk, 2);
 			$kolom4 = array('NO' => '', 'ITEM' => '', 'NILAI' => '');
-			$tabel4{
-				1} = array('NO' => '1', 'ITEM' => "Grade Ketuntasan, rata-rata dari:\r\na. Grade Jurnal Penyakit = $grade_penyakit\r\nb. Grade Jurnal Ketrampilan = $grade_ketrampilan", 'NILAI' => "$ketuntasan %");
-			$tabel4{
-				2} = array('NO' => '2', 'ITEM' => "Penilaian Bagian, rata-rata dari:\r\na. Nilai Komprehensip = $nilai_kompre\r\nb. Nilai Kedokteran Keluarga = $nilai_kdk", 'NILAI' => $nilai_bagian);
+			$tabel4[
+				1] = array('NO' => '1', 'ITEM' => "Grade Ketuntasan, rata-rata dari:\r\na. Grade Jurnal Penyakit = $grade_penyakit\r\nb. Grade Jurnal Ketrampilan = $grade_ketrampilan", 'NILAI' => "$ketuntasan %");
+			$tabel4[
+				2] = array('NO' => '2', 'ITEM' => "Penilaian Bagian, rata-rata dari:\r\na. Nilai Komprehensip = $nilai_kompre\r\nb. Nilai Kedokteran Keluarga = $nilai_kdk", 'NILAI' => $nilai_bagian);
 			$pdf->ezTable(
 				$tabel4,
 				$kolom4,
@@ -1240,10 +1240,10 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Nilai Total Rata-rata
 			$kolom6 = array('TOTAL' => '', 'NILAI' => '');
-			$tabel6{
-				1} = array('TOTAL' => "Nilai Akhir ( $persen_ketuntasan% x $nilai_bagian ):", 'NILAI' => "<b>$nilai_akhir</b>");
-			$tabel6{
-				2} = array('TOTAL' => 'Ekivalensi Nilai Huruf:', 'NILAI' => "<b>$grade_akhir</b>");
+			$tabel6[
+				1] = array('TOTAL' => "Nilai Akhir ( $persen_ketuntasan% x $nilai_bagian ):", 'NILAI' => "<b>$nilai_akhir</b>");
+			$tabel6[
+				2] = array('TOTAL' => 'Ekivalensi Nilai Huruf:', 'NILAI' => "<b>$grade_akhir</b>");
 			$pdf->ezTable(
 				$tabel6,
 				$kolom6,
@@ -1256,24 +1256,24 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Rumus Nilai
 			$kolom4a = array('ITEM' => "");
-			$tabel4a{
-				1} = array('ITEM' => "\r\n<b>Nilai Akhir = Rasio Ketuntasan x Nilai Bagian</b>");
-			$tabel4a{
-				2} = array('ITEM' => "");
-			$tabel4a{
-				3} = array('ITEM' => "  Grade Ketuntasan >= 70% --> Rasio Ketuntasan = 100%");
-			$tabel4a{
-				4} = array('ITEM' => "  60% <= Grade Ketuntasan < 70% --> Rasio Ketuntasan = 80%");
-			$tabel4a{
-				5} = array('ITEM' => "  50% <= Grade Ketuntasan < 60% --> Rasio Ketuntasan = 60%");
-			$tabel4a{
-				6} = array('ITEM' => "  Grade Ketuntasan < 50% --> Rasio Ketuntasan = 40%");
-			$tabel4a{
-				7} = array('ITEM' => "");
-			$tabel4a{
-				8} = array('ITEM' => "  <i>Ctt: Grade Ketuntasan = [(Grade Jurnal Penyakit + Grade Jurnal Ketrampilan)/2] %</i>");
-			$tabel4a{
-				9} = array('ITEM' => "");
+			$tabel4a[
+				1] = array('ITEM' => "\r\n<b>Nilai Akhir = Rasio Ketuntasan x Nilai Bagian</b>");
+			$tabel4a[
+				2] = array('ITEM' => "");
+			$tabel4a[
+				3] = array('ITEM' => "  Grade Ketuntasan >= 70% --> Rasio Ketuntasan = 100%");
+			$tabel4a[
+				4] = array('ITEM' => "  60% <= Grade Ketuntasan < 70% --> Rasio Ketuntasan = 80%");
+			$tabel4a[
+				5] = array('ITEM' => "  50% <= Grade Ketuntasan < 60% --> Rasio Ketuntasan = 60%");
+			$tabel4a[
+				6] = array('ITEM' => "  Grade Ketuntasan < 50% --> Rasio Ketuntasan = 40%");
+			$tabel4a[
+				7] = array('ITEM' => "");
+			$tabel4a[
+				8] = array('ITEM' => "  <i>Ctt: Grade Ketuntasan = [(Grade Jurnal Penyakit + Grade Jurnal Ketrampilan)/2] %</i>");
+			$tabel4a[
+				9] = array('ITEM' => "");
 			$pdf->ezTable(
 				$tabel4a,
 				$kolom4a,
@@ -1296,20 +1296,20 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 			$kordik1 = $data_kordik1[nama] . ", " . $data_kordik1[gelar];
 			$kordik2 = $data_kordik2[nama] . ", " . $data_kordik2[gelar];
 			$kolom6a = array('ITEM1' => '', 'ITEM2' => '');
-			$tabel6a{
-				1} = array('ITEM1' => 'Status: <b>DISETUJUI</b>', 'ITEM2' => 'Status: <b>DISETUJUI</b>');
-			$tabel6a{
-				2} = array('ITEM1' => 'pada tanggal _____________________', 'ITEM2' => 'pada tanggal _____________________');
-			$tabel6a{
-				3} = array('ITEM1' => "Kordik Kepaniteraan Kedokteran Keluarga", 'ITEM2' => "Kordik Kepaniteraan Komprehensip");
-			$tabel6a{
-				4} = array('ITEM1' => '', 'ITEM2' => '');
-			$tabel6a{
-				5} = array('ITEM1' => '', 'ITEM2' => '');
-			$tabel6a{
-				6} = array('ITEM1' => $kordik1, 'ITEM2' => $kordik2);
-			$tabel6a{
-				7} = array('ITEM1' => 'NIP: ' . $data_kordik1[nip], 'ITEM2' => 'NIP: ' . $data_kordik1[nip]);
+			$tabel6a[
+				1] = array('ITEM1' => 'Status: <b>DISETUJUI</b>', 'ITEM2' => 'Status: <b>DISETUJUI</b>');
+			$tabel6a[
+				2] = array('ITEM1' => 'pada tanggal _____________________', 'ITEM2' => 'pada tanggal _____________________');
+			$tabel6a[
+				3] = array('ITEM1' => "Kordik Kepaniteraan Kedokteran Keluarga", 'ITEM2' => "Kordik Kepaniteraan Komprehensip");
+			$tabel6a[
+				4] = array('ITEM1' => '', 'ITEM2' => '');
+			$tabel6a[
+				5] = array('ITEM1' => '', 'ITEM2' => '');
+			$tabel6a[
+				6] = array('ITEM1' => $kordik1, 'ITEM2' => $kordik2);
+			$tabel6a[
+				7] = array('ITEM1' => 'NIP: ' . $data_kordik1[nip], 'ITEM2' => 'NIP: ' . $data_kordik1[nip]);
 			$pdf->ezTable(
 				$tabel6a,
 				$kolom6a,

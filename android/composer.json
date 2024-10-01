@@ -1,0 +1,22 @@
+{
+  "name": "hp/elogbook",
+  "description": "for security and other depedency",
+  "platform-check": false,
+  "autoload": {
+    "psr-4": {
+      "Hp\\Elogbook\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Yudhi",
+      "email": "yudhiwinantoro@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4.33",
+    "vlucas/phpdotenv": "^5.6",
+    "firebase/php-jwt": "^6.10",
+    "phpmailer/phpmailer": "^5.2"
+  }
+}

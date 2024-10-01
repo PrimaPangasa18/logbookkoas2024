@@ -63,6 +63,7 @@ if(substr($jam_awal,2,1)==':'){
 
 
 $status = "0";
+$evaluasi = "0";
 
 
 
@@ -82,7 +83,7 @@ if($jenis=="jurnal_penyakit"){
     WHERE NOT EXISTS(SELECT * FROM jurnal_penyakit WHERE nim='".$username."' AND angkatan='".$angkatan."' 
     AND tanggal='".$tanggal."' AND lokasi='".$lokasi."' AND jam_awal='".$jam_awal."' AND jam_akhir='".$jam_akhir."')";
 	mysqli_query ($conn,$query);
-	$query_update = "UPDATE jurnal_penyakit set grup='".$grup."', kegiatan='".$kegiatan."', kelas='".$kelas."', status='".$status."' WHERE nim='".$username."' AND angkatan='".$angkatan."' 
+	$query_update = "UPDATE jurnal_penyakit set grup='".$grup."', kegiatan='".$kegiatan."', kelas='".$kelas."', status='".$status."', evaluasi='".$evaluasi."' WHERE nim='".$username."' AND angkatan='".$angkatan."' 
     AND tanggal='".$tanggal."' AND lokasi='".$lokasi."' AND jam_awal='".$jam_awal."' AND jam_akhir='".$jam_akhir."'";
 	mysqli_query($conn,$query_update);
 	if($jenis2!="0"){
@@ -120,7 +121,7 @@ else{
     WHERE NOT EXISTS(SELECT * FROM jurnal_ketrampilan WHERE nim='".$username."' AND angkatan='".$angkatan."' 
     AND tanggal='".$tanggal."' AND lokasi='".$lokasi."' AND jam_awal='".$jam_awal."' AND jam_akhir='".$jam_akhir."')";
 	mysqli_query ($conn,$query);
-	$query_update = "UPDATE jurnal_ketrampilan set kegiatan='".$kegiatan."', kelas='".$kelas."', grup='".$grup."', status='".$status."' WHERE nim='".$username."' AND angkatan='".$angkatan."' 
+	$query_update = "UPDATE jurnal_ketrampilan set kegiatan='".$kegiatan."', kelas='".$kelas."', grup='".$grup."', status='".$status."', evaluasi='".$evaluasi."' WHERE nim='".$username."' AND angkatan='".$angkatan."' 
     AND tanggal='".$tanggal."' AND lokasi='".$lokasi."' AND jam_awal='".$jam_awal."' AND jam_akhir='".$jam_akhir."'";
 	mysqli_query($conn,$query_update);
 	if($jenis2!="0"){

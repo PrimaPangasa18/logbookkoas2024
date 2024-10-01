@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirect all requests to index.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php !-d
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Remove query parameters and redirect to clean URLs
+
+RewriteCond %{THE_REQUEST} \s/+([^/?]+)\?id=([^&]_)&tglkeg=([^&]_) [NC]
+RewriteRule ^ /%1/%2/%3? [R=301,L]

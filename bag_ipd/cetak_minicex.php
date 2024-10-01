@@ -14,8 +14,8 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		";
 } else {
 	if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and ($_COOKIE['level'] == 1 or $_COOKIE['level'] == 2 or $_COOKIE['level'] == 3 or $_COOKIE['level'] == 5)) {
-		if ($_COOKIE[level] == '5') $nim_mhsw_ipd = $_COOKIE[user];
-		if ($_COOKIE[level] == '1' or $_COOKIE[level] == '2' or $_COOKIE[level] == '3') $nim_mhsw_ipd = $_GET[nim];
+		if ($_COOKIE['level'] == '5') $nim_mhsw_ipd = $_COOKIE['user'];
+		if ($_COOKIE['level'] == '1' or $_COOKIE['level'] == '2' or $_COOKIE['level'] == '3') $nim_mhsw_ipd = $_GET['nim'];
 
 		$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$nim_mhsw_ipd'"));
 		$pdf = new Cezpdf('A4');
@@ -28,49 +28,56 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		while ($data_minicex = mysqli_fetch_array($daftar_minicex)) {
 			//Judul
 			$kolom1 = array('item' => "");
-			$tabel1{
-			1} = array('item' => "NILAI MINI-CEX KEPANITERAAN (STASE) ILMU PENYAKIT DALAM");
-			$tabel1{
-			2} = array('item' => "LOGBOOK KOAS PENDIDIKAN PROFESI DOKTER");
-			$tabel1{
-			3} = array('item' => "FAKULTAS KEDOKTERAN - UNIVERSITAS DIPONEGORO");
+			$tabel1[1] = array('item' => "NILAI MINI-CEX KEPANITERAAN (STASE) ILMU PENYAKIT DALAM");
+			$tabel1[2] = array('item' => "LOGBOOK KOAS PENDIDIKAN PROFESI DOKTER");
+			$tabel1[3] = array('item' => "FAKULTAS KEDOKTERAN - UNIVERSITAS DIPONEGORO");
 			$pdf->ezTable(
 				$tabel1,
 				$kolom1,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 0,
 					'cols' => array('item' => array('justification' => 'left'))
 				)
 			);
 
 			//Data Mahasiswa
 			$pdf->ezSetDy(-20, '');
-			$tanggal_ujian = tanggal_indo($data_minicex[tgl_ujian]);
+			$tanggal_ujian = tanggal_indo($data_minicex['tgl_ujian']);
 			$kolom2 = array('item' => "", 'isi' => "");
-			$tabel2{
-			1} = array('item' => "Nama Mahasiswa", 'isi' => ": " . "$data_mhsw[nama]");
-			$tabel2{
-			2} = array('item' => "NIM", 'isi' => ": " . "$data_mhsw[nim]");
-			$tabel2{
-			3} = array('item' => "Kepaniteraan (Stase)", 'isi' => ": " . "Ilmu Penyakit Dalam");
-			$tabel2{
-			4} = array('item' => "Tanggal Penilaian", 'isi' => ": " . "$tanggal_ujian");
-			$tabel2{
-			5} = array('item' => "Ruangan / Bangsal", 'isi' => ": " . "$data_minicex[ruangan]");
-			$tabel2{
-			6} = array('item' => "Umur Pasien", 'isi' => ": " . "$data_minicex[umur_pasien]" . " tahun");
-			$tabel2{
-			7} = array('item' => "Jenis Kelamin Pasien", 'isi' => ": " . "$data_minicex[jk_pasien]");
-			$tabel2{
-			8} = array('item' => "Problem / Diagnosis Pasien", 'isi' => ": " . "$data_minicex[diagnosis]");
+			$tabel2[1] = array('item' => "Nama Mahasiswa", 'isi' => ": " . "$data_mhsw[nama]");
+			$tabel2[2] = array('item' => "NIM", 'isi' => ": " . "$data_mhsw[nim]");
+			$tabel2[3] = array('item' => "Kepaniteraan (Stase)", 'isi' => ": " . "Ilmu Penyakit Dalam");
+			$tabel2[4] = array('item' => "Tanggal Penilaian", 'isi' => ": " . "$tanggal_ujian");
+			$tabel2[5] = array('item' => "Ruangan / Bangsal", 'isi' => ": " . "$data_minicex[ruangan]");
+			$tabel2[6] = array('item' => "Umur Pasien", 'isi' => ": " . "$data_minicex[umur_pasien]" . " tahun");
+			$tabel2[7] = array('item' => "Jenis Kelamin Pasien", 'isi' => ": " . "$data_minicex[jk_pasien]");
+			$tabel2[8] = array('item' => "Problem / Diagnosis Pasien", 'isi' => ": " . "$data_minicex[diagnosis]");
 
 			$pdf->ezTable(
 				$tabel2,
 				$kolom2,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 0,
 					'cols' => array('item' => array('justification' => 'left', 'width' => 150))
 				)
 			);
@@ -78,56 +85,76 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Header tabel
 			$kolom3 = array('NO' => '', 'ASPEK' => '', 'NILAI' => '');
-			$tabel3{
-			1} = array('NO' => '<b>No</b>', 'ASPEK' => '<b>Aspek Yang Dinilai</b>', 'NILAI' => '<b>Nilai (0-100)</b>');
+			$tabel3[1] = array('NO' => '<b>No</b>', 'ASPEK' => '<b>Aspek Yang Dinilai</b>', 'NILAI' => '<b>Nilai (0-100)</b>');
 			$pdf->ezTable(
 				$tabel3,
 				$kolom3,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 2, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 3, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 2,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 3,
+					'showBgCol' => 0,
 					'cols' => array('NO' => array('width' => 30, 'justification' => 'center'), 'ASPEK' => array('justification' => 'center'), 'NILAI' => array('width' => 100, 'justification' => 'center'))
 				)
 			);
 
 			//Nilai Aspek 1 - 5
 			$kolom4 = array('NO' => '', 'ASPEK' => '', 'NILAI' => '');
-			$tabel4{
-			1} = array('NO' => '1', 'ASPEK' => "Kemampuan Wawancara Medis (<i>Medical Interviewing Skills</i>)", 'NILAI' => $data_minicex[aspek_1]);
-			$tabel4{
-			2} = array('NO' => '2', 'ASPEK' => "Kemampuan Pemeriksaan Fisik (<i>Physical Examination Skills</i>)", 'NILAI' => $data_minicex[aspek_2]);
-			$tabel4{
-			3} = array('NO' => '3', 'ASPEK' => "Kualitas Humanisti / Profesionalisme", 'NILAI' => $data_minicex[aspek_3]);
-			$tabel4{
-			4} = array('NO' => '4', 'ASPEK' => "Keputusan Klinis", 'NILAI' => $data_minicex[aspek_4]);
-			$tabel4{
-			5} = array('NO' => '5', 'ASPEK' => "Kemampuan Penatalaksanaan Pasien", 'NILAI' => $data_minicex[aspek_5]);
-			$tabel4{
-			6} = array('NO' => '6', 'ASPEK' => "Kemampuan Konseling", 'NILAI' => $data_minicex[aspek_6]);
-			$tabel4{
-			7} = array('NO' => '7', 'ASPEK' => "Organisasi / Efisiensi", 'NILAI' => $data_minicex[aspek_7]);
-			$tabel4{
-			8} = array('NO' => '8', 'ASPEK' => "Kompetensi Klinis Keseluruhan", 'NILAI' => $data_minicex[aspek_8]);
+			$tabel4[1] = array('NO' => '1', 'ASPEK' => "Kemampuan Wawancara Medis (<i>Medical Interviewing Skills</i>)", 'NILAI' => $data_minicex['aspek_1']);
+			$tabel4[2] = array('NO' => '2', 'ASPEK' => "Kemampuan Pemeriksaan Fisik (<i>Physical Examination Skills</i>)", 'NILAI' => $data_minicex['aspek_2']);
+			$tabel4[3] = array('NO' => '3', 'ASPEK' => "Kualitas Humanisti / Profesionalisme", 'NILAI' => $data_minicex['aspek_3']);
+			$tabel4[4] = array('NO' => '4', 'ASPEK' => "Keputusan Klinis", 'NILAI' => $data_minicex['aspek_4']);
+			$tabel4[5] = array('NO' => '5', 'ASPEK' => "Kemampuan Penatalaksanaan Pasien", 'NILAI' => $data_minicex['aspek_5']);
+			$tabel4[6] = array('NO' => '6', 'ASPEK' => "Kemampuan Konseling", 'NILAI' => $data_minicex['aspek_6']);
+			$tabel4[7] = array('NO' => '7', 'ASPEK' => "Organisasi / Efisiensi", 'NILAI' => $data_minicex['aspek_7']);
+			$tabel4[8] = array('NO' => '8', 'ASPEK' => "Kompetensi Klinis Keseluruhan", 'NILAI' => $data_minicex['aspek_8']);
 			$pdf->ezTable(
 				$tabel4,
 				$kolom4,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 2, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 3, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 2,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 3,
+					'showBgCol' => 0,
 					'cols' => array('NO' => array('width' => 30, 'justification' => 'center'), 'NILAI' => array('width' => 100, 'justification' => 'center'))
 				)
 			);
 
 			//Nilai Total
 			$kolom5 = array('TOTAL' => '', 'NILAI' => '');
-			$tabel5{
-			1} = array('TOTAL' => 'Rata-Rata Nilai (Nilai Total / 8):', 'NILAI' => "<b>$data_minicex[nilai_rata]</b>");
+			$tabel5[1] = array('TOTAL' => 'Rata-Rata Nilai (Nilai Total / 8):', 'NILAI' => "<b>$data_minicex[nilai_rata]</b>");
 			$pdf->ezTable(
 				$tabel5,
 				$kolom5,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 2, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 3, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 2,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 3,
+					'showBgCol' => 0,
 					'cols' => array('TOTAL' => array('justification' => 'right'), 'NILAI' => array('width' => 100, 'justification' => 'center'))
 				)
 			);
@@ -135,55 +162,77 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 
 			//Umpan Balik
 			$kolom5a = array('ITEM' => '');
-			$tabel5a{
-			1} = array('ITEM' => "<b>Umpan Balik Terhadap Mini-Cex:</b>\r\n\r\n<i>$data_minicex[umpan_balik]</i>\r\n");
+			$tabel5a[1] = array('ITEM' => "<b>Umpan Balik Terhadap Mini-Cex:</b>\r\n\r\n<i>$data_minicex[umpan_balik]</i>\r\n");
 			$pdf->ezTable(
 				$tabel5a,
 				$kolom5a,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 2, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 3, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 2,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 3,
+					'showBgCol' => 0,
 					'cols' => array('ITEM' => array('width' => 510))
 				)
 			);
 			//Saran
 			$kolom5d = array('ITEM' => '');
-			$tabel5d{
-			1} = array('ITEM' => "<b>Saran:</b>\r\n\r\n<i>$data_minicex[saran]</i>\r\n");
+			$tabel5d[1] = array('ITEM' => "<b>Saran:</b>\r\n\r\n<i>$data_minicex[saran]</i>\r\n");
 			$pdf->ezTable(
 				$tabel5d,
 				$kolom5d,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 2, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 3, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 2,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 3,
+					'showBgCol' => 0,
 					'cols' => array('ITEM' => array('width' => 510))
 				)
 			);
 			$pdf->ezSetDy(-20, '');
 
 			//Persetujuan
-			$tanggal_approval = tanggal_indo($data_minicex[tgl_approval]);
+			$tanggal_approval = tanggal_indo($data_minicex['tgl_approval']);
 			$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_minicex[dosen]'"));
-			$dosen = $data_dosen[nama] . ", " . $data_dosen[gelar];
+			$dosen = $data_dosen['nama'] . ", " . $data_dosen['gelar'];
 			$kolom6 = array('ITEM' => '');
-			$tabel6{
-			1} = array('ITEM' => 'Status: <b>DISETUJUI</b>');
-			$tabel6{
-			2} = array('ITEM' => 'pada tanggal ' . $tanggal_approval);
-			$tabel6{
-			3} = array('ITEM' => 'Dosen Penilai');
-			$tabel6{
-			4} = array('ITEM' => '');
-			$tabel6{
-			5} = array('ITEM' => $dosen);
-			$tabel6{
-			6} = array('ITEM' => 'NIP: ' . $data_dosen[nip]);
+			$tabel6[1] = array('ITEM' => 'Status: <b>DISETUJUI</b>');
+			$tabel6[2] = array('ITEM' => 'pada tanggal ' . $tanggal_approval);
+			$tabel6[3] = array('ITEM' => 'Dosen Penilai');
+			$tabel6[4] = array('ITEM' => '');
+			$tabel6[5] = array('ITEM' => $dosen);
+			$tabel6[6] = array('ITEM' => 'NIP: ' . $data_dosen['nip']);
 			$pdf->ezTable(
 				$tabel6,
 				$kolom6,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 1,
+					'showBgCol' => 0,
 					'cols' => array('ITEM' => array('justification' => 'right'))
 				)
 			);

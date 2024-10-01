@@ -2,6 +2,16 @@
 
 	include "connect.php";
 	include "fungsi.php";
+
+	require 'verifiytoken.php';
+	require './vendor/autoload.php';
+	use \Firebase\JWT\JWT;
+	use \Firebase\JWT\Key;
+
+	// Verify the token before proceeding
+	$userData = verifyToken(); // This will exit the script if the token is invalid
+
+
 	$inputJSON = file_get_contents('php://input');
 	$input = json_decode($inputJSON,TRUE);
     $username=$input['username'];

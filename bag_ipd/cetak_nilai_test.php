@@ -14,8 +14,8 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		";
 } else {
 	if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and ($_COOKIE['level'] == 1 or $_COOKIE['level'] == 2 or $_COOKIE['level'] == 3 or $_COOKIE['level'] == 5)) {
-		if ($_COOKIE[level] == '5') $nim_mhsw_ipd = $_COOKIE[user];
-		if ($_COOKIE[level] == '1' or $_COOKIE[level] == '2' or $_COOKIE[level] == '3') $nim_mhsw_ipd = $_GET[nim];
+		if ($_COOKIE['level'] == '5') $nim_mhsw_ipd = $_COOKIE['user'];
+		if ($_COOKIE['level'] == '1' or $_COOKIE['level'] == '2' or $_COOKIE['level'] == '3') $nim_mhsw_ipd = $_GET['nim'];
 
 		$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$nim_mhsw_ipd'"));
 		$pdf = new Cezpdf('A4');
@@ -28,20 +28,25 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 		while ($data_test = mysqli_fetch_array($daftar_test)) {
 			//Judul
 			$kolom1 = array('item' => "");
-			$tabel1{
-				1} = array('item' => "NILAI TEST (UJIAN MCQ)");
-			$tabel1{
-				2} = array('item' => "KEPANITERAAN (STASE) ILMU PENYAKIT DALAM");
-			$tabel1{
-				3} = array('item' => "LOGBOOK KOAS PENDIDIKAN PROFESI DOKTER");
-			$tabel1{
-				4} = array('item' => "FAKULTAS KEDOKTERAN - UNIVERSITAS DIPONEGORO");
+			$tabel1[1] = array('item' => "NILAI TEST (UJIAN MCQ)");
+			$tabel1[2] = array('item' => "KEPANITERAAN (STASE) ILMU PENYAKIT DALAM");
+			$tabel1[3] = array('item' => "LOGBOOK KOAS PENDIDIKAN PROFESI DOKTER");
+			$tabel1[4] = array('item' => "FAKULTAS KEDOKTERAN - UNIVERSITAS DIPONEGORO");
 			$pdf->ezTable(
 				$tabel1,
 				$kolom1,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 0,
 					'cols' => array('item' => array('justification' => 'left'))
 				)
 			);
@@ -52,56 +57,61 @@ if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
 			//Data Mahasiswa
 			$pdf->ezSetDy(-20, '');
 			$kolom2 = array('item' => "", 'isi' => "");
-			$tabel2{
-				1} = array('item' => "Nama Mahasiswa", 'isi' => ": " . "$data_mhsw[nama]");
-			$tabel2{
-				2} = array('item' => "NIM", 'isi' => ": " . "$data_mhsw[nim]");
-			$tabel2{
-				3} = array('item' => "Kepaniteraan (Stase)", 'isi' => ": " . "Ilmu Penyakit Dalam");
-			$tabel2{
-				4} = array('item' => "Jenis Test", 'isi' => ": " . "$jenis_test[jenis_test]");
-			$tabel2{
-				5} = array('item' => "Status Ujian / Test", 'isi' => ": " . "$status_ujian[status_ujian]");
-			$tabel2{
-				6} = array('item' => "", 'isi' => "");
-			$tabel2{
-				7} = array('item' => "Nilai Test", 'isi' => ": " . "<b>$data_test[nilai]</b>");
-			$tabel2{
-				8} = array('item' => "Catatan Khusus", 'isi' => ": " . "<i>$data_test[catatan]</i>");
+			$tabel2[1] = array('item' => "Nama Mahasiswa", 'isi' => ": " . "$data_mhsw[nama]");
+			$tabel2[2] = array('item' => "NIM", 'isi' => ": " . "$data_mhsw[nim]");
+			$tabel2[3] = array('item' => "Kepaniteraan (Stase)", 'isi' => ": " . "Ilmu Penyakit Dalam");
+			$tabel2[4] = array('item' => "Jenis Test", 'isi' => ": " . "$jenis_test[jenis_test]");
+			$tabel2[5] = array('item' => "Status Ujian / Test", 'isi' => ": " . "$status_ujian[status_ujian]");
+			$tabel2[6] = array('item' => "", 'isi' => "");
+			$tabel2[7] = array('item' => "Nilai Test", 'isi' => ": " . "<b>$data_test[nilai]</b>");
+			$tabel2[8] = array('item' => "Catatan Khusus", 'isi' => ": " . "<i>$data_test[catatan]</i>");
 			$pdf->ezTable(
 				$tabel2,
 				$kolom2,
 				"",
 				array(
-					'maxWidth' => 540, 'width' => 520, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 0,
+					'maxWidth' => 540,
+					'width' => 520,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 0,
 					'cols' => array('item' => array('justification' => 'left', 'width' => 110))
 				)
 			);
 			$pdf->ezSetDy(-20, '');
 
 			//Persetujuan
-			$tanggal_approval = tanggal_indo($data_test[tgl_approval]);
+			$tanggal_approval = tanggal_indo($data_test['tgl_approval']);
 			$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_test[dosen]'"));
-			$dosen = $data_dosen[nama] . ", " . $data_dosen[gelar];
+			$dosen = $data_dosen['nama'] . ", " . $data_dosen['gelar'];
 			$kolom6 = array('ITEM' => '');
-			$tabel6{
-				1} = array('ITEM' => 'Status: <b>DISETUJUI</b>');
-			$tabel6{
-				2} = array('ITEM' => 'pada tanggal ' . $tanggal_approval);
-			$tabel6{
-				3} = array('ITEM' => "Kordik Kepaniteraan (Stase)\r\nIlmu Penyakit Dalam");
-			$tabel6{
-				4} = array('ITEM' => '');
-			$tabel6{
-				5} = array('ITEM' => $dosen);
-			$tabel6{
-				6} = array('ITEM' => 'NIP: ' . $data_dosen[nip]);
+			$tabel6[1] = array('ITEM' => 'Status: <b>DISETUJUI</b>');
+			$tabel6[2] = array('ITEM' => 'pada tanggal ' . $tanggal_approval);
+			$tabel6[3] = array('ITEM' => "Kordik Kepaniteraan (Stase)\r\nIlmu Penyakit Dalam");
+			$tabel6[4] = array('ITEM' => '');
+			$tabel6[5] = array('ITEM' => $dosen);
+			$tabel6[6] = array('ITEM' => 'NIP: ' . $data_dosen['nip']);
 			$pdf->ezTable(
 				$tabel6,
 				$kolom6,
 				"",
 				array(
-					'maxWidth' => 530, 'width' => 510, 'fontSize' => 10, 'showHeadings' => 0, 'shaded' => 0, 'showLines' => 0, 'titleFontSize' => 12, 'xPos' => 'center', 'xOrientation' => 'center', 'rowGap' => 1, 'showBgCol' => 0,
+					'maxWidth' => 530,
+					'width' => 510,
+					'fontSize' => 10,
+					'showHeadings' => 0,
+					'shaded' => 0,
+					'showLines' => 0,
+					'titleFontSize' => 12,
+					'xPos' => 'center',
+					'xOrientation' => 'center',
+					'rowGap' => 1,
+					'showBgCol' => 0,
 					'cols' => array('ITEM' => array('justification' => 'right'))
 				)
 			);

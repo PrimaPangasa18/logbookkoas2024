@@ -31,7 +31,7 @@ $query    = "SELECT password FROM admin WHERE username=? ";
 		if($stmt->fetch()){
             
             if($passwordmd5==$password){
-                $response["status"] = 1;
+                //$response["status"] = 1;
                 include 'update_status_ri.php';
             }
             else{

@@ -1,6 +1,7 @@
 <?php
 
     include "connect.php";
+    error_reporting(E_ERROR | E_PARSE);
 	$inputJSON = file_get_contents('php://input');
 	$input = json_decode($inputJSON,TRUE);
     $username=$input['username'];

@@ -8,7 +8,7 @@ $input = json_decode($inputJSON, TRUE); //convert JSON into array
  
 //Check for Mandatory parameters
 $username = $input['username'];
-$angkatana = $input['angkatan'];
+//$angkatana = $input['angkatan'];
 $stase    = $input['stase'];
 $tanggal  = $input['tanggal'];
 $query_angkatan = "SELECT angkatan FROM biodata_mhsw WHERE nim='".$username."'";

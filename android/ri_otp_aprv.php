@@ -30,7 +30,7 @@ $dosen = $dos_a["nip"];}
 		if($stmt->fetch()){
             
             if($pin==$otp){
-                $response["status"] = 1;
+                //$response["status"] = 1;
                 include 'update_status_ri.php';
             }
             else{

@@ -1,6 +1,7 @@
 <?php
 include 'connect.php';
 include "fungsi.php";
+error_reporting(E_ERROR | E_PARSE);
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, TRUE);
 	$nim = $input["username"];
@@ -18,8 +19,8 @@ $input = json_decode($inputJSON, TRUE);
     $tanggal_selesai = tanggal_indo($data_stase['tgl_selesai']);
     $periode = $tanggal_mulai . " s.d. " . $tanggal_selesai;
 
-    mysqli_query($conn, "DELETE FROM `jurnal_penyakit_dummy` WHERE `username`='".$nama."'");
-    mysqli_query($conn, "DELETE FROM `jurnal_ketrampilan_dummy` WHERE `username`='".$nama."'");
+    mysqli_query($conn, "DELETE FROM `jurnal_penyakit_dummy` WHERE `username`='".$nim."'");
+    mysqli_query($conn, "DELETE FROM `jurnal_ketrampilan_dummy` WHERE `username`='".$nim."'");
 
     $filter_penyakit = "SELECT * FROM `jurnal_penyakit` WHERE `nim`='" . $data_mhsw['nim'] . "' AND `stase`='$id_stase' AND `status`='1'";
     $jurnal_penyakit = mysqli_query($conn, $filter_penyakit);
@@ -32,12 +33,12 @@ $input = json_decode($inputJSON, TRUE);
              `penyakit1`, `penyakit2`, `penyakit3`, `penyakit4`,
              `dosen`, `status`, `evaluasi`, `username`)
             VALUES
-            ('" . $data['id'] . "', '" . $data['nim'] . "', '', '" . $data['angkatan'] . "', '" . $data['grup'] . "',
+            ('" . $data['id'] . "', '" . $data['nim'] . "','" . $data['nama'] . "', '" . $data['angkatan'] . "', '" . $data['grup'] . "',
              '" . $data['hari'] . "', '" . $data['tanggal'] . "', '" . $data['stase'] . "',
              '" . $data['jam_awal'] . "', '" . $data['jam_akhir'] . "', '" . $data['kelas'] . "',
              '" . $data['lokasi'] . "', '" . $data['kegiatan'] . "',
              '" . $data['penyakit1'] . "', '" . $data['penyakit2'] . "', '" . $data['penyakit3'] . "', '" . $data['penyakit4'] . "',
-             '" . $data['dosen'] . "', '" . $data['status'] . "', '" . $data['evaluasi'] . "', '".$nama."')");
+             '" . $data['dosen'] . "', '" . $data['status'] . "', '" . $data['evaluasi'] . "', '".$nim."')");
     }
 
     $filter_ketrampilan = "SELECT * FROM `jurnal_ketrampilan` WHERE `nim`='" . $data_mhsw['nim'] . "' AND `stase`='$id_stase' AND `status`='1'";
@@ -51,19 +52,19 @@ $input = json_decode($inputJSON, TRUE);
              `ketrampilan1`, `ketrampilan2`, `ketrampilan3`, `ketrampilan4`,
              `dosen`, `status`, `evaluasi`, `username`)
             VALUES
-            ('" . $data['id'] . "', '" . $data['nim'] . "', '', '" . $data['angkatan'] . "', '" . $data['grup'] . "',
+            ('" . $data['id'] . "', '" . $data['nim'] . "','" . $data['nama'] . "', '" . $data['angkatan'] . "', '" . $data['grup'] . "',
              '" . $data['hari'] . "', '" . $data['tanggal'] . "', '" . $data['stase'] . "',
              '" . $data['jam_awal'] . "', '" . $data['jam_akhir'] . "', '" . $data['kelas'] . "',
              '" . $data['lokasi'] . "', '" . $data['kegiatan'] . "',
              '" . $data['ketrampilan1'] . "', '" . $data['ketrampilan2'] . "', '" . $data['ketrampilan3'] . "', '" . $data['ketrampilan4'] . "',
-             '" . $data['dosen'] . "', '" . $data['status'] . "', '" . $data['evaluasi'] . "', '".$nama."')");
+             '" . $data['dosen'] . "', '" . $data['status'] . "', '" . $data['evaluasi'] . "', '".$nim."')");
     }
 
     // Grade Jurnal Penyakit
-    $grade_penyakit = ketuntasan_penyakit($conn, $include_id, $target_id, $data_mhsw['nim'], $nama);
+    $grade_penyakit = ketuntasan_penyakit($conn, $include_id, $target_id, $data_mhsw['nim'], $nim);
 
     // Grade Jurnal Ketrampilan
-    $grade_ketrampilan = ketuntasan_ketrampilan($conn, $include_id, $target_id, $data_mhsw['nim'], $nama);
+    $grade_ketrampilan = ketuntasan_ketrampilan($conn, $include_id, $target_id, $data_mhsw['nim'], $nim);
 
     //--------------------------------------------------------------------
 			//Rekap Nilai Akhir Bagian / Kepaniteraan (Stase) Ilmu Penyakit Dalam
@@ -219,7 +220,7 @@ $input = json_decode($inputJSON, TRUE);
 				//-------------------------------
 				//Rekap Nilai Penilaian Kegiatan di PKBI
 				$data_nilai_pkbi = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `ikmkp_nilai_pkbi` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_pkbi = $data_nilai_pkbi[nilai_total];
+				$nilai_pkbi = $data_nilai_pkbi['nilai_total'];
 				//Rekap Nilai Penilaian Kegiatan di P2UKM Mlonggo
 				//-------------------------------
 				//Kegiatan Evaluasi Manajemen Puskesmas
@@ -241,7 +242,7 @@ $input = json_decode($inputJSON, TRUE);
 				//Rekap Nilai Ujian Komprehensip
 				//-------------------------------
 				$data_nilai_komprehensip = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `ikmkp_nilai_komprehensip` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_komprehensip = $data_nilai_komprehensip[nilai_total];
+				$nilai_komprehensip = $data_nilai_komprehensip['nilai_total'];
 				//Total Nilai
 				$nilai_bagian = number_format(($nilai_pkbi+2*$nilai_p2ukm+$nilai_test+4*$nilai_komprehensip)/8,2);
 			}
@@ -327,7 +328,7 @@ $input = json_decode($inputJSON, TRUE);
 				//Rekap Nilai Ujian OSCE
 				//-------------------------------
 				$data_nilai_osce = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `anestesi_nilai_osce` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_osce = $data_nilai_osce[nilai_total];
+				$nilai_osce = $data_nilai_osce['nilai_total'];
 				$nilai_osce = number_format($nilai_osce,2);
 
 				//-------------------------------
@@ -393,10 +394,10 @@ $input = json_decode($inputJSON, TRUE);
 				//-------------------------------
 				//Rekap Nilai Presentasi Kasus Besar
 				$data_nilai_presentasi = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `mata_nilai_presentasi` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_presentasi = $data_nilai_presentasi[nilai_total];
+				$nilai_presentasi = $data_nilai_presentasi['nilai_total'];
 				//Rekap Nilai Journal Reading
 				$data_nilai_jurnal = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `mata_nilai_jurnal` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_jurnal = $data_nilai_jurnal[nilai_total];
+				$nilai_jurnal = $data_nilai_jurnal['nilai_total'];
 				//Rekap Nilai Penyanggah
 				$jml_penyanggah = mysqli_num_rows(mysqli_query($conn,"SELECT `id` FROM `mata_nilai_penyanggah` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
 				$jml_nilai_penyanggah = mysqli_fetch_array(mysqli_query($conn,"SELECT SUM(`nilai`) FROM `mata_nilai_penyanggah` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
@@ -469,14 +470,14 @@ $input = json_decode($inputJSON, TRUE);
 				//Rekap Nilai Penilaian Laporan Kasus
 				//-------------------------------
 				$data_nilai_kasus = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `ikgm_nilai_kasus` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_kasus = $data_nilai_kasus[nilai_total];
+				$nilai_kasus = $data_nilai_kasus['nilai_total'];
 				$nilai_kasus = number_format($nilai_kasus,2);
 
 				//-------------------------------
 				//Rekap Nilai Penilaian Journal Reading
 				//-------------------------------
 				$data_nilai_jurnal = mysqli_fetch_array(mysqli_query($conn,"SELECT `nilai_total` FROM `ikgm_nilai_jurnal` WHERE `nim`='$data_mhsw[nim]' AND `status_approval`='1'"));
-				$nilai_jurnal = $data_nilai_jurnal[nilai_total];
+				$nilai_jurnal = $data_nilai_jurnal['nilai_total'];
 				$nilai_jurnal = number_format($nilai_jurnal,2);
 
 				//-------------------------------
@@ -1081,6 +1082,10 @@ $input = json_decode($inputJSON, TRUE);
         
     // Output JSON response
     echo json_encode($response);
+
+	mysqli_query($conn, "DELETE FROM `jurnal_penyakit_dummy` WHERE `username`='".$nim."'");
+    mysqli_query($conn, "DELETE FROM `jurnal_ketrampilan_dummy` WHERE `username`='".$nim."'");
+	
 
 //mysqli_close($conn);
 ?>
