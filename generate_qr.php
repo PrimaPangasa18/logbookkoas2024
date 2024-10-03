@@ -130,7 +130,7 @@
 								QRcode::png($code_gen, $tempdir . $imgtemp, "H", 15, 1);
 								echo "<img src=\"$tempdir$imgtemp\" />";
 								$update = mysqli_query($con, "UPDATE `dosen` SET `qr`='$code_gen' WHERE `nip`='$_COOKIE[user]'");
-								echo '<center><br><span class="otp-timer">Sisa waktu Approval Anda menggunakan OTP:</span></center>';
+								echo '<center><br><span class="otp-timer">Sisa waktu Approval Anda menggunakan QR CODE:</span></center>';
 							?>
 								<div id="timer" style="font-size:30px;color:red;"></div>
 							<?php
