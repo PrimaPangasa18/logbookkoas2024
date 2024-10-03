@@ -78,7 +78,7 @@
         <ul id="multi-three" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-four" aria-expanded="false" aria-controls="multi-four">
-              Rekap Kelompok
+              Rotasi Kelompok
             </a>
             <ul id="multi-four" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
