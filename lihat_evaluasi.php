@@ -88,7 +88,7 @@
 						<li class="nav-item dropdown d-flex align-item-center">
 							<span class="navbar-text me-2" style="color: white;">Halo, <?php echo $nama . ' , <span class="gelar" >' . $gelar . '</span>'; ?></span>
 							<a href="#" class="nav-icon pe-md-0" data-bs-toggle="dropdown">
-								<img src="<?php echo $foto_path; ?>" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
+								<img src="foto/profil_blank.png" class="avatar img-fluid rounded-circle" alt="" style=" width:40px; height:40px" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-end rounded">
 
