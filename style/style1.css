@@ -50,7 +50,6 @@ body {
   background-color: #0e2238;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 #sidebar.expand {

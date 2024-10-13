@@ -18,7 +18,60 @@
 	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+<style>
+	.clearfix:before,
+	.clearfix:after {
+		content: "";
+		display: table;
+	}
 
+	.clearfix:after {
+		clear: both;
+	}
+
+	.radio {
+		width: 20px;
+		position: relative;
+		display: inline-block;
+	}
+
+	.radio label {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: white;
+		background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+		border-radius: 10px;
+		box-shadow: inset 0px 1px 1px white, 3px 3px 9px rgba(0, 0, 0, 0.5);
+		border: 1px solid #babbbc;
+	}
+
+	.radio label:after {
+		content: '';
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		border: 7px solid #1890cf;
+		background: transparent;
+		border-radius: 10px;
+		opacity: 0;
+	}
+
+	.radio label:hover::after {
+		opacity: 0.5;
+	}
+
+	.radio input[type=radio] {
+		visibility: hidden;
+	}
+
+	.radio input[type=radio]:checked+label:after {
+		opacity: 1;
+	}
+</style>
 
 <body>
 	<div class="wrapper">
@@ -109,7 +162,7 @@
 						$kepaniteraan = mysqli_fetch_array(mysqli_query($con, "SELECT `kepaniteraan` FROM `kepaniteraan` WHERE `id`='$id_stase'"));
 
 						echo '<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">
-    						Evaluasi Pelaksanaan Kepaniteraan (STASE) ' . htmlspecialchars($kepaniteraan['kepaniteraan']) . '
+    						EVALUASI PELAKSANAAN KEPANITERAAN (STASE) ' . htmlspecialchars($kepaniteraan['kepaniteraan']) . '
 							</h2>';
 
 						echo '<br><br>';
@@ -148,25 +201,25 @@
 						while ($data_pemb = mysqli_fetch_array($eval_pemb)) {
 							echo "<tr>";
 							echo "<td>";
-							echo "<table style=\"border:0.5px solid black;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+							echo "<table style=\"width:100%; border-collapse: collapse;\">";
 							echo "<tr>";
-							echo "<td style=\"width:52%\"><font style=\"font-size:0.85em\">$data_pemb[pertanyaan]</font></td>";
+							echo "<td style=\"width:52%\"><font style=\"font-size:0.85em; font-weight:500;\">$data_pemb[pertanyaan]</font></td>";
 							$radio_name = "input_11" . $no;
 							$radio_id1 = "1input_11" . $no;
 							$radio_id2 = "2input_11" . $no;
 							$radio_id3 = "3input_11" . $no;
 							$radio_id4 = "4input_11" . $no;
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
+							<input type=\"radio\"  name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
 							<label for=\"$radio_id1\"></label></div></div></td>";
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
+							<input type=\"radio\"  name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
 							<label for=\"$radio_id2\"></label></div></div></td>";
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
+							<input type=\"radio\"  name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
 							<label for=\"$radio_id3\"></label></div></div></td>";
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
+							<input type=\"radio\"  name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
 							<label for=\"$radio_id4\"></label></div></div></td>";
 							echo "</tr>";
 							echo "</table>";
@@ -191,60 +244,49 @@
 						//Pencapaian
 						echo "<tr>";
 						echo "<td>";
-						echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+						echo "<table style=\"width:100%; border-collapse: collapse;\">";
 						echo "<tr>";
-						echo "<td colspan=2><font style=\"font-size:0.85em\">Menurut Anda, seberapa banyak pencapaian kompetensi level 3A, 3B, 4A yang Anda capat dalam kepaniteraan Bagian ini (termasuk dengan stase luar kepaniteraan ini)? </font><font style=\"font-size:0.85em;color:red; \"> *</font></td>";
+						echo "<td colspan=2 ><font style=\"font-size:0.85em; font-weight:500;\">Menurut Anda, seberapa banyak pencapaian kompetensi level 3A, 3B, 4A yang Anda capai dalam kepaniteraan Bagian ini (termasuk dengan stase luar kepaniteraan ini)? </font><font style=\"font-size:0.85em;color:red; \"> *</font></td>";
 						echo "</tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_12\" value=\"1\" id=\"1input_12\" required>
-						<label for=\"1input_12\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;< 25%</font>
-						</td></tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_12\" value=\"2\" id=\"2input_12\">
-						<label for=\"2input_12\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;25-50%</font>
-						</td></tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_12\" value=\"3\" id=\"3input_12\">
-						<label for=\"3input_12\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;50-75%</font>
-						</td></tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_12\" value=\"4\" id=\"4input_12\">
-						<label for=\"4input_12\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;> 75%</font>
-						</td></tr>";
+						echo "<tr>
+						
+						<td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_12\" value=\"1\" id=\"1input_12\" required style=\"transform: scale(1.5);\">
+    <label for=\"1input_12\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">&lt; 25%</label></div></div></td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_12\" value=\"2\" id=\"2input_12\" style=\"transform: scale(1.5);\">
+    <label for=\"2input_12\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">25-50%</label></div></div></td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_12\" value=\"3\" id=\"3input_12\" style=\"transform: scale(1.5);\">
+    <label for=\"3input_12\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">50-75%</label></div></div></td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_12\" value=\"4\" id=\"4input_12\" style=\"transform: scale(1.5);\">
+    <label for=\"4input_12\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">&gt; 75%</label></div></div></td></tr>";
+
 						echo "</table>";
 						echo "</td>";
 						echo "</tr>";
+
 						//Kepuasan
 						echo "<tr>";
 						echo "<td>";
-						echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+						echo "<table style=\"width:100%; border-collapse: collapse;\">";
 						echo "<tr>";
-						echo "<td colspan=2><font style=\"font-size:0.85em\">Seberapa besar kepuasan Anda terhadap keseluruhan program stase di Bagian ini (termasuk program stase luar)? </font><font style=\"font-size:0.85em;color:red; \"> *</font></td>";
+						echo "<td colspan=2><font style=\"font-size:0.85em; font-weight:500;\">Seberapa besar kepuasan Anda terhadap keseluruhan program stase di Bagian ini (termasuk program stase luar)? </font><font style=\"font-size:0.85em;color:red; \"> *</font></td>";
 						echo "</tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_13\" value=\"1\" id=\"1input_13\" required>
-						<label for=\"1input_13\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;Sangat tidak puas</font>
-						</td></tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_13\" value=\"2\" id=\"2input_13\">
-						<label for=\"2input_13\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;Kurang puas</font>
-						</td></tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_13\" value=\"3\" id=\"3input_13\">
-						<label for=\"3input_13\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;Puas</font>
-						</td></tr>";
-						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div class=\"radio\">
-						<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"input_13\" value=\"4\" id=\"4input_13\">
-						<label for=\"4input_13\"></label></div></div></td>
-						<td style=\"width:95%;vertical-align:middle;padding:0px\"><font style=\"font-size:0.85em\">&nbsp;&nbsp;Sangat puas</font>
-						</td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_13\" value=\"1\" id=\"1input_13\" required style=\"transform: scale(1.5);\">
+    <label for=\"1input_13\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">Sangat tidak puas</label></div></div></td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_13\" value=\"2\" id=\"2input_13\" style=\"transform: scale(1.5);\">
+    <label for=\"2input_13\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">Kurang puas</label></div></div></td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_13\" value=\"3\" id=\"3input_13\" style=\"transform: scale(1.5);\">
+    <label for=\"3input_13\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">Puas</label></div></div></td></tr>";
+						echo "<tr><td style=\"width:5%;padding:0 0 0 10px\"><div class=\"clearfix\"><div style=\"display: flex; align-items: center; margin-bottom: 10px;\">
+    <input type=\"radio\"  name=\"input_13\" value=\"4\" id=\"4input_13\" style=\"transform: scale(1.5);\">
+    <label for=\"4input_13\" style=\"margin-left: 10px; font-size:0.85em; font-weight:500;\">Sangat puas</label></div></div></td></tr>";
+
 						echo "</table>";
 						echo "</td>";
 						echo "</tr>";
@@ -261,7 +303,7 @@
 							//Pilihan Dosen x
 							echo "<tr>";
 							$dosenx = "dosen" . $x;
-							echo "<td><font style=\"font-size:0.85em\">2.$x. Nama Dosen </font><font style=\"font-size:0.85em;color:red; \"> *</font> :<p>";
+							echo "<td><font style=\"font-size:0.85em; font-weight:500;\">2.$x. Nama Dosen </font><font style=\"font-size:0.85em;color:red; \"> *</font> :<p>";
 							echo "<label class=\"select_small\">
 							<select class=\"form-select\" name=\"$dosenx\" id=\"$dosenx\" required></label>";
 							$dosen = mysqli_query($con, "SELECT `username`,`nama` FROM `admin` WHERE `level`='4' OR (`level`='6' AND `stase`='$id_stase') ORDER BY `nama`");
@@ -301,25 +343,25 @@
 							while ($data_umum = mysqli_fetch_array($dosen_umum)) {
 								echo "<tr>";
 								echo "<td>";
-								echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+								echo "<table style=\"width:100%; border-collapse: collapse;\">";
 								echo "<tr>";
-								echo "<td style=\"width:52%\"><font style=\"font-size:0.85em\">$data_umum[pertanyaan]</font></td>";
+								echo "<td style=\"width:52%\"><font style=\"font-size:0.85em; font-weight:500;\">$data_umum[pertanyaan]</font></td>";
 								$radio_name = "input_2" . $x . "A" . $no;
 								$radio_id1 = "1input_2" . $x . "A" . $no;
 								$radio_id2 = "2input_2" . $x . "A" . $no;
 								$radio_id3 = "3input_2" . $x . "A" . $no;
 								$radio_id4 = "4input_2" . $x . "A" . $no;
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
+								<input type=\"radio\"   name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
 								<label for=\"$radio_id1\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
+								<input type=\"radio\"   name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
 								<label for=\"$radio_id2\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
+								<input type=\"radio\"   name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
 								<label for=\"$radio_id3\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
+								<input type=\"radio\"   name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
 								<label for=\"$radio_id4\"></label></div></div></td>";
 								echo "</tr>";
 								echo "</table>";
@@ -350,25 +392,25 @@
 							while ($data_pengajar = mysqli_fetch_array($dosen_pengajar)) {
 								echo "<tr>";
 								echo "<td>";
-								echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+								echo "<table style=\"width:100%; border-collapse: collapse;\">";
 								echo "<tr>";
-								echo "<td style=\"width:52%\"><font style=\"font-size:0.85em\">$data_pengajar[pertanyaan]</font></td>";
+								echo "<td style=\"width:52%\"><font style=\"font-size:0.85em; font-weight:500;\">$data_pengajar[pertanyaan]</font></td>";
 								$radio_name = "input_2" . $x . "B" . $no;
 								$radio_id1 = "1input_2" . $x . "B" . $no;
 								$radio_id2 = "2input_2" . $x . "B" . $no;
 								$radio_id3 = "3input_2" . $x . "B" . $no;
 								$radio_id4 = "4input_2" . $x . "B" . $no;
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
+								<input type=\"radio\"   name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
 								<label for=\"$radio_id1\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
+								<input type=\"radio\"   name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
 								<label for=\"$radio_id2\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
+								<input type=\"radio\"   name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
 								<label for=\"$radio_id3\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\"  style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
+								<input type=\"radio\"   name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
 								<label for=\"$radio_id4\"></label></div></div></td>";
 								echo "</tr>";
 								echo "</table>";
@@ -399,25 +441,25 @@
 							while ($data_penguji = mysqli_fetch_array($dosen_penguji)) {
 								echo "<tr>";
 								echo "<td>";
-								echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+								echo "<table style=\"width:100%; border-collapse: collapse;\">";
 								echo "<tr>";
-								echo "<td style=\"width:52%\"><font style=\"font-size:0.85em\">$data_penguji[pertanyaan]</font></td>";
+								echo "<td style=\"width:52%\"><font style=\"font-size:0.85em; font-weight:500;\">$data_penguji[pertanyaan]</font></td>";
 								$radio_name = "input_2" . $x . "C" . $no;
 								$radio_id1 = "1input_2" . $x . "C" . $no;
 								$radio_id2 = "2input_2" . $x . "C" . $no;
 								$radio_id3 = "3input_2" . $x . "C" . $no;
 								$radio_id4 = "4input_2" . $x . "C" . $no;
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
+								<input type=\"radio\"  name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
 								<label for=\"$radio_id1\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
+								<input type=\"radio\"  name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
 								<label for=\"$radio_id2\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
+								<input type=\"radio\"  name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
 								<label for=\"$radio_id3\"></label></div></div></td>";
 								echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-								<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
+								<input type=\"radio\"  name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
 								<label for=\"$radio_id4\"></label></div></div></td>";
 								echo "</tr>";
 								echo "</table>";
@@ -481,25 +523,25 @@
 						while ($data_materi = mysqli_fetch_array($materi)) {
 							echo "<tr>";
 							echo "<td>";
-							echo "<table style=\"border:0.5px solid grey;border-radius:5px;width:100%;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);\">";
+							echo "<table style=\"width:100%; border-collapse: collapse;\">";
 							echo "<tr>";
-							echo "<td style=\"width:52%\"><font style=\"font-size:0.85em\">$data_materi[pertanyaan]</font></td>";
+							echo "<td style=\"width:52%\"><font style=\"font-size:0.85em; font-weight:500;\">$data_materi[pertanyaan]</font></td>";
 							$radio_name = "input_3A" . $no;
 							$radio_id1 = "1input_3A" . $no;
 							$radio_id2 = "2input_3A" . $no;
 							$radio_id3 = "3input_3A" . $no;
 							$radio_id4 = "4input_3A" . $no;
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
+							<input type=\"radio\"  name=\"$radio_name\" value=\"1\" id=\"$radio_id1\" required>
 							<label for=\"$radio_id1\"></label></div></div></td>";
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
+							<input type=\"radio\"  name=\"$radio_name\" value=\"2\" id=\"$radio_id2\">
 							<label for=\"$radio_id2\"></label></div></div></td>";
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
+							<input type=\"radio\"  name=\"$radio_name\" value=\"3\" id=\"$radio_id3\">
 							<label for=\"$radio_id3\"></label></div></div></td>";
 							echo "<td align=center style=\"vertical-align:middle;width:12%\"><div class=\"clearfix\"><div class=\"radio\">
-							<input type=\"radio\" style=\"width:20px; height:20px;\" name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
+							<input type=\"radio\"  name=\"$radio_name\" value=\"4\" id=\"$radio_id4\">
 							<label for=\"$radio_id4\"></label></div></div></td>";
 							echo "</tr>";
 							echo "</table>";

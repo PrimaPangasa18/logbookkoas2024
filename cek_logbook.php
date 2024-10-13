@@ -137,9 +137,9 @@
 										$tglselesai = tanggal_indo($data['tgl_selesai']);
 										if (strtotime($data['tgl_mulai']) <= strtotime($tgl) and strtotime($tgl) <= strtotime($data['tgl_selesai'])) {
 								?>
-											<td align="center"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
+											<td align="center"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-outline-success btn-md">
 
-														<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+														<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
 												<font style="color:green; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Aktif)</font>
@@ -150,8 +150,8 @@
 										<?php
 										} elseif (strtotime($tgl) > strtotime($data['tgl_selesai'])) {
 										?>
-											<td align="center"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
-														<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+											<td align="center"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-outline-success btn-md">
+														<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
 												<font style="color:blue; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Sudah Terlewat)</font>
@@ -162,9 +162,9 @@
 										<?php
 										} elseif (strtotime($tgl) < strtotime($data['tgl_mulai'])) {
 										?>
-											<td align="center"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
+											<td align="center"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-outline-success btn-md">
 
-														<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+														<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
 												<font style="color:grey; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Belum aktif)</font>
@@ -176,9 +176,9 @@
 										}
 									} else {
 										?>
-										<td align="center" style="width:400px"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
+										<td align="center" style="width:400px"><a href="tampil_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-outline-success btn-md">
 
-													<font style="color:whitw; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+													<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 												</button></a></td>
 										<td align="center">
 											<font style="color:red; font-size:1.1em; font-weight:600;">-<br>(Belum terjadwal)</font>

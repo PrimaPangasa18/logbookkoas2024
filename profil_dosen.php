@@ -131,23 +131,23 @@
                     <tbody>
                       <tr class="table-primary">
                         <td style="width: 300px;"><strong>Username</strong></td>
-                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $data_user['username']; ?></td>
+                        <td style="width: 400px; font-weight:500; "><?php echo $data_user['username']; ?></td>
                       </tr>
                       <tr class="table-success">
                         <td style="width: 300px;"><strong>Nama Lengkap</strong></td>
-                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $dosen['nama']; ?></td>
+                        <td style="width: 400px; font-weight:500; "><?php echo $dosen['nama']; ?></td>
                       </tr>
                       <tr class="table-primary">
                         <td style="width: 300px;"><strong>Gelar</strong></td>
-                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $dosen['gelar']; ?></td>
+                        <td style="width: 400px; font-weight:500; "><?php echo $dosen['gelar']; ?></td>
                       </tr>
                       <tr class="table-success">
                         <td style="width: 300px;"><strong>Bagian</strong></td>
-                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $bagian['bagian']; ?></td>
+                        <td style="width: 400px; font-weight:500; "><?php echo $bagian['bagian']; ?></td>
                       </tr>
                       <tr class="table-primary">
                         <td style="width: 300px;"><strong>Level User</strong></td>
-                        <td style="width: 400px; font-weight:500; color:darkgreen"><?php echo $level_user['level']; ?></td>
+                        <td style="width: 400px; font-weight:500; "><?php echo $level_user['level']; ?></td>
                       </tr>
                     </tbody>
                   </table>

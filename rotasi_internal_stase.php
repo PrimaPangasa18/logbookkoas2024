@@ -137,9 +137,9 @@
 										$tglselesai = tanggal_indo($data['tgl_selesai']);
 										if (strtotime($data['tgl_mulai']) <= strtotime($tgl) and strtotime($tgl) <= strtotime($data['tgl_selesai'])) {
 								?>
-											<td align="center"><a href="internal_stase.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-success btn-sm">
+											<td align="center"><a href="internal_stase.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-outline-success btn-md">
 														<i class="fa fa-hourglass-half me-2"></i>
-														<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+														<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
 												<font style="color:green; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Aktif)</font>
@@ -152,7 +152,7 @@
 										} elseif (strtotime($tgl) > strtotime($data['tgl_selesai'])) {
 										?>
 											<td align="center"><a href="/" onclick="return false;">
-													<button type="button" class="btn btn-info btn-sm"><i class="fa fa-check-circle me-2"></i>
+													<button type="button" class="btn btn-outline-info btn-md"><i class="fa fa-check-circle me-2" style="color: #000;"></i>
 														<font style="color:black;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
@@ -165,9 +165,9 @@
 											$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='2' WHERE `nim`='$_COOKIE[user]'");
 										} elseif (strtotime($tgl) < strtotime($data['tgl_mulai'])) {
 										?>
-											<td align="center"><a href="/" onclick="return false;"><button type="button" class="btn btn-danger btn-sm">
-														<i class="fa fa-times-circle me-2"></i>
-														<font style="color:grey; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+											<td align="center"><a href="/" onclick="return false;"><button type="button" class="btn btn-outline-secondary btn-md">
+														<i class="fa fa-times-circle me-2" style="color: #000;"></i>
+														<font style="color:black; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>
 											<td align="center">
 												<font style="color:grey; font-size:1.1em; font-weight:600;"><?php echo $tglmulai . ' - ' . $tglselesai; ?><br>(Belum aktif)</font>
@@ -180,9 +180,9 @@
 										}
 									} else {
 										?>
-										<td align="center"><a href="/" onclick="return false;"><button type="button" class="btn btn-danger btn-sm">
-													<i class="fa fa-times-circle me-2"></i>
-													<font style="color:white; "><?php echo $data_stase['kepaniteraan']; ?></font>
+										<td align="center"><a href="/" onclick="return false;"><button type="button" class="btn btn-outline-secondary btn-md">
+													<i class="fa fa-times-circle me-2" style="color: #000;"></i>
+													<font style="color:black; "><?php echo $data_stase['kepaniteraan']; ?></font>
 												</button></a></td>
 										<td align="center">
 											<font style="color:red; font-size:1.1em; font-weight:600;">-<br>(Belum terjadwal)</font>

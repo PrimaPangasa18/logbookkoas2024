@@ -41,6 +41,10 @@ if ($_COOKIE["user_login"] == "" or empty($_COOKIE["user_login"]) or $_GET["st"]
           </div>
         </div>
         <input type="submit" value="Submit" name="commit">
+        <div class="forgot-password-link">
+          <br>
+          <a href="login_forgotpass">Forgot Password?</a>
+        </div>
       </form>
     </div>
     <script>

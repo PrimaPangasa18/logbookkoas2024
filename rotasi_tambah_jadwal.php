@@ -5,11 +5,12 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>On-line Rekap Individu Evaluasi Harian Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+	<title>On-line Edit Rotasi Tambah Jadwal Koas Logbook Koas Pendidikan Dokter FK-UNDIP</title>
 	<link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
+	<link rel="stylesheet" type="text/css" href="jquery_ui/jquery-ui.css">
+	<link rel="stylesheet" href="select2/dist/css/select2.css" />
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
-
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -17,6 +18,7 @@
 	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 
 <body>
 	<div class="wrapper">
@@ -34,15 +36,9 @@
 		</script>
 		";
 		} else {
-			if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and ($_COOKIE['level'] == 1 or $_COOKIE['level'] == 2 or $_COOKIE['level'] == 3)) {
+			if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 1) {
 				if ($_COOKIE['level'] == 1) {
 					include "menu1.php";
-				}
-				if ($_COOKIE['level'] == 2) {
-					include "menu2.php";
-				}
-				if ($_COOKIE['level'] == 3) {
-					include "menu3.php";
 				}
 				$nama = isset($_COOKIE['nama']) ? $_COOKIE['nama'] : 'User';
 				$gelar = isset($_COOKIE['gelar']) ? $_COOKIE['gelar'] : '';
@@ -105,84 +101,106 @@
 			<main class="content px-3 py-4" style="background-image: url('images/undip_watermark_color.png'), url('images/undip_watermark_color.png'); ">
 				<div class="container-fluid">
 					<div class="mb-3">
-						<h3 class="fw-bold fs-4 mb-3">REKAP INDIVIDU EVALUASI</h3>
+						<h3 class="fw-bold fs-4 mb-3">ROTASI KEPANITERAAN (STASE)</h3>
 						<br />
 						<h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
-							REKAP INDIVIDU EVALUASI KEPANITERAAN (STASE)
+							UPDATE DATA JADWAL KOAS
 						</h2>
 						<br><br>
 						<?php
-						$mhsw_nim = $_GET['user_name'];
-						$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$mhsw_nim'"));
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">";
+
+						if (empty($_POST['submit'])) {
+							$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id`");
+						}
 						?>
-						<center>
-							<table class="table table-bordered" style="width: auto;">
-								<tr class="table-primary" style="border-width: 1px; border-color: #000;">
-									<td style="width: 300px;"><strong>Nama Mahasiswa: </strong></td>
-									<td style="width: 300px; font-weight:600;color:darkblue"><?php echo $data_mhsw['nama']; ?></td>
-								</tr>
-								<tr class=" table-success" style="border-width: 1px; border-color: #000;">
-									<td><strong>NIM: </strong></td>
-									<td style="font-weight:600;color:darkred"><?php echo $data_mhsw['nim']; ?></td>
-								</tr>
-							</table>
-						</center>
-						<br>
-						<table class=" table table-bordered">
-							<?php
-							$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id` ASC");
+						<div class="container">
+							<center>
+								<div class="table-responsive">
+									<table class="table table-bordered" style="width: auto;">
 
-							$kelas_baris = "table-primary";
-							$no = 1;
+										<tr class="table-success" style="border-width: 1px; border-color: #000;">
+											<td>
+												<strong>Import Data Jadwal Koas</strong>
+											</td>
+											<td>
+												<?php
+												echo "<input type=\"file\" class=\"form-control\" id=\"daftar_koas\" name=\"daftar_koas\" accept=\".csv\" required ><br>";
+												echo "<font style=\"font-size:0.8em; font-weight:700;\" class=\"text-danger\">Import file dalam format <i>csv</i> (*.csv) dengan separator ( , ) atau ( ; ) => <br> no - nim - angkatan - stase1 - mulai1 - selesai1 - stase2 - mulai2 - selesai2 - stase3 - mulai3 - selesai3 - stase4 - mulai4 - selesai4 - stase5 - mulai5 - selesai5 - stase6 - mulai6 - selesai6</font>";
+												?>
+											</td>
+										</tr>
+										<tr class="table-primary" style="border-width: 1px; border-color: #000;">
+											<td>
+												<strong>Separator file csv:<br><span class="text-danger" style="font-weight: 700;">koma --> ( , )</span> atau <span class="text-danger" style="font-weight: 700;">titik koma --> ( ; )</span></strong>
+											</td>
+											<td>
+												<?php
+												echo "<select class=\"form-select\" id=\"separator\" name=\"separator\" required>";
+												echo "<option value=\"\">< Pilihan Separator ></option>";
+												echo "<option value=\",\">Koma --> ( , )</option>";
+												echo "<option value=\";\">Titik Koma --> ( ; )</option>";
+												echo "</select>";
+												?>
+											</td>
+										</tr>
+									</table>
+									<div id="stase"></div>
+									<br>
+									<button type="submit" class="btn btn-success" name="submit" value="SUBMIT"><i class="fa-solid fa-floppy-disk me-2"></i>SUBMIT</button>
+								</div>
+							</center>
+						</div>
+						<?php
+						if (!empty($_POST['submit'])) {
+							$truncate_table = mysqli_query($con, "TRUNCATE TABLE `update_jadwal_koas_temp`");
+							$file = $_FILES['daftar_koas']['tmp_name'];
+							$handle = fopen($file, "r");
+							$separator = $_POST['separator'];
+							$id = 0;
+							while (($filesop = fgetcsv($handle, 1000, $separator)) !== false) {
+								if ($id > 0 && $filesop[0] != "") {
+									$no = $filesop[0];
+									$nim = $filesop[1];
+									$angkatan = $filesop[2];
+									$stase1 = $filesop[3];
+									$mulai1 = $filesop[4];
+									$selesai1 = $filesop[5];
+									$stase2 = $filesop[6];
+									$mulai2 = $filesop[7];
+									$selesai2 = $filesop[8];
+									$stase3 = $filesop[9];
+									$mulai3 = $filesop[10];
+									$selesai3 = $filesop[11];
+									$stase4 = $filesop[12];
+									$mulai4 = $filesop[13];
+									$selesai4 = $filesop[14];
+									$stase5 = $filesop[15];
+									$mulai5 = $filesop[16];
+									$selesai5 = $filesop[17];
+									$stase6 = $filesop[18];
+									$mulai6 = $filesop[19];
+									$selesai6 = $filesop[20];
 
-							while ($data_stase = mysqli_fetch_array($stase)) {
-								$stase_id = "stase_" . $data_stase['id'];
-								$jml_data = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$mhsw_nim'"));
-
-								if ($no == 1) {
-									echo "<tr class=\"$kelas_baris\" style=\"border-width: 1px; border-color: #000;\">";
+									$insert_temp = mysqli_query($con, "INSERT INTO `update_jadwal_koas_temp` 
+                                    (`no`, `nim`, `angkatan`, `stase1`, `mulai1`, `selesai1`, `stase2`, `mulai2`, `selesai2`, 
+                                    `stase3`, `mulai3`, `selesai3`, `stase4`, `mulai4`, `selesai4`, `stase5`, `mulai5`, `selesai5`, 
+                                    `stase6`, `mulai6`, `selesai6`) 
+                                    VALUES ('$no', '$nim', '$angkatan', '$stase1', '$mulai1', '$selesai1', '$stase2', '$mulai2', '$selesai2', 
+                                            '$stase3', '$mulai3', '$selesai3', '$stase4', '$mulai4', '$selesai4', '$stase5', '$mulai5', '$selesai5', 
+                                            '$stase6', '$mulai6', '$selesai6')");
 								}
-
-								if ($jml_data > 0) {
-									$data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$mhsw_nim'"));
-									$tglmulai = tanggal_indo($data['tgl_mulai']);
-									$tglselesai = tanggal_indo($data['tgl_selesai']);
-
-									if (strtotime($data['tgl_mulai']) <= strtotime($tgl) && strtotime($tgl) <= strtotime($data['tgl_selesai'])) {
-										echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-outline-success btn-md\"><i class=\"fa fa-hourglass-half me-2\" ></i><font style=\" font-size:1.1em;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-										echo "<td align=\"center\"><font style=\"color:green; font-size:1.1em; font-weight:600;\">{$tglmulai} - {$tglselesai}<br>(Aktif)</font></td>";
-										echo "<td align=\"center\"><font style=\"color:green; font-size:1.1em; font-weight:600;\">Aktif</font></td>";
-										$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='1' WHERE `nim`='$mhsw_nim'");
-									} elseif (strtotime($tgl) > strtotime($data['tgl_selesai'])) {
-										echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-outline-info btn-md\"><i class=\"fa fa-check-circle me-2\" style=\"color:black\"></i><font style=\"color:black;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-										echo "<td align=\"center\"><font style=\"color:blue; font-size:1.1em; font-weight:600;\">{$tglmulai} - {$tglselesai}<br>(Sudah Terlewat)</font></td>";
-										echo "<td align=\"center\"><font style=\"color:blue; font-size:1.1em; font-weight:600;\">Sudah Terlewat</font></td>";
-										$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='2' WHERE `nim`='$mhsw_nim'");
-									} elseif (strtotime($tgl) < strtotime($data['tgl_mulai'])) {
-										echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-outline-secondary btn-md\"><i class=\"fa fa-times-circle me-2\" style=\"color:black\"></i><font style=\"color:black; font-size:1.1em;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-										echo "<td align=\"center\"><font style=\"color:grey; font-size:1.1em; font-weight:600;\">{$tglmulai} - {$tglselesai}<br>(Belum aktif)</font></td>";
-										echo "<td align=\"center\"><font style=\"color:grey; font-size:1.1em; font-weight:600;\">Belum aktif</font></td>";
-										$update = mysqli_query($con, "UPDATE `$stase_id` SET `status`='0' WHERE `nim`='$mhsw_nim'");
-									}
-								} else {
-									echo "<td align=\"center\"><a href=\"rekap_evalstase_admin.php?id={$data_stase['id']}&nim={$mhsw_nim}\"><button type=\"button\" class=\"btn btn-outline-secondary btn-md\"><i class=\"fa fa-times-circle me-2\" style=\"color:black\"></i><font style=\"color:black;\">{$data_stase['kepaniteraan']}</font></button></a></td>";
-									echo "<td align=\"center\"><font style=\"color:red; font-size:1.1em; font-weight:600;\">-<br>(Belum terjadwal)</font></td>";
-									echo "<td align=\"center\"><font style=\"color:red; font-size:1.1em; font-weight:600;\">Belum terjadwal</font></td>";
-								}
-
-								if ($no == 2) {
-									echo "</tr>";
-									$kelas_baris = ($kelas_baris == "table-primary") ? "table-success" : "table-primary";
-									$no = 0;
-								}
-								$no++;
+								if ($filesop[0] != "") $id++;
 							}
+							echo "
+                            <script>
+                                window.location.href=\"update_tambah_jadwal.php\";
+                            </script>
+                            ";
+						}
 
-							if ($no == 2) echo "<td colspan=\"3\">&nbsp;</td></tr>";
-							?>
 
-						</table>
-						<br>
+						?>
 					</div>
 				</div>
 			</main>
@@ -265,6 +283,43 @@
 
 	<script src="javascript/script1.js"></script>
 	<script src="javascript/buttontopup.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery_ui/jquery-ui.js"></script>
+	<script src="select2/dist/js/select2.js"></script>
+	<script type="text/javascript" src="freezeheader/js/jquery.freezeheader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('#input-tanggal').datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+
+			$('#semester').change(function() {
+				var smt = $(this).val();
+				$.ajax({
+					type: 'POST',
+					url: 'semester_stase.php',
+					data: 'semester=' + smt,
+					success: function(response) {
+						$('#stase').html(response);
+					}
+				});
+			});
+
+			$("#semester").select2({
+				placeholder: "< Pilihan Semester >",
+				allowClear: true
+			});
+			$("#separator").select2({
+				placeholder: "< Pilihan Separator >",
+				allowClear: true
+			});
+			$("#freeze").freezeHeader();
+
+
+
+		});
+	</script>
 </body>
 
 </HTML>

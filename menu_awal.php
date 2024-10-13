@@ -16,6 +16,25 @@
 	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 
 </head>
+<style>
+	@keyframes blink {
+		0% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.blink-text {
+		animation: blink 2s linear infinite;
+	}
+</style>
 
 <body>
 	<div class="wrapper">
@@ -128,6 +147,24 @@
 						<br>
 						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">SELAMAT DATANG DI WEB KOAS FAKULTAS KEDOKTERAN UNDIP</h2>
 						<br>
+						<div class="text-center my-3">
+							<?php if ($_COOKIE['level'] != 6): ?>
+								<span class="blink-text" style="color: red; font-weight: bold;">Silahkan isi Email Anda Pada Update Profil !!</span>
+								<br><br>
+								<?php
+								$update_link = '';
+								if ($_COOKIE['level'] == 5) {
+									$update_link = 'edit_usermhsw_action.php';
+								} elseif ($_COOKIE['level'] == 1 || $_COOKIE['level'] == 2) {
+									$update_link = 'update_admin.php';
+								} elseif ($_COOKIE['level'] == 3 || $_COOKIE['level'] == 4) {
+									$update_link = 'edit_userdosen_action.php';
+								}
+								?>
+								<a href="<?php echo $update_link; ?>" class="btn btn-primary">Update Profil</a>
+							<?php endif; ?>
+						</div>
+
 						<!-- ISI DISINI -->
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
 							<div class="carousel-indicators">

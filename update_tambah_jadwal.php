@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-line Hapus Rotasi Individu Logbook Koas Pendidikan Dokter FK-UNDIP</title>
+  <title>On-line Informasi Logbook Koas Pendidikan Dokter FK-UNDIP</title>
   <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
   <link rel="stylesheet" href="style/style1.css" />
   <link rel="stylesheet" href="style/buttontopup.css">
-
+  <link rel="stylesheet" href="style/informasi.css">
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -21,10 +21,9 @@
 <body>
   <div class="wrapper">
     <?php
-
     include "config.php";
     include "fungsi.php";
-    set_time_limit(0);
+
     error_reporting("E_ALL ^ E_NOTICE");
 
     if (empty($_COOKIE['user']) || empty($_COOKIE['pass'])) {
@@ -34,7 +33,7 @@
 		</script>
 		";
     } else {
-      if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass']) and $_COOKIE['level'] == 1) {
+      if (!empty($_COOKIE['user']) and !empty($_COOKIE['pass'])) {
         if ($_COOKIE['level'] == 1) {
           include "menu1.php";
         }
@@ -65,7 +64,7 @@
       $foto_path = $default_foto;
     }
     ?>
-    <!-- End Sidebar -->
+    <!-- Main Content -->
     <div class="main">
       <!-- Start Navbar -->
       <nav class="navbar navbar-expand px-4 py-3" style="background-color: #006400; ">
@@ -100,83 +99,79 @@
         <div class="container-fluid">
           <div class="mb-3">
             <h3 class="fw-bold fs-4 mb-3">ROTASI KEPANITERAAN (STASE)</h3>
-            <br />
-            <h2 class="fw-bold fs-4 mb-3 text-center" style="color: #0a3967">
-              ROTASI INDIVIDU KEPANITERAAN (STASE) - HAPUS ROTASI
-            </h2>
-            <br><br>
+            <br>
+            <h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">UPDATE DATA JADWAL KOAS</h2>
+            <br>
             <?php
-            // Form
-            echo '<form method="POST" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '">';
-            ?>
-            <div class="container mt-5">
-              <div class="text-center mb-4">
-                <center>
-                  <table class="table table-bordered" style="width: auto;">
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
-                      <td class="align-middle" style="width:200px"><span style="font-size: 17px;"><strong>Cari Mahasiswa: </strong></span></td>
-                      <td class="align-middle" style="width: 400px;"><input type="text" class="form-control" name="kunci" id="kunci" style="display: inline-block;" placeholder="masukkan NIM atau nama mahasiswa" /></td>
-                    </tr>
-                  </table>
-                </center>
-                <br>
-                <button type="submit" class="btn btn-success" name="cari" value="CARI">
-                  <i class="fa-solid fa-magnifying-glass me-2"></i>CARI
-                </button>
-              </div>
-              <br>
-              <?php
-              // Handling the search request
-              if (isset($_POST['cari']) && $_POST['cari'] === "CARI") {
-                // Secure the input
-                $kunci = mysqli_real_escape_string($con, $_POST['kunci']);
-                $query = "SELECT * FROM `admin` WHERE `level`='5' AND (`username` LIKE '%$kunci%' OR `nama` LIKE '%$kunci%')";
-                $user_kunci = mysqli_query($con, $query);
-                $jml = mysqli_num_rows($user_kunci);
+            $data_koas = mysqli_query($con, "SELECT * FROM `update_jadwal_koas_temp`");
+            $no = 0;
 
-                // Check if any results found
-                if ($jml >= 1) {
-                  echo '<div class="text-center mb-4">';
-                  echo '<small class="text-danger" style="font-weight:700">(Klik username untuk melihat dan menghapus rotasi kepaniteraan/stase secara manual)</small>';
-                  echo '<p></p>';
-                  echo '<table class="table table-bordered"';
-                  echo '<thead>';
-                  echo '<tr class="table-success">';
-                  echo '<th style="width:5px;text-align:center">No</th>';
-                  echo '<th style="width:150px;text-align:center">Username (NIM)</th>';
-                  echo '<th style="width:250px;text-align:center">Nama Mahasiswa</th>';
-                  echo '</tr>';
-                  echo '</thead>';
-                  echo '<tbody>';
-                  $no = 1;
-                  while ($data = mysqli_fetch_array($user_kunci)) {
-                    $biodata_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$data[username]'"));
-                    echo '<tr class="table-secondary">';
-                    echo '<td style="text-align:center;font-weight:700">' . htmlspecialchars($no) . '</td>';
-                    echo '<td><a href="rotasi_inddelete.php?user_name=' . urlencode($data['username']) . '" class="btn btn-outline-primary">' . htmlspecialchars($data['username']) . '</a></td>';
-                    echo '<td style="text-align:center;font-weight:700">' . htmlspecialchars($biodata_mhsw['nama']) . '</td>';
-                    echo '</tr>';
-                    $no++;
+            // Mulai tabel
+            echo '<table border="1" cellpadding="5" cellspacing="0" class="table table-bordered table-striped">';
+            echo '<tr align=center><th>No</th><th>NIM</th><th>Stase</th><th>Status</th><th>Pesan</th></tr>';
+
+            while ($data = mysqli_fetch_array($data_koas)) {
+              $nim_mhsw = $data['nim'];
+              for ($i = 1; $i < 7; $i++) {
+                $stase_i = "stase" . $i;
+                $mulai_i = "mulai" . $i;
+                $selesai_i = "selesai" . $i;
+                $stase = $data[$stase_i];
+                $tgl_mulai = $data[$mulai_i];
+                $tgl_selesai = $data[$selesai_i];
+                $stase_id = "stase_" . $stase;
+
+                $rotasi = $i;
+
+                if ($stase != "") {
+                  $ada_jadwal = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `$stase_id` WHERE `nim`='$nim_mhsw'"));
+                  if ($ada_jadwal > 0) {
+                    $update_jadwal = mysqli_query($con, "UPDATE `$stase_id` SET `rotasi`='$rotasi',`tgl_mulai`='$tgl_mulai',`tgl_selesai`='$tgl_selesai',`status`='0',`evaluasi`='0' WHERE `nim`='$nim_mhsw'");
+                    $status = "UPDATED";
+                  } else {
+                    $insert_jadwal = mysqli_query($con, "INSERT INTO `$stase_id` ( `nim`, `rotasi`, `tgl_mulai`, `tgl_selesai`, `status`, `evaluasi`) VALUES ( '$nim_mhsw','$rotasi','$tgl_mulai','$tgl_selesai', '0','0')");
+                    $status = "INSERTED";
                   }
-                  echo '</tbody>';
-                  echo '</table>';
-                  echo '</div>';
-                } else {
-                  echo '<div class="text-center mb-4">';
-                  echo '<span style="font-size:1.0em;font-weight:700;color:#dc3545">Tidak ada USER dengan kata kunci "<i style="color:blue">' . htmlspecialchars($_POST['kunci']) . '</i>" !</span>';
-                  echo '</div>';
+
+                  // Menentukan pesan berdasarkan status
+                  if ($insert_jadwal || $update_jadwal) {
+                    $pesan = "$nim_mhsw - $stase_id - $status";
+                  } else {
+                    $pesan = "$nim_mhsw - $stase_id - ERROR";
+                  }
+
+                  // Menampilkan hasil dalam tabel
+                  echo "<tr align=center><td>{$no}</td><td>$nim_mhsw</td><td>$stase_id</td><td>$status</td><td>$pesan</td></tr>";
                 }
               }
-              ?>
-            </div>
-            </form>
+              $no++;
+            }
+
+            // Menutup tabel
+            echo '</table>';
+            echo "<div style='text-align: center; color: blue; font-size:0.9em; font-weight: 600;'>
+        <br><br>
+        << Update data jumlah $no mahasiswa koas >>
+        <br><br>
+      </div>";
+            ?>
+            <center>
+              <button type="submit" class="btn btn-primary me-3" name="kembali" value="KEMBALI">
+                <i class="fa-solid fa-backward me-2"></i>KEMBALI
+              </button>
+            </center>
+            <?php
+            if ($_POST['kembali'] == "KEMBALI") {
+              echo "
+				<script>
+					window.location.href=\"rotasi_tambah_jadwal.php\";
+				</script>
+				";
+            }
+            ?>
 
           </div>
-        </div>
       </main>
-
-
-      <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
         <i class="fa-solid fa-arrow-up"></i>
@@ -245,15 +240,14 @@
         </div>
       </footer>
       <!-- End Footer -->
-
     </div>
+
   </div>
   <!-- Script Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <script src="javascript/script1.js"></script>
   <script src="javascript/buttontopup.js"></script>
-  <script type="text/javascript" src="jquery.min.js"></script>
 </body>
 
-</HTML>
+</html>

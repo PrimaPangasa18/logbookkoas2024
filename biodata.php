@@ -142,15 +142,15 @@
 										<tbody>
 											<tr class="table-primary">
 												<td style="width: 400px;"><strong>Nama Peserta</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['nama']; ?></td>
+												<td style="width: 500px; font-weight:500;"><?php echo $data_mhsw['nama']; ?></td>
 											</tr>
 											<tr class="table-success">
 												<td style="width: 400px;"><strong>NIM Peserta</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['nim']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['nim']; ?></td>
 											</tr>
 											<tr class="table-primary">
 												<td style="width: 400px;"><strong>Tempat, Tgl Lahir</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen">
+												<td style="width: 500px; font-weight:500; ">
 													<?php
 													if ($data_mhsw['tanggal_lahir'] == "2000-01-01") {
 														echo "&nbsp;";
@@ -162,31 +162,31 @@
 											</tr>
 											<tr class="table-success">
 												<td style="width: 400px;"><strong>Alamat</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['alamat'] . " - " . $kota_alamat['kota'] . " - " . $prop_alamat['prop']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['alamat'] . " - " . $kota_alamat['kota'] . " - " . $prop_alamat['prop']; ?></td>
 											</tr>
 											<tr class="table-primary">
 												<td style="width: 400px;"><strong>No HP</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['no_hp']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['no_hp']; ?></td>
 											</tr>
 											<tr class="table-success">
 												<td style="width: 400px;"><strong>Email</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['email']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['email']; ?></td>
 											</tr>
 											<tr class="table-primary">
 												<td style="width: 400px;"><strong>Nama Orang Tua</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['nama_ortu']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['nama_ortu']; ?></td>
 											</tr>
 											<tr class="table-success">
 												<td style="width: 400px;"><strong>Alamat Orang Tua</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['alamat_ortu'] . " - " . $kota_ortu['kota'] . " - " . $prop_ortu['prop']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['alamat_ortu'] . " - " . $kota_ortu['kota'] . " - " . $prop_ortu['prop']; ?></td>
 											</tr>
 											<tr class="table-primary">
 												<td style="width: 400px;"><strong>No HP Orang Tua</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $data_mhsw['no_hportu']; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $data_mhsw['no_hportu']; ?></td>
 											</tr>
 											<tr class="table-success">
 												<td style="width: 400px;"><strong>Dosen Wali</strong></td>
-												<td style="width: 500px; font-weight:500; color:darkgreen"><?php echo $dosen_wali['nama'] . ", " . $dosen_wali['gelar'] . " (NIP. " . $data_mhsw['dosen_wali'] . ")"; ?></td>
+												<td style="width: 500px; font-weight:500; "><?php echo $dosen_wali['nama'] . ", " . $dosen_wali['gelar'] . " (NIP. " . $data_mhsw['dosen_wali'] . ")"; ?></td>
 											</tr>
 										</tbody>
 									</table>

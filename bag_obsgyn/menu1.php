@@ -77,6 +77,11 @@
         </a>
         <ul id="multi-three" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
+            <a href="rotasi_tambah_jadwal.php" class="sidebar-link">
+              <span>Tambah Jadwal Koas</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-four" aria-expanded="false" aria-controls="multi-four">
               Rotasi Kelompok
             </a>
@@ -109,7 +114,9 @@
               </li>
             </ul>
         </ul>
+
       </li>
+
       <li class="sidebar-item">
         <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#multi-six" aria-expanded="false" aria-controls="multi-six">
           <i class="lni lni-folder"></i>

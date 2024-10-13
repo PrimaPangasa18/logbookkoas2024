@@ -193,13 +193,13 @@
                     </tr>
 
                     <!-- Nama Lengkap -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Nama Lengkap</strong></td>
                       <td><input type="text" name="nama" value="<?php echo htmlspecialchars($data_user['nama']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Propinsi Lahir -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>Propinsi Lahir</strong></td>
                       <td>
                         <select name="prop_lahir" id="prop_lahir" class="form-select">
@@ -216,7 +216,7 @@
                     </tr>
 
                     <!-- Kota Lahir -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Kota Lahir</strong></td>
                       <td>
                         <select name="kota_lahir" id="kota_lahir" class="form-select">
@@ -229,19 +229,19 @@
                     </tr>
 
                     <!-- Tanggal Lahir -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>Tanggal Lahir <span class="text-danger">(yyyy-mm-dd)</span></strong></td>
                       <td><input type="text" name="tgl_lahir" value="<?php echo htmlspecialchars($biodata_mhsw['tanggal_lahir']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Alamat -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Alamat</strong></td>
                       <td><input type="text" name="alamat" value="<?php echo htmlspecialchars($biodata_mhsw['alamat']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Propinsi Alamat -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>Propinsi Alamat</strong></td>
                       <td>
                         <select name="prop_alamat" id="prop_alamat" class="form-select">
@@ -258,7 +258,7 @@
                     </tr>
 
                     <!-- Kota Alamat -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Kota Alamat</strong></td>
                       <td>
                         <select name="kota_alamat" id="kota_alamat" class="form-select">
@@ -271,31 +271,31 @@
                     </tr>
 
                     <!-- No HP (Telepon) -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>No HP <span class="text-danger">(Telepon)</span></strong></td>
                       <td><input type="text" name="no_hp" value="<?php echo htmlspecialchars($biodata_mhsw['no_hp']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Alamat Email -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Alamat Surat Elektronik <span class="text-danger">(E-mail)</span></strong></td>
                       <td><input type="text" name="surel" value="<?php echo htmlspecialchars($biodata_mhsw['email']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Nama Wali (Orang Tua) -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>Nama Wali <span class="text-danger">(Orang Tua)</span></strong></td>
                       <td><input type="text" name="nama_ortu" value="<?php echo htmlspecialchars($biodata_mhsw['nama_ortu']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Alamat Wali (Orang Tua) -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Alamat Wali <span class="text-danger">(Orang Tua)</span></strong></td>
                       <td><input type="text" name="alamat_ortu" value="<?php echo htmlspecialchars($biodata_mhsw['alamat_ortu']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Propinsi Alamat Wali (Orang Tua) -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>Propinsi Alamat Wali <span class="text-danger">(Orang Tua)</span></strong></td>
                       <td>
                         <select name="prop_ortu" id="prop_ortu" class="form-select">
@@ -312,7 +312,7 @@
                     </tr>
 
                     <!-- Kota Alamat Wali (Orang Tua) -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td style="width: 400px;"><strong>Kota Alamat Wali <span class="text-danger">(Orang Tua)</span></strong></td>
                       <td tyle="width: 500px;">
                         <select name="kota_ortu" id="kota_ortu" class="form-select">
@@ -324,13 +324,13 @@
                       </td>
                     </tr>
                     <!-- No HP (Telepon) Ortu -->
-                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                       <td><strong>No HP (Telepon) Wali <span class="text-danger">(Orang Tua)</span></strong></td>
                       <td><input type="text" name="no_hportu" value="<?php echo htmlspecialchars($biodata_mhsw['no_hportu']); ?>" class="form-control"></td>
                     </tr>
 
                     <!-- Dosen Wali -->
-                    <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <tr class="table-success" style="border-width: 1px; border-color: #000;">
                       <td><strong>Dosen Wali</strong></td>
                       <td>
                         <select name="dosen_wali" id="dosen_wali" class="form-select" required>

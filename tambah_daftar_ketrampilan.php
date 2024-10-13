@@ -115,7 +115,7 @@
 							echo "</tr>";
 							//Level Ketrampilan SKDI
 							echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
-							echo "<td><strong>Level Penyakit <span class=\"text-danger\">(SKDI)</span> <strong> </td>";
+							echo "<td><strong>Level Ketrampilan <span class=\"text-danger\">(SKDI)</span> <strong> </td>";
 							echo "<td>";
 							echo "<select class=\"form-select\" name=\"skdi_level\" id=\"skdi_level\" style=\"border:0.5px solid grey;border-radius:5px; font-weight:600;\">";
 							echo "<option value=\"-\"> - </option>";
@@ -132,7 +132,7 @@
 							echo "</tr>";
 							//Level Ketrampilan Kemenkes
 							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
-							echo "<td><strong>Level Penyakit <span class=\"text-danger\">(Kepmenkes)</span> </td>";
+							echo "<td><strong>Level Ketrampilan (Kepmenkes) <span class=\"text-danger\">(Kepmenkes)</span> </td>";
 							echo "<td>";
 							echo "<select class=\"form-select\" name=\"k_level\" id=\"k_level\" style=\"border:0.5px solid grey;border-radius:5px; font-weight:600;\">";
 							echo "<option value=\"-\"> - </option>";
@@ -149,7 +149,7 @@
 							echo "</tr>";
 							//Level Ketrampilan IPSG
 							echo "<tr class=\"table-success\" style=\"border-width: 1px; border-color: #000;\">";
-							echo "<td><strong>Level Penyakit <span class=\"text-danger\">(IPSG)</span> </strong> </td>";
+							echo "<td><strong>Level Ketrampilan (IPSG) <span class=\"text-danger\">(IPSG)</span> </strong> </td>";
 							echo "<td>";
 							echo "<select class=\"form-select\" name=\"ipsg_level\" id=\"ipsg_level\" style=\"border:0.5px solid grey;border-radius:5px; font-weight:600;\">";
 							echo "<option value=\"-\"> - </option>";
@@ -166,7 +166,7 @@
 							echo "</tr>";
 							//Level Ketrampilan Muatan Lokal
 							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
-							echo "<td><strong>Level Penyakit <span class=\"text-danger\">(Muatan Lokal)</span></strong> </td>";
+							echo "<td><strong>Level Ketrampilan (Muatan Lokal) <span class=\"text-danger\">(Muatan Lokal)</span></strong> </td>";
 							echo "<td>";
 							echo "<select class=\"form-select\" name=\"kml_level\" id=\"kml_level\" style=\"border:0.5px solid grey;border-radius:5px; font-weight:600;\">";
 							echo "<option value=\"-\"> - </option>";

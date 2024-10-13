@@ -109,7 +109,7 @@
 						</h2>
 						<br><br>
 						<center>
-							<span class="text-danger" style="font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600">Tekan tobol dibawah ini untuk melihat masing-masing cek</span>
+							<span class="text-danger" style="font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600">Tekan tombol dibawah ini untuk melihat masing-masing cek</span>
 							<br><br>
 							<a href="#penyakit" class="btn btn-success me-3">Kegitan Jurnal Penyakit</a>
 							<a href="#trampil" class="btn btn-primary me-3">Kegiatan Jurnal Ketrampilan</a>
