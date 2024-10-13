@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>On-line Logbook Koas Pendidikan Dokter FK-UNDIP</title>
-  <link rel="shortcut icon" type="x-icon" href="../images/undipsolid.png">
-  <link rel="stylesheet" href="../style/style1.css" />
+  <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
+  <link rel="stylesheet" href="style1.css" />
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -34,13 +34,13 @@
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-item">
-        <a href="../menu_awal.php" class="sidebar-link">
+        <a href="menu_awal.php" class="sidebar-link">
           <i class="lni lni-home"></i>
           <span>Beranda</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="../profil_dosen.php" class="sidebar-link">
+        <a href="profil_dosen.php" class="sidebar-link">
           <i class="lni lni-user"></i>
           <span>Profil Diri</span>
         </a>
@@ -57,14 +57,14 @@
             </a>
             <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="../view_rotasi_kelp.php" class="sidebar-link">Rotasi Angkatan</a>
+                <a href="view_rotasi_kelp.php" class="sidebar-link">Rotasi Angkatan</a>
               </li>
               <li class="sidebar-item">
-                <a href="../view_rotasi_individu.php" class="sidebar-link">Rotasi Individu</a>
+                <a href="view_rotasi_individu.php" class="sidebar-link">Rotasi Individu</a>
               </li>
             </ul>
           <li class="sidebar-item">
-            <a href="../rotasi_internal_stase_search.php" class="sidebar-link">
+            <a href="rotasi_internal_stase_search.php" class="sidebar-link">
               <span>Rotasi Internal</span>
             </a>
           </li>
@@ -82,22 +82,22 @@
             </a>
             <ul id="multi-four" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="../rekap_umum_admin.php" class="sidebar-link">Rekap Stase</a>
+                <a href="rekap_umum_admin.php" class="sidebar-link">Rekap Stase</a>
               </li>
               <li class="sidebar-item">
                 <a href="rekap_umumeval_admin.php" class="sidebar-link">Evaluasi Harian</a>
               </li>
               <li class="sidebar-item">
-                <a href="../rekap_umumeval_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
+                <a href="rekap_umumeval_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="../capaian_umum_search.php" class="sidebar-link">Ketuntasan/Grade</a>
+                <a href="capaian_umum_search.php" class="sidebar-link">Ketuntasan/Grade</a>
               </li>
               <li class="sidebar-item">
-                <a href="../nilai_bag_umum_search.php" class="sidebar-link">Rekap Nilai Bagian</a>
+                <a href="nilai_bag_umum_search.php" class="sidebar-link">Rekap Nilai Bagian</a>
               </li>
               <li class="sidebar-item">
-                <a href="../nilai_akhir_umum_search.php" class="sidebar-link">Rekap Nilai Akhir</a>
+                <a href="nilai_akhir_umum_search.php" class="sidebar-link">Rekap Nilai Akhir</a>
               </li>
             </ul>
         </ul>
@@ -108,22 +108,22 @@
             </a>
             <ul id="multi-five" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="../rekap_individu_search.php" class="sidebar-link">Rekap Stase</a>
+                <a href="rekap_individu_search.php" class="sidebar-link">Rekap Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="../rekap_evaluasi_search.php" class="sidebar-link">Evaluasi Harian</a>
+                <a href="rekap_evaluasi_search.php" class="sidebar-link">Evaluasi Harian</a>
               </li>
               <li class="sidebar-item">
-                <a href="../rekap_evaluasi_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
+                <a href="rekap_evaluasi_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="../capaian_individu_search.php" class="sidebar-link">Ketuntasan/Grade</a>
+                <a href="capaian_individu_search.php" class="sidebar-link">Ketuntasan/Grade</a>
               </li>
               <li class="sidebar-item">
-                <a href="../nilai_bag_search.php" class="sidebar-link">Cetak Nilai Bagian</a>
+                <a href="nilai_bag_search.php" class="sidebar-link">Cetak Nilai Bagian</a>
               </li>
               <li class="sidebar-item">
-                <a href="../nilai_akhir_search.php" class="sidebar-link">Nilai Akhir Bagian</a>
+                <a href="nilai_akhir_search.php" class="sidebar-link">Nilai Akhir Bagian</a>
               </li>
             </ul>
         </ul>
@@ -135,7 +135,7 @@
         </a>
         <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="../edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
+            <a href="edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
           </li>
         </ul>
       </li>
@@ -143,7 +143,7 @@
     </ul>
 
     <div class="sidebar-footer">
-      <a href="../logout.php" class="sidebar-link">
+      <a href="logout.php" class="sidebar-link">
         <i class="lni lni-exit"></i>
         <span>Logout</span>
       </a>
@@ -152,8 +152,21 @@
 
   <!-- Script Javascript -->
 
-  <script src="../javascript/script1.js"></script>
-  <script src="../jquery-3.1.1.min.js"></script>
+  <script src="javascript/script1.js"></script>
+  <script>
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  </script>
+  <script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) ||
+        (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 
 

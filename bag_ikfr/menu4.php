@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>On-line Logbook Koas Pendidikan Dokter FK-UNDIP</title>
-  <link rel="shortcut icon" type="x-icon" href="../images/undipsolid.png">
-  <link rel="stylesheet" href="../style/style1.css" />
+  <link rel="shortcut icon" type="x-icon" href="images/undipsolid.png">
+  <link rel="stylesheet" href="style1.css" />
 
   <!-- Link Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -34,31 +34,31 @@
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-item">
-        <a href="../menu_awal.php" class="sidebar-link">
+        <a href="menu_awal.php" class="sidebar-link">
           <i class="lni lni-home"></i>
           <span>Beranda</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="../informasi.php" class="sidebar-link">
+        <a href="informasi.php" class="sidebar-link">
           <i class="lni lni-information"></i>
           <span>Informasi</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="../profil_dosen.php" class="sidebar-link">
+        <a href="profil_dosen.php" class="sidebar-link">
           <i class="lni lni-user"></i>
           <span>Profil Diri</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="../generate_pin.php" class="sidebar-link">
+        <a href="generate_pin.php" class="sidebar-link">
           <i class="lni lni-key"></i>
           <span>Generate OTP</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="../generate_qr.php" class="sidebar-link">
+        <a href="generate_qr.php" class="sidebar-link">
           <i class="fa-solid fa-qrcode"></i>
           <span>Generate QR</span>
         </a>
@@ -70,13 +70,13 @@
         </a>
         <ul id="kegiatan" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="../filter_kegiatan_dosen.php" class="sidebar-link">Daftar Kegiatan</a>
+            <a href="filter_kegiatan_dosen.php" class="sidebar-link">Daftar Kegiatan</a>
           </li>
           <li class="sidebar-item">
-            <a href="../filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
+            <a href="filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
           </li>
           <li class="sidebar-item">
-            <a href="../penilaian_bag_dosen.php" class="sidebar-link">Penilaian Bagian</a>
+            <a href="penilaian_bag_dosen.php" class="sidebar-link">Penilaian Bagian</a>
           </li>
         </ul>
       </li>
@@ -87,14 +87,14 @@
         </a>
         <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="../edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
+            <a href="edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
           </li>
         </ul>
       </li>
     </ul>
 
     <div class="sidebar-footer">
-      <a href="../logout.php" class="sidebar-link">
+      <a href="logout.php" class="sidebar-link">
         <i class="lni lni-exit"></i>
         <span>Logout</span>
       </a>
@@ -103,7 +103,21 @@
 
   <!-- Script Javascript -->
 
-  <script src="../javascript/script1.js"></script>
+  <script src="javascript/script1.js"></script>
+  <script>
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  </script>
+  <script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) ||
+        (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 
 
