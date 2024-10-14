@@ -149,7 +149,7 @@
 						<br>
 						<div class="text-center my-3">
 							<?php if ($_COOKIE['level'] != 6): ?>
-								<span class="blink-text" style="color: red; font-weight: bold;">Silahkan isi Email Anda Pada Update Profil !!</span>
+								<span class="blink-text" style="color: red; font-weight: bold;">Jika Belum Mengisi Email, Silahkan isi Email Anda Pada Update Profil !!</span>
 								<br><br>
 								<?php
 								$update_link = '';

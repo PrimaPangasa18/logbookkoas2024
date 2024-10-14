@@ -122,6 +122,7 @@
               $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_user[username]'"));
               $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
               $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `level` WHERE `id`='$data_user[level]'"));
+
             ?>
               <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <table class="table table-bordered">
@@ -172,6 +173,18 @@
                     <tr style="border-width: 1px; border-color: #000;" class="table-primary">
                       <td>Nama Lengkap Baru</td>
                       <td><input type="text" name="user_surename" value="<?php echo $dosen['nama']; ?>" class="form-control"></td>
+                    </tr>
+                    <tr style="border-width: 1px; border-color: #000;" class="table-success">
+                      <td><strong>Email</strong></td>
+                      <td>
+                        <strong><?php echo $data_user['email']; ?></strong>
+                      </td>
+                    </tr>
+                    <tr style="border-width: 1px; border-color: #000;" class="table-primary">
+                      <td>Email Baru</td>
+                      <td>
+                        <input type="email" name="user_email" value="<?php echo $data_user['email']; ?>" class="form-control">
+                      </td>
                     </tr>
                     <tr style="border-width: 1px; border-color: #000;" class="table-success">
                       <td><strong>Gelar</strong></td>
@@ -242,42 +255,44 @@
                   <?php } ?>
                 </div>
               </form>
-
-              <?php
+            <?php
             }
 
             if ($_POST['cancel'] == "CANCEL") {
               if ($_COOKIE['level'] == 1 or $_COOKIE['level'] == 2)
                 echo "
-		<script>
-			window.location.href=\"edit_user_dosen.php\";
-		</script>
-		";
+            <script>
+              window.location.href = \"edit_user_dosen.php\";
+            </script>
+            ";
               else
                 echo "
-		<script>
-			window.location.href=\"profil_dosen.php\";
-		</script>
-		";
+            <script>
+              window.location.href = \"profil_dosen.php\";
+            </script>
+            ";
             }
 
             if ($_POST['simpan'] == "SIMPAN") {
               $nama = addslashes($_POST['user_surename']);
+              $email = $_POST['user_email'];
               if (($_COOKIE['level'] == "1" or $_COOKIE['level'] == "2") and $_POST['user_name'] != $_POST['user_name_lama']) {
                 $user_password = MD5($_POST['user_name']);
                 $update_admin = mysqli_query($con, "UPDATE `admin`
-        SET
-        `nama`='$nama',
-        `username`='$_POST[user_name]',
-        `password`='$user_password'
-        WHERE `username`='$_POST[user_name_lama]'");
+            SET
+            `nama`='$nama',
+            `email`='$email',
+            `username`='$_POST[user_name]',
+            `password`='$user_password'
+  
+            WHERE `username`='$_POST[user_name_lama]'");
                 $update_dosen = mysqli_query($con, "UPDATE `dosen`
-        SET
-        `nip`='$_POST[user_name]',
-        `nama`='$nama'
-        WHERE `nip`='$_POST[user_name_lama]'");
-              ?>
-            <?php
+            SET
+            `nip`='$_POST[user_name]',
+            `nama`='$nama'
+            WHERE `nip`='$_POST[user_name_lama]'");
+
+
                 $dosen_baru = $_POST['user_name'];
                 $dosen_lama = $_POST['user_name_lama'];
 
@@ -398,40 +413,44 @@
               if ($_POST['user_pass'] != "") {
                 $user_password = MD5($_POST['user_pass']);
                 $update_admin = mysqli_query($con, "UPDATE `admin`
-        SET
-        `nama`='$nama',
-        `password`='$user_password',
-        `level`='$level'
-        WHERE `username`='$_POST[user_name]'");
+            SET
+            `nama`='$nama',
+            `email`='$email',
+            `password`='$user_password',
+            `level`='$level'
+         
+            WHERE `username`='$_POST[user_name]'");
               } else {
                 $update_admin = mysqli_query($con, "UPDATE `admin`
-        SET
-        `nama`='$nama',
-        `level`='$level'
-        WHERE `username`='$_POST[user_name]'");
+            SET
+            `nama`='$nama',
+            `email`='$email',
+            `level`='$level'
+          
+            WHERE `username`='$_POST[user_name]'");
               }
 
               $update_dosen = mysqli_query($con, "UPDATE `dosen`
-        SET
-        `nama`='$nama',
-        `gelar`='$_POST[user_gelar]',
-        `kode_bagian`='$_POST[bagian]'
-        WHERE `nip`='$_POST[user_name]'");
+            SET
+            `nama`='$nama',
+            `gelar`='$_POST[user_gelar]',
+            `kode_bagian`='$_POST[bagian]'
+            WHERE `nip`='$_POST[user_name]'");
 
 
 
               if ($_COOKIE['level'] == 1 or $_COOKIE['level'] == 2)
                 echo "
-		<script>
-			window.location.href=\"edit_user_dosen.php?status=SIMPAN\";
-		</script>
-		";
+            <script>
+              window.location.href = \"edit_user_dosen.php?status=SIMPAN\";
+            </script>
+            ";
               else
                 echo "
-		<script>
-			window.location.href=\"profil_dosen.php\";
-		</script>
-		";
+            <script>
+              window.location.href = \"profil_dosen.php\";
+            </script>
+            ";
             }
 
             if ($_POST['hapus'] == "HAPUS") {
@@ -551,13 +570,12 @@
               $delete_kdk_nilai_sikap = mysqli_query($con, "DELETE FROM `kdk_nilai_sikap` WHERE `dosen`='$_POST[user_name]'");
 
               echo "
-		<script>
-			window.location.href=\"edit_user_dosen.php?status=HAPUS\";
-		</script>
-		";
+            <script>
+              window.location.href = \"edit_user_dosen.php?status=HAPUS\";
+            </script>
+            ";
             }
             ?>
-            <!-- BERAKHIR -->
           </div>
         </div>
       </main>

@@ -112,24 +112,21 @@
               SILAHKAN UPDATE PROFIL
             </h2>
             <br><br>
-
-            <!-- DISINI -->
             <?php
-            if (empty($_POST['cancel']) and empty($_POST['simpan']) and empty($_POST['hapus'])) {
+            if (empty($_POST['cancel']) && empty($_POST['simpan']) && empty($_POST['hapus'])) {
               $data_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$_COOKIE[user]'"));
               $dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$data_user[username]'"));
               $bagian = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `bagian_ilmu` WHERE `id`='$dosen[kode_bagian]'"));
               $level_user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `level` WHERE `id`='$data_user[level]'"));
-            }
             ?>
-            <div class="table-container">
+
               <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
-                <table class="table table-bordered ">
+                <table class="table table-bordered">
                   <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                     <td><strong>Username</strong></td>
                     <td>
                       <strong><?= $data_user['username'] ?><br></strong>
-                      <p class="text-danger" style="font-weight: 600;"> Note: (Username tidak bisa diubah, NIP/NIDK/NIM/ID dari user)</p>
+                      <p class="text-danger" style="font-weight: 600;">Note: (Username tidak bisa diubah, NIP/NIDK/NIM/ID dari user)</p>
                       <input type="hidden" name="user_name" value="<?= $data_user['username'] ?>" />
                     </td>
                   </tr>
@@ -139,7 +136,7 @@
                       <input type="password" id="form-password" name="user_pass" class="form-control">
                       <br>
                       <label for="form-checkbox">
-                        <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px ;transform: scale(1.3); ">&nbsp; Show password
+                        <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px; transform: scale(1.3);">&nbsp; Show password
                       </label>
                       <br><br>
                       <p class="text-danger" style="font-weight: 600;">Note: (Jika kosong/tidak diisi, password tidak berubah)</p>
@@ -152,6 +149,16 @@
                   <tr class="table-success" style="border-width: 1px; border-color: #000;">
                     <td>Nama Lengkap Baru</td>
                     <td><input type="text" name="user_surename" value="<?= $dosen['nama'] ?>" class="form-control"></td>
+                  </tr>
+                  <tr class="table-primary" style="border-width: 1px; border-color: #000;">
+                    <td><strong>Email</strong></td>
+                    <td>
+                      <strong><?= $data_user['email'] ?></strong>
+                    </td>
+                  </tr>
+                  <tr class="table-success" style="border-width: 1px; border-color: #000;">
+                    <td>Email Baru</td>
+                    <td><input type="email" name="user_email" value="<?= $data_user['email'] ?>" class="form-control"></td>
                   </tr>
                   <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                     <td><strong>Gelar</strong></td>
@@ -191,31 +198,30 @@
                     SIMPAN
                   </button>
                 </div>
-
               </form>
-            </div>
+
             <?php
+            }
+
             if ($_POST['cancel'] == "CANCEL") {
-              echo "<script>window.location.href='profil_dosen.php';</script>";
+              echo "<script>window.location.href=\"profil_dosen.php\";</script>";
             }
 
             if ($_POST['simpan'] == "SIMPAN") {
-              if ($_POST['user_pass'] != "") {
+              if (!empty($_POST['user_pass'])) {
                 $user_password = MD5($_POST['user_pass']);
-                $update_admin = mysqli_query($con, "UPDATE admin SET nama='$_POST[user_surename]', password='$user_password', level='$_COOKIE[level]' WHERE username='$_POST[user_name]'");
+                $update_admin = mysqli_query($con, "UPDATE `admin` SET `nama`='$_POST[user_surename]', `password`='$user_password', `email`='$_POST[user_email]', `level`='$_COOKIE[level]' WHERE `username`='$_POST[user_name]'");
               } else {
-                $update_admin = mysqli_query($con, "UPDATE admin SET nama='$_POST[user_surename]', level='$_COOKIE[level]' WHERE username='$_POST[user_name]'");
+                $update_admin = mysqli_query($con, "UPDATE `admin` SET `nama`='$_POST[user_surename]', `email`='$_POST[user_email]', `level`='$_COOKIE[level]' WHERE `username`='$_POST[user_name]'");
               }
-
-              $update_dosen = mysqli_query($con, "UPDATE dosen SET nama='$_POST[user_surename]', gelar='$_POST[user_gelar]', kode_bagian='$_POST[bagian]' WHERE nip='$_POST[user_name]'");
-              echo "<script>window.location.href='profil_dosen.php';</script>";
+              // Memperbarui cookie 'nama' setelah perubahan
+              setcookie('nama', $_POST['user_surename'], time() + (86400 * 30), "/");
+              $update_dosen = mysqli_query($con, "UPDATE `dosen` SET `nama`='$_POST[user_surename]', `gelar`='$_POST[user_gelar]', `kode_bagian`='$_POST[bagian]' WHERE `nip`='$_POST[user_name]'");
+              echo "<script>window.location.href=\"profil_dosen.php\";</script>";
             }
             ?>
-            <!-- BERAKHIR -->
           </div>
-        </div>
       </main>
-
       <!-- End Content -->
       <!-- Back to Top Button -->
       <button onclick="topFunction()" id="backToTopBtn" title="Go to top">

@@ -149,6 +149,10 @@
                         <td style="width: 300px;"><strong>Level User</strong></td>
                         <td style="width: 400px; font-weight:500; "><?php echo $level_user['level']; ?></td>
                       </tr>
+                      <tr class="table-success">
+                        <td style="width: 300px;"><strong>Email</strong></td>
+                        <td style="width: 400px; font-weight:500;"><?php echo $data_user['email']; ?></td>
+                      </tr>
                     </tbody>
                   </table>
                 </center>
