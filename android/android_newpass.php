@@ -14,10 +14,10 @@ if (isset($data['username']) && isset($data['code']) && isset($data['new_passwor
     $new_password = md5($data['new_password']);  // Hash the new password
 
     // Verify the code
-    $result = mysqli_query($conn, "SELECT * FROM `admin` WHERE `username`='$username' AND `stase`='$code'");
+    $result = mysqli_query($conn, "SELECT * FROM `admin` WHERE `username`='$username' AND `code`='$code'");
     if (mysqli_num_rows($result) == 1) {
         // Code matches, update the password
-        mysqli_query($conn, "UPDATE `admin` SET `password`='$new_password', `stase`=NULL WHERE `username`='$username'");
+        mysqli_query($conn, "UPDATE `admin` SET `password`='$new_password', `code`=NULL WHERE `username`='$username'");
 
         // Return JSON success response
         echo json_encode([

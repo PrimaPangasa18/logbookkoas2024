@@ -109,16 +109,17 @@
 
 						$id_stase = $_GET['id'];
 						$data_stase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
+						$tgl_stase_isi = $_GET['tgl'];
 						$stase_id = "stase_" . $id_stase;
 						$data_stase_mhsw = mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'");
 						$datastase_mhsw = mysqli_fetch_array($data_stase_mhsw);
 
 						$tgl_mulai = tanggal_indo($datastase_mhsw['tgl_mulai']);
 						$tgl_selesai = tanggal_indo($datastase_mhsw['tgl_selesai']);
-						$tgl_isi = tanggal_indo($tgl);
+						$tgl_isi = tanggal_indo($tgl_stase_isi);
 						$mulai = date_create($datastase_mhsw['tgl_mulai']);
 						$selesai = date_create($datastase_mhsw['tgl_selesai']);
-						$sekarang = date_create($tgl);
+						$sekarang = date_create($tgl_stase_isi);
 						$jmlhari_stase = $data_stase['hari_stase'];
 						$hari_skrg = date_diff($mulai, $sekarang);
 						$jmlhari_skrg = $hari_skrg->days + 1;
@@ -133,6 +134,7 @@
 									<td style="width:70%;">
 										<?php
 										echo "<input type=\"hidden\" name=\"stase\" value=\"$id_stase\">";
+										echo "<input type=\"hidden\" name=\"tgl\" value=\"<?php echo $tgl_stase_isi; ?>\">";
 										echo "<span style=\" font-weight: 600; color: darkgreen;\">$data_stase[kepaniteraan]</span>";
 										?>
 									</td>
@@ -183,6 +185,8 @@
 						<br><br>
 						<div class="table-responsive">
 							<center>
+								<input type="hidden" name="id_stase" value="<?php echo $id_stase; ?>">
+								<input type="hidden" name="tgl" value="<?php echo $tgl_stase_isi; ?>">
 
 								<table class="table table-bordered" style="width: auto; ">
 									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
@@ -374,7 +378,7 @@
 						if ($_POST['batal'] == "BATAL") {
 							echo "
 				<script>
-					window.location.href=\"edit_logbook.php?id=\"+\"$_POST[stase]\";
+					window.location.href = \"edit_logbook.php?id=\"+\"$_POST[id_stase]\"+\"&tgl=\"+\"$_POST[tgl]\";
 					</script>
 				";
 						}
@@ -385,7 +389,7 @@
 							$jam_mulai_kegiatan = strtotime($jam_awal);
 							$kelas = $_POST['kelas'];
 							$angkatan_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `angkatan`,`grup` FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
-							$cek_evaluasi = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `evaluasi` WHERE `nim`='$_COOKIE[user]' AND `tanggal`='$tgl'"));
+							$cek_evaluasi = mysqli_num_rows(mysqli_query($con, "SELECT `id` FROM `evaluasi` WHERE `nim`='$_COOKIE[user]' AND `tanggal`='$_POST[tgl]'"));
 							if ($cek_evaluasi >= 1) $evaluasi = 1;
 							else $evaluasi = 0;
 							$tambah_db = mysqli_query($con, "INSERT INTO `jurnal_penyakit`
@@ -397,14 +401,14 @@
 					`dosen`,`status`,`evaluasi`)
 				VALUES
 				( '$_COOKIE[user]','$angkatan_mhsw[angkatan]','$angkatan_mhsw[grup]','$_POST[jmlhari_skrg]',
-					'$tgl','$_POST[stase]','$jam_awal',
+					'$_POST[tgl]','$_POST[stase]','$jam_awal',
 					'$jam_akhir','$kelas','$_POST[lokasi]','$_POST[kegiatan]',
 					'$_POST[penyakit1]','$_POST[penyakit2]',
 					'$_POST[penyakit3]','$_POST[penyakit4]',
 					'$_POST[dosen]','0','$evaluasi')");
 							echo "
 				<script>
-					window.location.href=\"edit_logbook.php?id=\"+\"$_POST[stase]\";
+					window.location.href = \"edit_logbook.php?id=\"+\"$_POST[id_stase]\"+\"&tgl=\"+\"$_POST[tgl]\";
 				</script>
 				";
 						}

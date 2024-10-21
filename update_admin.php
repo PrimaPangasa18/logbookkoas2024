@@ -134,6 +134,15 @@
                     <td>Password Baru</td>
                     <td>
                       <input type="password" id="form-password" name="user_pass" class="form-control">
+                      <div id="password-strength" class="mt-2"></div>
+                      <div class="password-requirements mt-2">
+                        <strong>Password baru minimal 8 huruf dan harus mengandung:</strong>
+                        <ul style="margin-top: 10px; margin-bottom: 10px;">
+                          <li id="lowercase"><strong>Huruf kecil</strong></li>
+                          <li id="uppercase"><strong>Huruf besar</strong></li>
+                          <li id="number"><strong>Angka</strong></li>
+                        </ul>
+                      </div>
                       <br>
                       <label for="form-checkbox">
                         <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px; transform: scale(1.3);">&nbsp; Show password
@@ -153,12 +162,12 @@
                   <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                     <td><strong>Email</strong></td>
                     <td>
-                      <strong><?= $data_user['email'] ?></strong>
+                      <strong><?= $dosen['email'] ?></strong>
                     </td>
                   </tr>
                   <tr class="table-success" style="border-width: 1px; border-color: #000;">
                     <td>Email Baru</td>
-                    <td><input type="email" name="user_email" value="<?= $data_user['email'] ?>" class="form-control"></td>
+                    <td><input type="email" name="user_email" value="<?= $dosen['email'] ?>" class="form-control"></td>
                   </tr>
                   <tr class="table-primary" style="border-width: 1px; border-color: #000;">
                     <td><strong>Gelar</strong></td>
@@ -210,13 +219,13 @@
             if ($_POST['simpan'] == "SIMPAN") {
               if (!empty($_POST['user_pass'])) {
                 $user_password = MD5($_POST['user_pass']);
-                $update_admin = mysqli_query($con, "UPDATE `admin` SET `nama`='$_POST[user_surename]', `password`='$user_password', `email`='$_POST[user_email]', `level`='$_COOKIE[level]' WHERE `username`='$_POST[user_name]'");
+                $update_admin = mysqli_query($con, "UPDATE `admin` SET `nama`='$_POST[user_surename]', `password`='$user_password',  `level`='$_COOKIE[level]' WHERE `username`='$_POST[user_name]'");
               } else {
-                $update_admin = mysqli_query($con, "UPDATE `admin` SET `nama`='$_POST[user_surename]', `email`='$_POST[user_email]', `level`='$_COOKIE[level]' WHERE `username`='$_POST[user_name]'");
+                $update_admin = mysqli_query($con, "UPDATE `admin` SET `nama`='$_POST[user_surename]', `level`='$_COOKIE[level]' WHERE `username`='$_POST[user_name]'");
               }
               // Memperbarui cookie 'nama' setelah perubahan
               setcookie('nama', $_POST['user_surename'], time() + (86400 * 30), "/");
-              $update_dosen = mysqli_query($con, "UPDATE `dosen` SET `nama`='$_POST[user_surename]', `gelar`='$_POST[user_gelar]', `kode_bagian`='$_POST[bagian]' WHERE `nip`='$_POST[user_name]'");
+              $update_dosen = mysqli_query($con, "UPDATE `dosen` SET `nama`='$_POST[user_surename]',`email`='$_POST[user_email]', `gelar`='$_POST[user_gelar]', `kode_bagian`='$_POST[bagian]' WHERE `nip`='$_POST[user_name]'");
               echo "<script>window.location.href=\"profil_dosen.php\";</script>";
             }
             ?>
@@ -307,6 +316,47 @@
           $('#form-password').attr('type', 'text');
         } else {
           $('#form-password').attr('type', 'password');
+        }
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const passwordInput = document.getElementById('form-password');
+      const passwordStrength = document.getElementById('password-strength');
+      const lowercaseCheck = document.getElementById('lowercase');
+      const uppercaseCheck = document.getElementById('uppercase');
+      const numberCheck = document.getElementById('number');
+      const submitButton = document.querySelector('button[name="simpan"]');
+
+      passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const hasLowercase = /[a-z]/.test(password);
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const isLongEnough = password.length >= 8;
+
+        lowercaseCheck.style.color = hasLowercase ? 'green' : 'red';
+        uppercaseCheck.style.color = hasUppercase ? 'green' : 'red';
+        numberCheck.style.color = hasNumber ? 'green' : 'red';
+
+        if (password && hasLowercase && hasUppercase && hasNumber && isLongEnough) {
+          passwordStrength.innerHTML = '<strong>Password kuat</strong>';
+          passwordStrength.style.color = 'green';
+          submitButton.disabled = false;
+        } else if (password) {
+          passwordStrength.innerHTML = '<strong>Password lemah</strong>';
+          passwordStrength.style.color = 'red';
+          submitButton.disabled = true;
+        } else {
+          passwordStrength.innerHTML = '';
+          submitButton.disabled = false;
+        }
+      });
+
+      document.querySelector('form').addEventListener('submit', function(e) {
+        const password = passwordInput.value;
+        if (password && (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password) || password.length < 8)) {
+          e.preventDefault();
+          alert('Password harus minimal 8 karakter dan mengandung huruf kecil, huruf besar, dan angka!');
         }
       });
     });

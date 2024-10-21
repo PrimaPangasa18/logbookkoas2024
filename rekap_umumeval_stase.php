@@ -27,9 +27,9 @@
 	}
 
 	canvas {
-		width: 500px !important;
+		width: 420px !important;
 		/* Gunakan !important jika perlu untuk mengatasi pengaturan internal dari Chart.js */
-		height: 500px !important;
+		height: 420px !important;
 	}
 </style>
 

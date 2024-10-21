@@ -139,8 +139,8 @@
 							<br><br>
 						<?php
 						}
-
-						$semester = mysqli_query($con, "SELECT DISTINCT `semester` FROM `kepaniteraan` ORDER BY `semester`");
+						//hapus order by semester
+						$semester = mysqli_query($con, "SELECT DISTINCT `semester` FROM `kepaniteraan`");
 						?>
 						<table class="table table-bordered table-primary" style="width:100%">
 							<tr class="table-warning" style="border-width: 1px; border-color: #000;">
@@ -149,7 +149,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">&nbsp;</td>
+								<td colspan="6" style="border-width: 1px; border-color: #000;">&nbsp;</td>
 							</tr>
 							<?php
 							while ($data_smt = mysqli_fetch_array($semester)) {
@@ -260,7 +260,7 @@
 								}
 								?>
 								<tr>
-									<td colspan="6">&nbsp;</td>
+									<td colspan="6" style="border-width: 1px; border-color: #000;">&nbsp;</td>
 								</tr>
 							<?php
 							}

@@ -148,11 +148,11 @@
 							?>
 										<td align="center" style="width:400px">
 											<a href="rekap_indstase_admin.php?id=<?php echo $data_stase['id']; ?>&nim=<?php echo $mhsw_nim; ?>">
-												<button type="button" class="btn btn-success btn-sm">
-													<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+												<button type="button" class="btn btn-outline-success btn-md">
+													<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 												</button>
 											</a><br>
-											<font style="color:darkgreen; font-size:0.9em;font-weight:500">Skedul: <?php echo $tglmulai; ?> - <?php echo $tglselesai; ?><br>(Aktif)</font>
+											<font style="color:darkgreen; font-size:1em;font-weight: 600">Skedul: <?php echo $tglmulai; ?> - <?php echo $tglselesai; ?><br>(Aktif)</font>
 										</td>
 									<?php
 									}
@@ -160,11 +160,11 @@
 									?>
 										<td align="center" style="width:400px">
 											<a href="rekap_indstase_admin.php?id=<?php echo $data_stase['id']; ?>&nim=<?php echo $mhsw_nim; ?>">
-												<button type="button" class="btn btn-success btn-sm">
-													<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+												<button type="button" class="btn btn-outline-success btn-md">
+													<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 												</button>
 											</a><br>
-											<font style="color:darkblue; font-size:0.9em;font-weight:500">Skedul: <?php echo $tglmulai; ?> - <?php echo $tglselesai; ?><br>(Sudah Terlewat)</font>
+											<font style="color:darkblue; font-size:1em;font-weight:600">Skedul: <?php echo $tglmulai; ?> - <?php echo $tglselesai; ?><br>(Sudah Terlewat)</font>
 										</td>
 									<?php
 									}
@@ -172,11 +172,11 @@
 									?>
 										<td align="center" style="width:400px">
 											<a href="rekap_indstase_admin.php?id=<?php echo $data_stase['id']; ?>&nim=<?php echo $mhsw_nim; ?>">
-												<button type="button" class="btn btn-success btn-sm">
-													<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+												<button type="button" class="btn btn-outline-success btn-md">
+													<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 												</button>
 											</a><br>
-											<font style="color:grey; font-size:0.9em; font-weight:500">Skedul: <?php echo $tglmulai; ?> - <?php echo $tglselesai; ?><br>(Belum aktif)</font>
+											<font style="color:grey; font-size:1em; font-weight:600">Skedul: <?php echo $tglmulai; ?> - <?php echo $tglselesai; ?><br>(Belum aktif)</font>
 										</td>
 									<?php
 									}
@@ -184,11 +184,11 @@
 									?>
 									<td align="center" style="width:400px">
 										<a href="rekap_indstase_admin.php?id=<?php echo $data_stase['id']; ?>&nim=<?php echo $mhsw_nim; ?>">
-											<button type="button" class="btn btn-success btn-sm">
-												<font style="color:white; font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
+											<button type="button" class="btn btn-outline-success btn-md">
+												<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 											</button>
 										</a><br>
-										<font style="color:red; font-size:0.9em;font-weight:500">Skedul: - <br>(Belum terjadwal)</font>
+										<font style="color:red; font-size:1em;font-weight:600">Skedul: - <br>(Belum terjadwal)</font>
 									</td>
 							<?php
 								}

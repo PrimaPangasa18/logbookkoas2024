@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="style/style1.css" />
 	<link rel="stylesheet" href="style/buttontopup.css">
 	<link rel="stylesheet" href="style/informasi.css">
+	<link rel="stylesheet" href="select2/dist/css/select2.css" />
+	<link rel="stylesheet" type="text/css" href="jquery_ui/jquery-ui.css">
+	<link rel="stylesheet" href="style/filterkegiatan.css">
 
 	<!-- Link Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -106,6 +109,7 @@
 						<?php
 						$id_stase = $_GET['id'];
 						$data_stase = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `id`='$id_stase'"));
+						$tgl_stase_isi = $_GET['tgl'];
 						$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
 						$stase_id = "stase_" . $id_stase;
 						$data_stase_mhsw = mysqli_query($con, "SELECT * FROM `$stase_id` WHERE `nim`='$_COOKIE[user]'");
@@ -114,14 +118,15 @@
 						$tgl_mulai = tanggal_indo($datastase_mhsw['tgl_mulai']);
 						$mulai = date_create($datastase_mhsw['tgl_mulai']);
 						$tgl_selesai = tanggal_indo($datastase_mhsw['tgl_selesai']);
-						$tgl_isi = tanggal_indo($tgl);
-						$sekarang = date_create($tgl);
+						$tgl_isi = tanggal_indo($tgl_stase_isi);
+						$sekarang = date_create($tgl_stase_isi);
 						$jmlhari_stase = $data_stase['hari_stase'];
 						$hari_skrg = date_diff($mulai, $sekarang);
 						$jmlhari_skrg = $hari_skrg->days + 1;
 						?>
 						<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 							<input type="hidden" name="id_stase" value="<?php echo $id_stase; ?>">
+							<input type="hidden" name="tgl_isi" value="<?php echo $tgl_stase_isi; ?>">
 							<center>
 								<table class="table table-bordered" style="width: auto;">
 									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
@@ -144,8 +149,28 @@
 										<td style=" width: 300px;"><strong>Hari pengisian log book</strong></td>
 										<td style="width: 500px; color:black; font-weight:700">&nbsp; Hari ke- <span class="text-danger"><?php echo $jmlhari_skrg ?></span> dari <span class="text-danger"><?php echo $jmlhari_stase ?></span> hari masa kepaniteraan (STASE)</td>
 									</tr>
+									<tr style="border-width: 1px; border-color: #000;" class="table-success">
+										<td><strong>Cari Tanggal kegiatan <span class="text-danger">(yyyy-mm-dd)</span></strong></td>
+										<td>
+											<input type="text" class="form-select input-tanggal" name="tgl_kegiatan" style="font-size: 1em;" placeholder="Tanggal Kegiatan">
+										</td>
+									</tr>
 								</table>
 							</center>
+							<br>
+							<div class="d-grid gap-1 col-1 mx-auto">
+								<button type="submit" class="submit-btn" name="submit" value="SUBMIT">
+									<i class="fas fa-magnifying-glass me-2"></i> SEARCH
+								</button>
+							</div>
+							<?php
+							if ($_POST['submit'] == "SUBMIT") {
+								echo "
+            						<script>
+               						 window.location.href = \"edit_logbook.php?id=\"+\"$_POST[id_stase]\"+\"&tgl=\"+\"$_POST[tgl_kegiatan]\";
+          							  </script>";
+							}
+							?>
 							<br>
 							<center>
 								<span class="text-danger" style="font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600">Tekan tombol dibawah ini untuk melihat pengisian jurnal/evaluasi</span>
@@ -158,7 +183,7 @@
 							</center>
 							<a id="penyakit" style="font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;">Jurnal Penyakit</a><br><br>
 							<?php
-							$log_penyakit = mysqli_query($con, "SELECT * FROM `jurnal_penyakit` WHERE `stase`='$id_stase' AND `tanggal`='$tgl' AND `nim`='$_COOKIE[user]' ORDER BY `jam_awal`");
+							$log_penyakit = mysqli_query($con, "SELECT * FROM `jurnal_penyakit` WHERE `stase`='$id_stase' AND `tanggal`='$tgl_stase_isi' AND `nim`='$_COOKIE[user]' ORDER BY `jam_awal`");
 							?>
 							<table style="width:100%;" id="freeze" class="table table-bordered">
 								<thead class="table-primary">
@@ -271,7 +296,7 @@
 							<br>
 							<center>
 								<span class="text-danger" style="font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600">Klik Tambah untuk menambah Jurnal Penyakit</span><br><br>
-								<a href="tambah_logbook.php?id=<?php echo $id_stase; ?>"><button type="button" class="btn btn-primary" name="tambah" value="TAMBAH"><i class="fa-solid fa-folder-plus me-2"></i>TAMBAH</button>
+								<a href="tambah_logbook.php?id=<?php echo $id_stase; ?>&tgl=<?php echo $tgl_stase_isi; ?>"><button type="button" class="btn btn-primary" name="tambah" value="TAMBAH"><i class="fa-solid fa-folder-plus me-2"></i>TAMBAH</button>
 							</center>
 							<br>
 							<hr style="border: 2px solid ; margin: 20px 0;">
@@ -282,7 +307,7 @@
 							<a id="trampil" style="font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;">Jurnal Ketrampilan Klinik</a>
 							<br><br>
 							<?php
-							$log_ketrampilan = mysqli_query($con, "SELECT * FROM `jurnal_ketrampilan` WHERE `stase`='$id_stase' AND `tanggal`='$tgl' AND `nim`='$_COOKIE[user]' ORDER BY `jam_awal`");
+							$log_ketrampilan = mysqli_query($con, "SELECT * FROM `jurnal_ketrampilan` WHERE `stase`='$id_stase' AND `tanggal`='$tgl_stase_isi' AND `nim`='$_COOKIE[user]' ORDER BY `jam_awal`");
 							?>
 							<table class="table table-bordered" id="freeze1">
 								<thead class="table-success">
@@ -404,16 +429,16 @@
 							<br>
 							<center>
 								<span class="text-danger" style="font-size: 0.9em; font-family:'Poppins', sans-serif; font-weight:600">Klik Tambah untuk menambah Jurnal Keterampilan</span><br><br>
-								<a href="tambah_logbook2.php?id=<?php echo $id_stase; ?>"><button type="button" class="btn btn-primary" name="tambah" value="TAMBAH"><i class="fa-solid fa-folder-plus me-2"></i>TAMBAH</button>
+								<a href="tambah_logbook2.php?id=<?php echo $id_stase; ?>&tgl=<?php echo $tgl_stase_isi; ?>"><button type="button" class="btn btn-primary" name="tambah" value="TAMBAH"><i class="fa-solid fa-folder-plus me-2"></i>TAMBAH</button>
 							</center>
 							<br>
 							<hr style="border: 2px solid ; margin: 20px 0;">
 							<?php
 							//Evaluasi Jurnal
 
-							$jml_evaluasi = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `evaluasi` WHERE `nim`='$_COOKIE[user]' AND `stase`='$id_stase' AND `tanggal`='$tgl'"));
+							$jml_evaluasi = mysqli_num_rows(mysqli_query($con, "SELECT * FROM `evaluasi` WHERE `nim`='$_COOKIE[user]' AND `stase`='$id_stase' AND `tanggal`='$tgl_stase_isi'"));
 							if ($jml_evaluasi > 0) {
-								$evaluasi = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `evaluasi` WHERE `nim`='$_COOKIE[user]' AND `stase`='$id_stase' AND `tanggal`='$tgl'"));
+								$evaluasi = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `evaluasi` WHERE `nim`='$_COOKIE[user]' AND `stase`='$id_stase' AND `tanggal`='$tgl_stase_isi'"));
 								$id_eval = $evaluasi['id'];
 								$eval = $evaluasi['evaluasi'];
 								$renc = $evaluasi['rencana'];
@@ -489,20 +514,20 @@
 					(	`nim`, `angkatan`,`grup`,`stase`, `tanggal`,
 						`evaluasi`, `rencana`)
 					VALUES
-					(	'$_COOKIE[user]','$angkatan_mhsw[angkatan]','$angkatan_mhsw[grup]','$_POST[id_stase]','$tgl',
+					(	'$_COOKIE[user]','$angkatan_mhsw[angkatan]','$angkatan_mhsw[grup]','$_POST[id_stase]','$_POST[tgl_isi]',
 						'$_POST[evaluasi]','$_POST[rencana]')");
 							} else {
 								$update_evaluasi = mysqli_query($con, "UPDATE `evaluasi`
 					SET `evaluasi`='$_POST[evaluasi]',`rencana`='$_POST[rencana]' WHERE `id`='$_POST[id_eval]'");
 							}
 							$update_penyakit = mysqli_query($con, "UPDATE `jurnal_penyakit`
-				SET `evaluasi`='1' WHERE `nim`='$_COOKIE[user]' AND `tanggal`='$tgl'");
+				SET `evaluasi`='1' WHERE `nim`='$_COOKIE[user]' AND `tanggal`='$_POST[tgl_isi]'");
 							$update_ketrampilan = mysqli_query($con, "UPDATE `jurnal_ketrampilan`
-				SET `evaluasi`='1' WHERE `nim`='$_COOKIE[user]' AND `tanggal`='$tgl'");
+				SET `evaluasi`='1' WHERE `nim`='$_COOKIE[user]' AND `tanggal`='$_POST[tgl_isi]'");
 
 							echo "
 				<script>
-					window.location.href=\"edit_logbook.php?id=\"+\"$_POST[id_stase]\";
+					window.location.href = \"edit_logbook.php?id=\"+\"$_POST[id_stase]\"+\"&tgl=\"+\"$_POST[tgl_isi]\";
 				</script>
 				";
 						}
@@ -590,8 +615,29 @@
 	<script src="javascript/script1.js"></script>
 	<script src="javascript/buttontopup.js"></script>
 	<script src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery_ui/jquery-ui.js"></script>
+	<script src="select2/dist/js/select2.js"></script>
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="freezeheader/js/jquery.freezeheader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.input-tanggal').datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+			$("#stase").select2({
+				placeholder: "< Kepaniteraan (Stase) >",
+				allowClear: true
+			});
+			$("#mhsw").select2({
+				placeholder: "< Nama Mahasiswa >",
+				allowClear: true
+			});
+			$("#appstatus").select2({
+				placeholder: "< Status Approval >",
+				allowClear: true
+			});
+		});
+	</script>
 	<script>
 		$(document).ready(function() {
 			$("#freeze").freezeHeader();

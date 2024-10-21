@@ -77,6 +77,17 @@
           </li> -->
         </ul>
       </li>
+      <li class="sidebar-item">
+        <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#user-interface" aria-expanded="false" aria-controls="user-interface">
+          <i class="lni lni-users"></i>
+          <span>User Interface</span>
+        </a>
+        <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+          <li class="sidebar-item">
+            <a href="edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
+          </li>
+        </ul>
+      </li>
     </ul>
 
     <div class="sidebar-footer">

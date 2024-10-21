@@ -7,10 +7,10 @@ if (isset($_REQUEST['verify_code'])) {
     $new_password = md5($_POST['new_password']);  // Hash the new password
 
     // Verify the code
-    $result = mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$username' AND `stase`='$code'");
+    $result = mysqli_query($con, "SELECT * FROM `admin` WHERE `username`='$username' AND `code`='$code'");
     if (mysqli_num_rows($result) == 1) {
         // Code matches, update the password
-        mysqli_query($con, "UPDATE `admin` SET `password`='$new_password', `stase` = NULL WHERE `username`='$username'");
+        mysqli_query($con, "UPDATE `admin` SET `password`='$new_password', `code` = NULL WHERE `username`='$username'");
         echo "Password has been reset successfully.";
         echo "$new_password";
         

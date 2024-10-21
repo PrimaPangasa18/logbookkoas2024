@@ -127,7 +127,9 @@
 						$mhsw = mysqli_query($con, "SELECT `nim` FROM `$stase_id` WHERE `tgl_mulai`>='$tgl_awal' AND `tgl_selesai`<='$tgl_akhir' ORDER BY `nim`");
 						$jml_mhsw = mysqli_num_rows($mhsw);
 						$stase = mysqli_fetch_array(mysqli_query($con, "SELECT `kepaniteraan` FROM `kepaniteraan` WHERE `id`='$id_stase'"));
-
+						$jml_review_query = mysqli_query($con, "SELECT COUNT(*) as jumlah FROM `evaluasi_stase` WHERE `stase`='$id_stase'");
+						$result = mysqli_fetch_array($jml_review_query);
+						$jml_review = $result['jumlah'];
 						//--------------------
 						echo "<center>";
 						echo "<table class=\"table table-bordered\" style=\"width:50%\">";
@@ -157,7 +159,7 @@
 						echo "</table><br><br>";
 						//------------------
 
-						echo "<table class=\"table table-bordered\" style=\"width:90%\" id=\"freeze\">";
+						echo "<table class=\"table table-bordered\" style=\"width:auto\" id=\"freeze\">";
 						echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
 					<th style=\"width:5%;text-align:center;\">No</th>
 					<th style=\"width:30%;text-align:center;\">Nama Dosen/Dokter</th>
@@ -194,7 +196,7 @@
 								$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$dosen2[dosen2]'"));
 								echo "<td style=\"font-weight:600;\">$data_dosen[nama], <span style=\"color:red;\">$data_dosen[gelar]</span></td>";
 								echo "<td style=\"font-weight:600; color:blue;\">$data_dosen[nip]</td>";
-								echo "<td style=\"font-weight:600;\">$dosen1[komentar_dosen1]</td>";
+								echo "<td style=\"font-weight:600;\">$dosen2[komentar_dosen2]</td>";
 								echo "</tr>";
 								if ($kelas == "ganjil") $kelas = "genap";
 								else $kelas = "ganjil";
@@ -211,7 +213,7 @@
 								$data_dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$dosen3[dosen3]'"));
 								echo "<td style=\"font-weight:600;\">$data_dosen[nama], <span style=\"color:red;\">$data_dosen[gelar]</span></td>";
 								echo "<td style=\"font-weight:600; color:blue;\">$data_dosen[nip]</td>";
-								echo "<td style=\"font-weight:600;\">$dosen1[komentar_dosen1]</td>";
+								echo "<td style=\"font-weight:600;\">$dosen3[komentar_dosen3]</td>";
 								echo "</tr>";
 								if ($kelas == "ganjil") $kelas = "genap";
 								else $kelas = "ganjil";
@@ -223,6 +225,17 @@
 
 					</div>
 			</main>
+			<center>
+				<form action="export_rekap_evaluasi_kritik_dosen.php" method="get">
+					<input type="hidden" name="stase" value="<?php echo $id_stase; ?>">
+					<input type="hidden" name="angk" value="<?php echo $angkatan_filter; ?>">
+					<input type="hidden" name="tglawal" value="<?php echo $tgl_awal; ?>">
+					<input type="hidden" name="tglakhir" value="<?php echo $tgl_akhir; ?>">
+					<button type="submit" class="btn btn-success"> <i class="fa-solid fa-download me-2"></i>Export to Excel</button>
+				</form>
+			</center>
+			<br>
+
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
 				<i class="fa-solid fa-arrow-up"></i>
@@ -305,8 +318,15 @@
 	<script type="text/javascript" src="freezeheader/js/jquery.freezeheader.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("#freeze").freezeHeader();
-			$("#freeze1").freezeHeader();
+			// Atur lebar tabel menjadi 100% agar responsif
+			$("#freeze").css("width", "100%").freezeHeader();
+			$("#freeze1").css("width", "100%").freezeHeader();
+
+			// Tambahkan kelas responsif jika diperlukan
+			$(".responsive-table").css({
+				"width": "100%",
+				"overflow-x": "auto"
+			});
 		});
 	</script>
 </body>

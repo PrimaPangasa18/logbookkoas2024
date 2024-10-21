@@ -137,7 +137,8 @@
 										$tglselesai = tanggal_indo($data['tgl_selesai']);
 										if (strtotime($data['tgl_mulai']) <= strtotime($tgl) and strtotime($tgl) <= strtotime($data['tgl_selesai'])) {
 								?>
-											<td align="center"><a href="edit_logbook.php?id=<?php echo $data_stase['id']; ?>"><button type="button" class="btn btn-outline-success btn-md">
+											<td align="center"><a href="edit_logbook.php?id=<?php echo $data_stase['id']; ?>&tgl=<?php echo $tgl; ?>">
+													<button type="button" class="btn btn-outline-success btn-md">
 														<i class="fa fa-hourglass-half me-2"></i>
 														<font style=" font-size:1.1em;"><?php echo $data_stase['kepaniteraan']; ?></font>
 													</button></a></td>

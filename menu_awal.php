@@ -148,22 +148,40 @@
 						<h2 class="fw-bold fs-4 mb-3 text-center" style="color:#0A3967">SELAMAT DATANG DI WEB KOAS FAKULTAS KEDOKTERAN UNDIP</h2>
 						<br>
 						<div class="text-center my-3">
-							<?php if ($_COOKIE['level'] != 6): ?>
-								<span class="blink-text" style="color: red; font-weight: bold;">Jika Belum Mengisi Email, Silahkan isi Email Anda Pada Update Profil !!</span>
-								<br><br>
-								<?php
+							<?php
+							$email = '';
+
+							// Cek level pengguna dan ambil email sesuai dengan tabel
+							if ($_COOKIE['level'] == 1 || $_COOKIE['level'] == 2 || $_COOKIE['level'] == 3 || $_COOKIE['level'] == 4 || $_COOKIE['level'] == 6) {
+								// Untuk level 1-4 dan 6, ambil email dari tabel dosen
+								$dosen = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `dosen` WHERE `nip`='$_COOKIE[user]'"));
+								$email = $dosen['email']; // Ganti dengan nama kolom email yang sesuai
+							} elseif ($_COOKIE['level'] == 5) {
+								// Untuk level 5, ambil email dari tabel biodata_mhsw
+								$biodata_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `biodata_mhsw` WHERE `nim`='$_COOKIE[user]'"));
+								$email = $biodata_mhsw['email']; // Ganti dengan nama kolom email yang sesuai
+							}
+
+							// Cek apakah email terisi
+							if (empty($email)) {
+								// Jika email kosong, tampilkan pesan dan tombol
+								echo '<span class="blink-text" style="color: red; font-weight: bold;">Jika Belum Mengisi Email, Silahkan isi Email Anda Pada Update Profil !!</span>';
+								echo '<br><br>';
+
+								// Tombol Update Profil
 								$update_link = '';
 								if ($_COOKIE['level'] == 5) {
 									$update_link = 'edit_usermhsw_action.php';
 								} elseif ($_COOKIE['level'] == 1 || $_COOKIE['level'] == 2) {
 									$update_link = 'update_admin.php';
-								} elseif ($_COOKIE['level'] == 3 || $_COOKIE['level'] == 4) {
+								} elseif ($_COOKIE['level'] == 3 || $_COOKIE['level'] == 4 || $_COOKIE['level'] == 6) {
 									$update_link = 'edit_userdosen_action.php';
 								}
-								?>
-								<a href="<?php echo $update_link; ?>" class="btn btn-primary">Update Profil</a>
-							<?php endif; ?>
+								echo '<a href="' . $update_link . '" class="btn btn-primary">Update Profil</a>';
+							}
+							?>
 						</div>
+
 
 						<!-- ISI DISINI -->
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">

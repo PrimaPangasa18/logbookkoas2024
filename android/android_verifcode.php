@@ -13,7 +13,7 @@ if (isset($data['username']) && isset($data['code'])) {
     $code = $data['code'];
 
     // Verify the code
-    $result = mysqli_query($conn, "SELECT * FROM `admin` WHERE `username`='$username' AND `stase`='$code'");
+    $result = mysqli_query($conn, "SELECT * FROM `admin` WHERE `username`='$username' AND `code`='$code'");
     if (mysqli_num_rows($result) == 1) {
         // Return JSON success response
         echo json_encode([

@@ -31,15 +31,15 @@ if ($_COOKIE["user_login"] == "" or empty($_COOKIE["user_login"]) or $_GET["st"]
         <input type="submit" value="Submit" name="commit">
       </form>
       <br>
-    <div class="forgot-password-link">
+      <div class="forgot-password-link">
         <form action="login">
-            <input type="submit" value="Cancel" />
+          <input type="submit" value="Cancel" />
         </form>
       </div>
       <br>
     </div>
-    
-    
+
+
 
 
   </body>
@@ -48,3 +48,17 @@ if ($_COOKIE["user_login"] == "" or empty($_COOKIE["user_login"]) or $_GET["st"]
 <?php
 }
 ?>
+<script>
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+</script>
+<script>
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) ||
+      (e.ctrlKey && e.key === 'U')) {
+      e.preventDefault();
+    }
+  });
+</script>

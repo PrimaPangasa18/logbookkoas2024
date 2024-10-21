@@ -165,15 +165,24 @@
 
                     <!-- Password -->
                     <tr class="table-success" style="border-width: 1px; border-color: #000;">
-                      <td><strong>Password</strong></td>
+                      <td>Password Baru</td>
                       <td>
                         <input type="password" id="form-password" name="user_pass" class="form-control">
+                        <div id="password-strength" class="mt-2"></div>
+                        <div class="password-requirements mt-2">
+                          <strong>Password baru minimal 8 huruf dan harus mengandung:</strong>
+                          <ul style="margin-top: 10px; margin-bottom: 10px;">
+                            <li id="lowercase"><strong>Huruf kecil</strong></li>
+                            <li id="uppercase"><strong>Huruf besar</strong></li>
+                            <li id="number"><strong>Angka</strong></li>
+                          </ul>
+                        </div>
                         <br>
-                        <input type="checkbox" id="form-checkbox" class="form-check-input" style="width: 18px; height: 15px; transform: scale(1.3);">&nbsp; Show Password
+                        <label for="form-checkbox">
+                          <input type="checkbox" id="form-checkbox" style="width: 18px; height: 15px; transform: scale(1.3);">&nbsp; Show password
+                        </label>
                         <br><br>
-                        <p class="text-danger" style="font-weight: 600;">
-                          (Jika kosong/tidak diisi, password tidak berubah!)
-                        </p>
+                        <p class="text-danger" style="font-weight: 600;">Note: (Jika kosong/tidak diisi, password tidak berubah)</p>
                       </td>
                     </tr>
 
@@ -896,6 +905,47 @@
         dateFormat: 'yy-mm-dd'
       });
 
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const passwordInput = document.getElementById('form-password');
+      const passwordStrength = document.getElementById('password-strength');
+      const lowercaseCheck = document.getElementById('lowercase');
+      const uppercaseCheck = document.getElementById('uppercase');
+      const numberCheck = document.getElementById('number');
+      const submitButton = document.querySelector('button[name="simpan"]');
+
+      passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const hasLowercase = /[a-z]/.test(password);
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const isLongEnough = password.length >= 8;
+
+        lowercaseCheck.style.color = hasLowercase ? 'green' : 'red';
+        uppercaseCheck.style.color = hasUppercase ? 'green' : 'red';
+        numberCheck.style.color = hasNumber ? 'green' : 'red';
+
+        if (password && hasLowercase && hasUppercase && hasNumber && isLongEnough) {
+          passwordStrength.innerHTML = '<strong>Password kuat</strong>';
+          passwordStrength.style.color = 'green';
+          submitButton.disabled = false;
+        } else if (password) {
+          passwordStrength.innerHTML = '<strong>Password lemah</strong>';
+          passwordStrength.style.color = 'red';
+          submitButton.disabled = true;
+        } else {
+          passwordStrength.innerHTML = '';
+          submitButton.disabled = false;
+        }
+      });
+
+      document.querySelector('form').addEventListener('submit', function(e) {
+        const password = passwordInput.value;
+        if (password && (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password) || password.length < 8)) {
+          e.preventDefault();
+          alert('Password harus minimal 8 karakter dan mengandung huruf kecil, huruf besar, dan angka!');
+        }
+      });
     });
   </script>
 

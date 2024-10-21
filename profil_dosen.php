@@ -151,7 +151,7 @@
                       </tr>
                       <tr class="table-success">
                         <td style="width: 300px;"><strong>Email</strong></td>
-                        <td style="width: 400px; font-weight:500;"><?php echo $data_user['email']; ?></td>
+                        <td style="width: 400px; font-weight:500;"><?php echo $dosen['email']; ?></td>
                       </tr>
                     </tbody>
                   </table>

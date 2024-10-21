@@ -151,7 +151,7 @@
 						echo "</table><br><br>";
 						//------------------
 
-						echo "<table class=\"table table-bordered\" style=\"width:90%\" id=\"freeze\">";
+						echo "<table class=\"table table-bordered\" style=\"width:auto\" id=\"freeze\">";
 						echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
 					<th style=\"width:5%;text-align:center;\">No</th>
 					<th style=\"width:25%;text-align:center;\">Lokasi Stase Luar</th>
@@ -184,6 +184,16 @@
 
 					</div>
 			</main>
+			<center>
+				<form action="export_rekap_evaluasi_stase_luar.php" method="get">
+					<input type="hidden" name="stase" value="<?php echo $id_stase; ?>">
+					<input type="hidden" name="angk" value="<?php echo $angkatan_filter; ?>">
+					<input type="hidden" name="tglawal" value="<?php echo $tgl_awal; ?>">
+					<input type="hidden" name="tglakhir" value="<?php echo $tgl_akhir; ?>">
+					<button type="submit" class="btn btn-success"> <i class="fa-solid fa-download me-2"></i>Export to Excel</button>
+				</form>orm>
+			</center>
+			<br>
 			<!-- Back to Top Button -->
 			<button onclick="topFunction()" id="backToTopBtn" title="Go to top">
 				<i class="fa-solid fa-arrow-up"></i>
@@ -266,8 +276,15 @@
 	<script type="text/javascript" src="freezeheader/js/jquery.freezeheader.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("#freeze").freezeHeader();
-			$("#freeze1").freezeHeader();
+			// Atur lebar tabel menjadi 100% agar responsif
+			$("#freeze").css("width", "100%").freezeHeader();
+			$("#freeze1").css("width", "100%").freezeHeader();
+
+			// Tambahkan kelas responsif jika diperlukan
+			$(".responsive-table").css({
+				"width": "100%",
+				"overflow-x": "auto"
+			});
 		});
 	</script>
 </body>
