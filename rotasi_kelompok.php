@@ -126,10 +126,10 @@
 												<?php
 												echo "<select class=\"form-select\" name=\"semester\" id=\"semester\" required>";
 												echo "<option value=\"\">< Pilihan Semester ></option>";
-												echo "<option value=\"9\">Semester IX (Sembilan)</option>";
-												echo "<option value=\"10\">Semester X (Sepuluh)</option>";
-												echo "<option value=\"11\">Semester XI (Sebelas)</option>";
-												echo "<option value=\"12\">Semester XII (Dua belas)</option>";
+												echo "<option value=\"A\">Semester A</option>";
+												echo "<option value=\"B\">Semester B</option>";
+												echo "<option value=\"C\">Semester C</option>";
+												echo "<option value=\"4\">Semester 4</option>";
 												echo "</select>";
 												?>
 											</td>

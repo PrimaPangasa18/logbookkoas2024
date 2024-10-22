@@ -136,10 +136,10 @@
 												<?php
 												echo "<select class=\"form-select\" name=\"semester\" id=\"semester\" required>";
 												echo "<option value=\"\">< Pilihan Semester ></option>";
-												echo "<option value=\"9\">Semester IX (Sembilan)</option>";
-												echo "<option value=\"10\">Semester X (Sepuluh)</option>";
-												echo "<option value=\"11\">Semester XI (Sebelas)</option>";
-												echo "<option value=\"12\">Semester XII (Dua belas)</option>";
+												echo "<option value=\"A\">Semester A </option>";
+												echo "<option value=\"B\">Semester B </option>";
+												echo "<option value=\"C\">Semester C </option>";
+												echo "<option value=\"4\">Semester 4 </option>";
 												echo "</select>";
 												?>
 											</td>
@@ -286,20 +286,20 @@
 								if ($status_stase_mhsw['status'] == '0') {
 									$update_stase = mysqli_query($con, "UPDATE `$stase`
 						SET
-						`rotasi`='9',`tgl_mulai`='$_POST[tglmulai]',
+						`rotasi`='A',`tgl_mulai`='$_POST[tglmulai]',
 						`tgl_selesai`='$_POST[tglselesai]',`status`='0'
 						WHERE `nim`='$_POST[nim_mhsw]'");
 								} else {
 									if ($_POST['tgl_mulai'] <= $tgl) {
 										$update_stase = mysqli_query($con, "UPDATE `$stase`
 							SET
-							`rotasi`='9',`tgl_mulai`='$_POST[tglmulai]',
+							`rotasi`='A',`tgl_mulai`='$_POST[tglmulai]',
 							`tgl_selesai`='$_POST[tglselesai]',`status`='1'
 							WHERE `nim`='$_POST[nim_mhsw]'");
 									} else {
 										$update_stase = mysqli_query($con, "UPDATE `$stase`
 							SET
-							`rotasi`='9',`tgl_mulai`='$_POST[tglmulai]',
+							`rotasi`='A',`tgl_mulai`='$_POST[tglmulai]',
 							`tgl_selesai`='$_POST[tglselesai]',`status`='0'
 							WHERE `nim`='$_POST[nim_mhsw]'");
 									}
@@ -309,7 +309,7 @@
 					( `nim`, `rotasi`,
 						`tgl_mulai`, `tgl_selesai`, `status`)
 					VALUES
-					( '$_POST[nim_mhsw]','9',
+					( '$_POST[nim_mhsw]','A',
 						'$_POST[tglmulai]','$_POST[tglselesai]','0')");
 							}
 						?>

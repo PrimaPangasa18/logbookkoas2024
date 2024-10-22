@@ -254,23 +254,23 @@
 										$status_stase_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `status` FROM `$stase_id` WHERE `nim`='$data_mhsw[nim]'"));
 										if ($status_stase_mhsw['status'] == '0') {
 											$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-                        SET `rotasi`='9', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='0'
+                        SET `rotasi`='A', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='0'
                         WHERE `nim`='$data_mhsw[nim]'");
 										} else {
 											if ($_POST['tgl_mulai'] <= $tgl) {
 												$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-                            SET `rotasi`='9', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='1'
+                            SET `rotasi`='A', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='1'
                             WHERE `nim`='$data_mhsw[nim]'");
 											} else {
 												$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-                            SET `rotasi`='9', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='0'
+                            SET `rotasi`='A', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='0'
                             WHERE `nim`='$data_mhsw[nim]'");
 											}
 										}
 									} else {
 										$insert_stase = mysqli_query($con, "INSERT INTO `$stase_id`
                     (`nim`, `rotasi`, `tgl_mulai`, `tgl_selesai`, `status`)
-                    VALUES ('$data_mhsw[nim]', '9', '$_POST[tgl_mulai]', '$tgl_selesai', '0')");
+                    VALUES ('$data_mhsw[nim]', 'A', '$_POST[tgl_mulai]', '$tgl_selesai', '0')");
 									}
 								} else {
 									echo "<td align=center><span style=\"color:red;font-weight:600;\">Belum punya akun</span></td>";

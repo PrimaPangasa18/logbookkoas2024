@@ -124,7 +124,7 @@
 
 							<!-- Semester IX -->
 							<tr class="table-warning" style="border-width: 1px; border-color: #000;">
-								<td colspan="5" style="color:#04202C"><b>SEMESETER IX (SEMBILAN)</b></td>
+								<td colspan="5" style="color:#04202C"><b>SEMESTER A</b></td>
 							</tr>
 							<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 								<th style="width:20px; text-align:center">Urutan</th>
@@ -135,7 +135,7 @@
 							</tr>
 
 							<?php
-							$stase_ix = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='9' ORDER BY `id` ASC");
+							$stase_ix = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='A' ORDER BY `id` ASC");
 							$no = 1;
 							while ($data_ix = mysqli_fetch_array($stase_ix)) {
 								$stase_id = "stase_" . $data_ix['id'];
@@ -176,7 +176,7 @@
 
 							<!-- Semester X -->
 							<tr class="table-warning" style="border-width: 1px; border-color: #000;">
-								<td colspan="5" style="color:#04202C"><b>SEMESETER X (SEPULUH)</b></td>
+								<td colspan="5" style="color:#04202C"><b>SEMESTER B</b></td>
 							</tr>
 							<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 								<th style="width:20px;text-align:center">Urutan</th>
@@ -187,7 +187,7 @@
 							</tr>
 
 							<?php
-							$stase_x = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='10' ORDER BY `id` ASC");
+							$stase_x = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='B' ORDER BY `id` ASC");
 							$no = 1;
 							while ($data_x = mysqli_fetch_array($stase_x)) {
 								$stase_id = "stase_" . $data_x['id'];
@@ -228,7 +228,7 @@
 
 							<!-- Semester XI -->
 							<tr class="table-warning" style="border-width: 1px; border-color: #000;">
-								<td colspan="5" style="color:#04202C"><b>SEMESETER XI (SEBELAS)</b></td>
+								<td colspan="5" style="color:#04202C"><b>SEMESETER C</b></td>
 							</tr>
 							<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 								<th style="width:20px;text-align:center">Urutan</th>
@@ -239,7 +239,7 @@
 							</tr>
 
 							<?php
-							$stase_xi = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='11' ORDER BY `id` ASC");
+							$stase_xi = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='C' ORDER BY `id` ASC");
 							$no = 1;
 							while ($data_xi = mysqli_fetch_array($stase_xi)) {
 								$stase_id = "stase_" . $data_xi['id'];
@@ -280,7 +280,7 @@
 
 							<!-- Semester XII -->
 							<tr class="table-warning" style="border-width: 1px; border-color: #000;">
-								<td colspan="5" style="color:#04202C"><b>SEMESETER XII (DUA BELAS)</b></td>
+								<td colspan="5" style="color:#04202C"><b>SEMESETER 4</b></td>
 							</tr>
 							<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 								<th style="width:20px;text-align:center">Urutan</th>
@@ -291,7 +291,7 @@
 							</tr>
 
 							<?php
-							$stase_xii = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='12' ORDER BY `id` ASC");
+							$stase_xii = mysqli_query($con, "SELECT * FROM `kepaniteraan` WHERE `semester`='4' ORDER BY `id` ASC");
 							$no = 1;
 							while ($data_xii = mysqli_fetch_array($stase_xii)) {
 								$stase_id = "stase_" . $data_xii['id'];
