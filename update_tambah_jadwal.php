@@ -156,17 +156,22 @@
       </div>";
             ?>
             <center>
-              <button type="submit" class="btn btn-primary me-3" name="kembali" value="KEMBALI">
-                <i class="fa-solid fa-backward me-2"></i>KEMBALI
-              </button>
+              <!-- Tambahkan form dengan method POST -->
+              <form method="POST">
+                <button type="submit" class="btn btn-primary me-3" name="kembali" value="KEMBALI">
+                  <i class="fa-solid fa-backward me-2"></i>KEMBALI
+                </button>
+              </form>
             </center>
+
             <?php
-            if ($_POST['kembali'] == "KEMBALI") {
+            // Pastikan $_POST['kembali'] dicek hanya jika form sudah dikirimkan
+            if (isset($_POST['kembali']) && $_POST['kembali'] == "KEMBALI") {
               echo "
-				<script>
-					window.location.href=\"rotasi_tambah_jadwal.php\";
-				</script>
-				";
+    <script>
+        window.location.href=\"rotasi_tambah_jadwal.php\";
+    </script>
+    ";
             }
             ?>
 
