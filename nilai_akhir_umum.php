@@ -351,7 +351,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -454,7 +454,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -553,7 +553,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -660,7 +660,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -768,7 +768,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -883,7 +883,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -996,7 +996,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1097,7 +1097,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1200,7 +1200,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1307,7 +1307,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1421,7 +1421,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1533,7 +1533,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1681,7 +1681,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -1901,7 +1901,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -2010,7 +2010,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -2294,7 +2294,7 @@
 									$grade_akhir = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade_akhir<br><br><a href=\"cetak_nilai_akhir.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 

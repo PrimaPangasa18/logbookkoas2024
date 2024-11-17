@@ -130,7 +130,7 @@
 						echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
 						<td><strong>Periode Kepaniteraan (Stase)</strong></td>
 						<td style=\"font-weight:600;\">$periode</td></tr>";
-						echo "</table><br><br>";
+						echo "</table><br>";
 
 						//-------------------------------------
 						//Kepaniteraan (Stase) Ilmu Kesehatan Penyakit Dalam
@@ -205,8 +205,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Pengisian Formulir Penilaian Penyajian Kasus Besar
 							echo "<a id=\"kasus_M091\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Penyajian Kasus Besar</a><br><br>";
 							$nilai_kasus = mysqli_query($con, "SELECT * FROM `ipd_nilai_kasus` WHERE `nim`='$data_mhsw[nim]'");
@@ -260,8 +259,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Pengisian Formulir Penilaian Ujian Akhir
 							echo "<a id=\"ujian_M091\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian Akhir</a><br><br>";
 							$nilai_ujian = mysqli_query($con, "SELECT * FROM `ipd_nilai_ujian` WHERE `nim`='$data_mhsw[nim]'");
@@ -310,8 +308,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Preview Nilai-Nilai Test dan Perilaku
 							echo "<a id=\"test_M091\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Ujian/Test</a><br><br>";
 							$nilai_test = mysqli_query($con, "SELECT * FROM `ipd_nilai_test` WHERE `nim`='$data_mhsw[nim]'");
@@ -355,8 +352,8 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Ilmu Penyakit Dalam
 						//-------------------------------------
@@ -433,8 +430,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Journal Reading
 							echo "<a id=\"jurnal_M092\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Journal Reading</a><br><br>";
@@ -484,8 +480,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Ujian SPV
 							echo "<a id=\"spv_M092\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian SPV</a><br><br>";
@@ -535,8 +530,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Pengisian Formulir Penilaian Ujian MINI-CEX
 							echo "<a id=\"minicex_M092\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian MINI-CEX</a><br><br>";
 							$nilai_minicex = mysqli_query($con, "SELECT * FROM `neuro_nilai_minicex` WHERE `nim`='$data_mhsw[nim]'");
@@ -587,8 +581,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Ujian/Test (id test lihat tabel jenis_test)
 							echo "<a id=\"test_M092\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Ujian/Test</a><br><br>";
@@ -633,8 +626,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Neurologi
 						//-------------------------------------
@@ -707,8 +699,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Pengisian Formulir Penilaian CBD
 							echo "<a id=\"cbd_M093\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian CBD</a><br><br>";
 							$nilai_cbd = mysqli_query($con, "SELECT * FROM `psikiatri_nilai_cbd` WHERE `nim`='$data_mhsw[nim]'");
@@ -761,8 +752,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian MINI-CEX
 							echo "<a id=\"minicex_M093\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian MINI-CEX</a><br><br>";
@@ -814,8 +804,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Pengisian Formulir Penilaian Ujian OSCE
 							echo "<a id=\"osce_M093\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian OSCE</a><br><br>";
 							$nilai_osce = mysqli_query($con, "SELECT * FROM `psikiatri_nilai_osce` WHERE `nim`='$data_mhsw[nim]'");
@@ -864,8 +853,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Test (id test lihat tabel jenis_test)
 							echo "<a id=\"test_M093\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Test</a><br><br>";
@@ -910,8 +898,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Psikiatri
 						//-------------------------------------
@@ -982,8 +969,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Responsi Kasus Kecil
 							echo "<a id=\"responsi_M105\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Responsi Kasus Kecil</a><br><br>";
@@ -1032,8 +1018,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Journal Reading
 							echo "<a id=\"jurnal_M105\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Journal Reading</a><br><br>";
@@ -1083,8 +1068,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Preview Nilai Test (id Test lihat tabel jenis_test)
 							echo "<a id=\"test_M105\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Test</a><br><br>";
 							$nilai_test = mysqli_query($con, "SELECT * FROM `thtkl_nilai_test` WHERE `nim`='$data_mhsw[nim]'");
@@ -1127,8 +1111,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Ujian OSCE
 							echo "<a id=\"osce_M105\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian OSCE</a><br><br>";
@@ -1179,8 +1162,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) THTKL
 						//-------------------------------------
@@ -1249,8 +1231,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//Pengisian Formulir Penilaian Kegiatan di P2UKM
 							echo "<a id=\"p2ukm_M095\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Kegiatan di P2UKM</a><br><br>";
 							$nilai_p2ukm = mysqli_query($con, "SELECT * FROM `ikmkp_nilai_p2ukm` WHERE `nim`='$data_mhsw[nim]'");
@@ -1297,8 +1278,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Penugasan dan Test (id test lihat tabel jenis_test)
 							echo "<a id=\"test_M095\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Penugasan dan Test</a><br><br>";
@@ -1343,8 +1323,6 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
 
 							//Pengisian Formulir Penilaian Ujian Komprehensip
 							echo "<a id=\"komprehensip_M095\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian Komprehensip</a><br><br>";;
@@ -1393,8 +1371,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) IKM-KP
 						//-------------------------------------
@@ -1469,8 +1446,7 @@
 							}
 							echo "</table>";
 							echo "</center><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai-Nilai Pre-Test, Post-Test, Skill Lab dan OSCE
 							echo "<a id=\"test_M101\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Pre-Test, Post-Test, Skill Lab dan OSCE</a><br><br>";
@@ -1517,8 +1493,7 @@
 							echo "</table>";
 							echo "</center><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Ilmu Bedah
 						//-------------------------------------
@@ -1586,8 +1561,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Ujian OSCE
 							echo "<a id=\"osce_M102\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian OSCE</a><br><br>";
@@ -1636,8 +1610,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai-Nilai Test dan Perilaku
 							echo "<a id=\"test_M102\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Test dan Perilaku</a><br><br>";
@@ -1683,8 +1656,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Anestesi
 						//-------------------------------------
@@ -1757,8 +1729,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Kasus CBD - Radioterapi
 							echo "<a id=\"cbd2_M103\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Kasus CBD - Radioterapi</a><br><br>";
@@ -1808,8 +1779,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Journal Reading
 							echo "<a id=\"jurnal_M103\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Journal Reading</a><br><br>";
@@ -1859,8 +1829,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Test dan Sikap/Perilaku
 							echo "<a id=\"test_M103\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Test dan Sikap/Perilaku</a><br><br>";
@@ -1906,8 +1875,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Radiologi
 						//-------------------------------------
@@ -1978,8 +1946,6 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
 
 							//Pengisian Formulir Penilaian Presentasi Journal Reading
 							echo "<a id=\"jurnal_M104\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Presentasi Journal Reading</a><br><br>";
@@ -2027,8 +1993,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Penyanggah Presentasi
 							echo "<a id=\"penyanggah_M104\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Penyanggah Presentasi</a><br><br>";
@@ -2071,8 +2036,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Ujian Mini-Cex
 							echo "<a id=\"minicex_M104\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian Mini-Cex</a><br><br>";
@@ -2122,8 +2086,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai-Nilai Test (id Test lihat tabel jenis_test)
 							echo "<a id=\"test_M104\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Test</a><br><br>";
@@ -2169,8 +2132,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Ilmu Kesehatan Mata
 						//-------------------------------------
@@ -2239,8 +2201,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Ujian MINI-CEX
 							echo "<a id=\"minicex_M094\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Ujian MINI-CEX</a><br><br>";
@@ -2289,8 +2250,6 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
 
 							//Preview Nilai-Nilai Test dan Perilaku
 							echo "<a id=\"test_M094\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Test dan Perilaku</a><br><br>";
@@ -2336,8 +2295,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) IKFR
 						//-------------------------------------
@@ -2407,8 +2365,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Journal Reading
 							echo "<a id=\"jurnal_M106\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Journal Reading</a><br><br>";
@@ -2459,8 +2416,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Responsi Kasus Kecil
 							echo "<a id=\"responsi_M106\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Responsi Kasus Kecil</a><br><br>";
@@ -2508,8 +2464,6 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
 
 							//Preview Nilai-Nilai Test dan Perilaku
 							echo "<a id=\"test_M106\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Test dan Perilaku</a><br><br>";
@@ -2555,8 +2509,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) IKGM
 						//-------------------------------------
@@ -2630,8 +2583,7 @@
 							}
 							echo "</table>";
 							echo "</center><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian CBD
 							echo "<center>";
@@ -2691,8 +2643,7 @@
 							}
 							echo "</table>";
 							echo "</center><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Journal Reading
 							echo "<a id=\"jurnal_M111\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Journal Reading</a><br><br>";
@@ -2743,8 +2694,7 @@
 							}
 							echo "</table>";
 							echo "</center><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Penugasan dan Test (DOPS/OSCE, MCQ, dan MINI-PAT)
 							echo "<a id=\"test_M111\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Penugasan dan Test (DOPS/OSCE, MCQ, dan MINI-PAT)</a><br><br>";
@@ -2792,8 +2742,7 @@
 							echo "</table>";
 							echo "</center><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Ilmu Kebidanan dan Penyakit Kandungan
 						//-------------------------------------
@@ -2864,8 +2813,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Kegiatan Jaga
 							echo "<a id=\"jaga_M112\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Kegiatan Jaga</a><br><br>";
@@ -2914,8 +2862,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Substase
 							echo "<a id=\"substase_M112\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Substase</a><br><br>";
@@ -2963,8 +2910,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Referat
 							echo "<a id=\"referat_M112\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Referat</a><br><br>";
@@ -3012,8 +2958,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai-Nilai Test dan Perilaku
 							echo "<a id=\"test_M112\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai Test dan Perilaku</a><br><br>";
@@ -3059,8 +3004,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Forensik
 						//-------------------------------------
@@ -3142,8 +3086,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Direct Observation of Procedural Skill (DOPS)
 							echo "<a id=\"dops_M113\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Direct Observation of Procedural Skill (DOPS)</a><br><br>";
@@ -3193,8 +3136,6 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
 
 							//Pengisian Formulir Penilaian CBD
 							echo "<a id=\"cbd_M113\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian CBD  - Kasus Poliklinik</a><br><br>";
@@ -3249,8 +3190,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Penyajian Kasus Besar
 							echo "<a id=\"kasus_M113\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Penyajian Kasus Besar</a><br><br>";
@@ -3305,8 +3245,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Penyajian Journal Reading
 							echo "<a id=\"jurnal_M113\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Penyajian Journal Reading</a><br><br>";
@@ -3361,8 +3300,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Mini Peer Assesment Tool (Mini-PAT)
 							echo "<a id=\"minipat_M113\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Mini Peer Assesment Tool (Mini-PAT)</a><br><br>";
@@ -3416,8 +3354,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Ujian Akhir Kepaniteraan
 							echo "<center>";
@@ -3471,8 +3408,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai Ujian/Test (Pre-Test, Post-Test, dan Ujian OSCE)
 							echo "<a id=\"test_M113\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai Ujian/Test (Pre-Test, Post-Test, dan Ujian OSCE)</a><br><br>";
@@ -3518,8 +3454,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Ilmu Kesehatan Anak
 						//-------------------------------------
@@ -3585,8 +3520,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Preview Nilai-Nilai Test dan Perilaku
 							echo "<a id=\"test_M114\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Preview Nilai-Nilai OSCE, Ujian Teori dan Perilaku</a><br><br>";
@@ -3632,8 +3566,7 @@
 							}
 							echo "</table><br><br>";
 						}
-						echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-						echo "<br>";
+
 						//-------------------------------------
 						//End of Kepaniteraan (Stase) Ilmu Kesehatan Kulit dan Kelamin
 						//-------------------------------------
@@ -3710,8 +3643,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Sikap/Perilaku
 							echo "<a id=\"sikap_kompre\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Sikap/Perilaku</a><br><br>";
@@ -3762,8 +3694,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian CBD
 							echo "<a id=\"cbd_kompre\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Case Based Discussion (CBD)</a><br><br>";
@@ -3811,8 +3742,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Presensi / Kehadiran
 							echo "<a id=\"presensi_kompre\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Presensi / Kehadiran</a><br><br>";
@@ -3862,8 +3792,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 							//------------------------------------
 
 							//Kedokteran Keluarga
@@ -3932,8 +3861,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Sikap/Perilaku
 							echo "<a id=\"sikap_kdk\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Sikap/Perilaku</a><br><br>";
@@ -3983,8 +3911,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir DOPS
 							echo "<a id=\"dops_kdk\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir DOPS</a><br><br>";
@@ -4034,8 +3961,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian MINI-CEX
 							echo "<a id=\"minicex_kdk\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian MINI-CEX</a><br><br>";
@@ -4085,8 +4011,7 @@
 								}
 							}
 							echo "</table><br><br>";
-							echo "<hr style=\"border: 2px solid ; color:blue; margin: 20px 0;\">";
-							echo "<br>";
+
 
 							//Pengisian Formulir Penilaian Presensi / Kehadiran
 							echo "<a id=\"presensi_kdk\" style=\"font-size:1.2em;font-family:'Poppins', sans-serif;font-weight:800;\">Pengisian Formulir Penilaian Presensi / Kehadiran</a><br><br>";

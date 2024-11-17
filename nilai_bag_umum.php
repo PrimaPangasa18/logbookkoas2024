@@ -203,7 +203,7 @@
 
 						<?php
 						echo '<center>';
-						echo '<span style="font-size:0.9em; font-weight:500; color:red;">Klik tombol nama mahasiswa untuk melihat data penilaiannya</span>';
+						echo '<span style="font-size:1em; font-weight:500; color:red;">Klik tombol nama mahasiswa untuk melihat data penilaiannya</span>';
 						echo '</center>';
 						echo "<br>";
 						//Rekap Nilai Bagian / Kepaniteraan (Stase) Ilmu Penyakit Dalam
@@ -305,7 +305,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_ipd/cetak_nilai_ipd.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 
@@ -434,7 +434,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_neuro/cetak_nilai_neuro.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -552,7 +552,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_psikiatri/cetak_nilai_psikiatri.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -684,7 +684,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_thtkl/cetak_nilai_thtkl.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -803,7 +803,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_ikmkp/cetak_nilai_ikmkp.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -922,7 +922,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_bedah/cetak_nilai_bedah.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -932,9 +932,11 @@
 							echo "</table>";
 							echo "<br>";
 							echo "<br><br><center><form method=POST action=\"$_SERVER[PHP_SELF]\">
-							a href=\"export_nilai_bag.php?stase=$id_stase&grup=$grup_filter&angk=$angkatan_filter&tglawal=$tgl_awal&tglakhir=$tgl_akhir\" class=\"btn btn-success \">
+							<a href=\"export_nilai_bag.php?stase=$id_stase&grup=$grup_filter&angk=$angkatan_filter&tglawal=$tgl_awal&tglakhir=$tgl_akhir\" class=\"btn btn-success \">
         						<i class=\"fa fa-download\"></i> Export to Excel
      							 </a><br>
+
+						
 		    					</form>";
 						}
 						//End of Ilmu Bedah
@@ -942,8 +944,8 @@
 						//Rekap Nilai Bagian / Kepaniteraan (Stase) Anestesi
 						if ($id_stase == "M102") {
 							echo "<table class=\"table table-bordered\" style=\"width:100%\" id=\"freeze\">";
-							echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\>
-							<tr>
+							echo "<thead class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">
+						<tr>
 							<th style=\"width:5%;text-align:center;\">No</th>
 							<th style=\"width:20%;text-align:center;\">Nama / NIM / Angkatan</th>
 							<th style=\"width:12%;text-align:center;\">Periode</th>
@@ -964,10 +966,12 @@
 							$no = 1;
 							$kelas = "ganjil";
 							while ($data_mhsw = mysqli_fetch_array($data_mhsw_all)) {
-								echo "<tr  class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+								echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
 								echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 								$angk_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `angkatan` FROM `biodata_mhsw` WHERE `nim`='$data_mhsw[nim]'"));
 								echo "<td style=\"font-weight:600;\">
+								
+								
 								<a href=\"tampil_penilaian_individu.php?nim=$data_mhsw[nim]&stase=$id_stase\" target=\"_blank\" class=\"btn btn-primary btn-sm\">
         							  $data_mhsw[nama]
        								 </a><br>
@@ -1042,7 +1046,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_anestesi/cetak_nilai_anestesi.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -1166,7 +1170,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_radiologi/cetak_nilai_radiologi.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -1293,7 +1297,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_mata/cetak_nilai_mata.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -1333,7 +1337,7 @@
 							$no = 1;
 							$kelas = "ganjil";
 							while ($data_mhsw = mysqli_fetch_array($data_mhsw_all)) {
-								echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\>";
+								echo "<tr class=\"$kelas table-warning\" style=\"border-width: 1px; border-color: #000;\">";
 								echo "<td style=\"text-align:center; font-weight:600;\">$no</td>";
 								$angk_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `angkatan` FROM `biodata_mhsw` WHERE `nim`='$data_mhsw[nim]'"));
 								echo "<td style=\"font-weight:600;\">
@@ -1343,7 +1347,6 @@
         							<span style=\"color:red;\">(NIM: $data_mhsw[nim])</span><br>
         							<span style=\"color:darkgreen;\">Angkatan: $angk_mhsw[angkatan]</span>
      							 </td>";
-
 								//Periode Kepaniteraan/Stase
 								$tgl_stase = mysqli_fetch_array(mysqli_query($con, "SELECT `tgl_mulai`,`tgl_selesai` FROM `$stase_id` WHERE `nim`='$data_mhsw[nim]'"));
 								$tgl_mulai = tanggal_indo_skt($tgl_stase['tgl_mulai']);
@@ -1409,7 +1412,6 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_ikfr/cetak_nilai_ikfr.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -1525,7 +1527,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_ikgm/cetak_nilai_ikgm.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -1653,7 +1655,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_obsgyn/cetak_nilai_obsgyn.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -1808,7 +1810,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_forensik/cetak_nilai_forensik.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -2052,7 +2054,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_ika/cetak_nilai_ika.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -2170,7 +2172,7 @@
 									$grade = "E";
 									$color = "red";
 								}
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade<br><br><a href=\"bag_kulit/cetak_nilai_kulit.php?nim=$data_mhsw[nim]\" target=\"_blank\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-download\"></i> CETAK</a> </td>";
 								echo "</tr>";
 								$no++;
@@ -2629,7 +2631,7 @@
 								}
 
 								echo "<td align=center style=\"font-weight:600;\" >$nilai_rata_kompre_kdk</td>";
-								echo "<br><br>";
+
 								echo "<td align=center style=\"font-weight:600; color:$color;\">$grade</td>";
 								echo "</tr>";
 								$no++;
