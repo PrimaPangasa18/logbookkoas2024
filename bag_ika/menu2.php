@@ -23,24 +23,21 @@
   $qr = acakstring(9);
   $reset_pin_qr = mysqli_query($con, "UPDATE `dosen` SET `pin`='$pin',`qr`='$qr' WHERE `nip`=$_COOKIE[user]");
   ?>
-  <aside id="sidebar">
+  <aside id="sidebar" class="expand" style="position: fixed; height:100vh">
     <div class="d-flex">
-      <button id="toggle-btn" type="button">
-        <i class="lni lni-grid-alt"></i>
-      </button>
       <div class="sidebar-logo">
         <a href="#">E-LOGBOOK KOAS KEDOKTERAN</a>
       </div>
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-item">
-        <a href="menu_awal.php" class="sidebar-link">
+        <a href="../menu_awal.php" class="sidebar-link">
           <i class="lni lni-home"></i>
           <span>Beranda</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="profil_dosen.php" class="sidebar-link">
+        <a href="../profil_dosen.php" class="sidebar-link">
           <i class="lni lni-user"></i>
           <span>Profil Diri</span>
         </a>
@@ -57,10 +54,10 @@
             </a>
             <ul id="multi-seven" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="cari_penyakit.php" class="sidebar-link">Edit Penyakit</a>
+                <a href="../cari_penyakit.php" class="sidebar-link">Edit Penyakit</a>
               </li>
               <li class="sidebar-item">
-                <a href="tambah_daftar_penyakit.php" class="sidebar-link">Tambah Penyakit</a>
+                <a href="../tambah_daftar_penyakit.php" class="sidebar-link">Tambah Penyakit</a>
               </li>
 
             </ul>
@@ -72,10 +69,10 @@
             </a>
             <ul id="multi-eight" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="cari_ketrampilan.php" class="sidebar-link">Edit Keterampilan</a>
+                <a href="../cari_ketrampilan.php" class="sidebar-link">Edit Keterampilan</a>
               </li>
               <li class="sidebar-item">
-                <a href="tambah_daftar_ketrampilan.php" class="sidebar-link">Tambah Keterampilan</a>
+                <a href="../tambah_daftar_ketrampilan.php" class="sidebar-link">Tambah Keterampilan</a>
               </li>
             </ul>
         </ul>
@@ -92,14 +89,14 @@
             </a>
             <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="view_rotasi_kelp.php" class="sidebar-link">Rotasi Angkatan</a>
+                <a href="../view_rotasi_kelp.php" class="sidebar-link">Rotasi Angkatan</a>
               </li>
               <li class="sidebar-item">
-                <a href="view_rotasi_individu.php" class="sidebar-link">Rotasi Individu</a>
+                <a href="../view_rotasi_individu.php" class="sidebar-link">Rotasi Individu</a>
               </li>
             </ul>
           <li class="sidebar-item">
-            <a href="rotasi_internal_stase_search.php" class="sidebar-link">
+            <a href="../rotasi_internal_stase_search.php" class="sidebar-link">
               <span>Rotasi Internal</span>
             </a>
           </li>
@@ -117,22 +114,22 @@
             </a>
             <ul id="multi-four" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_umum_admin.php" class="sidebar-link">Rekap Stase</a>
+                <a href="../rekap_umum_admin.php" class="sidebar-link">Rekap Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_umumeval_admin.php" class="sidebar-link">Evaluasi Harian</a>
+                <a href="../rekap_umumeval_admin.php" class="sidebar-link">Evaluasi Harian</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_umumeval_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
+                <a href="../rekap_umumeval_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="capaian_umum_search.php" class="sidebar-link">Ketuntasan/Grade</a>
+                <a href=../capaian_umum_search.php" class="sidebar-link">Ketuntasan/Grade</a>
               </li>
               <li class="sidebar-item">
-                <a href="nilai_bag_umum_search.php" class="sidebar-link">Rekap Nilai Bagian</a>
+                <a href="../nilai_bag_umum_search.php" class="sidebar-link">Rekap Nilai Bagian</a>
               </li>
               <li class="sidebar-item">
-                <a href="nilai_akhir_umum_search.php" class="sidebar-link">Rekap Nilai Akhir</a>
+                <a href="../nilai_akhir_umum_search.php" class="sidebar-link">Rekap Nilai Akhir</a>
               </li>
             </ul>
         </ul>
@@ -143,34 +140,34 @@
             </a>
             <ul id="multi-five" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="rekap_individu_search.php" class="sidebar-link">Rekap Stase</a>
+                <a href="../rekap_individu_search.php" class="sidebar-link">Rekap Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_search.php" class="sidebar-link">Evaluasi Harian</a>
+                <a href="../rekap_evaluasi_search.php" class="sidebar-link">Evaluasi Harian</a>
               </li>
               <li class="sidebar-item">
-                <a href="rekap_evaluasi_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
+                <a href="../rekap_evaluasi_stase_search.php" class="sidebar-link">Evaluasi Stase</a>
               </li>
               <li class="sidebar-item">
-                <a href="capaian_individu_search.php" class="sidebar-link">Ketuntasan/Grade</a>
+                <a href="../capaian_individu_search.php" class="sidebar-link">Ketuntasan/Grade</a>
               </li>
               <li class="sidebar-item">
-                <a href="nilai_bag_search.php" class="sidebar-link">Cetak Nilai Bagian</a>
+                <a href="../nilai_bag_search.php" class="sidebar-link">Cetak Nilai Bagian</a>
               </li>
               <li class="sidebar-item">
-                <a href="nilai_akhir_search.php" class="sidebar-link">Nilai Akhir Bagian</a>
+                <a href="../nilai_akhir_search.php" class="sidebar-link">Nilai Akhir Bagian</a>
               </li>
             </ul>
         </ul>
       </li>
       <li class="sidebar-item">
-        <a href="generate_pin_search.php" class="sidebar-link">
+        <a href="../generate_pin_search.php" class="sidebar-link">
           <i class="lni lni-key"></i>
           <span>Generate OTP</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="generate_qr_search.php" class="sidebar-link">
+        <a href="../generate_qr_search.php" class="sidebar-link">
           <i class="fa-solid fa-qrcode"></i>
           <span>Generate QR</span>
         </a>
@@ -182,10 +179,10 @@
         </a>
         <ul id="multi-nine" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="filter_kegiatan_dosen_search.php" class="sidebar-link">Daftar Kegiatan</a>
+            <a href="../filter_kegiatan_dosen_search.php" class="sidebar-link">Daftar Kegiatan</a>
           </li>
           <li class="sidebar-item">
-            <a href="filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
+            <a href="../filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
           </li>
           <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-ten" aria-expanded="false" aria-controls="multi-ten">
@@ -193,13 +190,13 @@
             </a>
             <ul id="multi-ten" class="sidebar-dropdown list-unstyled collapse">
               <li class="sidebar-item">
-                <a href="upload_nilai.php" class="sidebar-link">Upload Nilai</a>
+                <a href="../upload_nilai.php" class="sidebar-link">Upload Nilai</a>
               </li>
               <li class="sidebar-item">
-                <a href="entry_nilai_manual.php" class="sidebar-link">Entry Manual</a>
+                <a href="../entry_nilai_manual.php" class="sidebar-link">Entry Manual</a>
               </li>
               <li class="sidebar-item">
-                <a href="hapus_nilai_manual.php" class="sidebar-link">Hapus Manual</a>
+                <a href="../hapus_nilai_manual.php" class="sidebar-link">Hapus Manual</a>
               </li>
             </ul>
         </ul>
@@ -211,10 +208,10 @@
         </a>
         <ul id="edit-user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="edit_user_mhsw.php" class="sidebar-link">User Mahasiswa</a>
+            <a href="../edit_user_mhsw.php" class="sidebar-link">User Mahasiswa</a>
           </li>
           <li class="sidebar-item">
-            <a href="edit_user_dosen.php" class="sidebar-link">User Dosen/Residen</a>
+            <a href="../edit_user_dosen.php" class="sidebar-link">User Dosen/Residen</a>
           </li>
         </ul>
       </li>
@@ -225,7 +222,7 @@
         </a>
         <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="update_admin.php" class="sidebar-link">Update Profil</a>
+            <a href="../update_admin.php" class="sidebar-link">Update Profil</a>
           </li>
         </ul>
       </li>
@@ -233,7 +230,7 @@
     </ul>
 
     <div class="sidebar-footer">
-      <a href="logout.php" class="sidebar-link">
+      <a href="../logout.php" class="sidebar-link">
         <i class="lni lni-exit"></i>
         <span>Logout</span>
       </a>

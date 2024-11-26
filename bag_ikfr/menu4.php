@@ -23,42 +23,39 @@
   $qr = acakstring(9);
   $reset_pin_qr = mysqli_query($con, "UPDATE `dosen` SET `pin`='$pin',`qr`='$qr' WHERE `nip`=$_COOKIE[user]");
   ?>
-  <aside id="sidebar">
+  <aside id="sidebar" class="expand" style="position: fixed; height:100vh">
     <div class="d-flex">
-      <button id="toggle-btn" type="button">
-        <i class="lni lni-grid-alt"></i>
-      </button>
       <div class="sidebar-logo">
         <a href="#">E-LOGBOOK KOAS KEDOKTERAN</a>
       </div>
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-item">
-        <a href="menu_awal.php" class="sidebar-link">
+        <a href="../menu_awal.php" class="sidebar-link">
           <i class="lni lni-home"></i>
           <span>Beranda</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="informasi.php" class="sidebar-link">
+        <a href="../informasi.php" class="sidebar-link">
           <i class="lni lni-information"></i>
           <span>Informasi</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="profil_dosen.php" class="sidebar-link">
+        <a href="../profil_dosen.php" class="sidebar-link">
           <i class="lni lni-user"></i>
           <span>Profil Diri</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="generate_pin.php" class="sidebar-link">
+        <a href="../generate_pin.php" class="sidebar-link">
           <i class="lni lni-key"></i>
           <span>Generate OTP</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="generate_qr.php" class="sidebar-link">
+        <a href="../generate_qr.php" class="sidebar-link">
           <i class="fa-solid fa-qrcode"></i>
           <span>Generate QR</span>
         </a>
@@ -70,13 +67,13 @@
         </a>
         <ul id="kegiatan" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="filter_kegiatan_dosen.php" class="sidebar-link">Daftar Kegiatan</a>
+            <a href="../filter_kegiatan_dosen.php" class="sidebar-link">Daftar Kegiatan</a>
           </li>
           <li class="sidebar-item">
-            <a href="filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
+            <a href="../filter_rekap_kegiatan.php" class="sidebar-link">Rekap Kegiatan</a>
           </li>
           <li class="sidebar-item">
-            <a href="penilaian_bag_dosen.php" class="sidebar-link">Penilaian Bagian</a>
+            <a href="../penilaian_bag_dosen.php" class="sidebar-link">Penilaian Bagian</a>
           </li>
         </ul>
       </li>
@@ -87,14 +84,14 @@
         </a>
         <ul id="user-interface" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
+            <a href="../edit_userdosen_action.php" class="sidebar-link">Update Profil</a>
           </li>
         </ul>
       </li>
     </ul>
 
     <div class="sidebar-footer">
-      <a href="logout.php" class="sidebar-link">
+      <a href="../logout.php" class="sidebar-link">
         <i class="lni lni-exit"></i>
         <span>Logout</span>
       </a>

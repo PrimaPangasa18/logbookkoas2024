@@ -18,11 +18,8 @@
 
 
 <body>
-  <aside id="sidebar">
+  <aside id="sidebar" class="expand" style="position: fixed; height:100vh">
     <div class="d-flex">
-      <button id="toggle-btn" type="button">
-        <i class="lni lni-grid-alt"></i>
-      </button>
       <div class="sidebar-logo">
         <a href="#">E-LOGBOOK KOAS KEDOKTERAN</a>
       </div>
