@@ -107,6 +107,7 @@
 						</h2>
 						<br><br>
 						<?php
+						echo "<form method=\"POST\" action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">";
 						if (empty($_POST['submit'])) {
 							$stase = mysqli_query($con, "SELECT * FROM `kepaniteraan` ORDER BY `id`");
 						?>
@@ -157,22 +158,22 @@
 						}
 
 						if (!empty($_POST['submit'])) {
-							echo "<table class=\"table table-bordered\" style=\"border-width: 1px; border-color: #000;\">";
-							echo "<tr class=\"table-primary\">";
-							echo "<td style=\"width:40%;\"><span style=\"font-size:1.0em;font-weight:600;\">Nama Mahasiswa [NIM]</span></td>";
+							echo "<table class=\"table  table-bordered\" >";
+							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<td style=\"width:40%; border: 1px solid black;\"><span style=\"font-size:1.0em;font-weight:600;\">Nama Mahasiswa [NIM]:</span></td>";
 							$data_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `nim`,`nama` FROM `biodata_mhsw` WHERE `nim`='$_POST[nim]'"));
-							echo "<td style=\"width:60%; font-weight:600;\">$data_mhsw[nama] [NIM: $data_mhsw[nim]]</td>";
+							echo "<td style=\"width:60%; font-weight:600; border: 1px solid black;\">$data_mhsw[nama] [NIM: <span style=\"color:red;\">$data_mhsw[nim]</span>]</td>";
 							echo "</tr>";
-							echo "<tr class=\"table-success\">";
+							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
 							echo "<td style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Rotasi stase semester</span></td>";
 							echo "<td style=\"font-weight:600;\">$_POST[semester]</td>";
 							echo "</tr>";
-							echo "<tr class=\"table-primary\">";
+							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
 							echo "<td style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Jumlah rotasi stase</span></td>";
 							echo "<td style=\"font-weight:600;\">$_POST[jml_stase]</td>";
 							echo "</tr>";
-							echo "<tr class=\"table-success\">";
-							echo "<td colspan=\"2\" style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Urutan rotasi kepaniteraan (stase):</span></td>";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<td align=center colspan=\"2\"  style=\"\"><span style=\"font-size:1.0em;font-weight:600; \">URUTAN ROTASI KEPANITERAAN (STASE):</span></td>";
 							echo "</tr>";
 							$no = 1;
 							$tgl_selesai_stase = "2000-01-01";
@@ -188,10 +189,10 @@
 								if (!empty($_POST['tgl_selesai' . $no])) $tgl_selesai_stase = $_POST['tgl_selesai' . $no];
 								$tglselesai_stase = tanggal_indo($tgl_selesai_stase);
 
-								echo "<tr class=\"table-success\" style=\"width:75%\">";
+								echo "<tr class=\"table-success\" style=\"width:75%; border-width: 1px; border-color: #000\" >";
 								echo "<td style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Urutan ke-<span style=\"color:red;\">Urutan ke-$no</span></span></td>";
 								if ($stase != "") {
-									echo "<td style=\"font-weight:600;\"><b><span style=\"color:darkgreen;\">$data_stase[kepaniteraan]</span> - Periode: <span style=\"color:darkred;\">$pekan_stase pekan</span> ($data_stase[hari_stase] hari)</b><br>";
+									echo "<td style=\"font-weight:500;\"><b><span style=\"color:darkgreen;\">$data_stase[kepaniteraan]</span> - Periode: <span style=\"color:darkred;\">$pekan_stase pekan</span> ($data_stase[hari_stase] hari)</b><br>";
 									echo "<span style=\"color:darkblue;\">Mulai tanggal: $tglmulai_stase<br>";
 									echo "Selesai tanggal: $tglselesai_stase</span></td>";
 
@@ -226,7 +227,7 @@
 								'$tgl_mulai_stase','$tgl_selesai_stase','0')");
 									}
 								} else {
-									echo "<td style=\"\"><span style=\"color:red;font-weight:600;\"><< BELUM TERJADWAL >></font></td>";
+									echo "<td style=\"\"><span style=\"color:red;font-weight:700;\"><< BELUM TERJADWAL >></font></td>";
 								}
 
 								echo "</tr>";

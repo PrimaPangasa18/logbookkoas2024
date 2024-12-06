@@ -214,7 +214,7 @@
 							$tgl_selesai = date('Y-m-d', strtotime($tambah_hari, strtotime($_POST['tgl_mulai'])));
 							if (!empty($_POST['tgl_selesai'])) $tgl_selesai = $_POST['tgl_selesai'];
 							$tanggal_selesai = tanggal_indo($tgl_selesai);
-							echo "<tr class=\"table-success\">";
+							echo "<tr class=\"table-primary\">";
 							echo "<td style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Tanggal Mulai Kepaniteraan (Stase)</span></td>";
 							echo "<td style=\"font-weight:600;\">$tanggal_mulai</td>";
 							echo "</tr>";
@@ -254,23 +254,29 @@
 										$status_stase_mhsw = mysqli_fetch_array(mysqli_query($con, "SELECT `status` FROM `$stase_id` WHERE `nim`='$data_mhsw[nim]'"));
 										if ($status_stase_mhsw['status'] == '0') {
 											$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-                        SET `rotasi`='A', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='0'
-                        WHERE `nim`='$data_mhsw[nim]'");
+								SET
+								`rotasi`='9',`tgl_mulai`='$_POST[tgl_mulai]',`tgl_selesai`='$tgl_selesai',`status`='0'
+								WHERE `nim`='$data_mhsw[nim]'");
 										} else {
 											if ($_POST['tgl_mulai'] <= $tgl) {
 												$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-                            SET `rotasi`='A', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='1'
-                            WHERE `nim`='$data_mhsw[nim]'");
+								SET
+								`rotasi`='9',`tgl_mulai`='$_POST[tgl_mulai]',`tgl_selesai`='$tgl_selesai',`status`='1'
+								WHERE `nim`='$data_mhsw[nim]'");
 											} else {
 												$update_stase = mysqli_query($con, "UPDATE `$stase_id`
-                            SET `rotasi`='A', `tgl_mulai`='$_POST[tgl_mulai]', `tgl_selesai`='$tgl_selesai', `status`='0'
-                            WHERE `nim`='$data_mhsw[nim]'");
+								SET
+								`rotasi`='9',`tgl_mulai`='$_POST[tgl_mulai]',`tgl_selesai`='$tgl_selesai',`status`='0'
+								WHERE `nim`='$data_mhsw[nim]'");
 											}
 										}
 									} else {
 										$insert_stase = mysqli_query($con, "INSERT INTO `$stase_id`
-                    (`nim`, `rotasi`, `tgl_mulai`, `tgl_selesai`, `status`)
-                    VALUES ('$data_mhsw[nim]', 'A', '$_POST[tgl_mulai]', '$tgl_selesai', '0')");
+							( `nim`, `rotasi`,
+								`tgl_mulai`, `tgl_selesai`, `status`)
+							VALUES
+							( '$data_mhsw[nim]','9',
+								'$_POST[tgl_mulai]','$tgl_selesai','0')");
 									}
 								} else {
 									echo "<td align=center><span style=\"color:red;font-weight:600;\">Belum punya akun</span></td>";

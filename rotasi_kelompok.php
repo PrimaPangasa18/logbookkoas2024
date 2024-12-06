@@ -183,16 +183,16 @@
 							}
 
 							echo "<table class=\"table table-bordered\" style=\"border-width: 1px; border-color: #000;\">";
-							echo "<tr class=\"table-primary\">";
-							echo "<td style=\"width:40%;\"><span style=\"font-size:1.0em;font-weight:600;\">Rotasi stase semester</span></td>";
-							echo "<td style=\"width:60%; font-weight:600;\">$_POST[semester]</td>";
+							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<td style=\"width:40%;  border: 1px solid black;\"><span style=\"font-size:1.0em;font-weight:600;\">Rotasi stase semester</span></td>";
+							echo "<td style=\"width:60%;  border: 1px solid black; font-weight:600;\">$_POST[semester]</td>";
 							echo "</tr>";
-							echo "<tr class=\"table-success\">";
+							echo "<tr class=\"table-primary\" style=\"border-width: 1px; border-color: #000;\">";
 							echo "<td style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Jumlah rotasi stase</span></td>";
 							echo "<td style=\"font-weight:600;\">$_POST[jml_stase]</td>";
 							echo "</tr>";
-							echo "<tr class=\"table-primary\">";
-							echo "<td colspan=\"2\" style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Urutan rotasi kepaniteraan (stase):</span></td>";
+							echo "<tr class=\"table-warning\" style=\"border-width: 1px; border-color: #000;\">";
+							echo "<td align=center colspan=\"2\" style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">UURUTAN ROTASI KEPANITERAAN (STASE):</span></td>";
 							echo "</tr>";
 							$no = 1;
 							$tgl_selesai_stase = "2000-01-01";
@@ -211,7 +211,7 @@
 								echo "<tr class=\"table-success\" style=\"width:75%\">";
 								echo "<td style=\"\"><span style=\"font-size:1.0em;font-weight:600;\">Urutan ke-<span style=\"color:red;\">$no</span></span></td>";
 								if ($stase != "") {
-									echo "<td style=\"font-weight:600;\"><b><span style=\"color:darkgreen;\">$data_stase[kepaniteraan]</span> - Periode: <span style=\"color:darkred;\">$pekan_stase pekan</span> ($data_stase[hari_stase] hari)</b><br>";
+									echo "<td style=\"font-weight:500;\"><b><span style=\"color:darkgreen;\">$data_stase[kepaniteraan]</span> - Periode: <span style=\"color:darkred;\">$pekan_stase pekan</span> ($data_stase[hari_stase] hari)</b><br>";
 									echo "<span style=\"color:darkblue;\">Mulai tanggal: $tglmulai_stase<br>";
 									echo "Selesai tanggal: $tglselesai_stase</span></td>";
 
@@ -239,7 +239,7 @@
 										}
 									}
 								} else {
-									echo "<td style=\"\"><span style=\"color:red;font-weight:600;\"><< BELUM TERJADWAL >></font></td>";
+									echo "<td style=\"\"><span style=\"color:red;font-weight:700;\"><< BELUM TERJADWAL >></font></td>";
 								}
 
 								echo "</tr>";

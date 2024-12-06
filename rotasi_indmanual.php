@@ -286,20 +286,20 @@
 								if ($status_stase_mhsw['status'] == '0') {
 									$update_stase = mysqli_query($con, "UPDATE `$stase`
 						SET
-						`rotasi`='A',`tgl_mulai`='$_POST[tglmulai]',
+						`rotasi`='9',`tgl_mulai`='$_POST[tglmulai]',
 						`tgl_selesai`='$_POST[tglselesai]',`status`='0'
 						WHERE `nim`='$_POST[nim_mhsw]'");
 								} else {
 									if ($_POST['tgl_mulai'] <= $tgl) {
 										$update_stase = mysqli_query($con, "UPDATE `$stase`
 							SET
-							`rotasi`='A',`tgl_mulai`='$_POST[tglmulai]',
+							`rotasi`='9',`tgl_mulai`='$_POST[tglmulai]',
 							`tgl_selesai`='$_POST[tglselesai]',`status`='1'
 							WHERE `nim`='$_POST[nim_mhsw]'");
 									} else {
 										$update_stase = mysqli_query($con, "UPDATE `$stase`
 							SET
-							`rotasi`='A',`tgl_mulai`='$_POST[tglmulai]',
+							`rotasi`='9',`tgl_mulai`='$_POST[tglmulai]',
 							`tgl_selesai`='$_POST[tglselesai]',`status`='0'
 							WHERE `nim`='$_POST[nim_mhsw]'");
 									}
@@ -309,7 +309,7 @@
 					( `nim`, `rotasi`,
 						`tgl_mulai`, `tgl_selesai`, `status`)
 					VALUES
-					( '$_POST[nim_mhsw]','A',
+					( '$_POST[nim_mhsw]','9',
 						'$_POST[tglmulai]','$_POST[tglselesai]','0')");
 							}
 						?>
@@ -371,7 +371,7 @@
 									</tbody>
 								</table>
 								<br><br>
-								<span style="color:darkgreen; font-size:1.1em; ">
+								<span style="color:darkgreen; font-weight:600; font-size:1.1em; ">
 									<< Perubahan tersimpan!!>>
 								</span>
 								<br><br>
