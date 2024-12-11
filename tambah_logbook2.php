@@ -281,7 +281,7 @@
 									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 										<!-- Penyakit 2 -->
 										<td style="width:300px" class="td_mid">
-											<span><strong>Penyakit - 2</strong></span>
+											<span><strong>Keterampilan - 2</strong></span>
 										</td>
 										<td style="width:500px">
 											<div id="my_ketrampilan2" role="dialog" class="fix_style">
@@ -301,7 +301,7 @@
 									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 										<!-- Penyakit 3 -->
 										<td style="width:300px" class="td_mid">
-											<span><strong>Penyakit - 3</strong></span>
+											<span><strong>Keterampilan - 3</strong></span>
 										</td>
 										<td style="width:500px">
 											<div id="my_ketrampilan3" role="dialog" class="fix_style">
@@ -321,7 +321,7 @@
 									<tr class="table-primary" style="border-width: 1px; border-color: #000;">
 										<!-- Penyakit 4 -->
 										<td style="width:300px" class="td_mid">
-											<span><strong>Penyakit - 4</strong></span>
+											<span><strong>Keterampilan - 4</strong></span>
 										</td>
 										<td style="width:500px">
 											<div id="my_ketrampilan4" role="dialog" class="fix_style">
